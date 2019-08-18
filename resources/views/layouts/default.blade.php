@@ -8,7 +8,11 @@
         <meta name="author" content="Byapps">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="generator" content="OctoberCMS">
-        <link rel="icon" type="image/png" href="/storage/app/media/byapps_logo_b_4.png">
+
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <link rel="icon" type="image/png" href="{{ asset('byapps_logo_b_4.png') }}">
 
         <!-- Codefox Theme -->
         <link href="{{ asset('assets/codefox/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -63,12 +67,12 @@
             <div id="content" class="col-md-12">
                 @yield('content')
             </div>
-            <!-- {% if this.page.title != 'Home' %}
+           @unless (Route::has('home'))
             <div id="sidebar-toggle">
                 <span><i class="mdi mdi-comment-processing-outline"></i></span>
                 <p>OPEN</p>
             </div>
-            {% endif %} -->
+            @endunless
             <div id="sidebar">
                 <!-- {% partial 'site/aside' %} -->
             </div>

@@ -20,13 +20,13 @@
                         </form>
                     </li>
 
-
+                    @if (Route::has('login'))
+                      @auth
                     <li class="list-inline-item user-box mt-3">
-                        <img data-name="" class="profile" />
+                        <img data-name="{{ Auth::user()->name }}" class="profile" />
                     </li>
 
                     <li class="list-inline-item user-box">
-
 
                         <a class="nav-link dropdown-toggle waves-effect user-link" data-toggle="dropdown" href="#" aria-haspopup="false" aria-expanded="true">
                             <i class="fi-ellipsis rounded-circle user-img text-white" style="font-size:2.5em;"></i>
@@ -47,18 +47,18 @@
                             <div class="dropdown-divider"></div>
 
                             <!-- item-->
-                            <!-- {% if user %} -->
-                            <!-- <a href="javascript:void(0);" class="dropdown-item notify-item"> -->
-                            <a class="dropdown-item notify-item" data-request="onLogout" data-request-data="redirect: '/'">
+                            <a class="dropdown-item notify-item" href="{{ route('logout') }}">
                                 <i class="mdi mdi-logout-variant"></i>
                                 <span>로그아웃</span>
                             </a>
-                            <!-- {% else %} -->
-                            <a class="dropdown-item notify-item" href="/login">
+
+                            @else
+                            <a class="dropdown-item notify-item" href="{{ route('login') }}">
                                 <i class="mdi mdi-logout-variant"></i>
                                 <span>로그인</span>
                             </a>
-                            <!-- {% endif %} -->
+                            @endauth
+                        @endif
 
                         </div>
                     </li>

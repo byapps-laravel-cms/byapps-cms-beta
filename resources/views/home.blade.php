@@ -28,8 +28,6 @@
 {% elseif user %} -->
 
 
-
-
 <div class="sortable">
   <!-- {% for record in records %}
       {% if record == 'layout1' %} -->
@@ -200,7 +198,7 @@
                     </div>
 
                     <div class="tab-pane fade row" id="nav-app" role="tabpanel" aria-labelledby="nav-ma-tab">
-                        
+
                         </div>
                 </div>
             </div>
