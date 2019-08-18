@@ -1,0 +1,13 @@
+
+
+/* =============
+   Print css
+============= */
+
+@media print {
+  .page-title-box,.topbar-left,.breadcrumb,.page-title,.footer {
+    display: none;
+    margin: 0;
+    padding: 0;
+  }
+}

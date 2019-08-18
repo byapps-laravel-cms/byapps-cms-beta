@@ -1,0 +1,93 @@
+
+
+/* =============
+   general
+============= */
+
+body {
+  font-family: $font-primary;
+  margin: 0;
+  padding-bottom: 60px;
+  overflow-x: hidden;
+  color: $light7;
+  font-size: $font-size-base;
+  background-color: $light3;
+}
+html {
+    position: relative;
+    min-height: 100%;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+  color: $dark;
+  font-family: $font-secondary;
+  margin: 10px 0;
+}
+
+.h1, h1 {
+  font-size: 36px;
+}
+
+.h2, h2 {
+  font-size: 30px;
+}
+
+.h3, h3 {
+  font-size: 24px;
+}
+
+.h4, h4 {
+  font-size: 18px;
+}
+
+.h5, h5 {
+  font-size: 15px;
+}
+
+.h6, h6 {
+  font-size: 12px;
+}
+
+p {
+  line-height: 1.6;
+}
+
+* {
+  outline: none !important;
+}
+
+b, strong {
+  font-family: $font-secondary;
+  font-weight: 500;
+}
+
+a {
+  &:hover {
+    outline: 0;
+    text-decoration: none;
+  }
+  &:active {
+    outline: 0;
+    text-decoration: none;
+  }
+  &:focus {
+    outline: 0;
+    text-decoration: none;
+  }
+}
+
+.container-fluid {
+  width: 95%;
+}
+
+.container-alt {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#wrapper {
+  height: $height;
+  overflow: hidden;
+  width: $width;
+}

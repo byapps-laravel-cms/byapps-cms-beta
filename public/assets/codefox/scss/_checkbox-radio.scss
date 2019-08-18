@@ -1,0 +1,242 @@
+
+
+/* =============
+   Checkbox and Radios
+============= */
+
+.checkbox,.radio {
+  label {
+    padding-left: 25px !important;
+    font-weight: 400;
+  }
+}
+.checkbox label:after,
+.radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr,
+.radio .cr {
+    position: relative;
+    border: 1px solid #a9a9a9;
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-left: -25px;
+}
+
+.radio .cr {
+    border-radius: 50%;
+}
+
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+  position: absolute;
+  font-size: 11px;
+  line-height: 0;
+  top: 9px;
+  left: 3px;
+}
+
+.radio .cr .cr-icon {
+    margin-left: 0.04em;
+}
+
+.checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none !important;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+    opacity: 0;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+    opacity: 1;
+}
+
+.checkbox-custom {
+  label {
+    input[type="checkbox"]:checked + .cr {
+      background-color: $custom;
+      border-color: $custom;
+      color: $white;
+    }
+  }
+}
+
+.checkbox-primary {
+  label {
+    input[type="checkbox"]:checked + .cr {
+      background-color: $primary;
+      border-color: $primary;
+      color: $white;
+    }
+  }
+}
+
+.checkbox-success {
+  label {
+    input[type="checkbox"]:checked + .cr {
+      background-color: $success;
+      border-color: $success;
+      color: $white;
+    }
+  }
+}
+
+.checkbox-info {
+  label {
+    input[type="checkbox"]:checked + .cr {
+      background-color: $info;
+      border-color: $info;
+      color: $white;
+    }
+  }
+}
+
+.checkbox-warning {
+  label {
+    input[type="checkbox"]:checked + .cr {
+      background-color: $warning;
+      border-color: $warning;
+      color: $white;
+    }
+  }
+}
+
+.checkbox-danger {
+  label {
+    input[type="checkbox"]:checked + .cr {
+      background-color: $danger;
+      border-color: $danger;
+      color: $white;
+    }
+  }
+}
+
+.checkbox-inverse {
+  label {
+    input[type="checkbox"]:checked + .cr {
+      background-color: $inverse;
+      border-color: $inverse;
+      color: $white;
+    }
+  }
+}
+
+.checkbox-pink {
+  label {
+    input[type="checkbox"]:checked + .cr {
+      background-color: $pink;
+      border-color: $pink;
+      color: $white;
+    }
+  }
+}
+
+.checkbox-purple {
+  label {
+    input[type="checkbox"]:checked + .cr {
+      background-color: $purple;
+      border-color: $purple;
+      color: $white;
+    }
+  }
+}
+
+
+
+// Radio colors
+.radio-primary {
+  label {
+    input[type="radio"]:checked + .cr {
+      border-color: $primary;
+      color: $primary;
+    }
+  }
+}
+
+.radio-success {
+  label {
+    input[type="radio"]:checked + .cr {
+      border-color: $success;
+      color: $success;
+    }
+  }
+}
+
+.radio-info {
+  label {
+    input[type="radio"]:checked + .cr {
+      border-color: $info;
+      color: $info;
+    }
+  }
+}
+
+.radio-warning {
+  label {
+    input[type="radio"]:checked + .cr {
+      border-color: $warning;
+      color: $warning;
+    }
+  }
+}
+
+.radio-danger {
+  label {
+    input[type="radio"]:checked + .cr {
+      border-color: $danger;
+      color: $danger;
+    }
+  }
+}
+
+.radio-custom {
+  label {
+    input[type="radio"]:checked + .cr {
+      border-color: $custom;
+      color: $custom;
+    }
+  }
+}
+
+.radio-inverse {
+  label {
+    input[type="radio"]:checked + .cr {
+      border-color: $inverse;
+      color: $inverse;
+    }
+  }
+}
+
+.radio-pink {
+  label {
+    input[type="radio"]:checked + .cr {
+      border-color: $pink;
+      color: $pink;
+    }
+  }
+}
+
+.radio-purple {
+  label {
+    input[type="radio"]:checked + .cr {
+      border-color: $purple;
+      color: $purple;
+    }
+  }
+}
+
+
+// Disable
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
+}

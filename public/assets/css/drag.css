@@ -1,0 +1,3 @@
+.sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; cursor:pointer; }
+.sortable>li { height: 100%; float:left; width:100%;margin:0.5rem;}
+#layout1, #layout2, #layout3 { background-color:#fff;}

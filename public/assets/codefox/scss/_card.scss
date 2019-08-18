@@ -1,0 +1,100 @@
+
+
+/* ===========
+   cards
+ =============*/
+
+.card {
+  border: 1px solid $light;
+  box-shadow: none;
+  margin-bottom: 30px;
+  .card-body {
+    padding: 20px;
+
+    p{
+      line-height: 24px;
+    }
+  }
+}
+
+.card-heading {
+  border: none !important;
+  padding: 15px 20px;
+  margin: -1px;
+  border-radius: 4px 4px 0 0;
+}
+
+.card-default > .panel-heading {
+  background-color: $white;
+  margin: 0;
+  color: $light7;
+}
+
+.card-title {
+  margin: 0;
+  font-family: $font-secondary;
+  font-size: 16px;
+  color: $light7;
+}
+
+.card-sub-title {
+  color: rgba($white, 0.7);
+  margin-top: 3px;
+  margin-bottom: -4px;
+}
+
+.card-border {
+  border-radius: 3px;
+}
+
+.card-border .card-heading {
+  background-color: $white;
+  border-top: 3px solid #ccc !important;
+  border-radius: 3px;
+  padding: 15px 20px 0;
+  margin: -2px 0 0 0 !important;
+}
+
+.card-border .card-body {
+  padding: 15px 20px 20px 20px;
+}
+
+.card-border.card-primary .card-heading {
+  border-color: $primary !important;
+}
+
+.card-border.card-success .card-heading {
+  border-color: $success !important;
+}
+
+.card-border.card-info .card-heading {
+  border-color: $info !important;
+}
+
+.card-border.card-warning .card-heading {
+  border-color: $warning !important;
+}
+
+.card-border.card-danger .card-heading {
+  border-color: $danger !important;
+}
+
+.card-border.card-purple .card-heading {
+  border-color: $purple !important;
+}
+
+.card-border.card-pink .card-heading {
+  border-color: $pink !important;
+}
+
+.card-border.card-inverse .card-heading {
+  border-color: $inverse !important;
+}
+
+.accordion{
+  .card-title{
+    a{
+      color: $light7;
+    }
+  }
+}

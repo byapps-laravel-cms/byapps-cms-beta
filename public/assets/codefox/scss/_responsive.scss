@@ -1,0 +1,147 @@
+
+/* =============
+   Responsive
+============= */
+
+@media (min-width: 768px) and (max-width: 991px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+    padding-bottom: 90px;
+  }
+
+  .topbar-left {
+    width: 70px !important;
+    i {
+      display: block !important;
+      line-height: 70px !important;
+    }
+  }
+  .topbar .topbar-left {
+    height: 70px;
+  }
+  .user-box {
+      a.user-link{
+        padding: 12px 10px !important;
+      }
+  }
+  .navbar-right {
+    .right-menu-item{
+      line-height: 56px !important;
+      .badge{
+        top: 8px !important;
+      }
+    }
+    .app-search{
+      .form-control{
+        margin-top: 12px !important;
+      }
+    }
+  }
+
+  .footer {
+    left: 0 !important;
+  }
+
+  .dataTables_wrapper {
+    .col-6 {
+      width: 100%;
+      text-align: left;
+    }
+  }
+  .fixedHeader-floating{
+    top: 60px !important;
+  }
+
+  .table-rep-plugin .sticky-table-header.fixed-solution {
+    top: 60px !important;
+  }
+  div#datatable-buttons_info {
+    float: none;
+  }
+  .m-t-sm-50 {
+    margin-top: 50px !important;
+  }
+  .contact-box{
+    padding: 0px;
+  }
+}
+
+@media (max-width: 767px) {
+
+  .dropdown-lg {
+    width: 200px !important;
+  }
+  
+  .dataTables_length {
+    float: none;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .button-menu-mobile {
+    display: block;
+  }
+  .copyright{
+    margin-bottom: 12px;
+  }
+  .pull-none{
+    float: none !important;
+     text-align: center;
+  }
+  .wizard {
+    .steps{
+      ul{
+        li{
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .hide-phone {
+    display: none !important;
+  }
+  .account-pages .account-content {
+    padding: 30px 0;
+  }
+  
+}
+
+@media (max-width: 419px) {
+  .hidden-xxs {
+    display: none;
+  }
+  .topbar-left {
+    width: 70px !important;
+  }
+  .content-page {
+    margin-left: 70px;
+  }
+
+  .page-title {
+    font-size: 15px;
+    max-width: 250px;
+    white-space: nowrap;
+  }
+
+  .editable-responsive {
+    overflow-x: auto;
+  }
+
+  .page-title-box .breadcrumb {
+    display: none;
+  }
+
+  .dropdown-lg {
+    width: 200px !important;
+  }
+}
