@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/paylist', 'PaymentController@getIndex')->name('paylist');
+Route::get('/paylist-data', 'PaymentController@getData')->name('paylist.data');
+
+
+//AdvancedRoute::controller('paylist', 'PaymentController');
