@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\HomeLayout;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $userId = User::select('user_id')->get();
+
+        return view('home')->with('home_layouts', HomeLayout::where('user_cd','=',$userId)
+                                                  ->select('layout_name')
+                                                  ->orderBy('sequence')
+                                                  ->get());
     }
 }
