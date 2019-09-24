@@ -27,9 +27,16 @@ class HomeController extends Controller
     {
         $userId = User::select('user_id')->get();
 
-        return view('home')->with('home_layouts', HomeLayout::where('user_cd','=',$userId)
+        info (gettype($userId));
+
+        $temp = HomeLayout::where('user_cd','=', $userId)
                                                   ->select('layout_name')
                                                   ->orderBy('sequence')
-                                                  ->get());
+                                                  ->get();
+
+        if (count($temp) == 0){
+          $temp = array('layout1','layout2','layout3', 'layout4');
+        }
+        return view('home')->with('home_layouts', $temp);
     }
 }

@@ -11,17 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/paylist', 'PaymentController@getIndex')->name('paylist');
 Route::get('/paylist-data', 'PaymentController@getData')->name('paylist.data');
-
-
-//AdvancedRoute::controller('paylist', 'PaymentController');
