@@ -18,7 +18,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
-
+Route::post('/chart', 'ChartController@index');
 
 Route::get('/paylist', 'PaymentController@getIndex')->name('paylist');
 Route::get('/paylist-data', 'PaymentController@getData')->name('paylist.data');
