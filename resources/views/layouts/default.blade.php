@@ -7,10 +7,11 @@
         <meta name="title" content="">
         <meta name="author" content="Byapps">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="OctoberCMS">
+        <meta name="generator" content="">
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' }</script>
 
         <link rel="icon" type="image/png" href="{{ asset('byapps_logo_b_4.png') }}">
 
@@ -21,10 +22,11 @@
         <link href="{{ asset('assets/css/temp.css?v1') }}" rel="stylesheet">
         <!-- //Codefox Theme -->
 
+        <link href="{{ asset('assets/vendor/jquery-ui-1.12.1/jquery-ui.css') }}" rel="stylesheet">
+
         <link href="{{ asset('assets/css/drag.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/appdata.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/vendor/billboard.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets/vendor/jquery-ui-1.12.1/jquery-ui.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/classCustom.css?v1') }}" rel="stylesheet">
 
         <!-- Datatable style -->
@@ -33,7 +35,6 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables/dataTables.checkboxes.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables/fixedHeader.dataTables.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables/responsive.dataTables.min.css') }}">
-
 
         <!-- jQuery  -->
         <script src="{{ asset('assets/codefox/js/jquery.min.js') }}"></script>
@@ -55,30 +56,33 @@
 
     <body>
 
-        <!-- Navigation Bar-->
-        <header id="topnav">
-            @include('partials.navigation')
-        </header>
-        <!-- End Navigation Bar-->
+      <!-- Navigation Bar-->
+      <header id="topnav">
+          @include('partials.navigation')
+      </header>
+      <!-- End Navigation Bar-->
+
+      <div id="app">
 
         <!-- Content -->
-      <div class="wrapper">
-        <section id="layout-content">
-            <div id="content" class="col-md-12">
-                @yield('content')
-            </div>
-           @unless (Route::has('home'))
-            <div id="sidebar-toggle">
-                <span><i class="mdi mdi-comment-processing-outline"></i></span>
-                <p>OPEN</p>
-            </div>
-            @endunless
-            <div id="sidebar">
-                <!-- {% partial 'site/aside' %} -->
-            </div>
-        </section>
-      </div>
+        <div class="wrapper">
+          <section id="layout-content">
+              <div id="content" class="col-md-12 mt-3">
+                  @yield('content')
+              </div>
+             @unless (Route::has('home'))
+              <div id="sidebar-toggle">
+                  <span><i class="mdi mdi-comment-processing-outline"></i></span>
+                  <p>OPEN</p>
+              </div>
+              @endunless
+              <div id="sidebar">
+                  @include('partials.aside')
+              </div>
+          </section>
+        </div>
 
+    </div>
         <!-- Scripts -->
         <script>
             function byapps_getCookie (cname) {
@@ -163,6 +167,9 @@
 
         </script>
 
+        <!-- Vue.js -->
+        <script src="{{ asset('js/app.js') }}"></script>
+
         <!-- Codefox Theme -->
         <script src="{{ asset('assets/codefox/js/waves.js') }}"></script>
         <script src="{{ asset('assets/codefox/js/jquery.slimscroll.js') }}"></script>
@@ -181,8 +188,8 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 
-        <script src="{{ asset('assets/vendor/jquery-ui.js') }}"></script>
-        <script src="{{ asset('assets/vendor/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-ui-1.12.1/jquery-ui.js') }}"></script>
+        <!-- <script src="{{ asset('assets/vendor/jquery-ui.min.js') }}"></script> -->
 
         <script src="{{ asset('assets/vendor/jquery.bpopup.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/billboard.js') }}"></script>
@@ -190,12 +197,13 @@
         <script src="{{ asset('assets/javascript/temp.js?v1') }}"></script>
         <script src="{{ asset('assets/javascript/app.js') }}"></script>
 
-        <!-- {% if this.page.title == 'Home' %}
-          <script src="{{ asset('assets/javascript/chart.js') }}"></script>
+
+        @if (Route::has('home'))
+          <!-- <script src="{{ asset('assets/javascript/chart.js') }}"></script> -->
           <script src="{{ asset('assets/javascript/drag.js') }}"></script>
-        {% else %}
+        @else
           <script src="{{ asset('assets/javascript/aside.js') }}"></script>
-        {% endif %} -->
+        @endif
 
         <!-- For Datatable -->
         <script src="{{ asset('assets/javascript/datatables/jquery.dataTables.min.js') }}"></script>
@@ -213,7 +221,7 @@
         <script src="{{ asset('assets/javascript/datatables/dataTables.responsive.min.js') }}"></script>
         <!-- For Datatable 끝 -->
 
-
+        @stack('scripts')
 
     </body>
 </html>
