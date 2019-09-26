@@ -27,16 +27,45 @@ class HomeController extends Controller
     {
         $userId = User::select('user_id')->get();
 
-        info (gettype($userId));
+        //info (gettype($userId));
 
-        $temp = HomeLayout::where('user_cd','=', $userId)
-                                                  ->select('layout_name')
-                                                  ->orderBy('sequence')
-                                                  ->get();
+        $layouts = HomeLayout::where('user_cd','=', $userId)
+                              ->select('layout_name')
+                              ->orderBy('sequence')
+                              ->get();
 
-        if (count($temp) == 0){
-          $temp = array('layout1','layout2','layout3', 'layout4');
+        if (count($layouts) == 0){
+          $layouts = array('layout1', 'layout2', 'layout3', 'layout4');
+        } else {
+          $layouts = array();
+          foreach($records as $record){
+              $temp[] = $record->layout_name;
+          }
+          $layouts = $temp;
         }
-        return view('home')->with('home_layouts', $temp);
+
+        return view('home')->with('home_layouts', $layouts);
+    }
+
+    public function onLayoutChange()
+    {
+        $userId = User::select('user_id')->get();
+        $params = Input::all();
+        $temp = HomeLayout::where('user_cd','=',$userId)
+                            ->count();
+
+        foreach($params as $key => $value){
+            unset($data);
+            $data['sequence'] = $value;
+            if ($temp == 0){
+                $data['layout_name'] = $key;
+                $data['user_cd'] = $userId;
+                HomeLayout::insert($data);
+            } else {
+                HomeLayout::where('user_cd','=', $userId)
+                          ->where('layout_name','=', $key)
+                          ->update($data);
+            }
+        }
     }
 }
