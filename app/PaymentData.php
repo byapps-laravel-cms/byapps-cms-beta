@@ -20,7 +20,7 @@ class PaymentData extends Model
 
       //Log::info($paymentData);
 
-      //dd($paymentData);
+      dd($paymentData);
 
       return $paymentData;
   }

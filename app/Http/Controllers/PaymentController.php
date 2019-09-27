@@ -11,30 +11,32 @@ use Yajra\Datatables\Datatables;
 
 class PaymentController extends Controller
 {
-  public function getIndex()
+    public function getIndex()
     {
-        // $paymentData = new PaymentData;
-        // $paymentData->getPaymentData();
-
         return view('paylist');
     }
-  /**
-   * Displays datatables front end view
-   *
-   * @return \Illuminate\View\View
-   */
-  // public function index(PaylistDataTable $dataTable)
-  // {
-  //     return $dataTable->render('paylist');
-  // }
 
-  public function getData()
+    public function getPaymentData()
     {
-        return Datatables::of(PaymentData::query())->make(true);
+      $paymentData = PaymentData::select('idx', 'app_name', 'pay_type', 'term', 'amount', 'start_time', 'reg_time');
 
-        //$paymentData = DB::connection('byapps')->table('BYAPPS_apps_payment_data')->select('idx', 'app_name', 'pay_type', 'term', 'amount', 'reg_time');
-
-        //return Datatables::of($paymentData)->make(true);
+      return Datatables::of($paymentData)
+              ->setRowId(function($paymentData) {
+                return $paymentData->idx;
+              })
+              ->editColumn('pay_type', '{{ $pay_type == 1 ? "연장" : "신규" }}')
+              ->editColumn('amount', '{{ number_format($amount)." 원" }}')
+              ->editColumn('term', function($eloquent) {
+                 if (empty($eloquent->start_time)) {
+                   return $eloquent->term." 일(미정)";
+                 } else {
+                   return $eloquent->term." 일";
+                 }
+              })
+              ->rawColumns([ 'term' ])
+              ->editColumn('reg_time', '{{ date("Y-m-d", $reg_time) }}')
+              ->orderColumn('reg_time', 'reg_time $1')
+              ->make(true);
     }
 
 }

@@ -20,5 +20,5 @@ Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 Route::post('/chart', 'ChartController@index');
 
-Route::get('/paylist', 'PaymentController@getIndex')->name('paylist');
-Route::get('/paylist-data', 'PaymentController@getData')->name('paylist.data');
+Route::view('/paylist', 'paylist')->name('paylist.view');
+Route::get('/paylist/data', 'PaymentController@getPaymentData')->name('paylist');
