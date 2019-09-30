@@ -58,11 +58,11 @@
                                   <i class="mdi mdi-logout-variant"></i>
                                   <span>로그인</span>
                               </a>
-                              @endauth
-                          @endif
 
                           </div>
                       </li>
+                        @endauth
+                      @endif
                   </ul>
 
                   <div class="menu-item">

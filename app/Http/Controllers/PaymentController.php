@@ -39,4 +39,11 @@ class PaymentController extends Controller
               ->make(true);
     }
 
+    public function getSingleData($idx)
+    {
+      $paymentData = PaymentData::where('idx', $idx)->first();
+
+      return view('paydetail')->with('paymentData', $paymentData);
+    }
+
 }

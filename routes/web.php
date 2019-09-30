@@ -23,3 +23,4 @@ Route::post('/expired', 'ExpiredController@getExpiredIos');
 
 Route::view('/paylist', 'paylist')->name('paylist.view');
 Route::get('/paylist/data', 'PaymentController@getPaymentData')->name('paylist');
+Route::get('/paydetail/{idx}', 'PaymentController@getSingleData')->name('paydetail');

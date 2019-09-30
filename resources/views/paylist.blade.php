@@ -63,7 +63,7 @@ $(function() {
            {
              'targets': 1,
              'render': function ( data, type, full, meta ) {
-                return '<a href="/pay/paydetail/'+full.idx+'">'+data+'</a>';
+                return '<a href="/paydetail/'+full.idx+'">'+data+'</a>';
              }
            },
         ],
