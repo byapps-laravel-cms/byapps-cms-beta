@@ -19,6 +19,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 Route::post('/chart', 'ChartController@index');
+Route::post('/expired', 'ExpiredController@getExpiredIos');
 
 Route::view('/paylist', 'paylist')->name('paylist.view');
 Route::get('/paylist/data', 'PaymentController@getPaymentData')->name('paylist');

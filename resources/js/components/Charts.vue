@@ -36,20 +36,20 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  mounted() {
-    //console.log("charts here");
+  data: function() {
+    return {
+    }
+  },
+  created() {
+    console.log("charts here");
 
     axios.post('/chart')
     .then(response => {
       showChart(response.data)
     });
   },
-  data: function() {
-    return {
-    }
-  },
-
 }
 
 function showChart (data) {
@@ -142,9 +142,9 @@ function showChart (data) {
       },
     bindto: "#sale_stats"
   });
-} catch(try_err) {
-  console.log(try_err.message);
-}
+  } catch(try_err) {
+    console.log(try_err.message);
+  }
 }
 
 </script>
