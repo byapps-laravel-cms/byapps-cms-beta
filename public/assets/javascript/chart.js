@@ -1,5 +1,5 @@
 
-$.request('onGetChartData', {
+$.request('onGetAppChartData', {
   success: function(data) {
     showChart(data);
   }

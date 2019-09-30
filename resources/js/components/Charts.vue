@@ -1,9 +1,9 @@
 <template>
-  <div class="dragbox_hover row collapse show" id="allLank">
+  <div class="dragbox_hover row collapse show" id="app">
       <!-- 앱 통계 차트 -->
       <div class="col-xs-12 col-md-3">
         <div align="center">
-          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="app_stats_daily()">일간</button>
+          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsDaily">일간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">주간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">월간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="app_stats_total()">전체</button>
@@ -36,26 +36,51 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  mounted() {
-    //console.log("charts here");
-
-    axios.post('/chart')
-    .then(response => {
-      showChart(response.data)
-    });
-  },
   data: function() {
     return {
     }
   },
-
+  mounted() {
+    console.log("charts here");
+    this.drawCharDefault();
+  },
+  methods: {
+    drawCharDefault() {
+      axios({
+        method: 'POST',
+        url: '/chart'
+      }).then(
+        response => {
+          showChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    appStatsDaily() {
+      alert("clicked");
+      console.log("clicked");
+      // axios({
+      //   method: 'POST',
+      //   url: '/chart/app_daily'
+      // }).then(
+      //   response => {
+      //     console.log(response)
+      //     showAppChart(response.data)
+      //   },
+      //   error => {
+      //     console.log(error)
+      //   }
+      // )
+    }
+  }
 }
 
 function showChart (data) {
-
-  try {
-    var chart = bb.generate({
+    var chart1 = bb.generate({
       data: {
           columns: data.circle1,
           type: "donut",
@@ -86,7 +111,7 @@ function showChart (data) {
       bindto: "#app_stats"
   });
 
-  var chart = bb.generate({
+  var chart2 = bb.generate({
     data: {
       columns: data.circle2,
       type: "donut",
@@ -107,7 +132,7 @@ function showChart (data) {
     bindto: "#ma_stats"
   });
 
-  var chart = bb.generate({
+  var chart3 = bb.generate({
     title: {
       text: "매출 통계"
     },
@@ -135,16 +160,43 @@ function showChart (data) {
     tooltip: {
       format: {
         title: function(d) {
-           console.log(d);
+           // console.log(d);
   		      return 'Data ' + d;
           },
         }
       },
     bindto: "#sale_stats"
   });
-} catch(try_err) {
-  console.log(try_err.message);
 }
+
+function showAppChart (data) {
+    var chart = bb.generate({
+    data: {
+        columns: data.circle1,
+        type: "donut",
+        colors: {
+          "무료": "#17b4dd",
+          "유료": "#038db2",
+          "관리": "#69bbd1"
+        },
+    },
+    tooltip: {
+      format: {
+        value: function(value) {
+          return value;
+        }
+      }
+    },
+    donut: {
+      title: "앱 통계",
+      label: {
+        format: function(value, ratio, id) {
+          return value + "개\n" + (ratio * 100).toFixed(1) + "%";
+        }
+      }
+    },
+    bindto: "#app_stats"
+  });
 }
 
 </script>

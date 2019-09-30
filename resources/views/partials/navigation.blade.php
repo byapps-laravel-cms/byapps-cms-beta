@@ -1,5 +1,5 @@
 
-<div class="topbar-main navbar m-b-0 b-0">
+  <div class="topbar-main navbar m-b-0 b-0">
         <div class="container-fluid">
 
             <!-- LOGO -->
@@ -47,7 +47,7 @@
                             <div class="dropdown-divider"></div>
 
                             <!-- item-->
-                            <a class="dropdown-item notify-item" href="{{ route('logout') }}">
+                            <a class="dropdown-item notify-item" href="{{ url('logout') }}">
                                 <i class="mdi mdi-logout-variant"></i>
                                 <span>로그아웃</span>
                             </a>
@@ -65,20 +65,20 @@
                 </ul>
 
                 <div class="menu-item">
-                        <!-- Mobile menu toggle-->
-                        <a class="navbar-toggle">
-                            <div class="lines">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </a>
-                        <!-- End mobile menu toggle-->
-                    </div>
+                    <!-- Mobile menu toggle-->
+                    <a class="navbar-toggle">
+                        <div class="lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
+                    <!-- End mobile menu toggle-->
                 </div>
+            </div>
 
         </div>
-    </div>
+  </div>
 
 
     <div class="navbar-custom">
@@ -94,8 +94,8 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                    <li><a href="payList">결제 관리</a></li>
-                                    <li><a href="payPromoList">프로모션</a></li>
+                                    <li><a href="paylist">결제 관리</a></li>
+                                    <li><a href="paypromoList">프로모션</a></li>
                                 </ul>
                             </li>
                         </ul>
