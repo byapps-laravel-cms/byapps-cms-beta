@@ -109,8 +109,13 @@
            <div class="col-md-10 col-xs-8">
                <div class="cell">
                    <div class="description td_style_1">
-
-                   , {{ $paymentData->term }}일,  {{ $paymentData->start_time }} ~ {{ $paymentData->end_time }}
+                   @php
+                      $arrPaytype = [ '신규', '연장', '충전', '추가', '기타' ];
+                   @endphp
+                   @foreach ($arrPaytype as $key => $paytype)
+                      {{ $key == $paymentData->pay_type ? $paytype : "" }}
+                   @endforeach
+                   , {{ $paymentData->term }}일, {{ date("Y-m-d", $paymentData->start_time) }} ~ {{ date("Y-m-d", $paymentData->end_time) }}
                    </div>
 
                </div>
@@ -148,9 +153,10 @@
            <div class="col-md-10 col-xs-8">
                <div class="cell">
                    <div class="description td_style_1">
-                    @foreach (explode('{:}', $paymentData->payment) as $pay)
-                      {{ $pay }}
-                    @endforeach
+                     @php $pay = explode('{:}', $paymentData->payment) @endphp
+                      {{ $pay[0] }} {{ !empty($pay[1]) ? "(".$pay[1].")" : "" }} <br />
+                      승인번호: {{ !empty($pay[3]) ? $pay[3] : "" }} <br />
+                      승인시간: <br />
                    <input class="btn nbutton3 btn-xs" type="button" value="입금확인">
                    </div>
 
@@ -170,9 +176,7 @@
            <div class="col-md-10 col-xs-8">
                <div class="cell">
                    <div class="description td_style_1">
-                     <textarea id="receipt" name="receipt" class="form-control" style="height:200px;">
-                       {{ $paymentData->receipt != '' ? $paymentData->receipt : "미발행" }}
-                     </textarea>
+                     <textarea id="receipt" name="receipt" class="form-control" style="height:200px;">{{ $paymentData->receipt != '' ? $paymentData->receipt : "미발행" }}</textarea>
                    </div>
                </div>
            </div>
