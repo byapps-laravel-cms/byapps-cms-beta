@@ -41,7 +41,6 @@
                           {{ val.ios_dev_exp }}
                       </div>
                   </div>
-              <!-- {% endfor %} -->
             </div>
             <div class="tab-pane fade" id="ios-stay" role="tabpanel" aria-labelledby="ios-stay-tab">
               <!-- 탭1-2 -->
@@ -188,9 +187,9 @@ export default {
       expiredIos: [{}],
     }
   },
-  mounted() {
+  created() {
+    this.expiredIos = this.getExpiredIosData();
     console.log("expired here");
-    this.getExpiredIosData();
   },
   methods: {
     // getExpiredIosData: function() {
@@ -205,8 +204,8 @@ export default {
         url: '/expired'
       }).then(
         response => {
-          //return response.data
-          this.expiredIos = response.data
+          return response.data
+          //this.expiredIos = response.data
         },
         error => {
           console.log(error)

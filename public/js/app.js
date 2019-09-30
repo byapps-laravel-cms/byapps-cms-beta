@@ -1882,103 +1882,154 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  created: function created() {
+  mounted: function mounted() {
     console.log("charts here");
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/chart').then(function (response) {
-      showChart(response.data);
-    });
+    this.drawCharDefault();
+  },
+  methods: {
+    drawCharDefault: function drawCharDefault() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart'
+      }).then(function (response) {
+        showChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    appStatsDaily: function appStatsDaily() {
+      alert("clicked");
+      console.log("clicked"); // axios({
+      //   method: 'POST',
+      //   url: '/chart/app_daily'
+      // }).then(
+      //   response => {
+      //     console.log(response)
+      //     showAppChart(response.data)
+      //   },
+      //   error => {
+      //     console.log(error)
+      //   }
+      // )
+    }
   }
 });
 
 function showChart(data) {
-  try {
-    var chart = bb.generate({
-      data: {
-        columns: data.circle1,
-        type: "donut",
-        colors: {
-          "무료": "#17b4dd",
-          "유료": "#038db2",
-          "관리": "#69bbd1"
-        },
-        onover: function onover(d) {//console.log("onover", d)
+  var chart1 = bb.generate({
+    data: {
+      columns: data.circle1,
+      type: "donut",
+      colors: {
+        "무료": "#17b4dd",
+        "유료": "#038db2",
+        "관리": "#69bbd1"
+      },
+      onover: function onover(d) {//console.log("onover", d)
+      }
+    },
+    tooltip: {
+      format: {
+        value: function value(_value) {
+          return _value;
         }
-      },
-      tooltip: {
-        format: {
-          value: function value(_value) {
-            return _value;
-          }
+      }
+    },
+    donut: {
+      title: "앱 통계",
+      label: {
+        format: function format(value, ratio, id) {
+          return value + "개\n" + (ratio * 100).toFixed(1) + "%";
         }
-      },
-      donut: {
-        title: "앱 통계",
-        label: {
-          format: function format(value, ratio, id) {
-            return value + "개\n" + (ratio * 100).toFixed(1) + "%";
-          }
+      }
+    },
+    bindto: "#app_stats"
+  });
+  var chart2 = bb.generate({
+    data: {
+      columns: data.circle2,
+      type: "donut",
+      colors: {
+        "무료": "#f6b300",
+        "유료": "#e88d00",
+        "관리": "#fcca8f"
+      }
+    },
+    donut: {
+      title: "MA 통계",
+      label: {
+        format: function format(value, ratio, id) {
+          return value + "개 \n" + (ratio * 100).toFixed(1) + "%";
         }
+      }
+    },
+    bindto: "#ma_stats"
+  });
+  var chart3 = bb.generate({
+    title: {
+      text: "매출 통계"
+    },
+    data: {
+      columns: data.bar,
+      type: "bar",
+      colors: {
+        "전체": "#97215c",
+        "신규": "#fca1b0",
+        "연장": "#f9637c",
+        "기타": "#d7215c"
       },
-      bindto: "#app_stats"
-    });
-    var chart = bb.generate({
-      data: {
-        columns: data.circle2,
-        type: "donut",
-        colors: {
-          "무료": "#f6b300",
-          "유료": "#e88d00",
-          "관리": "#fcca8f"
+      labels: {
+        centered: true,
+        format: function format(x) {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-      },
-      donut: {
-        title: "MA 통계",
-        label: {
-          format: function format(value, ratio, id) {
-            return value + "개 \n" + (ratio * 100).toFixed(1) + "%";
-          }
+      }
+    },
+    bar: {
+      width: {
+        ratio: 0.8
+      }
+    },
+    tooltip: {
+      format: {
+        title: function title(d) {
+          // console.log(d);
+          return 'Data ' + d;
         }
-      },
-      bindto: "#ma_stats"
-    });
-    var chart = bb.generate({
-      title: {
-        text: "매출 통계"
-      },
-      data: {
-        columns: data.bar,
-        type: "bar",
-        colors: {
-          "전체": "#97215c",
-          "신규": "#fca1b0",
-          "연장": "#f9637c",
-          "기타": "#d7215c"
-        },
-        labels: {
-          centered: true,
-          format: function format(x) {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          }
+      }
+    },
+    bindto: "#sale_stats"
+  });
+}
+
+function showAppChart(data) {
+  var chart = bb.generate({
+    data: {
+      columns: data.circle1,
+      type: "donut",
+      colors: {
+        "무료": "#17b4dd",
+        "유료": "#038db2",
+        "관리": "#69bbd1"
+      }
+    },
+    tooltip: {
+      format: {
+        value: function value(_value2) {
+          return _value2;
         }
-      },
-      bar: {
-        width: {
-          ratio: 0.8
+      }
+    },
+    donut: {
+      title: "앱 통계",
+      label: {
+        format: function format(value, ratio, id) {
+          return value + "개\n" + (ratio * 100).toFixed(1) + "%";
         }
-      },
-      tooltip: {
-        format: {
-          title: function title(d) {
-            console.log(d);
-            return 'Data ' + d;
-          }
-        }
-      },
-      bindto: "#sale_stats"
-    });
-  } catch (try_err) {
-    console.log(try_err.message);
-  }
+      }
+    },
+    bindto: "#app_stats"
+  });
 }
 
 /***/ }),
@@ -2175,7 +2226,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2183,9 +2233,9 @@ __webpack_require__.r(__webpack_exports__);
       expiredIos: [{}]
     };
   },
-  mounted: function mounted() {
+  created: function created() {
+    this.expiredIos = this.getExpiredIosData();
     console.log("expired here");
-    this.getExpiredIosData();
   },
   methods: {
     // getExpiredIosData: function() {
@@ -2195,14 +2245,11 @@ __webpack_require__.r(__webpack_exports__);
     //   });
     // }
     getExpiredIosData: function getExpiredIosData() {
-      var _this = this;
-
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'POST',
         url: '/expired'
       }).then(function (response) {
-        //return response.data
-        _this.expiredIos = response.data;
+        return response.data; //this.expiredIos = response.data
       }, function (error) {
         console.log(error);
       });
@@ -37506,159 +37553,162 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "dragbox_hover row collapse show", attrs: { id: "app" } },
+    [
+      _c("div", { staticClass: "col-xs-12 col-md-3" }, [
+        _c("div", { attrs: { align: "center" } }, [
+          _c(
+            "button",
+            {
+              staticClass:
+                "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+              on: { click: _vm.appStatsDaily }
+            },
+            [_vm._v("일간")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+            },
+            [_vm._v("주간")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+            },
+            [_vm._v("월간")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+              attrs: { onclick: "app_stats_total()" }
+            },
+            [_vm._v("전체")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "app_stats" } })
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "dragbox_hover row collapse show",
-        attrs: { id: "allLank" }
-      },
-      [
-        _c("div", { staticClass: "col-xs-12 col-md-3" }, [
-          _c("div", { attrs: { align: "center" } }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-                attrs: { onclick: "app_stats_daily()" }
-              },
-              [_vm._v("일간")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
-              },
-              [_vm._v("주간")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
-              },
-              [_vm._v("월간")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-                attrs: { onclick: "app_stats_total()" }
-              },
-              [_vm._v("전체")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { attrs: { id: "app_stats" } })
-        ]),
+    return _c("div", { staticClass: "col-xs-12 col-md-3" }, [
+      _c("div", { attrs: { align: "center" } }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+            attrs: { onclick: "ma_stats_daily()" }
+          },
+          [_vm._v("일간")]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-xs-12 col-md-3" }, [
-          _c("div", { attrs: { align: "center" } }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-                attrs: { onclick: "ma_stats_daily()" }
-              },
-              [_vm._v("일간")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
-              },
-              [_vm._v("주간")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
-              },
-              [_vm._v("월간")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-                attrs: { onclick: "ma_stats_total()" }
-              },
-              [_vm._v("전체")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { attrs: { id: "ma_stats" } })
-        ]),
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+          },
+          [_vm._v("주간")]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-xs-12 col-md-6 pl-0 pr-5" }, [
-          _c("div", { attrs: { align: "center" } }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-                attrs: { onclick: "sales_stats_daily()" }
-              },
-              [_vm._v("일간")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
-              },
-              [_vm._v("주간")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
-              },
-              [_vm._v("월간")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-                attrs: { onclick: "sales_stats_total()" }
-              },
-              [_vm._v("전체")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", {
-            attrs: {
-              id: "sale_stats",
-              "data-toggle": "modal",
-              "data-target": "#lankDetail"
-            }
-          })
-        ])
-      ]
-    )
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+          },
+          [_vm._v("월간")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+            attrs: { onclick: "ma_stats_total()" }
+          },
+          [_vm._v("전체")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "ma_stats" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xs-12 col-md-6 pl-0 pr-5" }, [
+      _c("div", { attrs: { align: "center" } }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+            attrs: { onclick: "sales_stats_daily()" }
+          },
+          [_vm._v("일간")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+          },
+          [_vm._v("주간")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+          },
+          [_vm._v("월간")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+            attrs: { onclick: "sales_stats_total()" }
+          },
+          [_vm._v("전체")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        attrs: {
+          id: "sale_stats",
+          "data-toggle": "modal",
+          "data-target": "#lankDetail"
+        }
+      })
+    ])
   }
 ]
 render._withStripped = true
@@ -50458,13 +50508,14 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
+ * components and automatically register them with their "  basename".
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('navbar-component', require('./components/NavbarComponent.vue'.default);
 
 Vue.component('charts', __webpack_require__(/*! ./components/Charts.vue */ "./resources/js/components/Charts.vue")["default"]);
 Vue.component('expired', __webpack_require__(/*! ./components/ExpiredList.vue */ "./resources/js/components/ExpiredList.vue")["default"]);

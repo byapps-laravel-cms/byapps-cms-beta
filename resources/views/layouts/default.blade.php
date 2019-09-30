@@ -56,13 +56,12 @@
 
     <body>
 
+    <div id="app">
       <!-- Navigation Bar-->
       <header id="topnav">
           @include('partials.navigation')
       </header>
       <!-- End Navigation Bar-->
-
-      <div id="app">
 
         <!-- Content -->
         <div class="wrapper">
