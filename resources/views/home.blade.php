@@ -1,19 +1,14 @@
 @extends('layouts.default')
 
 @section('content')
-<!-- <style>
+<style>
 .input-group-text {
   font-size: 11px;
 }
-
-</style> -->
+</style>
 
 @if (Auth::user())
 <div class="container-fluid">
-<!-- {% if not user %}
-<h2><center>로그인하는페이지</center></h2>
-{% elseif user %} -->
-
 
 <div class="sortable">
 
@@ -161,7 +156,7 @@
           </div>
           <!-- 기간조회 End -->
 
-          <charts></charts>
+
           <!-- <div class="dragbox_hover row collapse show" id="allLank"> -->
               <!-- 앱 통계 차트 -->
               <!-- <div class="col-xs-12 col-md-3">
@@ -312,8 +307,8 @@
               </div>
           </div>
 
-          <expired></expired>
-          
+          @include('layouts.includes.expiredlist')
+
       </li>
       @endif
   @endforeach
