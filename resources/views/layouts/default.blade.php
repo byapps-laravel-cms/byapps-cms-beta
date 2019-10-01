@@ -37,7 +37,8 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables/responsive.dataTables.min.css') }}">
 
         <!-- jQuery  -->
-        <script src="{{ asset('assets/codefox/js/jquery.min.js') }}"></script>
+        <!-- <script src="{{ asset('assets/codefox/js/jquery.min.js') }}"></script> -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
         <!-- bootstrap.bundle.min.js -->
         <script src="{{ asset('assets/codefox/js/bootstrap.bundle.min.js') }}"></script>
@@ -62,26 +63,25 @@
       </header>
       <!-- End Navigation Bar-->
 
-        <!-- Content -->
-        <div class="wrapper">
-          <section id="layout-content">
-              <div id="content" class="col-md-12 mt-3">
-                  <div id="app">
-                  @yield('content')
-                </div>
+      <!-- Content -->
+      <div class="wrapper">
+        <section id="layout-content">
+            <div id="content" class="col-md-12 mt-3">
+                <div id="app">
+                @yield('content')
               </div>
-             @unless (Route::has('home'))
-              <div id="sidebar-toggle">
-                  <span><i class="mdi mdi-comment-processing-outline"></i></span>
-                  <p>OPEN</p>
-              </div>
-              @endunless
-              <div id="sidebar">
-                  @include('partials.aside')
-              </div>
-          </section>
-        </div>
-
+            </div>
+           @unless (Route::has('home'))
+            <div id="sidebar-toggle">
+                <span><i class="mdi mdi-comment-processing-outline"></i></span>
+                <p>OPEN</p>
+            </div>
+            @endunless
+            <div id="sidebar">
+                @include('partials.aside')
+            </div>
+        </section>
+      </div>
 
         <!-- Scripts -->
         <script>
@@ -123,9 +123,7 @@
                         !a[i] ? newcookie += "": newcookie += a[i]+"|";
 
                     }
-
                     prev = a[i];
-
                 }
                 newcookie = newcookie.replace("undefined|","");
                 console.log( "newcookie",newcookie);
@@ -135,7 +133,6 @@
                     console.log("cookie", cookie_history);
                     byapps_setCookie("link_history", cookie_history+"|"+""+"&"+location.href, 14);
                 }
-
             }
 
                 var str = "";
@@ -159,13 +156,94 @@
         </script>
 
         <script type="text/javascript">
-
             $('.profile').initial({
               width: 32,
               height: 32,
               fontSize: 16 });
-
         </script>
+
+        <!-- sortable -->
+         <script>
+         $(function (id) {
+             id = '#salesList';
+             $(id).sortable({
+                 start: function (event, ui) {
+                      ui.item.toggleClass("highlight");
+                 },
+                 stop: function (event, ui) {
+                      ui.item.toggleClass("highlight");
+                 }
+             });
+             $(id).disableSelection();
+         });
+         </script>
+
+         <!-- datepicker -->
+         <script>
+        $(document).ready(function(){
+             $('.datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                language: "kr",
+            });
+
+            $.fn.datepicker.dates['kr'] = {
+            days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
+            daysShort: ["일", "월", "화", "수", "목", "금", "토", "일"],
+            daysMin: ["일", "월", "화", "수", "목", "금", "토", "일"],
+            months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+            monthsShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+          };
+
+
+        $(function() {
+           $('#start_date_chart').datepicker();
+           $('#end_date_chart').datepicker();
+           $('#start_date_table').datepicker();
+           $('#end_date_table').datepicker();
+
+            //초기값을 오늘 날짜로 설정
+           //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+            $('#start_date_chart').datepicker('setDate', 'today');
+            $('#end_date_chart').datepicker('setDate', 'today');
+            $('#start_date_table').datepicker('setDate', 'today');
+            $('#end_date_table').datepicker('setDate', 'today');
+       });
+
+        function stat_chartDateTerm(term) {
+          if (term == 7) {
+            $('#start_date_chart').datepicker('setDate', '-7D');
+          } else if (term == 30) {
+             $('#start_date_chart').datepicker('setDate', '-1M');
+          } else if (term == 90) {
+             $('#start_date_chart').datepicker('setDate', '-3M');
+          } else if (term == 180) {
+            $('#start_date_chart').datepicker('setDate', '-6M');
+          }
+        }
+
+        function stat_tableDateTerm(term) {
+          if (term == 7) {
+            $('#start_date_table').datepicker('setDate', '-7D');
+          } else if (term == 30) {
+             $('#start_date_table').datepicker('setDate', '-1M');
+          } else if (term == 90) {
+             $('#start_date_table').datepicker('setDate', '-3M');
+          } else if (term == 180) {
+            $('#start_date_table').datepicker('setDate', '-6M');
+          }
+        }
+        // var showEntireChart = function(date1, date2) {
+        //   console.log("시작일", date1);
+        //   console.log("종료일", date2);
+        // }
+
+       // 보기 버튼 눌렀을때 동작
+        // $('#getDate').on('click', function(){
+        //   showEntireChart($('#start_date_chart').val(), $('#end_date_chart').val());
+        // });
+        });
+         </script>
+
 
         <!-- Vue.js -->
         <!-- <script src="{{ mix('js/app.js') }}"></script> -->
@@ -196,7 +274,6 @@
         <script src="{{ asset('assets/javascript/util.js') }}"></script>
         <script src="{{ asset('assets/javascript/temp.js?v1') }}"></script>
         <script src="{{ asset('assets/javascript/app.js') }}"></script>
-
 
         @if (Route::has('home'))
           <!-- <script src="{{ asset('assets/javascript/chart.js') }}"></script> -->
