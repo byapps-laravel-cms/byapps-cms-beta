@@ -33,7 +33,6 @@
         <div class="tab-content" id="tab-depth2-content">
           <div class="tab-pane fade show active" id="ios-over" role="tabpanel" aria-labelledby="ios-over-tab">
             <!-- 탭1-1 -->
-
                 @foreach ($expiredIos as $data)
                 <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
                     <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">

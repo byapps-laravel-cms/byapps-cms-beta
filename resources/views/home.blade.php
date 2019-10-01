@@ -156,41 +156,7 @@
           </div>
           <!-- 기간조회 End -->
 
-
-          <!-- <div class="dragbox_hover row collapse show" id="allLank"> -->
-              <!-- 앱 통계 차트 -->
-              <!-- <div class="col-xs-12 col-md-3">
-                <div align="center">
-                  <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="app_stats_daily()">일간</button>
-                  <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">주간</button>
-                  <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">월간</button>
-                  <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="app_stats_total()">전체</button>
-                </div>
-                <div id="app_stats"></div>
-              </div> -->
-              <!-- MA 통계 차트 -->
-              <!-- <div class="col-xs-12 col-md-3">
-                  <div align="center">
-                    <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="ma_stats_daily()">일간</button>
-                    <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">주간</button>
-                    <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">월간</button>
-                    <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="ma_stats_total()">전체</button>
-                  </div>
-                  <div id="ma_stats"></div>
-              </div> -->
-
-              <!-- 매출 통계 차트 -->
-              <!-- <div class="col-xs-12 col-md-6 pl-0 pr-5">
-                <div align="center">
-                  <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="sales_stats_daily()">일간</button>
-                  <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">주간</button>
-                  <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">월간</button>
-                  <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="sales_stats_total()">전체</button>
-                </div>
-                  <div id="sale_stats" data-toggle="modal" data-target="#lankDetail"></div>
-              </div> -->
-
-          <!-- </div> -->
+          @include('components.chart')
         </li>
 
       @elseif ($layout == 'layout3')
@@ -307,7 +273,7 @@
               </div>
           </div>
 
-          @include('layouts.includes.expiredlist')
+          @include('components.expiredlist')
 
       </li>
       @endif

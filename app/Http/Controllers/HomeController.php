@@ -7,8 +7,8 @@ use App\User;
 use App\HomeLayout;
 use App\AppsData;
 
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ExpiredController;
-
 
 class HomeController extends Controller
 {
@@ -49,9 +49,14 @@ class HomeController extends Controller
         $preData = new ExpiredController;
         $expiredIos = $preData->getExpiredIos();
 
-        return view('home')->with(array('home_layouts' => $layouts,
-                                          'expiredIos' => $expiredIos));
+        $preData = new ChartController;
+        $chartData = $preData->index();
 
+        return view('home')->with(array('home_layouts' => $layouts,
+                                          'expiredIos' => $expiredIos,
+                                           'chartData' => $chartData
+                                        )
+                                  );
     }
 
     public function onLayoutChange()
