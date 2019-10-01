@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\HomeLayout;
+use App\AppsData;
+
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\ExpiredController;
 
 class HomeController extends Controller
 {
@@ -27,8 +31,6 @@ class HomeController extends Controller
     {
         $userId = User::select('user_id')->get();
 
-        //info (gettype($userId));
-
         $layouts = HomeLayout::where('user_cd','=', $userId)
                               ->select('layout_name')
                               ->orderBy('sequence')
@@ -44,7 +46,17 @@ class HomeController extends Controller
           $layouts = $temp;
         }
 
-        return view('home')->with('home_layouts', $layouts);
+        $preData = new ExpiredController;
+        $expiredIos = $preData->getExpiredIos();
+
+        $preData = new ChartController;
+        $chartData = $preData->index();
+
+        return view('home')->with(array('home_layouts' => $layouts,
+                                          'expiredIos' => $expiredIos,
+                                           'chartData' => $chartData
+                                        )
+                                  );
     }
 
     public function onLayoutChange()
@@ -68,4 +80,5 @@ class HomeController extends Controller
             }
         }
     }
+
 }

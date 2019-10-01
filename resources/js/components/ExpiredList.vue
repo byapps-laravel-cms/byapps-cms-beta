@@ -44,14 +44,10 @@
             </div>
             <div class="tab-pane fade" id="ios-stay" role="tabpanel" aria-labelledby="ios-stay-tab">
               <!-- 탭1-2 -->
-              <!-- {% for iosData in willBeExpiredIos %} -->
                   <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
                       <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">
-                          <!-- {% iosData.app_name %}<br><span class="badge badge-info">D {% func.calculateDday(iosData.ios_dev_exp) %}</span> -->
-                          <!-- {% iosData.ios_dev_exp %} -->
                       </div>
                   </div>
-              <!-- {% endfor %} -->
             </div>
           </div>
         </div>
@@ -72,25 +68,23 @@
           <div class="tab-content" id="tab-depth2-content">
             <div class="tab-pane fade show active" id="push-over" role="tabpanel" aria-labelledby="push-over-tab">
               <!-- 탭2-1 -->
-              <!-- {% for pushData in expiredPush %} -->
+
                   <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
                       <div class="mx-0 p-2 text-truncate" style="width:8rem;vertical-align:middle;">
-                          <!-- {% pushData.app_name %}<br> -->
-                          <!-- {% pushData.ios_cer_exp %} -->
+
                       </div>
                   </div>
-              <!-- {% endfor %} -->
+
             </div>
             <div class="tab-pane fade" id="push-stay" role="tabpanel" aria-labelledby="push-stay-tab">
               <!-- 탭2-2 -->
-              <!-- {% for pushData in willBeExpiredPush %} -->
+
                   <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
                       <div class="mx-0 p-2 text-truncate" style="width:8rem;vertical-align:middle;">
-                          <!-- {% pushData.app_name %}<br> -->
-                          <!-- {% pushData.ios_cer_exp %} -->
+
                       </div>
                   </div>
-              <!-- {% endfor %} -->
+
             </div>
           </div>
         </div>
@@ -111,25 +105,23 @@
           <div class="tab-content" id="tab-depth2-content">
             <div class="tab-pane fade show active" id="ma-over" role="tabpanel" aria-labelledby="ma-over-tab">
               <!-- 탭3-1 -->
-              <!-- {% for maData in expiredMA %} -->
+
                   <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
                       <div class="mx-0 p-2 text-truncate" style="width:8rem;vertical-align:middle;">
-                          <!-- {% maData.app_name %}<br> -->
-                          <!-- {% func.dateFormat(maData.end_time) %} -->
+
                       </div>
                   </div>
-              <!-- {% endfor %} -->
+
             </div>
             <div class="tab-pane fade" id="ma-stay" role="tabpanel" aria-labelledby="ma-stay-tab">
               <!-- 탭3-2 -->
-              <!-- {% for maData in willBeExpiredMA %} -->
+
                   <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
                       <div class="mx-0 p-2 text-truncate" style="width:8rem;vertical-align:middle;">
-                          <!-- {% maData.app_name %}<br> -->
-                          <!-- {% func.dateFormat(maData.end_time) %} -->
+
                       </div>
                   </div>
-              <!-- {% endfor %} -->
+
             </div>
           </div>
         </div>
@@ -150,25 +142,23 @@
           <div class="tab-content" id="tab-depth2-content">
             <div class="tab-pane fade show active" id="apps-over" role="tabpanel" aria-labelledby="apps-over-tab">
               <!-- 탭4-1 -->
-              <!-- {% for appsData in expiredApps %} -->
+
                   <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
                       <div class="mx-0 p-2 text-truncate" style="width:8rem;vertical-align:middle;">
-                          <!-- {% appsData.app_name %}<br> -->
-                          <!-- {% func.dateFormat(appsData.end_time) %} -->
+
                       </div>
                   </div>
-              <!-- {% endfor %} -->
+
             </div>
             <div class="tab-pane fade" id="apps-stay" role="tabpanel" aria-labelledby="apps-stay-tab">
               <!-- 탭4-2 -->
-              <!-- {% for appsData in willBeExpiredApps %} -->
+
                   <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
                       <div class="mx-0 p-2 text-truncate" style="width:8rem;vertical-align:middle;">
-                          <!-- {% appsData.app_name %}<br> -->
-                          <!-- {% func.dateFormat(appsData.end_time) %} -->
+
                       </div>
                   </div>
-              <!-- {% endfor %} -->
+
             </div>
           </div>
         </div>

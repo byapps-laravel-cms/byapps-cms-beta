@@ -22,8 +22,6 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::post('/chart', 'ChartController@index');
 Route::post('/chart/app_daily', 'ChartController@onGetAppDailyChartData');
 
-Route::post('/expired', 'ExpiredController@getExpiredIos');
-
 Route::view('/paylist', 'paylist')->name('paylist.view');
 Route::get('/paylist/data', 'PaymentController@getPaymentData')->name('paylist');
 Route::get('/paydetail/{idx}', 'PaymentController@getSingleData')->name('paydetail');

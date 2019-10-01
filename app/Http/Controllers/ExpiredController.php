@@ -14,11 +14,13 @@ class ExpiredController extends Controller
       // original query: select app_id,app_name,ios_dev_exp from BYAPPS_apps_data where ios_dev_exp!='' and ios_dev_exp<'".$next_month."' order by ios_dev_exp
       $todate=date("Y-m-d");
 
-      return AppsData::select('app_name', 'app_id', 'ios_dev_exp')
+      $data = AppsData::select('app_name', 'app_id', 'ios_dev_exp')
               ->where('ios_dev_exp', '!=', '')
               ->where('ios_dev_exp', '<', $todate)
               ->orderBy('ios_dev_exp')
               ->get();
+
+      return $data;
     }
 
     // iOS 계정 만료예정 업체들

@@ -2216,16 +2216,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -37564,7 +37554,11 @@ var render = function() {
             {
               staticClass:
                 "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-              on: { click: _vm.appStatsDaily }
+              on: {
+                click: function($event) {
+                  return _vm.$emit("appStatsDaily")
+                }
+              }
             },
             [_vm._v("일간")]
           ),

@@ -3,7 +3,7 @@
       <!-- 앱 통계 차트 -->
       <div class="col-xs-12 col-md-3">
         <div align="center">
-          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsDaily">일간</button>
+          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="$emit('appStatsDaily')">일간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">주간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">월간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="app_stats_total()">전체</button>

@@ -56,7 +56,6 @@
 
     <body>
 
-    <div id="app">
       <!-- Navigation Bar-->
       <header id="topnav">
           @include('partials.navigation')
@@ -67,7 +66,9 @@
         <div class="wrapper">
           <section id="layout-content">
               <div id="content" class="col-md-12 mt-3">
+                  <div id="app">
                   @yield('content')
+                </div>
               </div>
              @unless (Route::has('home'))
               <div id="sidebar-toggle">
@@ -81,7 +82,7 @@
           </section>
         </div>
 
-    </div>
+
         <!-- Scripts -->
         <script>
             function byapps_getCookie (cname) {
@@ -167,7 +168,7 @@
         </script>
 
         <!-- Vue.js -->
-        <script src="{{ asset('js/app.js') }}"></script>
+        <!-- <script src="{{ mix('js/app.js') }}"></script> -->
 
         <!-- Codefox Theme -->
         <script src="{{ asset('assets/codefox/js/waves.js') }}"></script>
