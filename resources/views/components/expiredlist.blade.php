@@ -45,10 +45,14 @@
           </div>
           <div class="tab-pane fade" id="ios-stay" role="tabpanel" aria-labelledby="ios-stay-tab">
             <!-- 탭1-2 -->
+                @foreach ($willBeExpiredIos as $data)
                 <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
                     <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">
+                      {{ $data->app_name }}<br><span class="badge badge-info">D {{ App\Helpers\Helpers::calculateDday($data->ios_dev_exp) }}</span>
+                      {{ $data->ios_dev_exp }}
                     </div>
                 </div>
+                @endforeach
           </div>
         </div>
       </div>
@@ -69,23 +73,25 @@
         <div class="tab-content" id="tab-depth2-content">
           <div class="tab-pane fade show active" id="push-over" role="tabpanel" aria-labelledby="push-over-tab">
             <!-- 탭2-1 -->
-
+                @foreach ($expiredPush as $data)
                 <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
-                    <div class="mx-0 p-2 text-truncate" style="width:8rem;vertical-align:middle;">
-
+                    <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">
+                      {{ $data->app_name }}<br><span class="badge badge-pink">D+ {{ App\Helpers\Helpers::calculateDday($data->ios_cer_exp) }}</span>
+                      {{ $data->ios_cer_exp }}
                     </div>
                 </div>
-
+                @endforeach
           </div>
           <div class="tab-pane fade" id="push-stay" role="tabpanel" aria-labelledby="push-stay-tab">
             <!-- 탭2-2 -->
-
+                @foreach ($willBeExpiredPush as $data)
                 <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
-                    <div class="mx-0 p-2 text-truncate" style="width:8rem;vertical-align:middle;">
-
+                    <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">
+                      {{ $data->app_name }}<br><span class="badge badge-info">D {{ App\Helpers\Helpers::calculateDday($data->ios_cer_exp) }}</span>
+                      {{ $data->ios_cer_exp }}
                     </div>
                 </div>
-
+                @endforeach
           </div>
         </div>
       </div>
@@ -106,23 +112,25 @@
         <div class="tab-content" id="tab-depth2-content">
           <div class="tab-pane fade show active" id="ma-over" role="tabpanel" aria-labelledby="ma-over-tab">
             <!-- 탭3-1 -->
-
+                @foreach ($expiredMA as $data)
                 <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
-                    <div class="mx-0 p-2 text-truncate" style="width:8rem;vertical-align:middle;">
-
+                    <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">
+                      {{ $data->app_name }}<br><span class="badge badge-pink">D+ {{ App\Helpers\Helpers::calculateDday(App\Helpers\Helpers::dateFormat($data->end_time)) }}</span>
+                      {{ App\Helpers\Helpers::dateFormat($data->end_time) }}
                     </div>
                 </div>
-
+                @endforeach
           </div>
           <div class="tab-pane fade" id="ma-stay" role="tabpanel" aria-labelledby="ma-stay-tab">
             <!-- 탭3-2 -->
-
+                @foreach ($willBeExpiredMA as $data)
                 <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
-                    <div class="mx-0 p-2 text-truncate" style="width:8rem;vertical-align:middle;">
-
+                    <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">
+                      {{ $data->app_name }}<br><span class="badge badge-info">D {{ App\Helpers\Helpers::calculateDday(App\Helpers\Helpers::dateFormat($data->end_time)) }}</span>
+                      {{ App\Helpers\Helpers::dateFormat($data->end_time) }}
                     </div>
                 </div>
-
+                @endforeach
           </div>
         </div>
       </div>
@@ -143,23 +151,25 @@
         <div class="tab-content" id="tab-depth2-content">
           <div class="tab-pane fade show active" id="apps-over" role="tabpanel" aria-labelledby="apps-over-tab">
             <!-- 탭4-1 -->
-
+                @foreach ($expiredApps as $data)
                 <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
-                    <div class="mx-0 p-2 text-truncate" style="width:8rem;vertical-align:middle;">
-
+                    <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">
+                      {{ $data->app_name }}<br><span class="badge badge-pink">D+ {{ App\Helpers\Helpers::calculateDday(App\Helpers\Helpers::dateFormat($data->end_time)) }}</span>
+                      {{ App\Helpers\Helpers::dateFormat($data->end_time) }}
                     </div>
                 </div>
-
+                @endforeach
           </div>
           <div class="tab-pane fade" id="apps-stay" role="tabpanel" aria-labelledby="apps-stay-tab">
             <!-- 탭4-2 -->
-
+                @foreach ($willBeExpiredApps as $data)
                 <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
-                    <div class="mx-0 p-2 text-truncate" style="width:8rem;vertical-align:middle;">
-
+                    <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">
+                      {{ $data->app_name }}<br><span class="badge badge-info">D {{ App\Helpers\Helpers::calculateDday(App\Helpers\Helpers::dateFormat($data->end_time)) }}</span>
+                      {{ App\Helpers\Helpers::dateFormat($data->end_time) }}
                     </div>
                 </div>
-
+                @endforeach
           </div>
         </div>
       </div>

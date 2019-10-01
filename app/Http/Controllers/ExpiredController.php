@@ -107,4 +107,19 @@ class ExpiredController extends Controller
                         ->orderBy('end_time')
                         ->get();
     }
+
+    // 앱서비스 만료예정 업체들
+    public function getWillBeExpiredApps()
+    {
+      // original query: 없음
+      $todate=time();
+      $next_month=time()+(86400*30);
+
+      return AppsData::select('app_name', 'app_id', 'end_time')
+                        ->where('app_process', '=', '7')
+                        ->where('end_time', '!=', '0')
+                        ->whereBetween('end_time', [$todate, $next_month])
+                        ->orderBy('end_time')
+                        ->get();
+    }
 }
