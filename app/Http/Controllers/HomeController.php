@@ -9,6 +9,7 @@ use App\AppsData;
 
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ExpiredController;
+use App\Http\Controllers\StatusController;
 
 class HomeController extends Controller
 {
@@ -46,6 +47,12 @@ class HomeController extends Controller
           $layouts = $temp;
         }
 
+        // 주문요청현황 데이터
+        $preData = new StatusController;
+        $appsOrderCount = $preData->onGetAppsOrderCount();
+        $appendixOrderCount = $preData->onGetAppendixOrderCount();
+        $updateCount = $preData->onGetUpdateCount();
+
         // 만료예정 데이터
         $preData = new ExpiredController;
         $expiredIos = $preData->getExpiredIos();
@@ -62,6 +69,9 @@ class HomeController extends Controller
         $chartData = $preData->index();
 
         return view('home')->with(array('home_layouts' => $layouts,
+                                        'appsOrderCount' => $appsOrderCount,
+                                        'appendixOrderCount' => $appendixOrderCount,
+                                        'updateCount' => $updateCount,
                                         'expiredIos' => $expiredIos,
                                         'willBeExpiredIos' => $willBeExpiredIos,
                                         'expiredPush' => $expiredPush,

@@ -36,7 +36,7 @@
 <script>
 $(document).ready(function() {
   var data = {!! json_encode($chartData) !!}
-  console.log(data);
+  //console.log(data);
   showChart(data);
 
   function showChart (data) {

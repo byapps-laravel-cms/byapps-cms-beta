@@ -9,7 +9,7 @@
                 주문접수
               </p>
               <h2 class="text-white">
-                <span data-plugin="counterup">10</span>
+                <span data-plugin="counterup">{{ $appsOrderCount }}</span>
                 <small><i class="mdi mdi-arrow-up text-white"></i></small>
               </h2>
               <p class="text-white m-0">어제보다 <b>10%</b> 늘었어요</p>
@@ -26,7 +26,7 @@
                   <p class="m-0 text-white text-uppercase font-600 font-secondary text-overflow" title="User Today">
                     부가서비스 접수
                   </p>
-                  <h2 class="text-white"><span data-plugin="counterup">20</span>
+                  <h2 class="text-white"><span data-plugin="counterup">{{ $appendixOrderCount }}</span>
                     <small><i class="mdi mdi-arrow-up text-white"></i></small>
                   </h2>
                   <p class="text-white m-0">어제보다 <b>5.6%</b> 줄었어요</p>
@@ -43,7 +43,7 @@
                   <p class="m-0 text-uppercase text-white font-600 font-secondary text-overflow" title="Request Per Minute">
                     업데이트 접수
                   </p>
-                  <h2 class="text-white"><span data-plugin="counterup">30</span>
+                  <h2 class="text-white"><span data-plugin="counterup">{{ $updateCount }}</span>
                     <small><i class="mdi mdi-arrow-up text-white"></i></small>
                   </h2>
                   <p class="text-white m-0">어제보다 <b>7.02%</b> 늘었어요</p>
