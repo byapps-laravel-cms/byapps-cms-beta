@@ -9,6 +9,7 @@ use App\AppsData;
 
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ExpiredController;
+use App\Http\Controllers\StatusController;
 
 class HomeController extends Controller
 {
@@ -29,8 +30,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // 홈 레이아웃
         $userId = User::select('user_id')->get();
-
         $layouts = HomeLayout::where('user_cd','=', $userId)
                               ->select('layout_name')
                               ->orderBy('sequence')
@@ -46,15 +47,40 @@ class HomeController extends Controller
           $layouts = $temp;
         }
 
+        // 주문요청현황 데이터
+        $preData = new StatusController;
+        $appsOrderCount = $preData->onGetAppsOrderCount();
+        $appendixOrderCount = $preData->onGetAppendixOrderCount();
+        $updateCount = $preData->onGetUpdateCount();
+
+        // 만료예정 데이터
         $preData = new ExpiredController;
         $expiredIos = $preData->getExpiredIos();
+        $willBeExpiredIos = $preData->getWillBeExpiredIos();
+        $expiredPush = $preData->getExpiredPush();
+        $willBeExpiredPush = $preData->getWillBeExpiredPush();
+        $expiredMA = $preData->getExpiredMA();
+        $willBeExpiredMA = $preData->getWillBeExpiredMA();
+        $expiredApps = $preData->getExpiredApps();
+        $willBeExpiredApps = $preData->getWillBeExpiredApps();
 
+        // 차트데이터
         $preData = new ChartController;
         $chartData = $preData->index();
 
         return view('home')->with(array('home_layouts' => $layouts,
-                                          'expiredIos' => $expiredIos,
-                                           'chartData' => $chartData
+                                        'appsOrderCount' => $appsOrderCount,
+                                        'appendixOrderCount' => $appendixOrderCount,
+                                        'updateCount' => $updateCount,
+                                        'expiredIos' => $expiredIos,
+                                        'willBeExpiredIos' => $willBeExpiredIos,
+                                        'expiredPush' => $expiredPush,
+                                        'willBeExpiredPush' => $willBeExpiredPush,
+                                        'expiredMA' => $expiredMA,
+                                        'willBeExpiredMA' => $willBeExpiredMA,
+                                        'expiredApps' => $expiredApps,
+                                        'willBeExpiredApps' => $willBeExpiredApps,
+                                        'chartData' => $chartData
                                         )
                                   );
     }
