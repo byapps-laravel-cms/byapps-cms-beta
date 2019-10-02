@@ -15,7 +15,6 @@ class AppsData extends Model
       ->table($table)->get();
 
       //Log::info($paymentData);
-
       //dd($paymentData);
 
       return $appsData;

@@ -13,8 +13,19 @@ use App\QnaNonmember;
 class StatusController extends Controller
 {
   /* 어제 대비 퍼센트 계산 */
-  public function calculatePercent()
+  public function calculatePercent($date = '')
   {
+    // 넘겨받는 날짜가 있으면 해당 날짜를 unix_timestamp로 변경. 없으면 오늘 날짜를 계산
+    //
+    if ($date == '') {
+      $todate = time();
+      $yesterday = time() - 86400;
+    } else {
+      $todate = strtotime($date);
+      $yesterday = strtotime('-1 day', $todate);
+      // info($todate);
+      // info($yesterday);
+    }
 
   }
 
