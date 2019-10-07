@@ -20,7 +20,6 @@
         <link href="{{ asset('assets/codefox/css/icons.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/codefox/css/style.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/temp.css?v1') }}" rel="stylesheet">
-        <!-- //Codefox Theme -->
 
         <link href="{{ asset('assets/vendor/jquery-ui-1.12.1/jquery-ui.css') }}" rel="stylesheet">
 
@@ -28,6 +27,7 @@
         <link href="{{ asset('assets/css/appdata.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/vendor/billboard.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/classCustom.css?v1') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/chatbox.css') }}" rel="stylesheet">
 
         <!-- Datatable style -->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables/jquery.dataTables.css') }}">
@@ -36,9 +36,13 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables/fixedHeader.dataTables.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables/responsive.dataTables.min.css') }}">
 
-        <!-- jQuery  -->
-        <!-- <script src="{{ asset('assets/codefox/js/jquery.min.js') }}"></script> -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+        <!-- datepicker -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/codefox/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" >
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/codefox/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" >
+
+        <!-- jQuery  & jQuery UI -->
+        <script src="{{ asset('assets/codefox/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-ui-1.12.1/jquery-ui.js') }}"></script>
 
         <!-- bootstrap.bundle.min.js -->
         <script src="{{ asset('assets/codefox/js/bootstrap.bundle.min.js') }}"></script>
@@ -69,7 +73,7 @@
             <div id="content" class="col-md-12 mt-3">
                 <div id="app">
                 @yield('content')
-              </div>
+                </div>
             </div>
            @unless (Route::getCurrentRoute()->uri() == '/')
             <div id="sidebar-toggle">
@@ -77,14 +81,14 @@
                 <p>OPEN</p>
             </div>
             @endunless
-            <div id="sidebar">
+            <div id="sidebar" style="overflow-y:auto;">
                 @include('partials.aside')
             </div>
         </section>
       </div>
 
 <!-- Scripts -->
-<script>
+<script type="text/javascript">
 $(document).ready(function(){
   function byapps_getCookie (cname) {
       var name = cname + "=";
@@ -156,6 +160,7 @@ $(document).ready(function(){
 });
 </script>
 
+<!-- avatar like gmail -->
 <script type="text/javascript">
 $('.profile').initial({
   width: 32,
@@ -164,9 +169,10 @@ $('.profile').initial({
 </script>
 
 <!-- sortable -->
-<script>
+<script type="text/javascript">
 $(function (id) {
    id = '#salesList';
+   console.log('id', id);
    $(id).sortable({
        start: function (event, ui) {
             ui.item.toggleClass("highlight");
@@ -180,7 +186,7 @@ $(function (id) {
 </script>
 
 <!-- datepicker -->
-<script>
+<script type="text/javascript">
 $(document).ready(function(){
    $('.datepicker').datepicker({
       format: "yyyy-mm-dd",
@@ -244,10 +250,7 @@ function stat_tableDateTerm(term) {
 // });
 });
 </script>
-
-
-<!-- Vue.js -->
-<!-- <script src="{{ mix('js/app.js') }}"></script> -->
+<!-- <script src="{{ asset('assets/javascript/apps.js') }}"></script> -->
 
 <!-- Codefox Theme -->
 <script src="{{ asset('assets/codefox/js/waves.js') }}"></script>
@@ -267,21 +270,23 @@ function stat_tableDateTerm(term) {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 
-<script src="{{ asset('assets/vendor/jquery-ui-1.12.1/jquery-ui.js') }}"></script>
+
 <!-- <script src="{{ asset('assets/vendor/jquery-ui.min.js') }}"></script> -->
 
 <script src="{{ asset('assets/vendor/jquery.bpopup.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/billboard.js') }}"></script>
 <script src="{{ asset('assets/javascript/util.js') }}"></script>
 <script src="{{ asset('assets/javascript/temp.js?v1') }}"></script>
-<script src="{{ asset('assets/javascript/apps.js') }}"></script>
 
-@if (Route::has('/'))
+
+@if (Route::getCurrentRoute()->uri() == '/')
 <!-- <script src="{{ asset('assets/javascript/chart.js') }}"></script> -->
 <script src="{{ asset('assets/javascript/drag.js') }}"></script>
 @else
 <script src="{{ asset('assets/javascript/aside.js') }}"></script>
 @endif
+
+<script src="{{ asset('assets/codefox/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 
 <!-- For Datatable -->
 <script src="{{ asset('assets/javascript/datatables/jquery.dataTables.min.js') }}"></script>
