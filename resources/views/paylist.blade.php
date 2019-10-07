@@ -6,7 +6,7 @@
 
   <div class="method">
     <div class="col-md-12 margin-5">
-
+      {{ Breadcrumbs::render('pay') }}
      <table id="paymentTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <col width="5%">
          <col width="35%">
