@@ -1,0 +1,228 @@
+<div id="sidebar-close" class="my-2"><i class="mdi mdi-close"></i></div>
+
+        <form class="navbar-nav flex-row ml-md-auto d-none d-md-flex form-inline">
+                <div class="form-group">
+
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+                </div>
+        </form>
+
+
+            <div id="app_noti" class="card-body row" >
+                <div class="col-12" style="overflow:auto;" >
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-comment-tab" data-toggle="tab" href="#nav-comment" role="tab" aria-controls="nav-comment" aria-selected="true">댓글</a>
+                            <a class="nav-item nav-link" id="nav-search-info-tab" data-toggle="tab" href="#nav-search-info" role="tab" aria-controls="nav-search-info" aria-selected="false">검색업체 정보</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content">
+                        <!-- #nav-comment -->
+                        <div class="tab-pane px-3 active" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
+                                <div id="comment">
+                                <!-- 코멘트박스 -->
+                                    <select name="" class="custom-select my-1 mr-sm-2">
+                                        <option value="1">주문</option>
+                                        <option value="2">결제</option>
+                                        <option value="3">업데이트</option>
+                                        <option value="4">앱상세</option>
+                                        <option value="5">리셀러</option>
+                                        <option value="6">문의</option>
+                                        <option value="7">MA</option>
+                                        <option value="8" selected>전체</option>
+                                    </select>
+                                    <h3 class="card-title p-2">
+                                        <a class="text-dark">
+                                                Comment
+                                        </a>
+                                    </h3>
+
+                                    <div id="comment_box" class="row" >
+                                        <!-- comment component 자리 -->
+                                    </div>
+                                <!-- //코멘트박스 -->
+                                </div>
+                                <!-- 코멘트 푸터 고정-->
+                                <div class="box-footer">
+                                    <form action="#" method="post">
+                                    <div class="input-group">
+                                        <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-warning btn-flat">Send</button>
+                                        </span>
+                                    </div>
+                                    </form>
+                                </div><!-- 코멘트 푸터 고정-->
+                            </div>
+                        <!-- #nav-comment -->
+                        <div class="tab-pane px-3" id="nav-search-info" role="tabpanel" aria-labelledby="nav-search-info">
+                                <!-- card -->
+                                    <h3 class="card-title my-2">
+                                        <a class="text-dark" >
+
+                                        </a>
+                                    </h3>
+
+                                    <div id="app_noti" class="row" >
+
+                                        <div class="col-12" style="overflow:auto;" >
+                                            <nav>
+                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                    <a class="nav-item nav-link active" id="nav-company-info-tab" data-toggle="tab" href="#nav-company-info" role="tab" aria-controls="nav-company-info" aria-selected="true">업체정보</a>
+                                                    <a class="nav-item nav-link" id="nav-app-info-tab" data-toggle="tab" href="#nav-app-info" role="tab" aria-controls="nav-app-info" aria-selected="false">서비스기간</a>
+                                                </div>
+                                            </nav>
+
+                                            <!-- tab content-->
+                                            <div class="tab-content">
+                                                <!-- #nav-company-info -->
+                                                <div class="tab-pane px-3 active" id="nav-company-info" role="tabpanel" aria-labelledby="nav-company-info-tab">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group row">
+                                                                <label class="col-md-3 col-xs-12 control-label">ID</label>
+                                                                <strong class="form-control-static mr-3">email@example.com</strong>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-md-5 col-xs-12 control-label">RESELLER</label>
+                                                                <strong class="form-control-static">cafe24</strong>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-md-5 col-xs-12 control-label">비밀번호</label>
+                                                                <input type="password" name="pw" class="col-4" value="">
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-md-5 col-xs-12 control-label">비밀번호 확인</label>
+                                                                <input type="password" name="check_pw" class="col-4" value="">
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <div class="form-group row">
+                                                                <label class="col-md-5 col-xs-12 control-label">대표자</label>
+                                                                <strong class="form-control-static">정민희</strong>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-md-5 col-xs-12 control-label">담당자</label>
+                                                                <strong class="form-control-static mr-3">정민희</strong>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-md-5 col-xs-12 control-label">연락처</label>
+                                                                <input type="text" name="phone" class="col-4" value="010-9804-8898">
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-md-5 col-xs-12 control-label">이메일</label>
+                                                                <input type="text" name="email" class="col-4" value="byapps01@naver.com">
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" class="btn btn-sm btn-inverse waves-effect w-md waves-light float-right"> <i class="mdi mdi-account"></i> <span>회원정보 수정</span> </button>
+                                                    </div>
+                                                </div>
+                                                <!-- //#nav-company-info -->
+
+                                                    <!-- #nav-company-info -->
+                                                    <div class="tab-pane fade px-3" id="nav-app-info" role="tabpanel" aria-labelledby="nav-app-info-tab">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group row">
+                                                                    <label class="col-md-5 col-xs-12 control-label">APP ID</label>
+                                                                    <strong class="form-control-static">yeosinj</strong>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-md-5 col-xs-12 control-label">APP NAME</label>
+                                                                    <input type="text" name="pw" class="col-4" value="여신제이">
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-md-5 col-xs-12 control-label">부가서비스</label>
+                                                                    <div class="col-md-7 col-xs-12 px-0">
+                                                                        <div class="checkbox checkbox-warning">
+                                                                            <label>
+                                                                                <input type="checkbox" value="iphone" checked="">
+                                                                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                                                푸쉬자동화
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="checkbox checkbox-warning">
+                                                                            <label>
+                                                                                <input type="checkbox" value="iphone" checked="">
+                                                                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                                                웹푸쉬
+                                                                            </label>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="checkbox checkbox-pink">
+                                                                            <label>
+                                                                                <input type="checkbox" value="android" >
+                                                                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                                                MA통합
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="checkbox checkbox-purple">
+                                                                            <label>
+                                                                                <input type="checkbox" value="iphone" checked="">
+                                                                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                                                리타겟팅
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="checkbox checkbox-purple">
+                                                                            <label>
+                                                                                <input type="checkbox" value="android" checked="">
+                                                                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                                                MA
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-md-5 col-xs-12 control-label">이용기간</label>
+                                                                    <div class="input-daterange input-group col-md-7 col-xs-12" id="date-range">
+                                                                        <input class="form-control input-limit-datepicker" type="text" name="daterange" value="06/01/2015 - 06/07/2015"/>
+                                                                        <input type="text" class="form-control col-md-2 col-xs-2" name="count-day" value="">일
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-md-5 col-xs-12control-label">APP OS</label>
+                                                                    <div class="checkbox checkbox-success m-t-0">
+                                                                        <label>
+                                                                            <input type="checkbox" value="android" checked="">
+                                                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                                            android
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="checkbox checkbox-info ml-3">
+                                                                        <label>
+                                                                            <input type="checkbox" value="iphone" checked="">
+                                                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                                                            ios
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-md-5 col-xs-12 control-label">이용기간</label>
+
+                                                                <div class="form-inline">
+                                                                    <div class="input-daterange input-group row" id="date-range">
+                                                                        <input type="date" class="col-md-3 col-xs-3" name="start">
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text bg-custom text-white b-0">to</span>
+                                                                        </div>
+                                                                        <input type="date" class="col-md-3 col-xs-3" name="end">
+                                                                        <input type="text" class="col-md-2 col-xs-2" name="count-day" value="">일
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div> <!-- //#nav-company-info -->
+                                                </div><!-- //tab content-->
+                                            </div>
+
+                                    </div><!-- //card body -->
+                            </div>
+                    </div>
+
+                </div>
+            </div><!-- 전체를 감싸고있는 박스 -->
