@@ -12,7 +12,9 @@ use App\QnaNonmember;
 
 class StatusController extends Controller
 {
-  /* 어제 대비 퍼센트 계산 */
+  /* 어제 대비 퍼센트 계산
+   *  공식 = ((오늘 - 어제) / 어제 ) * 100
+   */
   public function calculatePercent($date = '')
   {
     // 넘겨받는 날짜가 있으면 해당 날짜를 unix_timestamp로 변경. 없으면 오늘 날짜를 계산
@@ -42,7 +44,6 @@ class StatusController extends Controller
     }
 
     //info(date('Y-m-d', $todate));
-
     // AppsOrderData::where('app_process', 1)->where('reg_time', '>=', time())->count();
     $appsOrderCount = AppsOrderData::where('app_process', 1)->where('reg_time', '>=', $todate)->count();
 
