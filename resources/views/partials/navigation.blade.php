@@ -39,7 +39,7 @@
                             </a>
 
                             <!-- item-->
-                            <a href="http://innotiveinc.co.kr/desk/" class="dropdown-item">
+                            <a href="http://innotiveinc.co.kr/desk/" class="dropdown-item" target="_blank">
                                 <i class="mdi mdi-calendar-check"></i>
                                 <span>이노팸</span>
                             </a>
