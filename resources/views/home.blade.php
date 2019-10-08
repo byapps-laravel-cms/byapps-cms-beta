@@ -30,7 +30,7 @@
           <div class="cal_box">
               <div class="card-title m-2">
                   <i class="fi-menu"></i> 통계
-                  <button class="btn float-right" type="button" data-toggle="collapse" data-target="#allLank" aria-expanded="true" aria-controls="allLank">
+                  <button class="btn float-right" type="button" data-toggle="collapse" data-target="#allchart" aria-expanded="true" aria-controls="allchart">
                     <i class="dripicons-chevron-down"></i>
                   </button>
               </div>

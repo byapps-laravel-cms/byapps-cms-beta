@@ -1,4 +1,4 @@
-<div class="dragbox_hover row collapse show" id="app">
+<div class="dragbox_hover row collapse show" id="allchart">
     <!-- 앱 통계 차트 -->
     <div class="col-xs-12 col-md-3">
       <div align="center">
