@@ -10,7 +10,7 @@ Breadcrumbs::for('pay', function ($trail) {
     $trail->push('결제 관리', route('paylist.view'));
 });
 
-// Home > 결제 관리
+// Home > 결제 관리 > 결제 상세
 Breadcrumbs::for('paylist', function ($trail) {
     $trail->parent('pay');
     $trail->push('결제 상세', route('paylist'));
@@ -19,5 +19,5 @@ Breadcrumbs::for('paylist', function ($trail) {
 // Home > 결제 관리 > 프로모션
 Breadcrumbs::for('promo', function ($trail) {
     $trail->parent('pay');
-    $trail->push('프로모션', route('promo'));
+    $trail->push('프로모션', route('promolist'));
 });
