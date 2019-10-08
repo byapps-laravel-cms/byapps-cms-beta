@@ -28,22 +28,24 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         // 홈 레이아웃
-        $userId = User::select('user_id')->get();
-        $layouts = HomeLayout::where('user_cd','=', $userId)
+        $userId = $request->user()->id;
+        $layout = HomeLayout::where('user_cd','=', $userId)
                               ->select('layout_name')
                               ->orderBy('sequence')
                               ->get();
 
-        if (count($layouts) == 0){
+        if (count($layout) == 0){
           $layouts = array('layout1', 'layout2', 'layout3', 'layout4');
         } else {
           $layouts = array();
-          foreach($records as $record){
+
+          foreach($layout as $record){
               $temp[] = $record->layout_name;
           }
+
           $layouts = $temp;
         }
 
@@ -87,10 +89,10 @@ class HomeController extends Controller
                                   );
     }
 
-    public function onLayoutChange()
+    public function onLayoutChange(Request $request)
     {
-        $userId = User::select('user_id')->get();
-        $params = Input::all();
+        $userId = $request->user()->id;
+        $params = $request->all();
         $temp = HomeLayout::where('user_cd','=',$userId)
                             ->count();
 
