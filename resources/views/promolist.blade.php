@@ -5,17 +5,10 @@
 <div class="container col-12 col-md-12">
 
   <div class="method">
-    <div class="col-md-12 margin-5">
+    <div class="col-md-12 mt-3">
       {{ Breadcrumbs::render('promo') }}
 
      <table id="promotionTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
-         <col width="5%">
-         <col width="35%">
-         <col width="10%">
-         <col width="10%">
-         <col width="15%">
-         <col width="15%">
-         <col width="10%">
          <thead>
              <tr>
                  <th>idx</th>
@@ -50,13 +43,12 @@ $(function() {
             { data: 'mem_name', name: 'mem_name' },
             { data: 'pm_used', name: 'pm_used' },
             { data: 'pm_target', name: 'pm_target' },
-            { data: 'pm_comment', name: 'pm_comment' },
+            { data: 'pm_content', name: 'pm_content' },
             { data: 'reg_time', name: 'reg_time' }
         ],
         columnDefs: [
            {
               'targets': 0,
-              //'width': '5%',
               'className': 'select-checkbox',
               'searchable': false,
               'orderable': false,
