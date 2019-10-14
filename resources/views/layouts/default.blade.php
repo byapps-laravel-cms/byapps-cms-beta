@@ -85,9 +85,11 @@
                 <p>OPEN</p>
             </div>
             @endunless
-            <div id="sidebar" style="overflow-y:auto;">
+
+            <div id="sidebar" style="overflow-y:auto; z-index:2000;">
                 @include('partials.aside')
             </div>
+
         </section>
       </div>
 
@@ -255,6 +257,16 @@ $(document).ready(function(){
   // });
 </script>
 
+<script>
+$(document).ready(function(){
+    const activeSidebar = localStorage.getItem('activeSidebar');
+
+    if (activeSidebar) {
+      $('#sidebar-toggle a[href="'+ activeSidebar +'"]').show();
+    }
+})
+
+</script>
 
 <!-- Codefox Theme -->
 <script src="{{ asset('assets/codefox/js/waves.js') }}"></script>
