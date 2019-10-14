@@ -11,7 +11,6 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <!-- <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' }</script> -->
 
         <link rel="icon" type="image/png" href="{{ asset('byapps_logo_b_4.png') }}">
 
@@ -39,6 +38,9 @@
         <!-- datepicker -->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/codefox/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" >
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/codefox/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" >
+
+        <!-- Vue -->
+        <script src="{{ asset('/js/app.js') }}"></script>
 
         <!-- jQuery  & jQuery UI -->
         <script src="{{ asset('assets/codefox/js/jquery.min.js') }}"></script>
@@ -71,9 +73,11 @@
       <div class="wrapper">
         <section id="layout-content">
             <div id="content" class="col-md-12 mt-3">
-                <div id="app">
+
+              <div id="app">
                 @yield('content')
-                </div>
+              </div>
+
             </div>
            @unless (Route::getCurrentRoute()->uri() == '/')
             <div id="sidebar-toggle">
@@ -250,7 +254,7 @@ $(document).ready(function(){
   //   showEntireChart($('#start_date_chart').val(), $('#end_date_chart').val());
   // });
 </script>
-<!-- <script src="{{ asset('assets/javascript/apps.js') }}"></script> -->
+
 
 <!-- Codefox Theme -->
 <script src="{{ asset('assets/codefox/js/waves.js') }}"></script>

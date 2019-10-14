@@ -32,7 +32,7 @@
                         <a class="nav-link dropdown-toggle waves-effect user-link" data-toggle="dropdown" href="#" aria-haspopup="false" aria-expanded="true">
                             <i class="fi-ellipsis rounded-circle user-img text-white" style="font-size:2.5em;"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class=" mdi mdi-bell-ring-outline"></i>
