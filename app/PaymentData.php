@@ -18,9 +18,7 @@ class PaymentData extends Model
   {
       $paymentData = DB::connection('byapps')->table('BYAPPS_apps_payment_data')->get();
 
-      //Log::info($paymentData);
-
-      dd($paymentData);
+      // dd($paymentData);
 
       return $paymentData;
   }
