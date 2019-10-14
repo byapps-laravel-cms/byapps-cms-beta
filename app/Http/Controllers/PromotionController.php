@@ -47,7 +47,7 @@ class PromotionController extends Controller
   {
     $promotionData = PromotionData::where('idx', $idx)->first();
 
-    return view('promodetail')->with('paymentData', $promotionData);
+    return view('promodetail')->with('promotionData', $promotionData);
   }
 
 }
