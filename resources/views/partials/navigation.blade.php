@@ -14,8 +14,9 @@
                 <ul class="nav navbar-right list-inline">
 
                     <li class="d-none d-sm-inline-block list-inline-item">
-                        <form role="search" class="app-search" action="search" method="get">
-                            <input type="text" placeholder="Search..." class="form-control" name="q">
+                        <form role="search" class="app-search" action="{{ route('search') }}" method="POST">
+                          @csrf
+                            <input type="text" placeholder="Search..." class="form-control" name="query">
                             <a href=""><i class="fa fa-search"></i></a>
                         </form>
                     </li>

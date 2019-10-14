@@ -18,6 +18,7 @@ Route::get('/session',function(){
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/layout', 'HomeController@onLayoutChange');
+Route::post('/search', 'HomeController@search')->name('search');
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');

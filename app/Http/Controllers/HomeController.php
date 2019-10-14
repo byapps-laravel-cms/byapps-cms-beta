@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use App\User;
 use App\HomeLayout;
 use App\AppsData;
+use App\PaymentData;
 
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ExpiredController;
 use App\Http\Controllers\StatusController;
+
+use Spatie\Searchable\Search;
 
 class HomeController extends Controller
 {
@@ -109,6 +112,20 @@ class HomeController extends Controller
                           ->update($data);
             }
         }
+    }
+
+    public function search(Request $request)
+    {
+      $searchResults = (new Search())
+                        ->registerModel(PaymentData::class, 'app_name')
+                        ->perform($request->input('query'));
+
+      $typesArray = [ 'BYAPPS_apps_payment_data' => '결제 관리',
+                      'BYAPPS2016_promotion_data' => '프로모션', ];
+
+      //dd($searchResults);
+
+      return view('search', compact('searchResults', 'typesArray'));
     }
 
 }

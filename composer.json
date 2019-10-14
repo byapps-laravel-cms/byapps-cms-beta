@@ -14,6 +14,7 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "lesichkovm/laravel-advanced-route": "^1.6",
+        "spatie/laravel-searchable": "^1.4",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "^9.6"
     },
