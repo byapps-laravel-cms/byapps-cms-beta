@@ -2,28 +2,24 @@
 
 @section('content')
 
-@if (Auth::user())
 <div class="container col-12 col-md-12">
 
   <div class="method">
-    <div class="col-md-12 margin-5">
-      {{ Breadcrumbs::render('paylist') }}
+    <div class="col-md-12 mt-3">
 
-     <table id="paymentTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
-         <col width="5%">
-         <col width="35%">
-         <col width="15%">
-         <col width="15%">
-         <col width="15%">
-         <col width="15%">
+      {{ Breadcrumbs::render('promolist') }}
+
+     <table id="updateTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
+                 <th>신청일</th>
+                 <th>진행상태</th>
+                 <th>앱아이디</th>
                  <th>앱명</th>
-                 <th>구분</th>
-                 <th>기간</th>
-                 <th>결제금액</th>
-                 <th>결제일</th>
+                 <th>앱OS</th>
+                 <th>버전</th>
+                 <th>업데이트 내역</th>
              </tr>
          </thead>
 
@@ -31,31 +27,31 @@
       </div>
   </div>
 </div>
-  @endif
 @endsection
 
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#paymentTable').DataTable({
+    $('#updateTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('paylist') }}",
+          url: "{{ route('updatelist') }}",
           crossDomain: true
         },
         columns: [
             { data: 'idx', name: 'idx' },
+            { data: 'reg_time', name: 'reg_time' },
+            { data: 'update_process', name: 'update_process' },
+            { data: 'app_id', name: 'app_id' },
             { data: 'app_name', name: 'app_name' },
-            { data: 'pay_type', name: 'pay_type' },
-            { data: 'term', name: 'term' },
-            { data: 'amount', name: 'amount' },
-            { data: 'reg_time', name: 'reg_time' }
+            { data: 'os', name: 'os' },
+            { data: 'update_ver', name: 'update_ver' },
+            { data: 'update_type', name: 'update_type' },
         ],
         columnDefs: [
            {
               'targets': 0,
-              //'width': '5%',
               'className': 'select-checkbox',
               'searchable': false,
               'orderable': false,
@@ -64,16 +60,16 @@ $(function() {
               },
            },
            {
-             'targets': 1,
+             'targets': 4,
              'render': function ( data, type, full, meta ) {
-                return '<a href="/paydetail/'+full.idx+'">'+data+'</a>';
-             }
+                return '<a href="/updatedetail/'+full.idx+'">'+data+'</a>';
+              }
            },
         ],
         select: {
            'style': 'multi'
         },
-        order: [[ 5, 'desc']],
+        order: [[ 1, 'desc']],
         "paging": true,
         "pageLength": 50,
         // "info": false,
