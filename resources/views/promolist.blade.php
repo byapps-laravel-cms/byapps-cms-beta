@@ -6,7 +6,7 @@
 
   <div class="method">
     <div class="col-md-12 mt-3">
-      {{ Breadcrumbs::render('promo') }}
+      {{ Breadcrumbs::render('promolist') }}
 
      <table id="promotionTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>

@@ -14,8 +14,9 @@
                 <ul class="nav navbar-right list-inline">
 
                     <li class="d-none d-sm-inline-block list-inline-item">
-                        <form role="search" class="app-search" action="search" method="get">
-                            <input type="text" placeholder="Search..." class="form-control" name="q">
+                        <form role="search" class="app-search" action="{{ route('search') }}" method="POST">
+                          @csrf
+                            <input type="text" placeholder="Search..." class="form-control" name="query">
                             <a href=""><i class="fa fa-search"></i></a>
                         </form>
                     </li>
@@ -31,7 +32,7 @@
                         <a class="nav-link dropdown-toggle waves-effect user-link" data-toggle="dropdown" href="#" aria-haspopup="false" aria-expanded="true">
                             <i class="fi-ellipsis rounded-circle user-img text-white" style="font-size:2.5em;"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class=" mdi mdi-bell-ring-outline"></i>

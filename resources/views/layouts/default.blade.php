@@ -11,7 +11,6 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <!-- <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' }</script> -->
 
         <link rel="icon" type="image/png" href="{{ asset('byapps_logo_b_4.png') }}">
 
@@ -39,6 +38,9 @@
         <!-- datepicker -->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/codefox/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" >
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/codefox/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" >
+
+        <!-- Vue -->
+        <script src="{{ asset('/js/app.js') }}"></script>
 
         <!-- jQuery  & jQuery UI -->
         <script src="{{ asset('assets/codefox/js/jquery.min.js') }}"></script>
@@ -71,9 +73,11 @@
       <div class="wrapper">
         <section id="layout-content">
             <div id="content" class="col-md-12 mt-3">
-                <div id="app">
+
+              <div id="app">
                 @yield('content')
-                </div>
+              </div>
+
             </div>
            @unless (Route::getCurrentRoute()->uri() == '/')
             <div id="sidebar-toggle">
@@ -81,9 +85,11 @@
                 <p>OPEN</p>
             </div>
             @endunless
-            <div id="sidebar" style="overflow-y:auto;">
+
+            <div id="sidebar" style="overflow-y:auto; z-index:2000;">
                 @include('partials.aside')
             </div>
+
         </section>
       </div>
 
@@ -250,7 +256,26 @@ $(document).ready(function(){
   //   showEntireChart($('#start_date_chart').val(), $('#end_date_chart').val());
   // });
 </script>
-<!-- <script src="{{ asset('assets/javascript/apps.js') }}"></script> -->
+
+<script>
+$(document).ready(function() {
+  var $sidebar = $("#sidebar");
+  readCookie('sidebar') == 'open' ? sidebarOpen() : $sidebar.hide();
+
+  console.log(readCookie('sidebar') );
+
+  function readCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+  }
+})
+</script>
 
 <!-- Codefox Theme -->
 <script src="{{ asset('assets/codefox/js/waves.js') }}"></script>

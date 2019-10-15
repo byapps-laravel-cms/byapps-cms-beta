@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    {{ Breadcrumbs::render('paylist') }}
+    {{ Breadcrumbs::render('paydetail') }}
 
   <div class="alert alert-info">
         @if ($paymentData)

@@ -4,7 +4,7 @@
 
 <div class="container">
 
-  {{ Breadcrumbs::render('promo') }}
+  {{ Breadcrumbs::render('promodetail') }}
 
   <div class="alert alert-info">
     @if ($promotionData)

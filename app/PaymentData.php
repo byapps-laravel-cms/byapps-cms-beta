@@ -6,39 +6,31 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-use Illuminate\Database\Eloquent\Model;
 use DB;
+use Illuminate\Database\Eloquent\Model;
 
-class PaymentData extends Model
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+
+
+class PaymentData extends Model implements Searchable
 {
   protected $connection = 'byapps';
   protected $table = 'BYAPPS_apps_payment_data';
+
+  protected $fillable = ['app_name'];
 
   public static function getPaymentData()
   {
       $paymentData = DB::connection('byapps')->table('BYAPPS_apps_payment_data')->get();
 
-      // dd($paymentData);
-
       return $paymentData;
   }
 
-  /**
-    * Run the migrations.
-    *
-    * @return void
-    */
-  public function up()
+  public function getSearchResult(): SearchResult
   {
-  }
+    $url = route('paydetail', $this->idx);
 
-  /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //Schema::dropIfExists('students');
-    }
+    return new SearchResult($this, $this->app_name, $url);
+  }
 }
