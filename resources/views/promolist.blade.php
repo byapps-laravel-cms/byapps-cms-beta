@@ -5,24 +5,19 @@
 <div class="container col-12 col-md-12">
 
   <div class="method">
-    <div class="col-md-12 margin-5">
-      {{ Breadcrumbs::render('paylist') }}
-      
-     <table id="paymentTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
-         <col width="5%">
-         <col width="35%">
-         <col width="15%">
-         <col width="15%">
-         <col width="15%">
-         <col width="15%">
+    <div class="col-md-12 mt-3">
+      {{ Breadcrumbs::render('promolist') }}
+
+     <table id="promotionTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
-                 <th>앱명</th>
-                 <th>구분</th>
-                 <th>기간</th>
-                 <th>결제금액</th>
-                 <th>결제일</th>
+                 <th>프로모션명</th>
+                 <th>회원</th>
+                 <th>사용</th>
+                 <th>적용대상</th>
+                 <th>적용내용</th>
+                 <th>등록일</th>
              </tr>
          </thead>
 
@@ -35,25 +30,25 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#paymentTable').DataTable({
+    $('#promotionTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('paylist') }}",
+          url: "{{ route('promolist') }}",
           crossDomain: true
         },
         columns: [
             { data: 'idx', name: 'idx' },
-            { data: 'app_name', name: 'app_name' },
-            { data: 'pay_type', name: 'pay_type' },
-            { data: 'term', name: 'term' },
-            { data: 'amount', name: 'amount' },
+            { data: 'pm_title', name: 'pm_title' },
+            { data: 'mem_name', name: 'mem_name' },
+            { data: 'pm_used', name: 'pm_used' },
+            { data: 'pm_target', name: 'pm_target' },
+            { data: 'pm_content', name: 'pm_content' },
             { data: 'reg_time', name: 'reg_time' }
         ],
         columnDefs: [
            {
               'targets': 0,
-              //'width': '5%',
               'className': 'select-checkbox',
               'searchable': false,
               'orderable': false,
@@ -64,7 +59,7 @@ $(function() {
            {
              'targets': 1,
              'render': function ( data, type, full, meta ) {
-                return '<a href="/paydetail/'+full.idx+'">'+data+'</a>';
+                return '<a href="/promodetail/'+full.idx+'">'+data+'</a>';
              }
            },
         ],

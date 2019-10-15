@@ -11,7 +11,6 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <!-- <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' }</script> -->
 
         <link rel="icon" type="image/png" href="{{ asset('byapps_logo_b_4.png') }}">
 
@@ -39,6 +38,9 @@
         <!-- datepicker -->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/codefox/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" >
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/codefox/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" >
+
+        <!-- Vue -->
+        <script src="{{ asset('/js/app.js') }}"></script>
 
         <!-- jQuery  & jQuery UI -->
         <script src="{{ asset('assets/codefox/js/jquery.min.js') }}"></script>
@@ -71,9 +73,11 @@
       <div class="wrapper">
         <section id="layout-content">
             <div id="content" class="col-md-12 mt-3">
-                <div id="app">
+
+              <div id="app">
                 @yield('content')
-                </div>
+              </div>
+
             </div>
            @unless (Route::getCurrentRoute()->uri() == '/')
             <div id="sidebar-toggle">
@@ -81,9 +85,11 @@
                 <p>OPEN</p>
             </div>
             @endunless
-            <div id="sidebar" style="overflow-y:auto;">
+
+            <div id="sidebar" style="overflow-y:auto; z-index:2000;">
                 @include('partials.aside')
             </div>
+
         </section>
       </div>
 
@@ -194,63 +200,82 @@ $(document).ready(function(){
   });
 
   $.fn.datepicker.dates['kr'] = {
-  days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
-  daysShort: ["일", "월", "화", "수", "목", "금", "토", "일"],
-  daysMin: ["일", "월", "화", "수", "목", "금", "토", "일"],
-  months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-  monthsShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
-};
-
-
-$(function() {
- $('#start_date_chart').datepicker();
- $('#end_date_chart').datepicker();
- $('#start_date_table').datepicker();
- $('#end_date_table').datepicker();
-
-  //초기값을 오늘 날짜로 설정
- //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-  $('#start_date_chart').datepicker('setDate', 'today');
-  $('#end_date_chart').datepicker('setDate', 'today');
-  $('#start_date_table').datepicker('setDate', 'today');
-  $('#end_date_table').datepicker('setDate', 'today');
+    days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
+    daysShort: ["일", "월", "화", "수", "목", "금", "토", "일"],
+    daysMin: ["일", "월", "화", "수", "목", "금", "토", "일"],
+    months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+    monthsShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+  };
 });
 
-function stat_chartDateTerm(term) {
-  if (term == 7) {
-    $('#start_date_chart').datepicker('setDate', '-7D');
-  } else if (term == 30) {
-     $('#start_date_chart').datepicker('setDate', '-1M');
-  } else if (term == 90) {
-     $('#start_date_chart').datepicker('setDate', '-3M');
-  } else if (term == 180) {
-    $('#start_date_chart').datepicker('setDate', '-6M');
-  }
-}
 
-function stat_tableDateTerm(term) {
-  if (term == 7) {
-    $('#start_date_table').datepicker('setDate', '-7D');
-  } else if (term == 30) {
-     $('#start_date_table').datepicker('setDate', '-1M');
-  } else if (term == 90) {
-     $('#start_date_table').datepicker('setDate', '-3M');
-  } else if (term == 180) {
-    $('#start_date_table').datepicker('setDate', '-6M');
-  }
-}
-// var showEntireChart = function(date1, date2) {
-//   console.log("시작일", date1);
-//   console.log("종료일", date2);
-// }
+  $(function() {
+   $('#start_date_chart').datepicker();
+   $('#end_date_chart').datepicker();
+   $('#start_date_table').datepicker();
+   $('#end_date_table').datepicker();
 
-// 보기 버튼 눌렀을때 동작
-// $('#getDate').on('click', function(){
-//   showEntireChart($('#start_date_chart').val(), $('#end_date_chart').val());
-// });
-});
+    //초기값을 오늘 날짜로 설정
+   //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+    $('#start_date_chart').datepicker('setDate', 'today');
+    $('#end_date_chart').datepicker('setDate', 'today');
+    $('#start_date_table').datepicker('setDate', 'today');
+    $('#end_date_table').datepicker('setDate', 'today');
+  });
+
+  function stat_chartDateTerm(term) {
+    if (term == 7) {
+      $('#start_date_chart').datepicker('setDate', '-7D');
+    } else if (term == 30) {
+       $('#start_date_chart').datepicker('setDate', '-1M');
+    } else if (term == 90) {
+       $('#start_date_chart').datepicker('setDate', '-3M');
+    } else if (term == 180) {
+      $('#start_date_chart').datepicker('setDate', '-6M');
+    }
+  }
+
+  function stat_tableDateTerm(term) {
+    if (term == 7) {
+      $('#start_date_table').datepicker('setDate', '-7D');
+    } else if (term == 30) {
+       $('#start_date_table').datepicker('setDate', '-1M');
+    } else if (term == 90) {
+       $('#start_date_table').datepicker('setDate', '-3M');
+    } else if (term == 180) {
+      $('#start_date_table').datepicker('setDate', '-6M');
+    }
+  }
+  // var showEntireChart = function(date1, date2) {
+  //   console.log("시작일", date1);
+  //   console.log("종료일", date2);
+  // }
+
+  // 보기 버튼 눌렀을때 동작
+  // $('#getDate').on('click', function(){
+  //   showEntireChart($('#start_date_chart').val(), $('#end_date_chart').val());
+  // });
 </script>
-<!-- <script src="{{ asset('assets/javascript/apps.js') }}"></script> -->
+
+<script>
+$(document).ready(function() {
+  var $sidebar = $("#sidebar");
+  readCookie('sidebar') == 'open' ? sidebarOpen() : $sidebar.hide();
+
+  console.log(readCookie('sidebar') );
+
+  function readCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+  }
+})
+</script>
 
 <!-- Codefox Theme -->
 <script src="{{ asset('assets/codefox/js/waves.js') }}"></script>
@@ -269,7 +294,6 @@ function stat_tableDateTerm(term) {
 <!-- //Codefox Theme -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-
 
 <!-- <script src="{{ asset('assets/vendor/jquery-ui.min.js') }}"></script> -->
 

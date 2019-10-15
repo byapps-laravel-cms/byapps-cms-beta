@@ -50,9 +50,11 @@ class ChartController extends Controller
       $appsCheck = 100;
 
       $result = array(
-          array('무료', $appsFree),
-          array('유료', $appsPaid),
-          array('관리', $appsCheck),
+          'circle1' => array(
+            array('무료', $appsFree),
+            array('유료', $appsPaid),
+            array('관리', $appsCheck),
+          )
       );
 
       return $result;
@@ -70,7 +72,6 @@ class ChartController extends Controller
 
       return $result;
     }
-
 
     // MA 통계
     public function onGetMaChartData()
@@ -103,11 +104,11 @@ class ChartController extends Controller
       $maCheck = 10;
 
       $result = array(
-        // 'circle2' => array(
+        'circle2' => array(
             array('무료', $maFree),
             array('유료', $maPaid),
             array('관리', $maCheck),
-        // )
+        )
       );
 
       return $result;
@@ -197,12 +198,12 @@ class ChartController extends Controller
       $salesEtc = $salesTotal - ($salesNew + $salesCon);
 
       $result = array(
-        // 'bar' => array(
+        'bar' => array(
             array('전체', $salesTotal),
             array('신규', $salesNew),
             array('연장', $salesCon),
             array('기타', $salesEtc),
-        // )
+        )
       );
 
       return $result;
@@ -211,9 +212,9 @@ class ChartController extends Controller
     public function index() {
 
       $result = array(
-        'circle1' => $this->onGetAppChartData(),
-        'circle2' => $this->onGetMaChartData(),
-        'bar' => $this->onGetSalesChartData()
+        'circle1' => $this->onGetAppChartData()['circle1'],
+        'circle2' => $this->onGetMaChartData()['circle2'],
+        'bar' => $this->onGetSalesChartData()['bar']
       );
 
       return $result;

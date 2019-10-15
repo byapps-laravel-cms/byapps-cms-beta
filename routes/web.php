@@ -11,17 +11,29 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// });
+// 세션정보 확인용
+Route::get('/session',function(){
+    dd(session()->all());
+});
+
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/layout', 'HomeController@onLayoutChange');
+Route::post('/search', 'HomeController@search')->name('search');
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 
+// 차트 데이터
 Route::post('/chart', 'ChartController@index');
-Route::post('/chart/app_daily', 'ChartController@onGetAppDailyChartData');
+Route::get('/chart/app_daily', 'ChartController@onGetAppDailyChartData');
+Route::get('/chart/app_total', 'ChartController@onGetAppChartData');
 
+// 결제관리
 Route::view('/paylist', 'paylist')->name('paylist.view');
 Route::get('/paylist/data', 'PaymentController@getPaymentData')->name('paylist');
 Route::get('/paydetail/{idx}', 'PaymentController@getSingleData')->name('paydetail');
+
+// 프로모션
+Route::view('/promolist', 'promolist')->name('promolist.view');
+Route::get('/promolist/data', 'PromotionController@getPromotionData')->name('promolist');
+Route::get('/promodetail/{idx}', 'PromotionController@getSingleData')->name('promodetail');

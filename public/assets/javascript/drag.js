@@ -5,6 +5,12 @@ if(Util.isMobile() == false){
   $( ".sortable" ).disableSelection();
 }
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 //레이아웃 수정시
 function getLayout (){
   var formData = new Object();
@@ -16,9 +22,9 @@ function getLayout (){
 }
 
 function saveLayout (){
-  $.request('onLayoutChange', {
-    data:getLayout(),
-    success: function(data) {
-    console.log(data);
-  }});
+  $.ajax({
+      url : "/layout",
+      method:"get",
+      data : getLayout()
+  });
 }

@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use App\User;
 use App\HomeLayout;
 use App\AppsData;
+use App\PaymentData;
 
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ExpiredController;
 use App\Http\Controllers\StatusController;
+
+use Spatie\Searchable\Search;
 
 class HomeController extends Controller
 {
@@ -28,22 +31,24 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         // 홈 레이아웃
-        $userId = User::select('user_id')->get();
-        $layouts = HomeLayout::where('user_cd','=', $userId)
+        $userId = $request->user()->id;
+        $layout = HomeLayout::where('user_cd','=', $userId)
                               ->select('layout_name')
                               ->orderBy('sequence')
                               ->get();
 
-        if (count($layouts) == 0){
+        if (count($layout) == 0){
           $layouts = array('layout1', 'layout2', 'layout3', 'layout4');
         } else {
           $layouts = array();
-          foreach($records as $record){
+
+          foreach($layout as $record){
               $temp[] = $record->layout_name;
           }
+
           $layouts = $temp;
         }
 
@@ -87,10 +92,10 @@ class HomeController extends Controller
                                   );
     }
 
-    public function onLayoutChange()
+    public function onLayoutChange(Request $request)
     {
-        $userId = User::select('user_id')->get();
-        $params = Input::all();
+        $userId = $request->user()->id;
+        $params = $request->all();
         $temp = HomeLayout::where('user_cd','=',$userId)
                             ->count();
 
@@ -107,6 +112,20 @@ class HomeController extends Controller
                           ->update($data);
             }
         }
+    }
+
+    public function search(Request $request)
+    {
+      $searchResults = (new Search())
+                        ->registerModel(PaymentData::class, 'app_name')
+                        ->perform($request->input('query'));
+
+      $typesArray = [ 'BYAPPS_apps_payment_data' => '결제 관리',
+                      'BYAPPS2016_promotion_data' => '프로모션', ];
+
+      //dd($searchResults);
+
+      return view('search', compact('searchResults', 'typesArray'));
     }
 
 }
