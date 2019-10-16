@@ -113,11 +113,15 @@ $(document).ready(function(){
       document.cookie = name + "=" + encodeURIComponent(value) + "; path=/; expires=" + todayDate.toGMTString() + ";"
   }
 
-  var now_page = location.href
-  var cookie_history = byapps_getCookie("link_history")
-  if(!cookie_history||cookie_history=="") byapps_setCookie("link_history", ""+"&"+location.href, 14)
+  var now_page = location.href;
+  var cookie_history = byapps_getCookie("link_history");
+  var pagename = now_page.split("http://jmh.innoi.kr/");
+  if(!pagename[1]||pagename[1]=="") {
+    pagename[1]="home";
+  }
+  if(!cookie_history||cookie_history=="") byapps_setCookie("link_history", pagename[1]+"&"+now_page, 14)
   else {
-      byapps_setCookie("link_history", cookie_history+"|"+""+"&"+location.href, 14)
+      byapps_setCookie("link_history", cookie_history+"|"+pagename+"&"+location.href, 14)
 
       var ch = cookie_history.split("|");
       var newcookie, prev = "";
@@ -141,7 +145,7 @@ $(document).ready(function(){
       console.log("newcookie.length", newcookie.split("|").length);
       if(ch.length >= 10) {
           cookie_history = cookie_history.split(ch[0]+"|")[1];
-          console.log("cookie", cookie_history);
+          console.log("cookie10", cookie_history);
           byapps_setCookie("link_history", cookie_history+"|"+""+"&"+location.href, 14);
       }
   }
@@ -155,9 +159,10 @@ $(document).ready(function(){
       for(i=ch.length; i > 0; i--) {
           if(i!=ch.length) page_val = ch[i-1].split("&");
           if(page_val[0] && page_val[1]){
+              page_val[0] = page_val[0].replace(",","");
               page_val[0] = page_val[0].replace("undefined","");
               page_val[1] = page_val[1].replace("undefined", "")
-              str += '<li id="page_history_sub"><a href="'+page_val[1]+'">'+page_val[0]+'</a></li>';
+              str += '<li class="page_history_sub"><a href="'+page_val[1]+'">'+page_val[0]+'</a></li>';
           }
       }
       str += "</ul></li>";
