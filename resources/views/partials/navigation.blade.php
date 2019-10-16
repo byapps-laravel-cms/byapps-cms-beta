@@ -216,7 +216,7 @@
                             <i class="mdi mdi-worker"></i>
                             히스토리
                         </a>
-                        <ul class="submenu megamenu">
+                        <ul class="submenu megamenu" style="display:none;">
                         </ul>
                     </li>
                 </ul>

@@ -119,9 +119,10 @@ $(document).ready(function(){
   if(!pagename[1]||pagename[1]=="") {
     pagename[1]="home";
   }
-  if(!cookie_history||cookie_history=="") byapps_setCookie("link_history", pagename[1]+"&"+now_page, 14)
-  else {
-      byapps_setCookie("link_history", cookie_history+"|"+pagename+"&"+location.href, 14)
+  if(!cookie_history||cookie_history=="") {
+    byapps_setCookie("link_history", pagename[1]+"&"+now_page, 14);
+  } else {
+      byapps_setCookie("link_history", cookie_history+"|"+pagename[1]+"&"+location.href, 14)
 
       var ch = cookie_history.split("|");
       var newcookie, prev = "";
@@ -168,6 +169,7 @@ $(document).ready(function(){
       str += "</ul></li>";
       console.log("str", str);
       $('#page_history .submenu.megamenu').append(str);
+      $('#page_history .submenu.megamenu').css("display","block");
 });
 </script>
 
