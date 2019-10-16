@@ -11,12 +11,12 @@
             <!-- End Logo container-->
 
             <div class="menu-extras">
-                <ul class="nav navbar-right list-inline">
+                <ul class="nav navbar-right list-inline user-box">
 
-                    <li class="d-none d-sm-inline-block list-inline-item">
+                    <li class="d-none d-sm-inline-block list-inline-item user-link">
                         <form role="search" class="app-search" action="{{ route('search') }}" method="POST">
                           @csrf
-                            <input type="text" placeholder="Search..." class="form-control" name="query">
+                            <input type="text" placeholder="Search..." class="form-control mb-3" name="query">
                             <a href=""><i class="fa fa-search"></i></a>
                         </form>
                     </li>
@@ -52,17 +52,19 @@
                                 <i class="mdi mdi-logout-variant"></i>
                                 <span>로그아웃</span>
                             </a>
+                        </div>
+                    </li>
 
                             @else
-                            <a class="dropdown-item notify-item" href="{{ route('login') }}">
+                            <li class="d-none d-sm-inline-block list-inline-item user-box">
+                            <a class="user-link text-white mt-2" href="{{ route('login') }}">
                                 <i class="mdi mdi-logout-variant"></i>
                                 <span>로그인</span>
                             </a>
+                            </li>
                             @endauth
                         @endif
 
-                        </div>
-                    </li>
                 </ul>
 
                 <div class="menu-item">
@@ -112,7 +114,7 @@
                                     <li><a href="#sub">앱 접수</a></li>
                                     <li><a href="updateList">업데이트 관리</a></li>
                                     <li><a href="apkList">APK 관리</a></li>
-                                    <li><a href="appsList">앱 목록</a></li>
+                                    <li><a href="/appslist">앱 목록</a></li>
                                     <li><a href="pushList">푸쉬 현황</a></li>
                                     <li><a href="newsList">소식 관리</a></li>
                                     <li><a href="membersList">인증회원 관리</a></li>
@@ -120,7 +122,7 @@
                                     <li><a href="#">테스터</a></li>
                                 </ul>
                             </li>
-                        </ul>
+                        </ul> 
                     </li>
                     <li class="has-submenu">
                         <a href="#">
@@ -225,3 +227,4 @@
         </div>
         <!-- end container -->
     </div>
+   
