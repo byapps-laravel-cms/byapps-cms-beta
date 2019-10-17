@@ -6,20 +6,23 @@
 
   <div class="method">
     <div class="col-md-12 mt-3">
-      {{ Breadcrumbs::render('appslist') }}
 
-     <table id="appslistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+      {{ Breadcrumbs::render('promolist') }}
+
+     <table id="updateTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
+                 <th>신청일</th>
+                 <th>진행상태</th>
                  <th>앱아이디</th>
                  <th>앱명</th>
+                 <th>앱OS</th>
                  <th>버전</th>
-                 <th>BV</th>
-                 <th>등록상태</th>
-                 <th>스크립트</th>
+                 <th>업데이트 내역</th>
              </tr>
          </thead>
+
        </table>
       </div>
   </div>
@@ -29,21 +32,22 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#appslistTable').DataTable({
+    $('#updateTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('appslist') }}",
+          url: "{{ route('updatelist') }}",
           crossDomain: true
         },
         columns: [
             { data: 'idx', name: 'idx' },
+            { data: 'reg_time', name: 'reg_time' },
+            { data: 'update_process', name: 'update_process' },
             { data: 'app_id', name: 'app_id' },
             { data: 'app_name', name: 'app_name' },
-            { data: 'app_ver', name: 'app_ver' },
-            { data: 'app_process', name: 'app_process' },
-            { data: 'server_group', name: 'server_group' },
-            { data: 'script_popup', name: 'script_popup' }
+            { data: 'os', name: 'os' },
+            { data: 'update_ver', name: 'update_ver' },
+            { data: 'update_type', name: 'update_type' },
         ],
         columnDefs: [
            {
@@ -56,16 +60,16 @@ $(function() {
               },
            },
            {
-             'targets': 1,
+             'targets': 4,
              'render': function ( data, type, full, meta ) {
-                return '<a href="/appsDetail/'+full.idx+'">'+data+'</a>';
-             }
+                return '<a href="/updatedetail/'+full.idx+'">'+data+'</a>';
+              }
            },
         ],
         select: {
            'style': 'multi'
         },
-        order: [[ 5, 'desc']],
+        order: [[ 1, 'desc']],
         "paging": true,
         "pageLength": 50,
         // "info": false,

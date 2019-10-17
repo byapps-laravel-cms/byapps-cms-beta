@@ -20,7 +20,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-// Vue.component('charts', require('./components/Charts.vue').default);
+Vue.component('paydetail', require('./components/Paydetail.vue').default);
 // Vue.component('expired', require('./components/ExpiredList.vue').default);
 
 /**
@@ -29,8 +29,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-document.onload = function() {
-  const app = new Vue({
-      el: '#app',
-  });
-}
+
+const app = new Vue({
+    el: '#app',
+});

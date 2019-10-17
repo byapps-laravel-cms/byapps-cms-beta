@@ -39,8 +39,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/codefox/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" >
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/codefox/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" >
 
-        <!-- Vue -->
-        <script src="{{ asset('/js/app.js') }}"></script>
+
 
         <!-- jQuery  & jQuery UI -->
         <script src="{{ asset('assets/codefox/js/jquery.min.js') }}"></script>
@@ -92,6 +91,10 @@
 
         </section>
       </div>
+
+
+<!-- Vue -->
+<script src="{{ asset('/js/app.js') }}"></script>
 
 <!-- Scripts -->
 <script type="text/javascript">
@@ -283,6 +286,7 @@ $(document).ready(function() {
   }
 })
 </script>
+
 
 <!-- Codefox Theme -->
 <script src="{{ asset('assets/codefox/js/waves.js') }}"></script>

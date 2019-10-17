@@ -112,7 +112,7 @@
                             <li>
                                 <ul>
                                     <li><a href="#sub">앱 접수</a></li>
-                                    <li><a href="updateList">업데이트 관리</a></li>
+                                    <li><a href="/updatelist">업데이트 관리</a></li>
                                     <li><a href="apkList">APK 관리</a></li>
                                     <li><a href="/appslist">앱 목록</a></li>
                                     <li><a href="pushList">푸쉬 현황</a></li>
