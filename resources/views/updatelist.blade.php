@@ -7,7 +7,7 @@
   <div class="method">
     <div class="col-md-12 mt-3">
 
-      {{ Breadcrumbs::render('promolist') }}
+      {{ Breadcrumbs::render('updatelist') }}
 
      <table id="updateTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>

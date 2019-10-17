@@ -32,3 +32,9 @@ Breadcrumbs::for('promodetail', function ($trail) {
 Breadcrumbs::for('appslist', function ($trail) {
   $trail->push('앱 관리', route('appslist.view'));
 });
+
+// 업데이트 관리
+Breadcrumbs::for('updatelist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('업데이트 관리', route('updatelist.view'));
+});
