@@ -44,7 +44,6 @@ Route::view('/appsorderlist', 'appsorderlist')->name('appsorderlist.view');
 Route::get('/appsorderlist/data', 'AppsOrderController@getAppsOrderData')->name('appsorderlist');
 Route::get('/appsorderdetail/{idx}', 'AppsOrderController@getSingleData')->name('appsorderdetail');
 
-
 // 앱 목록
 Route::view('/appslist', 'appslist')->name('appslist.view');
 Route::get('/appslist/data', 'AppsListController@getAppsListData')->name('appslist');
@@ -54,3 +53,8 @@ Route::get('/appsdetail/{idx}', 'AppsListController@getSingleData')->name('appsd
 Route::view('/updatelist', 'updatelist')->name('updatelist.view');
 Route::get('/updatelist/data', 'UpdateController@getUpdateData')->name('updatelist');
 Route::get('/updatedetail/{idx}', 'UpdateController@getSingleData')->name('updatedetail');
+
+// APK 관리
+Route::view('/apklist', 'apklist')->name('apklist.view');
+Route::get('/apklist/data', 'ApkController@getApkData')->name('apklist');
+Route::get('/apkdetail/{idx}', 'ApkController@getSingleData')->name('apkdetail');

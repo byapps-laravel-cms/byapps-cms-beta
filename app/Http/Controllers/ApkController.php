@@ -19,7 +19,7 @@ class ApkController extends Controller
       return view('apklist');
   }
 
-  public function getPaymentData()
+  public function getApkData()
   {
     $apkData = ApkData::select('idx',
                             'app_id',

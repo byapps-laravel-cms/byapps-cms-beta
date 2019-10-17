@@ -44,3 +44,9 @@ Breadcrumbs::for('updatelist', function ($trail) {
   $trail->parent('appslist');
   $trail->push('업데이트 관리', route('updatelist.view'));
 });
+
+// APK 관리
+Breadcrumbs::for('apklist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('APK 관리', route('apklist.view'));
+});
