@@ -32,11 +32,17 @@ Route::get('/chart/app_total', 'ChartController@onGetAppChartData');
 Route::view('/paylist', 'paylist')->name('paylist.view');
 Route::get('/paylist/data', 'PaymentController@getPaymentData')->name('paylist');
 Route::get('/paydetail/{idx}', 'PaymentController@getSingleData')->name('paydetail');
+Route::post('/payupdate/{idx}', 'PaymentController@update')->name('payupdate');
 
 // 프로모션
 Route::view('/promolist', 'promolist')->name('promolist.view');
 Route::get('/promolist/data', 'PromotionController@getPromotionData')->name('promolist');
 Route::get('/promodetail/{idx}', 'PromotionController@getSingleData')->name('promodetail');
+
+// 앱 목록
+Route::view('/appslist', 'appslist')->name('appslist.view');
+Route::get('/appslist/data', 'AppsListController@getAppsListData')->name('appslist');
+Route::get('/appsdetail/{idx}', 'AppsListController@getSingleData')->name('appsdetail');
 
 // 업데이트 관리
 Route::view('/updatelist', 'updatelist')->name('updatelist.view');
