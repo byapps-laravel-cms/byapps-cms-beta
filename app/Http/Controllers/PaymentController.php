@@ -7,10 +7,15 @@ use Illuminate\Http\Request;
 use DB;
 use App\PaymentData;
 use Yajra\Datatables\Datatables;
-//use App\DataTables\PaylistDataTable;
+use Session;
 
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getIndex()
     {
         return view('paylist');
@@ -44,6 +49,18 @@ class PaymentController extends Controller
       $paymentData = PaymentData::where('idx', $idx)->first();
 
       return view('paydetail')->with('paymentData', $paymentData);
+    }
+
+    public function update(Request $request, $idx)
+    {
+      $paymentData = PaymentData::where('idx', $idx)->first();
+
+      $paymentData->receipt = $request->input('receipt');
+      $paymentData->save();
+
+      Session::flash('success', '업데이트 성공');
+
+      return redirect()->back();
     }
 
 }

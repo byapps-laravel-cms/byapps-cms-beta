@@ -9,6 +9,7 @@ class AppsData extends Model
   protected $connection = 'byapps';
   protected $table = 'BYAPPS_apps_data';
 
+
   public static function getAppsData()
   {
       $appsData = DB::connection($connection)
@@ -19,4 +20,8 @@ class AppsData extends Model
 
       return $appsData;
   }
+
+  protected $fillable = [
+      'receipt',
+  ];
 }

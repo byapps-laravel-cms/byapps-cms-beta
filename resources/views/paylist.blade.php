@@ -2,7 +2,7 @@
 
 @section('content')
 
-@if (Auth::user())
+  @if (Auth::user())
 <div class="container col-12 col-md-12">
 
   <div class="method">
@@ -55,7 +55,6 @@ $(function() {
         columnDefs: [
            {
               'targets': 0,
-              //'width': '5%',
               'className': 'select-checkbox',
               'searchable': false,
               'orderable': false,
