@@ -16,7 +16,6 @@
                 @endforeach
               </h3>
 
-
               @foreach($modelSearchResults as $searchResult)
 
                 <div class="col-md-3" style="display:inline-block;">

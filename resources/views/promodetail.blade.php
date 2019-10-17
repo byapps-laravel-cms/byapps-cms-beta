@@ -25,7 +25,6 @@
     <div class="col-md-12 margin-0">
         <form method="POST" action="">
 
-
         <input type="hidden" name="idx" value="{{ $promotionData->idx}}"/>
 
             <div class="row1">
