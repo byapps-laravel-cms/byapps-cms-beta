@@ -33,6 +33,12 @@ Breadcrumbs::for('appslist', function ($trail) {
   $trail->push('앱 관리', route('appslist.view'));
 });
 
+// 앱 접수
+Breadcrumbs::for('appsorderlist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('앱 접수', route('appsorderlist.view'));
+});
+
 // 업데이트 관리
 Breadcrumbs::for('updatelist', function ($trail) {
   $trail->parent('appslist');

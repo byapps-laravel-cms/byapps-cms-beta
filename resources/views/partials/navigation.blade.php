@@ -111,7 +111,7 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                    <li><a href="#sub">앱 접수</a></li>
+                                    <li><a href="/appsorderlist">앱 접수</a></li>
                                     <li><a href="/updatelist">업데이트 관리</a></li>
                                     <li><a href="apkList">APK 관리</a></li>
                                     <li><a href="/appslist">앱 목록</a></li>
@@ -122,7 +122,7 @@
                                     <li><a href="#">테스터</a></li>
                                 </ul>
                             </li>
-                        </ul> 
+                        </ul>
                     </li>
                     <li class="has-submenu">
                         <a href="#">
@@ -227,4 +227,3 @@
         </div>
         <!-- end container -->
     </div>
-   

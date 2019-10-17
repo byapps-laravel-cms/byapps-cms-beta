@@ -16,12 +16,11 @@ class AppsOrderController extends Controller
 
   public function getAppsOrderData()
   {
-    $appsOrderData = PromotionData::select('idx',
+    $appsOrderData = AppsOrderData::select('idx',
                                          'app_process',
                                          'app_cate',
                                          'app_name',
                                          'app_company',
-                                         'app_home_url',
                                          'order_name',
                                          'cellno',
                                          'apps_type',
@@ -33,9 +32,9 @@ class AppsOrderController extends Controller
             ->setRowId(function($appsOrderData) {
               return $appsOrderData->idx;
             })
-            // ->editColumn('mem_name', function($eloquent) {
-            //   return $eloquent->mem_name."(".$eloquent->mem_id.")";
-            // })
+            ->editColumn('receipt', function($eloquent) {
+              return substr($eloquent->receipt, 0, 50);
+            })
             // ->editColumn('pm_used', function($eloquent) {
             //   if ($eloquent->pm_used == 0) return "미사용";
             //   else return "사용 ".date('Y-m-d', $eloquent->used_time);
