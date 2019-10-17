@@ -8,7 +8,6 @@ use Yajra\Datatables\Datatables;
 
 class AppsListController extends Controller
 {
-    //
     public function getIndex()
     {
         return view('appslist');
@@ -21,15 +20,6 @@ class AppsListController extends Controller
     return Datatables::of($appslistData)
             ->setRowId(function($appslistData) {
                 return $appslistData->idx;
-            })
-            ->editColumn('app_id', function($eloquent) {
-                return $eloquent->app_id;
-            })
-            ->editColumn('app_name', function($eloquent) {
-                return $eloquent->app_name;
-            })
-            ->editColumn('app_ver', function($eloquent) {
-                return $eloquent->app_ver;
             })
             ->editColumn('app_process', function($eloquent) {
                 switch($eloquent->app_process){
@@ -59,14 +49,7 @@ class AppsListController extends Controller
             ->editColumn('server_group', function($eloquent) {
                 return $eloquent->server_group."그룹";
             })
-            ->editColumn('apps_type', function($eloquent) {
-                return  $eloquent->apps_type;
-            })
-            ->editColumn('script_popup', function($eloquent) {
-                return $eloquent->script_popup;
-            })
             ->make(true);
-
     }
 
     public function getSingleData($idx)
