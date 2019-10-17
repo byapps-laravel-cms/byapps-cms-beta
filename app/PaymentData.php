@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 
-
 class PaymentData extends Model implements Searchable
 {
   protected $connection = 'byapps';

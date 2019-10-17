@@ -7,6 +7,7 @@ use App\User;
 use App\HomeLayout;
 use App\AppsData;
 use App\PaymentData;
+use App\PromotionData;
 
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ExpiredController;
@@ -118,10 +119,12 @@ class HomeController extends Controller
     {
       $searchResults = (new Search())
                         ->registerModel(PaymentData::class, 'app_name')
+                        ->registerModel(PromotionData::class, 'mem_name')
                         ->perform($request->input('query'));
 
       $typesArray = [ 'BYAPPS_apps_payment_data' => '결제 관리',
-                      'BYAPPS2016_promotion_data' => '프로모션', ];
+                      'BYAPPS2016_promotion_data' => '프로모션',
+                    ];
 
       //dd($searchResults);
 
