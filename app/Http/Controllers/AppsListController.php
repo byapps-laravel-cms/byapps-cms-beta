@@ -51,8 +51,6 @@ class AppsListController extends Controller
                     break;
                     case 9: return "기간만료";
                     break;
-                    case 9: return "서비스유효";
-                    break;
                     case 10: return "서비스유효";
                     break;
                     default: return "";

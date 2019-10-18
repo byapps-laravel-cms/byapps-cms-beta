@@ -37,3 +37,8 @@ Route::get('/paydetail/{idx}', 'PaymentController@getSingleData')->name('paydeta
 Route::view('/promolist', 'promolist')->name('promolist.view');
 Route::get('/promolist/data', 'PromotionController@getPromotionData')->name('promolist');
 Route::get('/promodetail/{idx}', 'PromotionController@getSingleData')->name('promodetail');
+
+// 프로모션
+Route::view('/appslist', 'appslist')->name('appslist.blade.php');
+Route::get('/appslist/data', 'AppsListController@getAppsListData')->name('appslist');
+Route::get('/appsdetaill/{idx}', 'AppsListController@getSingleData')->name('appsdetail');
