@@ -32,13 +32,30 @@ Route::get('/chart/app_total', 'ChartController@onGetAppChartData');
 Route::view('/paylist', 'paylist')->name('paylist.view');
 Route::get('/paylist/data', 'PaymentController@getPaymentData')->name('paylist');
 Route::get('/paydetail/{idx}', 'PaymentController@getSingleData')->name('paydetail');
+Route::post('/payupdate/{idx}', 'PaymentController@update')->name('payupdate');
 
 // 프로모션
 Route::view('/promolist', 'promolist')->name('promolist.view');
 Route::get('/promolist/data', 'PromotionController@getPromotionData')->name('promolist');
 Route::get('/promodetail/{idx}', 'PromotionController@getSingleData')->name('promodetail');
 
-// 프로모션
-Route::view('/appslist', 'appslist')->name('appslist.blade.php');
+// 앱 접수
+Route::view('/appsorderlist', 'appsorderlist')->name('appsorderlist.view');
+Route::get('/appsorderlist/data', 'AppsOrderController@getAppsOrderData')->name('appsorderlist');
+Route::get('/appsorderdetail/{idx}', 'AppsOrderController@getSingleData')->name('appsorderdetail');
+
+// 앱 목록
+Route::view('/appslist', 'appslist')->name('appslist.view');
 Route::get('/appslist/data', 'AppsListController@getAppsListData')->name('appslist');
-Route::get('/appsdetaill/{idx}', 'AppsListController@getSingleData')->name('appsdetail');
+Route::get('/appsdetail/{idx}', 'AppsListController@getSingleData')->name('appsdetail');
+
+// 업데이트 관리
+Route::view('/updatelist', 'updatelist')->name('updatelist.view');
+Route::get('/updatelist/data', 'UpdateController@getUpdateData')->name('updatelist');
+Route::get('/updatedetail/{idx}', 'UpdateController@getSingleData')->name('updatedetail');
+
+// APK 관리
+Route::view('/apklist', 'apklist')->name('apklist.view');
+Route::get('/apklist/data', 'ApkController@getApkData')->name('apklist');
+Route::get('/apkdetail/{idx}', 'ApkController@getSingleData')->name('apkdetail');
+

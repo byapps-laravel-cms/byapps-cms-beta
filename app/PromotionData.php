@@ -5,7 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
-class PromotionData extends Model
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+
+class PromotionData extends Model implements Searchable
 {
   protected $connection = 'byapps';
   protected $table = 'BYAPPS2016_promotion_data';
@@ -17,5 +20,12 @@ class PromotionData extends Model
       dd($promotionData);
 
       return $promotionData;
+  }
+
+  public function getSearchResult(): SearchResult
+  {
+    $url = route('promodetail', $this->idx);
+
+    return new SearchResult($this, $this->mem_name, $url);
   }
 }

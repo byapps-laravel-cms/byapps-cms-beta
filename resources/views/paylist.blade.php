@@ -2,12 +2,13 @@
 
 @section('content')
 
+  @if (Auth::user())
 <div class="container col-12 col-md-12">
 
   <div class="method">
     <div class="col-md-12 margin-5">
       {{ Breadcrumbs::render('paylist') }}
-      
+
      <table id="paymentTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <col width="5%">
          <col width="35%">
@@ -30,6 +31,7 @@
       </div>
   </div>
 </div>
+  @endif
 @endsection
 
 @push('scripts')
@@ -53,7 +55,6 @@ $(function() {
         columnDefs: [
            {
               'targets': 0,
-              //'width': '5%',
               'className': 'select-checkbox',
               'searchable': false,
               'orderable': false,

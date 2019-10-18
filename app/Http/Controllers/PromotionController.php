@@ -49,5 +49,4 @@ class PromotionController extends Controller
 
     return view('promodetail')->with('promotionData', $promotionData);
   }
-
 }

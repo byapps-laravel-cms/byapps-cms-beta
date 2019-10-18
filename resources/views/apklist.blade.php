@@ -6,18 +6,18 @@
 
   <div class="method">
     <div class="col-md-12 mt-3">
-      {{ Breadcrumbs::render('appslist') }}
 
-     <table id="appslistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+      {{ Breadcrumbs::render('apklist') }}
+
+     <table id="apklistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
                  <th>앱아이디</th>
                  <th>앱명</th>
-                 <th>버전</th>
-                 <th>BV</th>
-                 <th>등록상태</th>
-                 <th>스크립트</th>
+                 <th>상태</th>
+                 <th>등록일</th>
+                 <th>다운로드</th>
              </tr>
          </thead>
        </table>
@@ -29,21 +29,20 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#appslistTable').DataTable({
+    $('#apklistTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('appslist') }}",
+          url: "{{ route('apklist') }}",
           crossDomain: true
         },
         columns: [
             { data: 'idx', name: 'idx' },
             { data: 'app_id', name: 'app_id' },
             { data: 'app_name', name: 'app_name' },
-            { data: 'app_ver', name: 'app_ver' },
             { data: 'app_process', name: 'app_process' },
-            { data: 'server_group', name: 'server_group' },
-            { data: 'script_popup', name: 'script_popup' }
+            { data: 'reg_time', name: 'reg_time' },
+            { data: 'apk_file', name: 'apk_file' },
         ],
         columnDefs: [
            {
@@ -56,24 +55,22 @@ $(function() {
               },
            },
            {
-             'targets': 1,
+             'targets': 2,
              'render': function ( data, type, full, meta ) {
-                return '<a href="/appsDetail/'+full.idx+'">'+data+'</a>';
+                return '<a href="/apkdetail/'+full.idx+'">'+data+'</a>';
              }
            },
         ],
         select: {
            'style': 'multi'
         },
-        order: [[ 5, 'desc']],
-        "paging": true,
-        "pageLength": 50,
-        // "info": false,
-        // "autoWidth": true,
-        "fixedHeader": false,
-        "responsive": true,
-        "orderClasses": false,
-        "stateSave": false,
+        order: [[ 4, 'desc']],
+        paging: true,
+        pageLength: 50,
+        fixedHeader: false,
+        responsive: true,
+        orderClasses: false,
+        stateSave: false,
     });
 });
 </script>

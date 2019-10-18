@@ -12,13 +12,13 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 
-
 class PaymentData extends Model implements Searchable
 {
   protected $connection = 'byapps';
   protected $table = 'BYAPPS_apps_payment_data';
-
-  protected $fillable = ['app_name'];
+  protected $primaryKey = 'idx';
+  public $timestamps = false;
+  protected $fillable = ['receipt'];
 
   public static function getPaymentData()
   {
