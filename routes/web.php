@@ -58,3 +58,4 @@ Route::get('/updatedetail/{idx}', 'UpdateController@getSingleData')->name('updat
 Route::view('/apklist', 'apklist')->name('apklist.view');
 Route::get('/apklist/data', 'ApkController@getApkData')->name('apklist');
 Route::get('/apkdetail/{idx}', 'ApkController@getSingleData')->name('apkdetail');
+
