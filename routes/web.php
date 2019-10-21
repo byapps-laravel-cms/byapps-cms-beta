@@ -25,8 +25,15 @@ Route::get('logout', 'Auth\LoginController@logout');
 
 // 차트 데이터
 Route::post('/chart', 'ChartController@index');
-Route::get('/chart/app_daily', 'ChartController@onGetAppDailyChartData');
+Route::post('/chart/app_daily', 'ChartController@onGetAppDailyChartData');
 Route::get('/chart/app_total', 'ChartController@onGetAppChartData');
+Route::get('/chart/ma_daily', 'ChartController@onGetMaDailyChartData');
+
+// 매출 통계표
+Route::post('/sales', 'SalesController@getPlatformData');
+
+
+
 
 // 결제관리
 Route::view('/paylist', 'paylist')->name('paylist.view');

@@ -30,4 +30,9 @@ class AppsData extends Model implements Searchable
 
     return new SearchResult($this, $this->app_name, $url);
   }
+
+  public function payments()
+  {
+    return $this->hasMany('App\PaymentData','mem_id');
+  }
 }
