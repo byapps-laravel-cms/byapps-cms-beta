@@ -109,7 +109,7 @@ function getTerm() {
   var end_date = $('#end_date_table').val();
   var diff = new Date(Date.parse(end_date) - Date.parse(start_date));
 
-  return Math.ceil(diff/1000/60/60/24);
+  return Math.round(diff/1000/60/60/24);
 }
 
 // 표 출력하는 부분
@@ -118,12 +118,13 @@ function showSalesTable() {
   var end_date = $('#end_date_table').val();
 
   var term = getTerm();
+  //alert(term);
 
   var last_start = new Date(start_date);
-  var last_end = new Date(end_date);
+  var last_end = new Date(last_start);
 
-  last_start.setDate(last_start.getDate() - 1);
-  last_end.setDate(last_start.getDate() + term);
+  last_end.setDate(last_start.getDate() - 1);
+  last_start.setDate(last_end.getDate() - term);
 
   last_start = dateFormat(last_start, "yyyy-mm-dd");
   last_end = dateFormat(last_end, "yyyy-mm-dd");
