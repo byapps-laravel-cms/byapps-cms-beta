@@ -51,8 +51,14 @@ Breadcrumbs::for('apklist', function ($trail) {
   $trail->push('APK 관리', route('apklist.view'));
 });
 
-// APK 관리
+// Push 현황
 Breadcrumbs::for('pushlist', function ($trail) {
   $trail->parent('appslist');
   $trail->push('PUSH 현황', route('pushlist.view'));
+});
+
+// 소식 관리
+Breadcrumbs::for('pushnewslist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('소식 관리', route('pushnewslist.view'));
 });

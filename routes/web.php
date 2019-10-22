@@ -70,3 +70,8 @@ Route::get('/apkdetail/{idx}', 'ApkController@getSingleData')->name('apkdetail')
 Route::view('/pushlist', 'pushlist')->name('pushlist.view');
 Route::get('/pushlist/data', 'PushController@getPushListData')->name('pushlist');
 Route::get('/pushdetail/{idx}', 'PushController@getSingleData')->name('pushdetail');
+
+// 소식 관리
+Route::view('/pushnewslist', 'pushnewslist')->name('pushnewslist.view');
+Route::get('/pushnewslist/data', 'PushNewsController@getPushNewsListData')->name('pushnewslist');
+Route::get('/pushnewsdetail/{idx}', 'PushNewsController@getSingleData')->name('pushnewsdetail');
