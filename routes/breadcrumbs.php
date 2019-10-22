@@ -91,3 +91,9 @@ Breadcrumbs::for('appendixorderlist', function ($trail) {
   $trail->parent('appendixlist');
   $trail->push('부가서비스 접수', route('appendixorderlist.view'));
 });
+
+// MA 이용 업체
+Breadcrumbs::for('malist', function ($trail) {
+  $trail->parent('appendixlist');
+  $trail->push('MA 이용 업체', route('malist.view'));
+});

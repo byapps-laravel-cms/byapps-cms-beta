@@ -133,7 +133,7 @@
                             <li>
                                 <ul>
                                     <li><a href="/appendixorderlist">부가서비스 접수</a></li>
-                                    <li><a href="#">MA 이용 업체</a></li>
+                                    <li><a href="/malist">MA 이용 업체</a></li>
                                     <li><a href="#">프리미엄 서비스</a></li>
                                 </ul>
                             </li>
