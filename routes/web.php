@@ -65,3 +65,8 @@ Route::get('/updatedetail/{idx}', 'UpdateController@getSingleData')->name('updat
 Route::view('/apklist', 'apklist')->name('apklist.view');
 Route::get('/apklist/data', 'ApkController@getApkData')->name('apklist');
 Route::get('/apkdetail/{idx}', 'ApkController@getSingleData')->name('apkdetail');
+
+// 푸쉬 현황
+Route::view('/pushlist', 'pushlist')->name('pushlist.view');
+Route::get('/pushlist/data', 'PushController@getPushListData')->name('pushlist');
+Route::get('/pushdetail/{idx}', 'PushController@getSingleData')->name('pushdetail');
