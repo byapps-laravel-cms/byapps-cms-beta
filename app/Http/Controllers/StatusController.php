@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\AppsOrderData;
 use App\AppendixOrderData;
-use App\UpdateData;
+use App\AppsUpdateData;
 use App\QnaMember;
 use App\QnaNonmember;
 
@@ -78,7 +78,7 @@ class StatusController extends Controller
 
     // original query: select sum(case when update_process='1' then 1 else 0 end) order_no, sum(case when update_process='2' then 1 else 0 end) confirm_no,  sum(case when update_process='3' then 1 else 0 end) app_no
     // from BYAPPS2015_apps_update_data where (update_process='1' or update_process='2' or update_process='3') and reg_time>='".$search_time."'
-    $updateCount = UpdateData::where('update_process', 1)->where('reg_time', '>=', $todate)->count();
+    $updateCount = AppsUpdateData::where('update_process', 1)->where('reg_time', '>=', $todate)->count();
     // UpdateData::where('app_process', 1)->where('reg_time', '>=', time())->count();
 
     return $updateCount;
