@@ -62,3 +62,9 @@ Breadcrumbs::for('pushnewslist', function ($trail) {
   $trail->parent('appslist');
   $trail->push('소식 관리', route('pushnewslist.view'));
 });
+
+// 인증회원 관리
+Breadcrumbs::for('appspointmemberlist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('인증회원 관리', route('appspointmemberlist.view'));
+});

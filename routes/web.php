@@ -75,3 +75,8 @@ Route::get('/pushdetail/{idx}', 'PushController@getSingleData')->name('pushdetai
 Route::view('/pushnewslist', 'pushnewslist')->name('pushnewslist.view');
 Route::get('/pushnewslist/data', 'PushNewsController@getPushNewsListData')->name('pushnewslist');
 Route::get('/pushnewsdetail/{idx}', 'PushNewsController@getSingleData')->name('pushnewsdetail');
+
+// 인증회원 관리
+Route::view('/appspointmemberlist', 'appspointmemberlist')->name('appspointmemberlist.view');
+Route::get('/appspointmemberlist/data', 'AppsPointMemberController@getAppsPointMemberListData')->name('appspointmemberlist');
+Route::get('/appspointmemberdetail/{idx}', 'AppsPointMemberController@getSingleData')->name('appspointmemberdetail');
