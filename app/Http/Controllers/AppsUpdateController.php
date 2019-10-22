@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\UpdateData;
+use App\AppsUpdateData;
 use Yajra\Datatables\Datatables;
 
-class UpdateController extends Controller
+class AppsUpdateController extends Controller
 {
   public function getIndex()
   {
-      return view('updatelist');
+      return view('appsupdatelist');
   }
 
-  public function getUpdateData()
+  public function getAppsUpdateData()
   {
-    $updateData = UpdateData::select('idx',
+    $appsupdateData = AppsUpdateData::select('idx',
                                     'reg_time',
                                     'update_process',
                                     'app_id',
@@ -26,9 +26,9 @@ class UpdateController extends Controller
                                     'update_ver'
                                     );
 
-    return Datatables::of($updateData)
-            ->setRowId(function($updateData) {
-              return $updateData->idx;
+    return Datatables::of($appsupdateData)
+            ->setRowId(function($appsupdateData) {
+              return $appsupdateData->idx;
             })
             // ->editColumn('mem_name', function($eloquent) {
             //   return $eloquent->mem_name."(".$eloquent->mem_id.")";
@@ -52,9 +52,9 @@ class UpdateController extends Controller
 
   public function getSingleData($idx)
   {
-    $updateData = UpdateData::where('idx', $idx)->first();
+    $appsupdateData = AppsUpdateData::where('idx', $idx)->first();
 
-    return view('updatedetail')->with('updateData', $updateData);
+    return view('appsupdatedetail')->with('appsupdateData', $appsupdateData);
   }
 
 }

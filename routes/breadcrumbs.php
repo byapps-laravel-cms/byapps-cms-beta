@@ -40,13 +40,60 @@ Breadcrumbs::for('appsorderlist', function ($trail) {
 });
 
 // 업데이트 관리
-Breadcrumbs::for('updatelist', function ($trail) {
+Breadcrumbs::for('appsupdatelist', function ($trail) {
   $trail->parent('appslist');
-  $trail->push('업데이트 관리', route('updatelist.view'));
+  $trail->push('업데이트 관리', route('appsupdatelist.view'));
 });
 
 // APK 관리
 Breadcrumbs::for('apklist', function ($trail) {
   $trail->parent('appslist');
   $trail->push('APK 관리', route('apklist.view'));
+});
+
+// Push 현황
+Breadcrumbs::for('pushlist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('PUSH 현황', route('pushlist.view'));
+});
+
+// 소식 관리
+Breadcrumbs::for('pushnewslist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('소식 관리', route('pushnewslist.view'));
+});
+
+// 인증회원 관리
+Breadcrumbs::for('appspointmemberlist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('인증회원 관리', route('appspointmemberlist.view'));
+});
+
+// 앱포인트 관리
+Breadcrumbs::for('appspointlist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('앱포인트 관리', route('appspointlist.view'));
+});
+
+// 테스터 관리
+Breadcrumbs::for('pushtesterlist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('테스터 관리', route('pushtesterlist.view'));
+});
+
+// 부가서비스
+Breadcrumbs::for('appendixlist', function ($trail) {
+  $trail->push('부가서비스', route('appendixorderlist.view'));
+});
+
+// 부가서비스 접수
+Breadcrumbs::for('appendixorderlist', function ($trail) {
+  $trail->parent('appendixlist');
+  $trail->push('부가서비스 접수', route('appendixorderlist.view'));
+});
+
+// MA 이용 업체
+Breadcrumbs::for('malist', function ($trail) {
+  $trail->parent('appendixlist');
+  $trail->push('MA 이용 업체', route('malist.view'));
 });

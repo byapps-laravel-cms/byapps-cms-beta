@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UpdateData extends Model
+class AppsUpdateData extends Model
 {
   protected $connection = 'byapps';
   protected $table = 'BYAPPS2015_apps_update_data';

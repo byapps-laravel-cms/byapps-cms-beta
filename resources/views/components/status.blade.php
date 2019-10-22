@@ -27,7 +27,7 @@
                     부가서비스 접수
                   </p>
                   <h2 class="text-white"><span data-plugin="counterup">{{ $appendixOrderCount }}</span>
-                    <small><i class="mdi mdi-arrow-up text-white"></i></small>
+                    <small><i class="mdi mdi-arrow-down text-white"></i></small>
                   </h2>
                   <p class="text-white m-0">어제보다 <b>5.6%</b> 줄었어요</p>
               </div>
@@ -58,10 +58,10 @@
         <i class="mdi mdi-cloud-download widget-two-icon"></i>
         <div class="wigdet-two-content">
             <p class="m-0 text-white text-uppercase font-600 font-secondary text-overflow" title="New Downloads">
-              New Downloads
+              MA 통합
             </p>
             <h2 class="text-white"><span data-plugin="counterup">854</span> <small><i class="mdi mdi-arrow-up text-white"></i></small></h2>
-            <p class="text-white m-0"><b>9.9%</b> From previous period</p>
+            <p class="text-white m-0">어제보다 <b>9.9%</b> 늘었어요</p>
         </div>
       </div>
     </div>

@@ -112,14 +112,14 @@
                             <li>
                                 <ul>
                                     <li><a href="/appsorderlist">앱 접수</a></li>
-                                    <li><a href="/updatelist">업데이트 관리</a></li>
+                                    <li><a href="/appsupdatelist">업데이트 관리</a></li>
                                     <li><a href="/apklist">APK 관리</a></li>
                                     <li><a href="/appslist">앱 목록</a></li>
-                                    <li><a href="pushList">푸쉬 현황</a></li>
-                                    <li><a href="newsList">소식 관리</a></li>
-                                    <li><a href="membersList">인증회원 관리</a></li>
-                                    <li><a href="#">앱 포인트 관리</a></li>
-                                    <li><a href="#">테스터</a></li>
+                                    <li><a href="/pushlist">푸쉬 현황</a></li>
+                                    <li><a href="/pushnewslist">소식 관리</a></li>
+                                    <li><a href="/appspointmemberlist">인증회원 관리</a></li>
+                                    <li><a href="/appspointlist">앱 포인트 관리</a></li>
+                                    <li><a href="/pushtesterlist">테스터</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -132,8 +132,8 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                    <li><a href="#">부가서비스 접수</a></li>
-                                    <li><a href="#">MA 이용 업체</a></li>
+                                    <li><a href="/appendixorderlist">부가서비스 접수</a></li>
+                                    <li><a href="/malist">MA 이용 업체</a></li>
                                     <li><a href="#">프리미엄 서비스</a></li>
                                 </ul>
                             </li>

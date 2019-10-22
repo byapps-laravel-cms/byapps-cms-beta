@@ -7,22 +7,22 @@
   <div class="method">
     <div class="col-md-12 mt-3">
 
-      {{ Breadcrumbs::render('updatelist') }}
+      {{ Breadcrumbs::render('appendixorderlist') }}
 
-     <table id="updateTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+     <table id="appendixorderlistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
-                 <th>신청일</th>
-                 <th>진행상태</th>
-                 <th>앱아이디</th>
-                 <th>앱명</th>
-                 <th>앱OS</th>
-                 <th>버전</th>
-                 <th>업데이트 내역</th>
+                 <th>주문일</th>
+                 <th>상태</th>
+                 <th>주문내역</th>
+                 <th>결제</th>
+                 <th>영수증</th>
+                 <th>주문자명</th>
+                 <th>업체명</th>
+                 <th>연락처</th>
              </tr>
          </thead>
-
        </table>
       </div>
   </div>
@@ -32,22 +32,23 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#updateTable').DataTable({
+    $('#appendixorderlistTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('updatelist') }}",
+          url: "{{ route('appendixorderlist') }}",
           crossDomain: true
         },
         columns: [
             { data: 'idx', name: 'idx' },
             { data: 'reg_time', name: 'reg_time' },
-            { data: 'update_process', name: 'update_process' },
-            { data: 'app_id', name: 'app_id' },
-            { data: 'app_name', name: 'app_name' },
-            { data: 'os', name: 'os' },
-            { data: 'update_ver', name: 'update_ver' },
-            { data: 'update_type', name: 'update_type' },
+            { data: 'app_process', name: 'app_process' },
+            { data: 'service_type', name: 'service_type' },
+            { data: 'pay_way', name: 'pay_way' },
+            { data: 'receipt', name: 'receipt' },
+            { data: 'order_name', name: 'order_name' },
+            { data: 'app_company', name: 'app_company' },
+            { data: 'cellno', name: 'cellno' }
         ],
         columnDefs: [
            {
@@ -60,16 +61,16 @@ $(function() {
               },
            },
            {
-             'targets': 4,
+             'targets': 6,
              'render': function ( data, type, full, meta ) {
-                return '<a href="/updatedetail/'+full.idx+'">'+data+'</a>';
-              }
+                return '<a href="/appendixorderdetail/'+full.idx+'">'+data+'</a>';
+             }
            },
         ],
         select: {
            'style': 'multi'
         },
-        order: [[ 1, 'desc']],
+        order: [[ 5, 'desc']],
         "paging": true,
         "pageLength": 50,
         // "info": false,

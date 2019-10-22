@@ -25,8 +25,15 @@ Route::get('logout', 'Auth\LoginController@logout');
 
 // 차트 데이터
 Route::post('/chart', 'ChartController@index');
-Route::get('/chart/app_daily', 'ChartController@onGetAppDailyChartData');
+Route::post('/chart/app_daily', 'ChartController@onGetAppDailyChartData');
 Route::get('/chart/app_total', 'ChartController@onGetAppChartData');
+Route::get('/chart/ma_daily', 'ChartController@onGetMaDailyChartData');
+
+// 매출 통계표
+Route::post('/sales', 'SalesController@getPlatformData');
+
+
+
 
 // 결제관리
 Route::view('/paylist', 'paylist')->name('paylist.view');
@@ -50,11 +57,46 @@ Route::get('/appslist/data', 'AppsListController@getAppsListData')->name('appsli
 Route::get('/appsdetail/{idx}', 'AppsListController@getSingleData')->name('appsdetail');
 
 // 업데이트 관리
-Route::view('/updatelist', 'updatelist')->name('updatelist.view');
-Route::get('/updatelist/data', 'UpdateController@getUpdateData')->name('updatelist');
-Route::get('/updatedetail/{idx}', 'UpdateController@getSingleData')->name('updatedetail');
+Route::view('/appsupdatelist', 'appsupdatelist')->name('appsupdatelist.view');
+Route::get('/appsupdatelist/data', 'AppsUpdateController@getAppsUpdateData')->name('appsupdatelist');
+Route::get('/appsupdatedetail/{idx}', 'AppsUpdateController@getSingleData')->name('appsupdatedetail');
 
 // APK 관리
 Route::view('/apklist', 'apklist')->name('apklist.view');
 Route::get('/apklist/data', 'ApkController@getApkData')->name('apklist');
 Route::get('/apkdetail/{idx}', 'ApkController@getSingleData')->name('apkdetail');
+
+// 푸쉬 현황
+Route::view('/pushlist', 'pushlist')->name('pushlist.view');
+Route::get('/pushlist/data', 'PushController@getPushListData')->name('pushlist');
+Route::get('/pushdetail/{idx}', 'PushController@getSingleData')->name('pushdetail');
+
+// 소식 관리
+Route::view('/pushnewslist', 'pushnewslist')->name('pushnewslist.view');
+Route::get('/pushnewslist/data', 'PushNewsController@getPushNewsListData')->name('pushnewslist');
+Route::get('/pushnewsdetail/{idx}', 'PushNewsController@getSingleData')->name('pushnewsdetail');
+
+// 인증회원 관리
+Route::view('/appspointmemberlist', 'appspointmemberlist')->name('appspointmemberlist.view');
+Route::get('/appspointmemberlist/data', 'AppsPointMemberController@getAppsPointMemberListData')->name('appspointmemberlist');
+Route::get('/appspointmemberdetail/{idx}', 'AppsPointMemberController@getSingleData')->name('appspointmemberdetail');
+
+// 앱포인트 관리
+Route::view('/appspointlist', 'appspointlist')->name('appspointlist.view');
+Route::get('/appspointlist/data', 'AppsPointController@getAppsPointListData')->name('appspointlist');
+Route::get('/appspointdetail/{idx}', 'AppsPointController@getSingleData')->name('appspointdetail');
+
+//  테스터 관리
+Route::view('/pushtesterlist', 'pushtesterlist')->name('pushtesterlist.view');
+Route::get('/pushtesterlist/data', 'PushTesterController@getPushTesterListData')->name('pushtesterlist');
+Route::get('/pushtesterdetail/{idx}', 'PushTesterController@getSingleData')->name('pushtesterdetail');
+
+//  부가서비스 관리
+Route::view('/appendixorderlist', 'appendixorderlist')->name('appendixorderlist.view');
+Route::get('/appendixorderlist/data', 'AppendixOrderController@getAppendixOrderListData')->name('appendixorderlist');
+Route::get('/appendixorderdetail/{idx}', 'AppendixOrderController@getSingleData')->name('appendixorderdetail');
+
+//  MA 이용 업체
+Route::view('/malist', 'malist')->name('malist.view');
+Route::get('/malist/data', 'MAController@getMAListData')->name('malist');
+Route::get('/madetail/{idx}', 'MAController@getSingleData')->name('madetail');
