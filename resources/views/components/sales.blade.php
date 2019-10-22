@@ -120,6 +120,8 @@ function showSalesTable() {
   var term = getTerm();
   //alert(term);
 
+  // 지난 시작일: 지난 종료일에서 term만큼 뒤로 간 날짜
+  // 지난 종료일: 이번 시작일보다 하루 전 날
   var last_start = new Date(start_date);
   var last_end = new Date(last_start);
 
