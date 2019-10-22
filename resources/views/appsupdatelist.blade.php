@@ -7,9 +7,9 @@
   <div class="method">
     <div class="col-md-12 mt-3">
 
-      {{ Breadcrumbs::render('updatelist') }}
+      {{ Breadcrumbs::render('appsupdatelist') }}
 
-     <table id="updateTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+     <table id="appsupdatelistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
@@ -32,11 +32,11 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#updateTable').DataTable({
+    $('#appsupdatelistTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('updatelist') }}",
+          url: "{{ route('appsupdatelist') }}",
           crossDomain: true
         },
         columns: [
@@ -62,7 +62,7 @@ $(function() {
            {
              'targets': 4,
              'render': function ( data, type, full, meta ) {
-                return '<a href="/updatedetail/'+full.idx+'">'+data+'</a>';
+                return '<a href="/appsupdatedetail/'+full.idx+'">'+data+'</a>';
               }
            },
         ],

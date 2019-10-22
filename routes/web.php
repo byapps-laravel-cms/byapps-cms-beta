@@ -57,9 +57,9 @@ Route::get('/appslist/data', 'AppsListController@getAppsListData')->name('appsli
 Route::get('/appsdetail/{idx}', 'AppsListController@getSingleData')->name('appsdetail');
 
 // 업데이트 관리
-Route::view('/updatelist', 'updatelist')->name('updatelist.view');
-Route::get('/updatelist/data', 'UpdateController@getUpdateData')->name('updatelist');
-Route::get('/updatedetail/{idx}', 'UpdateController@getSingleData')->name('updatedetail');
+Route::view('/appsupdatelist', 'appsupdatelist')->name('appsupdatelist.view');
+Route::get('/appsupdatelist/data', 'AppsUpdateController@getAppsUpdateData')->name('appsupdatelist');
+Route::get('/appsupdatedetail/{idx}', 'AppsUpdateController@getSingleData')->name('appsupdatedetail');
 
 // APK 관리
 Route::view('/apklist', 'apklist')->name('apklist.view');
