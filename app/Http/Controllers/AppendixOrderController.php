@@ -29,6 +29,9 @@ class AppendixOrderController extends Controller
             ->setRowId(function($appendixOrderListData) {
                 return $appendixOrderListData->idx;
             })
+            ->editColumn('receipt', function($eloquent) {
+              return $eloquent->receipt == '' ? "미발행" : "발행";
+            })
             ->editColumn('reg_time', '{{ date("Y-m-d", $reg_time) }}')
             ->orderColumn('reg_time', 'reg_time $1')
             ->make(true);

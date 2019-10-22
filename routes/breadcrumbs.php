@@ -80,3 +80,14 @@ Breadcrumbs::for('pushtesterlist', function ($trail) {
   $trail->parent('appslist');
   $trail->push('테스터 관리', route('pushtesterlist.view'));
 });
+
+// 부가서비스
+Breadcrumbs::for('appendixlist', function ($trail) {
+  $trail->push('부가서비스', route('appendixorderlist.view'));
+});
+
+// 부가서비스 접수
+Breadcrumbs::for('appendixorderlist', function ($trail) {
+  $trail->parent('appendixlist');
+  $trail->push('부가서비스 접수', route('appendixorderlist.view'));
+});

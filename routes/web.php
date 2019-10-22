@@ -90,3 +90,8 @@ Route::get('/appspointdetail/{idx}', 'AppsPointController@getSingleData')->name(
 Route::view('/pushtesterlist', 'pushtesterlist')->name('pushtesterlist.view');
 Route::get('/pushtesterlist/data', 'PushTesterController@getPushTesterListData')->name('pushtesterlist');
 Route::get('/pushtesterdetail/{idx}', 'PushTesterController@getSingleData')->name('pushtesterdetail');
+
+//  부가서비스 관리
+Route::view('/appendixorderlist', 'appendixorderlist')->name('appendixorderlist.view');
+Route::get('/appendixorderlist/data', 'AppendixOrderController@getAppendixOrderListData')->name('appendixorderlist');
+Route::get('/appendixorderdetail/{idx}', 'AppendixOrderController@getSingleData')->name('appendixorderdetail');
