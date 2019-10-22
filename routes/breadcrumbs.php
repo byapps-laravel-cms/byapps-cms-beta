@@ -68,3 +68,9 @@ Breadcrumbs::for('appspointmemberlist', function ($trail) {
   $trail->parent('appslist');
   $trail->push('인증회원 관리', route('appspointmemberlist.view'));
 });
+
+// 앱포인트 관리
+Breadcrumbs::for('appspointlist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('앱포인트 관리', route('appspointlist.view'));
+});

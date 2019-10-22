@@ -80,3 +80,8 @@ Route::get('/pushnewsdetail/{idx}', 'PushNewsController@getSingleData')->name('p
 Route::view('/appspointmemberlist', 'appspointmemberlist')->name('appspointmemberlist.view');
 Route::get('/appspointmemberlist/data', 'AppsPointMemberController@getAppsPointMemberListData')->name('appspointmemberlist');
 Route::get('/appspointmemberdetail/{idx}', 'AppsPointMemberController@getSingleData')->name('appspointmemberdetail');
+
+// 앱포인트 관리
+Route::view('/appspointlist', 'appspointlist')->name('appspointlist.view');
+Route::get('/appspointlist/data', 'AppsPointController@getAppsPointListData')->name('appspointlist');
+Route::get('/appspointdetail/{idx}', 'AppsPointController@getSingleData')->name('appspointdetail');
