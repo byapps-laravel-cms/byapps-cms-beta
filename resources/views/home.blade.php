@@ -92,7 +92,7 @@
       <li class="ui-state-default card" id="layout3">
 
           @include('components.sales')
-          
+
       </li>
 
       @elseif ($layout == 'layout4')
