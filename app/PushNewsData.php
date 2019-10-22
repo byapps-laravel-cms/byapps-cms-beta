@@ -13,7 +13,7 @@ class PushNewsData extends Model
 
   protected $fillable = [];
 
-  public static function getPushData()
+  public static function getPushNewsData()
   {
       $pushData = DB::connection($connection)
       ->table($table)->get();
