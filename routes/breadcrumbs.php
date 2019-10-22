@@ -74,3 +74,9 @@ Breadcrumbs::for('appspointlist', function ($trail) {
   $trail->parent('appslist');
   $trail->push('앱포인트 관리', route('appspointlist.view'));
 });
+
+// 테스터 관리
+Breadcrumbs::for('pushtesterlist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('테스터 관리', route('pushtesterlist.view'));
+});

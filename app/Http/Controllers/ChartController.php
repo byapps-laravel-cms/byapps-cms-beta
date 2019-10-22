@@ -60,13 +60,52 @@ class ChartController extends Controller
       return $result;
     }
 
-    public function onGetAppDailyChartData()
+    public function onGetAppDailyChartData(Request $request)
     {
+      // $result = array(
+      //     'circle1' => array(
+      //         array('무료', 300),
+      //         array('유료', 200),
+      //         array('관리', 100),
+      //     )
+      // );
+      info($request);
+      $date = strtotime($date);
+
+      // 전체
+      $appsTotal = AppsData::where('app_process', '=', '7')
+                    ->where(function($query){
+                      $query->where('service_type', '=', 'lite')->orWhere('end_time', '>', $date);
+                    })
+                    ->count();
+
+      // 유료
+      // 연장(pay_type = 1), 신규, 결제금액이 있는 경우, 서비스유효
+      $appsPaid = DB::table('marutm1.BYAPPS_apps_data as A')
+                  ->leftJoin('marutm1.BYAPPS_apps_payment_data as B', 'A.order_id', '=', 'B.order_id')
+                  ->where('A.app_process', '=', '7')
+                  //->selectRaw("'A.service_type' = 'lite' or 'A.end_time' > unix_timestamp()")
+                  ->where(function($query){
+                    $query->where('A.service_type', '=', 'lite')->orWhere('A.end_time', '>', $date);
+                  })
+                  ->where('B.process', '=', '1')
+                  ->where('B.amount', '>', '0')
+                  ->distinct()
+                  ->count('A.order_id');
+
+      // 무료
+      // 결제금액이 없는 경우, 관리업체가 아닌 경우(is_cherrypicker != Y), 서비스유효
+      $appsFree = $appsTotal - $appsPaid;
+
+      // 관리
+      // 관리업체에 체크(is_cherrypicker = Y), 서비스유효
+      $appsCheck = 100;
+
       $result = array(
           'circle1' => array(
-              array('무료', 300),
-              array('유료', 200),
-              array('관리', 100),
+            array('무료', $appsFree),
+            array('유료', $appsPaid),
+            array('관리', $appsCheck),
           )
       );
 

@@ -85,3 +85,8 @@ Route::get('/appspointmemberdetail/{idx}', 'AppsPointMemberController@getSingleD
 Route::view('/appspointlist', 'appspointlist')->name('appspointlist.view');
 Route::get('/appspointlist/data', 'AppsPointController@getAppsPointListData')->name('appspointlist');
 Route::get('/appspointdetail/{idx}', 'AppsPointController@getSingleData')->name('appspointdetail');
+
+//  테스터 관리
+Route::view('/pushtesterlist', 'pushtesterlist')->name('pushtesterlist.view');
+Route::get('/pushtesterlist/data', 'PushTesterController@getPushTesterListData')->name('pushtesterlist');
+Route::get('/pushtesterdetail/{idx}', 'PushTesterController@getSingleData')->name('pushtesterdetail');

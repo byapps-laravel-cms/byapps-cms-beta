@@ -119,7 +119,7 @@
                                     <li><a href="/pushnewslist">소식 관리</a></li>
                                     <li><a href="/appspointmemberlist">인증회원 관리</a></li>
                                     <li><a href="/appspointlist">앱 포인트 관리</a></li>
-                                    <li><a href="#">테스터</a></li>
+                                    <li><a href="/pushtesterlist">테스터</a></li>
                                 </ul>
                             </li>
                         </ul>
