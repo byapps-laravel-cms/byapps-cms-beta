@@ -105,3 +105,8 @@ Route::get('/madetail/{idx}', 'MAController@getSingleData')->name('madetail');
 Route::view('/appsdownstatlist', 'appsdownstatlist')->name('appsdownstatlist.view');
 Route::get('/appsdownstatlist/data', 'AppsDownStatController@getAppsDownStatListData')->name('appsdownstatlist');
 Route::get('/appsdownstatdetail/{idx}', 'AppsDownStatController@getSingleData')->name('appsdownstatdetail');
+
+//  앱 이용 통계
+Route::view('/appsstatlist', 'appsstatlist')->name('appsstatlist.view');
+Route::get('/appsstatlist/data', 'AppsStatController@getAppsStatListData')->name('appsstatlist');
+Route::get('/appsstatdetail/{idx}', 'AppsStatController@getSingleData')->name('appsstatdetail');

@@ -108,3 +108,9 @@ Breadcrumbs::for('appsdownstatlist', function ($trail) {
   $trail->parent('statlist');
   $trail->push('앱 설치 통계', route('appsdownstatlist.view'));
 });
+
+// 앱 이용 통계
+Breadcrumbs::for('appsstatlist', function ($trail) {
+  $trail->parent('statlist');
+  $trail->push('앱 이용 통계', route('appsstatlist.view'));
+});
