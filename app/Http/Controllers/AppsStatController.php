@@ -11,7 +11,7 @@ class AppsStatController extends Controller
 {
   public function getIndex()
   {
-      return view('appsdownstatlist');
+      return view('appsstatlist');
   }
 
   public function getAppsStatListData()
