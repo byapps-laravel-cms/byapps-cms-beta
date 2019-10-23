@@ -110,3 +110,8 @@ Route::get('/appsdownstatdetail/{idx}', 'AppsDownStatController@getSingleData')-
 Route::view('/appsstatlist', 'appsstatlist')->name('appsstatlist.view');
 Route::get('/appsstatlist/data', 'AppsStatController@getAppsStatListData')->name('appsstatlist');
 Route::get('/appsstatdetail/{idx}', 'AppsStatController@getSingleData')->name('appsstatdetail');
+
+//  앱 매출 통계
+Route::view('/appssalestatlist', 'appssalestatlist')->name('appssalestatlist.view');
+Route::get('/appssalestatlist/data', 'AppsSaleStatController@getAppsSaleStatListData')->name('appssalestatlist');
+Route::get('/appssalestatdetail/{idx}', 'AppsSaleStatController@getSingleData')->name('appssalestatdetail');
