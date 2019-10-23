@@ -97,3 +97,14 @@ Breadcrumbs::for('malist', function ($trail) {
   $trail->parent('appendixlist');
   $trail->push('MA 이용 업체', route('malist.view'));
 });
+
+// 통계
+Breadcrumbs::for('statlist', function ($trail) {
+  $trail->push('통계', route('appsdownstatlist.view'));
+});
+
+// 앱 설치 통계
+Breadcrumbs::for('appsdownstatlist', function ($trail) {
+  $trail->parent('statlist');
+  $trail->push('앱 설치 통계', route('appsdownstatlist.view'));
+});

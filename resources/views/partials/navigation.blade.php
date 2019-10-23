@@ -147,7 +147,7 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                    <li><a href="#">앱 설치 통계</a></li>
+                                    <li><a href="/appsdownstatlist">앱 설치 통계</a></li>
                                     <li><a href="#">앱 이용 통계</a></li>
                                     <li><a href="#">앱 매출 통계</a></li>
                                     <li><a href="#">푸쉬 허용 통계</a></li>

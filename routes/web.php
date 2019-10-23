@@ -100,3 +100,8 @@ Route::get('/appendixorderdetail/{idx}', 'AppendixOrderController@getSingleData'
 Route::view('/malist', 'malist')->name('malist.view');
 Route::get('/malist/data', 'MAController@getMAListData')->name('malist');
 Route::get('/madetail/{idx}', 'MAController@getSingleData')->name('madetail');
+
+//  앱 설치 통계
+Route::view('/appsdownstatlist', 'appsdownstatlist')->name('appsdownstatlist.view');
+Route::get('/appsdownstatlist/data', 'AppsDownStatController@getAppsDownStatListData')->name('appsdownstatlist');
+Route::get('/appsdownstatdetail/{idx}', 'AppsDownStatController@getSingleData')->name('appsdownstatdetail');
