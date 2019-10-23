@@ -13,7 +13,7 @@ class AppsSaleStat extends Model
 
   protected $fillable = [];
 
-  public static function getAppsDownStatData()
+  public static function getAppsSaleStatData()
   {
       $appsSaleStatData = DB::connection($connection)
       ->table($table)->get();
