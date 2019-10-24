@@ -4,14 +4,12 @@
 
 <div class="container">
 
-    {{ Breadcrumbs::render('paydetail') }}
-
-    <!-- <paydetail :payment-data="{{ $paymentData }}"></paydetail> -->
+    {{ Breadcrumbs::render('appspaydetail') }}
 
     <div class="alert alert-info">
-          @if ($paymentData)
+          @if ($appsPaymentData)
           <h4>
-            <strong>{{ $paymentData->app_name }}</strong>
+            <strong>{{ $appsPaymentData->app_name }}</strong>
           </h4>
           @else
           <h4>
@@ -34,7 +32,7 @@
     <div class="method">
       <div class="col-md-12 margin-0">
 
-        {!! Form::open([ 'route' => ['payupdate', $paymentData->idx] ]) !!}
+        {!! Form::open([ 'route' => ['appspayupdate', $appsPaymentData->idx] ]) !!}
 
           <div class="row1">
 
@@ -43,14 +41,14 @@
                <label class="col-md-4 control-label propertyname th_style_1">주문번호</label>
                <div class="col-md-8 col-xs-10">
                  <div class="col-md-8 col-xs-10">
-                     <input type="text" class="form-control" name="order_id" value=" {{ $paymentData->order_id }}" disabled>
+                     <input type="text" class="form-control" name="order_id" value=" {{ $appsPaymentData->order_id }}" disabled>
                  </div>
                </div>
 
                <label class="col-md-4 control-label propertyname th_style_1">결제날짜</label>
                <div class="col-md-8 col-xs-10">
                  <div class="col-md-8 col-xs-10">
-                     <input type="text" class="form-control" name="reg_time" value="{{ $paymentData->reg_time }}" disabled>
+                     <input type="text" class="form-control" name="reg_time" value="{{ $appsPaymentData->reg_time }}" disabled>
                  </div>
                </div>
 
@@ -59,7 +57,7 @@
                  <div class="col-md-8 col-xs-10">
                    <div class="cell">
                        <div class="description td_style_1">
-                         <input type="text" value="{{ $paymentData->mem_id }}" disabled>
+                         <input type="text" value="{{ $appsPaymentData->mem_id }}" disabled>
                          <input class="btn nbutton3 btn-xs" type="button" value="회원정보">
                          <input class="btn nbutton3 btn-xs" type="button" value="주문내역">
                          <input class="btn nbutton3 btn-xs" type="button" value="앱관리">
@@ -71,7 +69,7 @@
                <label class="col-md-4 control-label propertyname th_style_1">App 명</label>
                <div class="col-md-8 col-xs-10">
                  <div class="col-md-8 col-xs-10">
-                     <input type="text" class="form-control" name="app_name" value="{{ $paymentData->app_name }} ({{ $paymentData->apps_type }})" disabled>
+                     <input type="text" class="form-control" name="app_name" value="{{ $appsPaymentData->app_name }} ({{ $appsPaymentData->apps_type }})" disabled>
                  </div>
                </div>
 
@@ -84,9 +82,9 @@
                           $arrPaytype = [ '신규', '연장', '충전', '추가', '기타' ];
                        @endphp
                        @foreach ($arrPaytype as $key => $paytype)
-                          {{ $key == $paymentData->pay_type ? $paytype : "" }}
+                          {{ $key == $appsPaymentData->pay_type ? $paytype : "" }}
                        @endforeach
-                       , {{ $paymentData->term }}일, {{ date("Y-m-d", $paymentData->start_time) }} ~ {{ date("Y-m-d", $paymentData->end_time) }}
+                       , {{ $appsPaymentData->term }}일, {{ date("Y-m-d", $appsPaymentData->start_time) }} ~ {{ date("Y-m-d", $appsPaymentData->end_time) }}
                        </div>
                     </div>
                    </div>
@@ -97,7 +95,7 @@
                  <div class="col-md-8 col-xs-10">
                    <div class="cell">
                        <div class="description td_style_1">
-                         {{ number_format($paymentData->amount, 0) }}원
+                         {{ number_format($appsPaymentData->amount, 0) }}원
                          <input class="btn btn-danger cbutton3 btn-xs" type="button" value="결제취소">
                          <input class="btn btn-danger cbutton3 btn-xs" type="button" value="무료처리">
                       </div>
@@ -110,7 +108,7 @@
                  <div class="col-md-8 col-xs-10">
                    <div class="cell">
                        <div class="description td_style_1">
-                         @php $pay = explode('{:}', $paymentData->payment) @endphp
+                         @php $pay = explode('{:}', $appsPaymentData->payment) @endphp
                           {{ $pay[0] }} {{ !empty($pay[1]) ? "(".$pay[1].")" : "" }} <br />
                           승인번호: {{ !empty($pay[3]) ? $pay[3] : "" }} <br />
                           승인시간: <br />
@@ -123,7 +121,7 @@
                <label class="col-md-4 control-label propertyname th_style_1">영수증정보</label>
                <div class="col-md-8 col-xs-10">
                  <div class="col-md-8 col-xs-10">
-                     <textarea id="receipt" name="receipt" class="form-control" style="height:200px;">{{ $paymentData->receipt != '' ? $paymentData->receipt : "미발행" }}</textarea>
+                     <textarea id="receipt" name="receipt" class="form-control" style="height:200px;">{{ $appsPaymentData->receipt != '' ? $appsPaymentData->receipt : "미발행" }}</textarea>
                  </div>
                </div>
 

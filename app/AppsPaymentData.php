@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 
-class PaymentData extends Model implements Searchable
+class AppsPaymentData extends Model implements Searchable
 {
   protected $connection = 'byapps';
   protected $table = 'BYAPPS_apps_payment_data';
@@ -22,7 +22,7 @@ class PaymentData extends Model implements Searchable
 
   public static function getPaymentData()
   {
-      $paymentData = DB::connection('byapps')->table('BYAPPS_apps_payment_data')->get();
+      $paymentData = DB::connection($connection)->table($table)->get();
 
       return $paymentData;
   }

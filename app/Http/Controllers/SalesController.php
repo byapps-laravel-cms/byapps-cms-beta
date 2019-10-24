@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 use DateTime;
 use App\AppsData;
-use App\PaymentData;
+use App\AppsPaymentData;
 use App\AppendixOrderData;
 
 class SalesController extends Controller

@@ -7,9 +7,9 @@
 
   <div class="method">
     <div class="col-md-12 margin-5">
-      {{ Breadcrumbs::render('paylist') }}
+      {{ Breadcrumbs::render('appspaylist') }}
 
-     <table id="paymentTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+     <table id="appspaymentTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <col width="5%">
          <col width="35%">
          <col width="15%">
@@ -37,11 +37,11 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#paymentTable').DataTable({
+    $('#appspaymentTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('paylist') }}",
+          url: "{{ route('appspaylist') }}",
           crossDomain: true
         },
         columns: [
@@ -65,7 +65,7 @@ $(function() {
            {
              'targets': 1,
              'render': function ( data, type, full, meta ) {
-                return '<a href="/paydetail/'+full.idx+'">'+data+'</a>';
+                return '<a href="/appspaydetail/'+full.idx+'">'+data+'</a>';
              }
            },
         ],

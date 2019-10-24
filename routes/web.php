@@ -36,10 +36,10 @@ Route::post('/sales', 'SalesController@getPlatformData');
 
 
 // 결제관리
-Route::view('/paylist', 'paylist')->name('paylist.view');
-Route::get('/paylist/data', 'PaymentController@getPaymentData')->name('paylist');
-Route::get('/paydetail/{idx}', 'PaymentController@getSingleData')->name('paydetail');
-Route::post('/payupdate/{idx}', 'PaymentController@update')->name('payupdate');
+Route::view('/appspaylist', 'appspaylist')->name('appspaylist.view');
+Route::get('/appspaylist/data', 'AppsPaymentController@getAppsPaymentData')->name('appspaylist');
+Route::get('/appspaydetail/{idx}', 'AppsPaymentController@getSingleData')->name('appspaydetail');
+Route::post('/appspayupdate/{idx}', 'AppsPaymentController@update')->name('appspayupdate');
 
 // 프로모션
 Route::view('/promolist', 'promolist')->name('promolist.view');

@@ -6,19 +6,19 @@ Breadcrumbs::for('home', function ($trail) {
 });
 
 // 결제 관리
-Breadcrumbs::for('paylist', function ($trail) {
-    $trail->push('결제 관리', route('paylist.view'));
+Breadcrumbs::for('appspaylist', function ($trail) {
+    $trail->push('결제 관리', route('appspaylist.view'));
 });
 
 // 결제 관리 > 결제 상세
-Breadcrumbs::for('paydetail', function ($trail) {
-    $trail->parent('paylist');
-    $trail->push('결제 상세', route('paylist'));
+Breadcrumbs::for('appspaydetail', function ($trail) {
+    $trail->parent('appspaylist');
+    $trail->push('결제 상세', route('appspaylist'));
 });
 
 // 결제 관리 > 프로모션
 Breadcrumbs::for('promolist', function ($trail) {
-    $trail->parent('paylist');
+    $trail->parent('appspaylist');
     $trail->push('프로모션', route('promolist.view'));
 });
 

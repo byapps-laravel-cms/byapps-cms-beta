@@ -97,7 +97,7 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                    <li><a href="/paylist">결제 관리</a></li>
+                                    <li><a href="/appspaylist">결제 관리</a></li>
                                     <li><a href="/promolist">프로모션</a></li>
                                 </ul>
                             </li>
