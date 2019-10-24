@@ -68,6 +68,7 @@ class AppsSaleStatController extends Controller
 
                 return $avg_c."<br />".$avg_m;
             })
+            ->rawColumns(['total_c', 'today_c', 'yesterday_c', 'max_c', 'average'])
             ->editColumn('term', function($eloquent) {
               return $eloquent->revisit_check." (".$eloquent->launch_date." ~ ".now().")";
             })
