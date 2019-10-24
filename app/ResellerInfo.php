@@ -20,4 +20,9 @@ class ResellerInfo extends Model
 
       return $resellerInfoData;
   }
+
+  public function payments()
+  {
+    return $this->hasMany('App\AppsPaymentData', 'mem_id', 'recom_id');
+  }
 }

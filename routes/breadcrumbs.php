@@ -160,3 +160,9 @@ Breadcrumbs::for('resellerinfolist', function ($trail) {
   $trail->parent('resellerlist');
   $trail->push('리셀러 정보', route('resellerinfolist.view'));
 });
+
+// 리셀러 정산
+Breadcrumbs::for('resellerpaymentlist', function ($trail) {
+  $trail->parent('resellerlist');
+  $trail->push('리셀러 정산', route('resellerpaymentlist.view'));
+});

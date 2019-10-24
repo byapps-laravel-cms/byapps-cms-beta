@@ -187,7 +187,7 @@
                             <li>
                                 <ul>
                                 <li><a href="/resellerinfolist">리셀러 정보</a></li>
-                                <li><a href="#">리셀러 정산</a></li>
+                                <li><a href="/resellerpaymentlist">리셀러 정산</a></li>
                                 <li><a href="#">리셀러 방문 통계</a></li>
                                 </ul>
                             </li>
