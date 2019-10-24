@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class QnaMember extends Model
 {
   protected $connection = 'byapps';
-  protected $table = 'BYAPPS_cs_qna';
+  protected $table = 'BYAPPS_myqna_data';
 
   public static function getQnaMemberData()
   {
