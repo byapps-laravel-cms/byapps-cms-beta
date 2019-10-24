@@ -138,3 +138,9 @@ Breadcrumbs::for('userinfolist', function ($trail) {
   $trail->parent('userlist');
   $trail->push('회원 정보', route('userinfolist.view'));
 });
+
+// 회원 문의(구 1:1 문의)
+Breadcrumbs::for('qnamemberlist', function ($trail) {
+  $trail->parent('userlist');
+  $trail->push('회원 문의', route('qnamemberlist.view'));
+});

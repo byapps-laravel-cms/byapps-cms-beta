@@ -125,3 +125,8 @@ Route::get('/pushonoffstatstatdetail/{idx}', 'PushOnoffStatController@getSingleD
 Route::view('/userinfolist', 'userinfolist')->name('userinfolist.view');
 Route::get('/userinfolist/data', 'UserInfoController@getUserInfoListData')->name('userinfolist');
 Route::get('/userinfodetail/{idx}', 'UserInfoController@getSingleData')->name('userinfodetail');
+
+//  회원 문의
+Route::view('/qnamemberlist', 'qnamemberlist')->name('qnamemberlist.view');
+Route::get('/qnamemberlist/data', 'QnaMemberController@getQnaMemberListData')->name('qnamemberlist');
+Route::get('/qnamemberdetail/{idx}', 'QnaMemberController@getSingleData')->name('qnamemberdetail');
