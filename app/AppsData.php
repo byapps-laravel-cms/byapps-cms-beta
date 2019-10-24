@@ -33,6 +33,6 @@ class AppsData extends Model implements Searchable
 
   public function payments()
   {
-    return $this->hasMany('App\PaymentData','mem_id');
+    return $this->hasMany('App\AppsPaymentData','mem_id');
   }
 }
