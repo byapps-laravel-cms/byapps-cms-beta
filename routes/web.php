@@ -120,3 +120,8 @@ Route::get('/appssalestatdetail/{idx}', 'AppsSaleStatController@getSingleData')-
 Route::view('/pushonoffstatlist', 'pushonoffstatlist')->name('pushonoffstatlist.view');
 Route::get('/pushonoffstatlist/data', 'PushOnoffStatController@getPushOnoffStatListData')->name('pushonoffstatlist');
 Route::get('/pushonoffstatstatdetail/{idx}', 'PushOnoffStatController@getSingleData')->name('pushonoffstatdetail');
+
+//  회원 정보
+Route::view('/userinfolist', 'userinfolist')->name('userinfolist.view');
+Route::get('/userinfolist/data', 'UserInfoController@getUserInfoListData')->name('userinfolist');
+Route::get('/userinfodetail/{idx}', 'UserInfoController@getSingleData')->name('userinfodetail');

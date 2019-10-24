@@ -167,7 +167,7 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                    <li><a href="usersList">회원 정보</a>
+                                    <li><a href="/userinfolist">회원 정보</a>
                                     <li><a href="#">회원 문의</a></li>
                                     <li><a href="#">비회원 문의</a></li>
                                     <div class="dropdown-divider"></div>
