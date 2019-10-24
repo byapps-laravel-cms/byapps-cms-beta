@@ -10,7 +10,7 @@ class QnaMemberController extends Controller
 {
   public function getIndex()
   {
-      return view('appslist');
+      return view('qnamemberlist');
   }
 
   public function getQnaMemberListData()

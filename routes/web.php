@@ -130,3 +130,8 @@ Route::get('/userinfodetail/{idx}', 'UserInfoController@getSingleData')->name('u
 Route::view('/qnamemberlist', 'qnamemberlist')->name('qnamemberlist.view');
 Route::get('/qnamemberlist/data', 'QnaMemberController@getQnaMemberListData')->name('qnamemberlist');
 Route::get('/qnamemberdetail/{idx}', 'QnaMemberController@getSingleData')->name('qnamemberdetail');
+
+//  비회원 문의
+Route::view('/qnanonmemberlist', 'qnanonmemberlist')->name('qnanonmemberlist.view');
+Route::get('/qnanonmemberlist/data', 'QnaNonmemberController@getQnaNonmemberListData')->name('qnanonmemberlist');
+Route::get('/qnanonmemberdetail/{idx}', 'QnaNonmemberController@getSingleData')->name('qnanonmemberdetail');

@@ -144,3 +144,9 @@ Breadcrumbs::for('qnamemberlist', function ($trail) {
   $trail->parent('userlist');
   $trail->push('회원 문의', route('qnamemberlist.view'));
 });
+
+// 비회원 문의(구 홈페이지 문의)
+Breadcrumbs::for('qnanonmemberlist', function ($trail) {
+  $trail->parent('userlist');
+  $trail->push('비회원 문의', route('qnanonmemberlist.view'));
+});
