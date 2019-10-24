@@ -120,3 +120,9 @@ Breadcrumbs::for('appssalestatlist', function ($trail) {
   $trail->parent('statlist');
   $trail->push('앱 매출 통계', route('appssalestatlist.view'));
 });
+
+// 푸쉬 허용 통계
+Breadcrumbs::for('pushonoffstatlist', function ($trail) {
+  $trail->parent('statlist');
+  $trail->push('푸쉬 허용 통계', route('pushonoffstatlist.view'));
+});

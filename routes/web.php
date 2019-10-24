@@ -115,3 +115,8 @@ Route::get('/appsstatdetail/{idx}', 'AppsStatController@getSingleData')->name('a
 Route::view('/appssalestatlist', 'appssalestatlist')->name('appssalestatlist.view');
 Route::get('/appssalestatlist/data', 'AppsSaleStatController@getAppsSaleStatListData')->name('appssalestatlist');
 Route::get('/appssalestatdetail/{idx}', 'AppsSaleStatController@getSingleData')->name('appssalestatdetail');
+
+//  푸쉬 허용 통계
+Route::view('/pushonoffstatlist', 'pushonoffstatlist')->name('pushonoffstatlist.view');
+Route::get('/pushonoffstatlist/data', 'PushOnoffStatController@getPushOnoffStatListData')->name('pushonoffstatlist');
+Route::get('/pushonoffstatstatdetail/{idx}', 'PushOnoffStatController@getSingleData')->name('pushonoffstatdetail');

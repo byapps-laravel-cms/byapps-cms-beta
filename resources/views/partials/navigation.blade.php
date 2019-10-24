@@ -150,7 +150,7 @@
                                     <li><a href="/appsdownstatlist">앱 설치 통계</a></li>
                                     <li><a href="/appsstatlist">앱 이용 통계</a></li>
                                     <li><a href="/appssalestatlist">앱 매출 통계</a></li>
-                                    <li><a href="#">푸쉬 허용 통계</a></li>
+                                    <li><a href="/pushonoffstatlist">푸쉬 허용 통계</a></li>
                                     <li><a href="#">리타게팅 푸쉬 통계</a></li>
                                     <li><a href="#">부가서비스 매출 통계</a></li>
                                     <li><a href="#">프리미엄 통계</a></li>
