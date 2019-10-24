@@ -127,7 +127,6 @@ Breadcrumbs::for('pushonoffstatlist', function ($trail) {
   $trail->push('푸쉬 허용 통계', route('pushonoffstatlist.view'));
 });
 
-
 // 회원 관리(회원 정보)
 Breadcrumbs::for('userlist', function ($trail) {
   $trail->push('회원 관리', route('userinfolist.view'));
@@ -149,4 +148,15 @@ Breadcrumbs::for('qnamemberlist', function ($trail) {
 Breadcrumbs::for('qnanonmemberlist', function ($trail) {
   $trail->parent('userlist');
   $trail->push('비회원 문의', route('qnanonmemberlist.view'));
+});
+
+// 리셀러 관리
+Breadcrumbs::for('resellerlist', function ($trail) {
+  $trail->push('리셀러 관리', route('resellerinfolist.view'));
+});
+
+// 리셀러 정보
+Breadcrumbs::for('resellerinfolist', function ($trail) {
+  $trail->parent('resellerlist');
+  $trail->push('리셀러 정보', route('resellerinfolist.view'));
 });

@@ -135,3 +135,8 @@ Route::get('/qnamemberdetail/{idx}', 'QnaMemberController@getSingleData')->name(
 Route::view('/qnanonmemberlist', 'qnanonmemberlist')->name('qnanonmemberlist.view');
 Route::get('/qnanonmemberlist/data', 'QnaNonmemberController@getQnaNonmemberListData')->name('qnanonmemberlist');
 Route::get('/qnanonmemberdetail/{idx}', 'QnaNonmemberController@getSingleData')->name('qnanonmemberdetail');
+
+//  리셀러 정보
+Route::view('/resellerinfolist', 'resellerinfolist')->name('resellerinfolist.view');
+Route::get('/qnanonmemberlist/data', 'ResellerInfoController@getResellerInfoListData')->name('resellerinfolist');
+Route::get('/resellerinfodetail/{idx}', 'ResellerInfoController@getSingleData')->name('resellerinfodetail');
