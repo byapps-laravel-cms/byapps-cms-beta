@@ -2,55 +2,55 @@
 
 @section('content')
 
-  @if (Auth::user())
 <div class="container col-12 col-md-12">
 
   <div class="method">
-    <div class="col-md-12 margin-5">
-      {{ Breadcrumbs::render('paylist') }}
+    <div class="col-md-12 mt-3">
 
-     <table id="paymentTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
-         <col width="5%">
-         <col width="35%">
-         <col width="15%">
-         <col width="15%">
-         <col width="15%">
-         <col width="15%">
+      {{ Breadcrumbs::render('pushonoffstatlist') }}
+
+     <table id="pushonoffstatlistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
-                 <th>앱명</th>
-                 <th>구분</th>
+                 <th>앱아이디</th>
+                 <th>OS</th>
+                 <th>On/Off</th>
+                 <th>전체</th>
+                 <th>오늘</th>
+                 <th>어제</th>
+                 <th>평균</th>
+                 <th>최고</th>
                  <th>기간</th>
-                 <th>결제금액</th>
-                 <th>결제일</th>
              </tr>
          </thead>
-
        </table>
       </div>
   </div>
 </div>
-  @endif
 @endsection
 
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#paymentTable').DataTable({
+    $('#pushonoffstatlistTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('paylist') }}",
+          url: "{{ route('pushonoffstatlist') }}",
           crossDomain: true
         },
         columns: [
             { data: 'idx', name: 'idx' },
-            { data: 'app_name', name: 'app_name' },
-            { data: 'pay_type', name: 'pay_type' },
+            { data: 'app_id', name: 'app_id' },
+            { data: 'app_os', name: 'app_os' },
+            { data: 'on_off', name: 'on_off' },
+            { data: 'total_c', name: 'total_c' },
+            { data: 'today_c', name: 'today_c' },
+            { data: 'yesterday_c', name: 'yesterday_c' },
+            { data: 'average', name: 'average' },
+            { data: 'max_c', name: 'max_c' },
             { data: 'term', name: 'term' },
-            { data: 'amount', name: 'amount' },
-            { data: 'reg_time', name: 'reg_time' }
         ],
         columnDefs: [
            {
@@ -65,7 +65,7 @@ $(function() {
            {
              'targets': 1,
              'render': function ( data, type, full, meta ) {
-                return '<a href="/paydetail/'+full.idx+'">'+data+'</a>';
+                return '<a href="/pushonoffstatdetail/'+full.idx+'">'+data+'</a>';
              }
            },
         ],
@@ -75,8 +75,6 @@ $(function() {
         order: [[ 5, 'desc']],
         "paging": true,
         "pageLength": 50,
-        // "info": false,
-        // "autoWidth": true,
         "fixedHeader": false,
         "responsive": true,
         "orderClasses": false,

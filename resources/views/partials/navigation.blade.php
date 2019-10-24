@@ -97,7 +97,7 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                    <li><a href="/paylist">결제 관리</a></li>
+                                    <li><a href="/appspaylist">결제 관리</a></li>
                                     <li><a href="/promolist">프로모션</a></li>
                                 </ul>
                             </li>
@@ -147,10 +147,10 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                    <li><a href="#">앱 설치 통계</a></li>
-                                    <li><a href="#">앱 이용 통계</a></li>
-                                    <li><a href="#">앱 매출 통계</a></li>
-                                    <li><a href="#">푸쉬 허용 통계</a></li>
+                                    <li><a href="/appsdownstatlist">앱 설치 통계</a></li>
+                                    <li><a href="/appsstatlist">앱 이용 통계</a></li>
+                                    <li><a href="/appssalestatlist">앱 매출 통계</a></li>
+                                    <li><a href="/pushonoffstatlist">푸쉬 허용 통계</a></li>
                                     <li><a href="#">리타게팅 푸쉬 통계</a></li>
                                     <li><a href="#">부가서비스 매출 통계</a></li>
                                     <li><a href="#">프리미엄 통계</a></li>

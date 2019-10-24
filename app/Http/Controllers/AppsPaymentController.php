@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //use App\Http\Requests;
 use DB;
-use App\PaymentData;
+use App\AppsPaymentData;
 use Yajra\Datatables\Datatables;
 use Session;
 
-class PaymentController extends Controller
+class AppsPaymentController extends Controller
 {
     public function __construct()
     {
@@ -21,13 +21,13 @@ class PaymentController extends Controller
         return view('paylist');
     }
 
-    public function getPaymentData()
+    public function getAppsPaymentData()
     {
-      $paymentData = PaymentData::select('idx', 'app_name', 'pay_type', 'term', 'amount', 'start_time', 'reg_time');
+      $appsPaymentData = AppsPaymentData::select('idx', 'app_name', 'pay_type', 'term', 'amount', 'start_time', 'reg_time');
 
-      return Datatables::of($paymentData)
-              ->setRowId(function($paymentData) {
-                return $paymentData->idx;
+      return Datatables::of($appsPaymentData)
+              ->setRowId(function($appsPaymentData) {
+                return $appsPaymentData->idx;
               })
               ->editColumn('pay_type', '{{ $pay_type == 1 ? "연장" : "신규" }}')
               ->editColumn('amount', '{{ number_format($amount)." 원" }}')
@@ -46,17 +46,17 @@ class PaymentController extends Controller
 
     public function getSingleData($idx)
     {
-      $paymentData = PaymentData::where('idx', $idx)->first();
+      $appsPaymentData = AppsPaymentData::where('idx', $idx)->first();
 
-      return view('paydetail')->with('paymentData', $paymentData);
+      return view('appspaydetail')->with('appsPaymentData', $appsPaymentData);
     }
 
     public function update(Request $request, $idx)
     {
-      $paymentData = PaymentData::where('idx', $idx)->first();
+      $appsPaymentData = AppsPaymentData::where('idx', $idx)->first();
 
-      $paymentData->receipt = $request->input('receipt');
-      $paymentData->save();
+      $appsPaymentData->receipt = $request->input('receipt');
+      $appsPaymentData->save();
 
       Session::flash('success', '업데이트 성공');
 

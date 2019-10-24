@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\HomeLayout;
 use App\AppsData;
-use App\PaymentData;
+use App\AppsPaymentData;
 use App\PromotionData;
 
 use App\Http\Controllers\ChartController;
@@ -118,7 +118,7 @@ class HomeController extends Controller
     public function search(Request $request)
     {
       $searchResults = (new Search())
-                        ->registerModel(PaymentData::class, 'app_name')
+                        ->registerModel(AppsPaymentData::class, 'app_name')
                         ->registerModel(PromotionData::class, 'mem_name')
                         ->perform($request->input('query'));
 

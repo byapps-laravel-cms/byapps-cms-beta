@@ -36,10 +36,10 @@ Route::post('/sales', 'SalesController@getPlatformData');
 
 
 // 결제관리
-Route::view('/paylist', 'paylist')->name('paylist.view');
-Route::get('/paylist/data', 'PaymentController@getPaymentData')->name('paylist');
-Route::get('/paydetail/{idx}', 'PaymentController@getSingleData')->name('paydetail');
-Route::post('/payupdate/{idx}', 'PaymentController@update')->name('payupdate');
+Route::view('/appspaylist', 'appspaylist')->name('appspaylist.view');
+Route::get('/appspaylist/data', 'AppsPaymentController@getAppsPaymentData')->name('appspaylist');
+Route::get('/appspaydetail/{idx}', 'AppsPaymentController@getSingleData')->name('appspaydetail');
+Route::post('/appspayupdate/{idx}', 'AppsPaymentController@update')->name('appspayupdate');
 
 // 프로모션
 Route::view('/promolist', 'promolist')->name('promolist.view');
@@ -100,3 +100,23 @@ Route::get('/appendixorderdetail/{idx}', 'AppendixOrderController@getSingleData'
 Route::view('/malist', 'malist')->name('malist.view');
 Route::get('/malist/data', 'MAController@getMAListData')->name('malist');
 Route::get('/madetail/{idx}', 'MAController@getSingleData')->name('madetail');
+
+//  앱 설치 통계
+Route::view('/appsdownstatlist', 'appsdownstatlist')->name('appsdownstatlist.view');
+Route::get('/appsdownstatlist/data', 'AppsDownStatController@getAppsDownStatListData')->name('appsdownstatlist');
+Route::get('/appsdownstatdetail/{idx}', 'AppsDownStatController@getSingleData')->name('appsdownstatdetail');
+
+//  앱 이용 통계
+Route::view('/appsstatlist', 'appsstatlist')->name('appsstatlist.view');
+Route::get('/appsstatlist/data', 'AppsStatController@getAppsStatListData')->name('appsstatlist');
+Route::get('/appsstatdetail/{idx}', 'AppsStatController@getSingleData')->name('appsstatdetail');
+
+//  앱 매출 통계
+Route::view('/appssalestatlist', 'appssalestatlist')->name('appssalestatlist.view');
+Route::get('/appssalestatlist/data', 'AppsSaleStatController@getAppsSaleStatListData')->name('appssalestatlist');
+Route::get('/appssalestatdetail/{idx}', 'AppsSaleStatController@getSingleData')->name('appssalestatdetail');
+
+//  푸쉬 허용 통계
+Route::view('/pushonoffstatlist', 'pushonoffstatlist')->name('pushonoffstatlist.view');
+Route::get('/pushonoffstatlist/data', 'PushOnoffStatController@getPushOnoffStatListData')->name('pushonoffstatlist');
+Route::get('/pushonoffstatstatdetail/{idx}', 'PushOnoffStatController@getSingleData')->name('pushonoffstatdetail');

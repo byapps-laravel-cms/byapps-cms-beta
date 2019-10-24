@@ -7,7 +7,7 @@ use DB;
 
 use App\AppsData;
 use App\MAData;
-use App\PaymentData;
+use App\AppsPaymentData;
 
 class ChartController extends Controller
 {
@@ -173,19 +173,19 @@ class ChartController extends Controller
       $from = mktime(0, 0, 0, date("03"), date("d"), date("Y"));
       $to = mktime(23, 59, 59, date("03"), date("d"), date("Y"));
 
-      $salesTotal = PaymentData::where('process', '=', '1')
+      $salesTotal = AppsPaymentData::where('process', '=', '1')
                     ->whereBetween('reg_time', [$from, $to])
                     ->orderBy('idx', 'asc')
                     ->sum('amount');
 
       // 신규
-      $salesNew = PaymentData::where('process', '=', '1')
+      $salesNew = AppsPaymentData::where('process', '=', '1')
                   ->whereBetween('reg_time', [$from, $to])
                   ->orderBy('idx', 'asc')
                   ->sum(DB::Raw("case when pay_type='0' then amount end"));
 
       // 연장
-      $salesCon = PaymentData::where('process', '=', '1')
+      $salesCon = AppsPaymentData::where('process', '=', '1')
                   ->whereBetween('reg_time', [$from, $to])
                   ->orderBy('idx', 'asc')
                   ->sum(DB::Raw("case when pay_type='1' then amount end"));
@@ -217,19 +217,19 @@ class ChartController extends Controller
       $from = mktime(0, 0, 0, date("03"), 01, date("Y"));
       $to = mktime(23, 59, 59, date("03"), 31, date("Y"));
 
-      $salesTotal = PaymentData::where('process', '=', '1')
+      $salesTotal = AppsPaymentData::where('process', '=', '1')
                     ->whereBetween('reg_time', [$from, $to])
                     ->orderBy('idx', 'asc')
                     ->sum('amount');
 
       // 신규
-      $salesNew = PaymentData::where('process', '=', '1')
+      $salesNew = AppsPaymentData::where('process', '=', '1')
                   ->whereBetween('reg_time', [$from, $to])
                   ->orderBy('idx', 'asc')
                   ->sum(DB::Raw("case when pay_type='0' then amount end"));
 
       // 연장
-      $salesCon = PaymentData::where('process', '=', '1')
+      $salesCon = AppsPaymentData::where('process', '=', '1')
                   ->whereBetween('reg_time', [$from, $to])
                   ->orderBy('idx', 'asc')
                   ->sum(DB::Raw("case when pay_type='1' then amount end"));

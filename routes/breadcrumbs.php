@@ -6,19 +6,19 @@ Breadcrumbs::for('home', function ($trail) {
 });
 
 // 결제 관리
-Breadcrumbs::for('paylist', function ($trail) {
-    $trail->push('결제 관리', route('paylist.view'));
+Breadcrumbs::for('appspaylist', function ($trail) {
+    $trail->push('결제 관리', route('appspaylist.view'));
 });
 
 // 결제 관리 > 결제 상세
-Breadcrumbs::for('paydetail', function ($trail) {
-    $trail->parent('paylist');
-    $trail->push('결제 상세', route('paylist'));
+Breadcrumbs::for('appspaydetail', function ($trail) {
+    $trail->parent('appspaylist');
+    $trail->push('결제 상세', route('appspaylist'));
 });
 
 // 결제 관리 > 프로모션
 Breadcrumbs::for('promolist', function ($trail) {
-    $trail->parent('paylist');
+    $trail->parent('appspaylist');
     $trail->push('프로모션', route('promolist.view'));
 });
 
@@ -96,4 +96,33 @@ Breadcrumbs::for('appendixorderlist', function ($trail) {
 Breadcrumbs::for('malist', function ($trail) {
   $trail->parent('appendixlist');
   $trail->push('MA 이용 업체', route('malist.view'));
+});
+
+// 통계
+Breadcrumbs::for('statlist', function ($trail) {
+  $trail->push('통계', route('appsdownstatlist.view'));
+});
+
+// 앱 설치 통계
+Breadcrumbs::for('appsdownstatlist', function ($trail) {
+  $trail->parent('statlist');
+  $trail->push('앱 설치 통계', route('appsdownstatlist.view'));
+});
+
+// 앱 이용 통계
+Breadcrumbs::for('appsstatlist', function ($trail) {
+  $trail->parent('statlist');
+  $trail->push('앱 이용 통계', route('appsstatlist.view'));
+});
+
+// 앱 매출 통계
+Breadcrumbs::for('appssalestatlist', function ($trail) {
+  $trail->parent('statlist');
+  $trail->push('앱 매출 통계', route('appssalestatlist.view'));
+});
+
+// 푸쉬 허용 통계
+Breadcrumbs::for('pushonoffstatlist', function ($trail) {
+  $trail->parent('statlist');
+  $trail->push('푸쉬 허용 통계', route('pushonoffstatlist.view'));
 });
