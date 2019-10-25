@@ -90,7 +90,7 @@
                 <!-- Navigation Menu-->
                 <ul class="navigation-menu">
                     <li class="has-submenu">
-                        <a href="#">
+                        <a href="/appspaylist">
                             <i class="mdi mdi-credit-card"></i>
                             결제 관리
                         </a>
@@ -104,7 +104,7 @@
                         </ul>
                     </li>
                     <li class="has-submenu">
-                        <a href="#">
+                        <a href="/appsorderlist">
                             <i class="mdi mdi-android"></i>
                             앱 관리
                         </a>
@@ -125,7 +125,7 @@
                         </ul>
                     </li>
                     <li class="has-submenu">
-                        <a href="#">
+                        <a href="/appendixorderlist">
                             <i class="mdi mdi-loupe"></i>
                             부가서비스
                         </a>
@@ -134,13 +134,13 @@
                                 <ul>
                                     <li><a href="/appendixorderlist">부가서비스 접수</a></li>
                                     <li><a href="/malist">MA 이용 업체</a></li>
-                                    <li><a href="#">프리미엄 서비스</a></li>
+                                    <li><a href="#">MA 통합</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
                     <li class="has-submenu">
-                        <a href="#">
+                        <a href="/appsdownstatlist">
                             <i class="mdi mdi-chart-bar"></i>
                             통계
                         </a>
@@ -160,7 +160,7 @@
                         </ul>
                     </li>
                     <li class="has-submenu">
-                        <a href="#">
+                        <a href="/userinfolist">
                             <i class="mdi mdi-account"></i>
                             회원 관리
                         </a>
@@ -170,16 +170,16 @@
                                     <li><a href="/userinfolist">회원 정보</a>
                                     <li><a href="/qnamemberlist">회원 문의</a></li>
                                     <li><a href="/qnanonmemberlist">비회원 문의</a></li>
-                                    <div class="dropdown-divider"></div>
+                                    <!-- <div class="dropdown-divider"></div>
                                     <li><a href="#">제휴 광고상담 관리</a></li>
                                     <li><a href="#">터틀체인</a></li>
-                                    <li><a href="#">리타쿠</a></li>
+                                    <li><a href="#">리타쿠</a></li> -->
                                 </ul>
                             </li>
                         </ul>
                     </li>
                     <li class="has-submenu">
-                        <a href="#">
+                        <a href="/resellerinfolist">
                             <i class="mdi mdi-account-multiple"></i>
                             리셀러
                         </a>
@@ -189,6 +189,21 @@
                                 <li><a href="/resellerinfolist">리셀러 정보</a></li>
                                 <li><a href="/resellerpaymentlist">리셀러 정산</a></li>
                                 <li><a href="#">리셀러 방문 통계</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#">
+                            <i class="mdi mdi-vector-combine"></i>
+                            제휴서비스 관리
+                        </a>
+                        <ul class="submenu megamenu">
+                            <li>
+                                <ul>
+                                  <li><a href="#">제휴 광고상담 관리</a></li>
+                                  <li><a href="#">터틀체인</a></li>
+                                  <li><a href="#">리타쿠</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -213,7 +228,7 @@
                     </li>
                     <li id="page_history" class="has-submenu">
                         <a href="#">
-                            <i class="mdi mdi-worker"></i>
+                            <i class="mdi mdi-history"></i>
                             히스토리
                         </a>
                         <ul class="submenu megamenu" style="display:none;">
