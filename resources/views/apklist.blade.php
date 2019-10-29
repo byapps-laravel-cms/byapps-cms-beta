@@ -54,12 +54,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 2,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/apkdetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
         ],
         select: {
            'style': 'multi'
@@ -71,6 +65,13 @@ $(function() {
         responsive: true,
         orderClasses: false,
         stateSave: false,
+
+        "fnDrawCallback": function () {
+            $("#apklistTable tbody tr").click(function () {
+              table = $('#apklistTable').dataTable();
+              window.location.href = "/apkdetail/" + this.id;
+            });
+         }
     });
 });
 </script>

@@ -60,12 +60,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 6,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/appendixorderdetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
         ],
         select: {
            'style': 'multi'
@@ -73,12 +67,17 @@ $(function() {
         order: [[ 5, 'desc']],
         "paging": true,
         "pageLength": 50,
-        // "info": false,
-        // "autoWidth": true,
         "fixedHeader": false,
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#appendixorderlistTable tbody tr").click(function () {
+              table = $('#appendixorderlistTable').dataTable();
+              window.location.href = "/appendixorderdetail/" + this.id;
+            });
+         }
     });
 });
 </script>

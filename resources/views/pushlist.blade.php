@@ -58,12 +58,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 1,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/appsDetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
         ],
         select: {
            'style': 'multi'
@@ -71,12 +65,17 @@ $(function() {
         order: [[ 5, 'desc']],
         "paging": true,
         "pageLength": 50,
-        // "info": false,
-        // "autoWidth": true,
         "fixedHeader": false,
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#pushlistTable tbody tr").click(function () {
+              table = $('#pushlistTable').dataTable();
+              window.location.href = "/appsdetail/" + this.id;
+            });
+         }
     });
 });
 </script>

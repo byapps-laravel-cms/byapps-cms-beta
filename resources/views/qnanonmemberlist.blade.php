@@ -56,12 +56,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 2,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/qnanonmemberdetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
         ],
         select: {
            'style': 'multi'
@@ -73,6 +67,13 @@ $(function() {
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#qnanonmemberlistTable tbody tr").click(function () {
+              table = $('#qnanonmemberlistTable').dataTable();
+              window.location.href = "/qnanonmemberdetail/" + this.id;
+            });
+         }
     });
 });
 </script>

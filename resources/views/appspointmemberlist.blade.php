@@ -58,12 +58,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 1,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/appspointmemberdetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
         ],
         select: {
            'style': 'multi'
@@ -75,6 +69,13 @@ $(function() {
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#appspointmemberTable tbody tr").click(function () {
+              table = $('#appspointmemberTable').dataTable();
+              window.location.href = "/appspointmemberdetail/" + this.id;
+            });
+         }
     });
 });
 </script>

@@ -62,12 +62,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 1,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/pushonoffstatdetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
         ],
         select: {
            'style': 'multi'
@@ -79,6 +73,13 @@ $(function() {
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#pushonoffstatlistTable tbody tr").click(function () {
+              table = $('#pushonoffstatlistTable').dataTable();
+              window.location.href = "/pushonoffstatdetail/" + this.id;
+            });
+         }
     });
 });
 </script>

@@ -59,12 +59,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 4,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/appsupdatedetail/'+full.idx+'">'+data+'</a>';
-              }
-           },
         ],
         select: {
            'style': 'multi'
@@ -72,12 +66,17 @@ $(function() {
         order: [[ 1, 'desc']],
         "paging": true,
         "pageLength": 50,
-        // "info": false,
-        // "autoWidth": true,
         "fixedHeader": false,
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#appsupdatelistTable tbody tr").click(function () {
+              table = $('#appsupdatelistTable').dataTable();
+              window.location.href = "/appsupdatedetail/" + this.id;
+            });
+         }
     });
 });
 </script>

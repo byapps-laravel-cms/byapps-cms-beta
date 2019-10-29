@@ -60,12 +60,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 2,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/appsdownstatdetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
         ],
         select: {
            'style': 'multi'
@@ -77,6 +71,13 @@ $(function() {
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#appsdownstatlistTable tbody tr").click(function () {
+              table = $('#appsdownstatlistTable').dataTable();
+              window.location.href = "/appsdownstatdetail/" + this.id;
+            });
+         }
     });
 });
 </script>

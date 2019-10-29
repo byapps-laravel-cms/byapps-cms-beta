@@ -60,12 +60,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 1,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/resellerinfodetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
         ],
         select: {
            'style': 'multi'
@@ -77,6 +71,13 @@ $(function() {
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#resellerinfolistTable tbody tr").click(function () {
+              table = $('#resellerinfolistTable').dataTable();
+              window.location.href = "/resellerinfodetail/" + this.id;
+            });
+         }
     });
 });
 </script>

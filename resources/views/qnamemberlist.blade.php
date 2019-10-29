@@ -56,12 +56,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 2,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/qnamemberdetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
         ],
         select: {
            'style': 'multi'
@@ -73,6 +67,13 @@ $(function() {
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#qnamemberlistTable tbody tr").click(function () {
+              table = $('#qnamemberlistTable').dataTable();
+              window.location.href = "/qnamemberdetail/" + this.id;
+            });
+         }
     });
 });
 </script>

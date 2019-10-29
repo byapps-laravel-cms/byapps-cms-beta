@@ -56,12 +56,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 1,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/pushnewsdetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
         ],
         select: {
            'style': 'multi'
@@ -73,6 +67,13 @@ $(function() {
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#pushnewslistTable tbody tr").click(function () {
+              table = $('#pushnewslistTable').dataTable();
+              window.location.href = "/pushnewsdetail/" + this.id;
+            });
+         }
     });
 });
 </script>
