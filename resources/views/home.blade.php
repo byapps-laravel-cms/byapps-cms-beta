@@ -23,7 +23,7 @@
         @elseif ($layout == 'layout2')
         <!-- 차트 -->
         <li class="ui-state-default card" id="layout2">
-          @include('components.chart')
+          <chart></chart>
         </li>
 
         @elseif ($layout == 'layout3')

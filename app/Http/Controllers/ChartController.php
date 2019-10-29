@@ -62,20 +62,13 @@ class ChartController extends Controller
 
     public function onGetAppDailyChartData(Request $request)
     {
-      // $result = array(
-      //     'circle1' => array(
-      //         array('무료', 300),
-      //         array('유료', 200),
-      //         array('관리', 100),
-      //     )
-      // );
-      info($request);
-      $date = strtotime($date);
+      info("~~~~~~~~~~~".$request->date);
+      $target_date = strtotime($request->date);
 
       // 전체
       $appsTotal = AppsData::where('app_process', '=', '7')
-                    ->where(function($query){
-                      $query->where('service_type', '=', 'lite')->orWhere('end_time', '>', $date);
+                    ->where(function($query) use ($target_date) {
+                      $query->where('service_type', '=', 'lite')->orWhere('end_time', '>', $target_date);
                     })
                     ->count();
 
@@ -85,8 +78,8 @@ class ChartController extends Controller
                   ->leftJoin('marutm1.BYAPPS_apps_payment_data as B', 'A.order_id', '=', 'B.order_id')
                   ->where('A.app_process', '=', '7')
                   //->selectRaw("'A.service_type' = 'lite' or 'A.end_time' > unix_timestamp()")
-                  ->where(function($query){
-                    $query->where('A.service_type', '=', 'lite')->orWhere('A.end_time', '>', $date);
+                  ->where(function($query) use ($target_date) {
+                    $query->where('A.service_type', '=', 'lite')->orWhere('A.end_time', '>', $target_date);
                   })
                   ->where('B.process', '=', '1')
                   ->where('B.amount', '>', '0')

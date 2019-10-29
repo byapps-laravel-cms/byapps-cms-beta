@@ -103,7 +103,7 @@ function app_stats_daily() {
   $.ajax({
       url: "/chart/app_daily",
       method: "post",
-      data: '',
+      data: "$('#start_date_chart').val()",
       success: function(data) {
         showAppChart(data);
       },
