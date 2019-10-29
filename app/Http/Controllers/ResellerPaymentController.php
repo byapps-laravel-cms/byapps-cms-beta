@@ -34,6 +34,10 @@ class ResellerPaymentController extends Controller
             // ->whereHas('payments', function (Builder $query) {
             //   $query->where('mem_id', '=', 'recom_id');
             // })
+            ->editColumn('recom_id', function($eloquent) {
+              if ($eloquent->recom_id != 'byapps' && $eloquent->recom_id != '' && $eloquent->recom_id != null)
+                return $eloquent->recom_id;
+            })
             ->editColumn('amount', '{{ number_format($amount)." 원" }}')
             ->editColumn('term', function($eloquent) {
                if (empty($eloquent->start_time)) {
