@@ -72,14 +72,26 @@
             <th>전체</th> <th>유료</th> <th>무료</th>
         </tr>
         <tr>
-            <th rowspan="2">이용수</th>
+            <th rowspan="3">이용수</th>
             <th>플랫폼</th>
             <td id="thisWeekTotal"></td> <td id="thisWeekPaid"></td> <td id="thisWeekFree"></td>
             <td id="lastWeekTotal"></td> <td id="lastWeekPaid"></td> <td id="lastWeekFree"></td>
             <td id="variTotal"></td>     <td id="variPaid"></td>     <td id="variFree"></td>
         </tr>
         <tr>
-            <th>MA</th>
+            <th>MA (기존)</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>MA 통합</th>
             <td></td>
             <td></td>
             <td></td>

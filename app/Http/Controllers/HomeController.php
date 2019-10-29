@@ -10,6 +10,7 @@ use App\AppsPaymentData;
 use App\PromotionData;
 
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\SalesChartController;
 use App\Http\Controllers\ExpiredController;
 use App\Http\Controllers\StatusController;
 
@@ -42,7 +43,7 @@ class HomeController extends Controller
                               ->get();
 
         if (count($layout) == 0){
-          $layouts = array('layout1', 'layout2', 'layout3', 'layout4');
+          $layouts = array('layout1', 'layout2', 'layout3', 'layout4', 'layout5');
         } else {
           $layouts = array();
 
@@ -76,6 +77,10 @@ class HomeController extends Controller
         $preData = new ChartController;
         $chartData = $preData->index();
 
+        // 매출차트데이터
+        $preData = new SalesChartController;
+        $salesChartData = $preData->index();
+
         return view('home')->with(array('home_layouts' => $layouts,
                                         'appsOrderCount' => $appsOrderCount,
                                         'appendixOrderCount' => $appendixOrderCount,
@@ -88,7 +93,8 @@ class HomeController extends Controller
                                         'willBeExpiredMA' => $willBeExpiredMA,
                                         'expiredApps' => $expiredApps,
                                         'willBeExpiredApps' => $willBeExpiredApps,
-                                        'chartData' => $chartData
+                                        'chartData' => $chartData,
+                                        'salesChartData' => $salesChartData,
                                         )
                                   );
     }

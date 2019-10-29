@@ -39,7 +39,7 @@ class SalesController extends Controller
 
         // 이번주
         $thisTotal = AppsData::where('app_process', '!=', 8)
-                           ->whereBetween('reg_time', [strtotime($start), strtotime($end)])
+                          ->whereBetween('reg_time', [strtotime($start), strtotime($end)])
                           ->count();
 
         $thisFree = AppsData::where('app_process', '!=', 8)
