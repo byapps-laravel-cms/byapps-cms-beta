@@ -127,27 +127,27 @@ Breadcrumbs::for('pushonoffstatlist', function ($trail) {
   $trail->push('푸쉬 허용 통계', route('pushonoffstatlist.view'));
 });
 
-// 회원 관리(회원 정보)
+// 고객사 관리(회원 정보)
 Breadcrumbs::for('userlist', function ($trail) {
-  $trail->push('회원 관리', route('userinfolist.view'));
+  $trail->push('고객사 관리', route('userinfolist.view'));
 });
 
-// 회원 정보
+// 고객 정보
 Breadcrumbs::for('userinfolist', function ($trail) {
   $trail->parent('userlist');
-  $trail->push('회원 정보', route('userinfolist.view'));
+  $trail->push('고객 정보', route('userinfolist.view'));
 });
 
-// 회원 문의(구 1:1 문의)
+// 고객 문의(구 1:1 문의)
 Breadcrumbs::for('qnamemberlist', function ($trail) {
   $trail->parent('userlist');
-  $trail->push('회원 문의', route('qnamemberlist.view'));
+  $trail->push('고객 문의', route('qnamemberlist.view'));
 });
 
-// 비회원 문의(구 홈페이지 문의)
+// 비고객 문의(비회원 문의) -> (구 홈페이지 문의)
 Breadcrumbs::for('qnanonmemberlist', function ($trail) {
   $trail->parent('userlist');
-  $trail->push('비회원 문의', route('qnanonmemberlist.view'));
+  $trail->push('비고객 문의', route('qnanonmemberlist.view'));
 });
 
 // 리셀러 관리

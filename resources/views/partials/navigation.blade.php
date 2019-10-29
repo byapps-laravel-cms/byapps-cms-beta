@@ -114,6 +114,7 @@
                                     <li><a href="/appsorderlist">앱 접수</a></li>
                                     <li><a href="/appsupdatelist">업데이트 관리</a></li>
                                     <li><a href="/apklist">APK 관리</a></li>
+                                    <li><a href="#">CAFE24 앱 설치</a></li>
                                     <li><a href="/appslist">앱 목록</a></li>
                                     <li><a href="/pushlist">푸쉬 현황</a></li>
                                     <li><a href="/pushnewslist">소식 관리</a></li>
@@ -153,7 +154,7 @@
                                     <li><a href="/pushonoffstatlist">푸쉬 허용 통계</a></li>
                                     <li><a href="#">리타게팅 푸쉬 통계</a></li>
                                     <li><a href="#">부가서비스 매출 통계</a></li>
-                                    <li><a href="#">프리미엄 통계</a></li>
+                                    <!-- <li><a href="#">프리미엄 통계</a></li> -->
                                     <li><a href="#">통계 매출</a></li>
                                 </ul>
                             </li>
@@ -162,14 +163,14 @@
                     <li class="has-submenu">
                         <a href="/userinfolist">
                             <i class="mdi mdi-account"></i>
-                            회원 관리
+                            고객사 관리
                         </a>
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                    <li><a href="/userinfolist">회원 정보</a>
-                                    <li><a href="/qnamemberlist">회원 문의</a></li>
-                                    <li><a href="/qnanonmemberlist">비회원 문의</a></li>
+                                    <li><a href="/userinfolist">고객 정보</a>
+                                    <li><a href="/qnamemberlist">고객 문의</a></li>
+                                    <li><a href="/qnanonmemberlist">비고객 문의</a></li>
                                     <!-- <div class="dropdown-divider"></div>
                                     <li><a href="#">제휴 광고상담 관리</a></li>
                                     <li><a href="#">터틀체인</a></li>
