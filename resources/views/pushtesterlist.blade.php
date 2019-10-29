@@ -61,12 +61,6 @@ $(function() {
               },
            },
            {
-             'targets': 1,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/pushtesterdetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
-           {
              'targets': 8,
              'render': function ( data, type, full, meta ) {
                 return '<a href="/pushtesterdetail/'+full.idx+'">PUSH</a>';
@@ -85,12 +79,17 @@ $(function() {
         order: [[ 5, 'desc']],
         "paging": true,
         "pageLength": 50,
-        // "info": false,
-        // "autoWidth": true,
         "fixedHeader": false,
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#pushtesterlistTable tbody tr").click(function () {
+              table = $('#pushtesterlistTable').dataTable();
+              window.location.href = "/pushtesterdetail/" + this.id;
+            });
+         }
     });
 });
 </script>

@@ -7,20 +7,19 @@
   <div class="method">
     <div class="col-md-12 mt-3">
 
-      {{ Breadcrumbs::render('appsdownstatlist') }}
+      {{ Breadcrumbs::render('userinfolist') }}
 
-     <table id="appsdownstatlistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+     <table id="userinfolistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
-                 <th>앱아이디</th>
-                 <th>앱명</th>
-                 <th>전체</th>
-                 <th>오늘</th>
-                 <th>어제</th>
-                 <th>평균</th>
-                 <th>최고</th>
-                 <th>기간</th>
+                 <th>아이디</th>
+                 <th>상태</th>
+                 <th>업체명</th>
+                 <th>이름</th>
+                 <th>연락처</th>
+                 <th>등록IP</th>
+                 <th>등록일</th>
              </tr>
          </thead>
        </table>
@@ -32,23 +31,22 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#appsdownstatlistTable').DataTable({
+    $('#userinfolistTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('appsdownstatlist') }}",
+          url: "{{ route('userinfolist') }}",
           crossDomain: true
         },
         columns: [
             { data: 'idx', name: 'idx' },
-            { data: 'app_id', name: 'app_id' },
-            { data: 'app_name', name: 'app_name' },
-            { data: 'total_c', name: 'total_c' },
-            { data: 'today_c', name: 'today_c' },
-            { data: 'yesterday_c', name: 'yesterday_c' },
-            { data: 'average', name: 'average' },
-            { data: 'max_c', name: 'max_c' },
-            { data: 'term', name: 'term' },
+            { data: 'mem_id', name: 'mem_id' },
+            { data: 'mem_level', name: 'mem_level' },
+            { data: 'mem_nick', name: 'mem_nick' },
+            { data: 'mem_name', name: 'mem_name' },
+            { data: 'cellno', name: 'cellno' },
+            { data: 'ip', name: 'ip' },
+            { data: 'reg_date', name: 'reg_date' },
         ],
         columnDefs: [
            {
@@ -73,9 +71,9 @@ $(function() {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#appsdownstatlistTable tbody tr").click(function () {
-              table = $('#appsdownstatlistTable').dataTable();
-              window.location.href = "/appsdownstatdetail/" + this.id;
+            $("#userinfolistTable tbody tr").click(function () {
+              table = $('#userinfolistTable').dataTable();
+              window.location.href = "/userinfodetail/" + this.id;
             });
          }
     });

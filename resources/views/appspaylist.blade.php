@@ -37,7 +37,7 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#appspaymentTable').DataTable({
+    var table = $('#appspaymentTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
@@ -45,7 +45,7 @@ $(function() {
           crossDomain: true
         },
         columns: [
-            { data: 'idx', name: 'idx' },
+            { data: 'idx', name: 'idx', className:"test" },
             { data: 'app_name', name: 'app_name' },
             { data: 'pay_type', name: 'pay_type' },
             { data: 'term', name: 'term' },
@@ -62,12 +62,12 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 1,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/appspaydetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
+           // {
+           //   'targets': 1,
+           //   'render': function ( data, type, full, meta ) {
+           //      return '<a href="/appspaydetail/'+full.idx+'">'+data+'</a>';
+           //   }
+           // },
         ],
         select: {
            'style': 'multi'
@@ -75,13 +75,20 @@ $(function() {
         order: [[ 5, 'desc']],
         "paging": true,
         "pageLength": 50,
-        // "info": false,
-        // "autoWidth": true,
         "fixedHeader": false,
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#appspaymentTable tbody tr").click(function () {
+              table = $('#appspaymentTable').dataTable();
+              window.location.href = "/appspaydetail/" + this.id;
+            });
+         }
     });
 });
+
+
 </script>
 @endpush

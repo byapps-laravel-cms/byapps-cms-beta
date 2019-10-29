@@ -7,20 +7,18 @@
   <div class="method">
     <div class="col-md-12 mt-3">
 
-      {{ Breadcrumbs::render('appsdownstatlist') }}
+      {{ Breadcrumbs::render('qnamemberlist') }}
 
-     <table id="appsdownstatlistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+     <table id="qnamemberlistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
-                 <th>앱아이디</th>
-                 <th>앱명</th>
-                 <th>전체</th>
-                 <th>오늘</th>
-                 <th>어제</th>
-                 <th>평균</th>
-                 <th>최고</th>
-                 <th>기간</th>
+                 <th>상태</th>
+                 <th>제목</th>
+                 <th>업체명</th>
+                 <th>이메일</th>
+                 <th>연락처</th>
+                 <th>등록일</th>
              </tr>
          </thead>
        </table>
@@ -32,23 +30,21 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#appsdownstatlistTable').DataTable({
+    $('#qnamemberlistTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('appsdownstatlist') }}",
+          url: "{{ route('qnamemberlist') }}",
           crossDomain: true
         },
         columns: [
             { data: 'idx', name: 'idx' },
-            { data: 'app_id', name: 'app_id' },
-            { data: 'app_name', name: 'app_name' },
-            { data: 'total_c', name: 'total_c' },
-            { data: 'today_c', name: 'today_c' },
-            { data: 'yesterday_c', name: 'yesterday_c' },
-            { data: 'average', name: 'average' },
-            { data: 'max_c', name: 'max_c' },
-            { data: 'term', name: 'term' },
+            { data: 'process', name: 'process' },
+            { data: 'subject', name: 'subject' },
+            { data: 'mem_name', name: 'mem_name' },
+            { data: 'email', name: 'email' },
+            { data: 'phone', name: 'phone' },
+            { data: 'reg_time', name: 'reg_time' },
         ],
         columnDefs: [
            {
@@ -73,9 +69,9 @@ $(function() {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#appsdownstatlistTable tbody tr").click(function () {
-              table = $('#appsdownstatlistTable').dataTable();
-              window.location.href = "/appsdownstatdetail/" + this.id;
+            $("#qnamemberlistTable tbody tr").click(function () {
+              table = $('#qnamemberlistTable').dataTable();
+              window.location.href = "/qnamemberdetail/" + this.id;
             });
          }
     });

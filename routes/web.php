@@ -120,3 +120,28 @@ Route::get('/appssalestatdetail/{idx}', 'AppsSaleStatController@getSingleData')-
 Route::view('/pushonoffstatlist', 'pushonoffstatlist')->name('pushonoffstatlist.view');
 Route::get('/pushonoffstatlist/data', 'PushOnoffStatController@getPushOnoffStatListData')->name('pushonoffstatlist');
 Route::get('/pushonoffstatstatdetail/{idx}', 'PushOnoffStatController@getSingleData')->name('pushonoffstatdetail');
+
+//  회원 정보
+Route::view('/userinfolist', 'userinfolist')->name('userinfolist.view');
+Route::get('/userinfolist/data', 'UserInfoController@getUserInfoListData')->name('userinfolist');
+Route::get('/userinfodetail/{idx}', 'UserInfoController@getSingleData')->name('userinfodetail');
+
+//  회원 문의
+Route::view('/qnamemberlist', 'qnamemberlist')->name('qnamemberlist.view');
+Route::get('/qnamemberlist/data', 'QnaMemberController@getQnaMemberListData')->name('qnamemberlist');
+Route::get('/qnamemberdetail/{idx}', 'QnaMemberController@getSingleData')->name('qnamemberdetail');
+
+//  비회원 문의
+Route::view('/qnanonmemberlist', 'qnanonmemberlist')->name('qnanonmemberlist.view');
+Route::get('/qnanonmemberlist/data', 'QnaNonmemberController@getQnaNonmemberListData')->name('qnanonmemberlist');
+Route::get('/qnanonmemberdetail/{idx}', 'QnaNonmemberController@getSingleData')->name('qnanonmemberdetail');
+
+//  리셀러 정보
+Route::view('/resellerinfolist', 'resellerinfolist')->name('resellerinfolist.view');
+Route::get('/resellerinfolist/data', 'ResellerInfoController@getResellerInfoListData')->name('resellerinfolist');
+Route::get('/resellerinfodetail/{idx}', 'ResellerInfoController@getSingleData')->name('resellerinfodetail');
+
+//  리셀러 정산
+Route::view('/resellerpaymentlist', 'resellerpaymentlist')->name('resellerpaymentlist.view');
+Route::get('/resellerpaymentlist/data', 'ResellerPaymentController@getResellerPaymentListData')->name('resellerpaymentlist');
+Route::get('/resellerpaymentdetail/{idx}', 'ResellerPaymentController@getSingleData')->name('resellerpaymentdetail');

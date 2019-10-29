@@ -7,21 +7,18 @@
   <div class="method">
     <div class="col-md-12 mt-3">
 
-      {{ Breadcrumbs::render('pushonoffstatlist') }}
+      {{ Breadcrumbs::render('resellerpaymentlist') }}
 
-     <table id="pushonoffstatlistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+     <table id="resellerpaymentlistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
-                 <th>앱아이디</th>
-                 <th>OS</th>
-                 <th>On/Off</th>
-                 <th>전체</th>
-                 <th>오늘</th>
-                 <th>어제</th>
-                 <th>평균</th>
-                 <th>최고</th>
+                 <th>결제일</th>
+                 <th>리셀러</th>
+                 <th>앱명</th>
+                 <th>구분</th>
                  <th>기간</th>
+                 <th>결제금액</th>
              </tr>
          </thead>
        </table>
@@ -33,24 +30,21 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#pushonoffstatlistTable').DataTable({
+    $('#resellerpaymentlistTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('pushonoffstatlist') }}",
+          url: "{{ route('resellerpaymentlist') }}",
           crossDomain: true
         },
         columns: [
             { data: 'idx', name: 'idx' },
-            { data: 'app_id', name: 'app_id' },
-            { data: 'app_os', name: 'app_os' },
-            { data: 'on_off', name: 'on_off' },
-            { data: 'total_c', name: 'total_c' },
-            { data: 'today_c', name: 'today_c' },
-            { data: 'yesterday_c', name: 'yesterday_c' },
-            { data: 'average', name: 'average' },
-            { data: 'max_c', name: 'max_c' },
+            { data: 'reg_time', name: 'reg_time' },
+            { data: 'recom_id', name: 'recom_id' },
+            { data: 'app_name', name: 'app_name' },
+            { data: 'process', name: 'process' },
             { data: 'term', name: 'term' },
+            { data: 'amount', name: 'amount' },
         ],
         columnDefs: [
            {
@@ -66,7 +60,7 @@ $(function() {
         select: {
            'style': 'multi'
         },
-        order: [[ 5, 'desc']],
+        order: [[ 1, 'desc']],
         "paging": true,
         "pageLength": 50,
         "fixedHeader": false,
@@ -75,9 +69,9 @@ $(function() {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#pushonoffstatlistTable tbody tr").click(function () {
-              table = $('#pushonoffstatlistTable').dataTable();
-              window.location.href = "/pushonoffstatdetail/" + this.id;
+            $("#resellerpaymentlistTable tbody tr").click(function () {
+              table = $('#resellerpaymentlistTable').dataTable();
+              window.location.href = "/resellerpaymentdetail/" + this.id;
             });
          }
     });

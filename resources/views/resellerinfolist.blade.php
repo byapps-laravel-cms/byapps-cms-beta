@@ -7,18 +7,19 @@
   <div class="method">
     <div class="col-md-12 mt-3">
 
-      {{ Breadcrumbs::render('appspointmemberlist') }}
+      {{ Breadcrumbs::render('resellerinfolist') }}
 
-     <table id="appspointmemberTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+     <table id="resellerinfolistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
-                 <th>앱아이디</th>
-                 <th>앱명</th>
-                 <th>회원아이디</th>
-                 <th>포인트</th>
-                 <th>앱OS</th>
-                 <th>버전</th>
+                 <th>아이디</th>
+                 <th>상태</th>
+                 <th>업체명</th>
+                 <th>담당자</th>
+                 <th>연락처</th>
+                 <th>가입회원수</th>
+                 <th>등록IP</th>
                  <th>등록일</th>
              </tr>
          </thead>
@@ -31,22 +32,23 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#appspointmemberTable').DataTable({
+    $('#resellerinfolistTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('appspointmemberlist') }}",
+          url: "{{ route('resellerinfolist') }}",
           crossDomain: true
         },
         columns: [
             { data: 'idx', name: 'idx' },
-            { data: 'app_id', name: 'app_id' },
-            { data: 'app_name', name: 'app_name' },
             { data: 'mem_id', name: 'mem_id' },
-            { data: 'total_point', name: 'total_point' },
-            { data: 'app_os', name: 'app_os' },
-            { data: 'app_ver', name: 'app_ver' },
-            { data: 'reg_time', name: 'reg_time' }
+            { data: 'mem_lv', name: 'mem_lv' },
+            { data: 'company', name: 'company' },
+            { data: 'company_owner', name: 'company_owner' },
+            { data: 'cellno', name: 'cellno' },
+            { data: 'mem_count', name: 'mem_count' },
+            { data: 'ip', name: 'ip' },
+            { data: 'reg_date', name: 'reg_date' },
         ],
         columnDefs: [
            {
@@ -62,7 +64,7 @@ $(function() {
         select: {
            'style': 'multi'
         },
-        order: [[ 5, 'desc']],
+        order: [[ 8, 'desc']],
         "paging": true,
         "pageLength": 50,
         "fixedHeader": false,
@@ -71,9 +73,9 @@ $(function() {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#appspointmemberTable tbody tr").click(function () {
-              table = $('#appspointmemberTable').dataTable();
-              window.location.href = "/appspointmemberdetail/" + this.id;
+            $("#resellerinfolistTable tbody tr").click(function () {
+              table = $('#resellerinfolistTable').dataTable();
+              window.location.href = "/resellerinfodetail/" + this.id;
             });
          }
     });

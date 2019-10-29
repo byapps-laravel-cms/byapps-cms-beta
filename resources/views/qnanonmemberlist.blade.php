@@ -7,18 +7,17 @@
   <div class="method">
     <div class="col-md-12 mt-3">
 
-      {{ Breadcrumbs::render('appspointmemberlist') }}
+      {{ Breadcrumbs::render('qnanonmemberlist') }}
 
-     <table id="appspointmemberTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+     <table id="qnanonmemberlistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
-                 <th>앱아이디</th>
-                 <th>앱명</th>
-                 <th>회원아이디</th>
-                 <th>포인트</th>
-                 <th>앱OS</th>
-                 <th>버전</th>
+                 <th>상태</th>
+                 <th>업체명</th>
+                 <th>담당자</th>
+                 <th>이메일</th>
+                 <th>연락처</th>
                  <th>등록일</th>
              </tr>
          </thead>
@@ -31,22 +30,21 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#appspointmemberTable').DataTable({
+    $('#qnanonmemberlistTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('appspointmemberlist') }}",
+          url: "{{ route('qnanonmemberlist') }}",
           crossDomain: true
         },
         columns: [
             { data: 'idx', name: 'idx' },
-            { data: 'app_id', name: 'app_id' },
-            { data: 'app_name', name: 'app_name' },
-            { data: 'mem_id', name: 'mem_id' },
-            { data: 'total_point', name: 'total_point' },
-            { data: 'app_os', name: 'app_os' },
-            { data: 'app_ver', name: 'app_ver' },
-            { data: 'reg_time', name: 'reg_time' }
+            { data: 'process', name: 'process' },
+            { data: 'company', name: 'company' },
+            { data: 'name', name: 'name' },
+            { data: 'email', name: 'email' },
+            { data: 'phone', name: 'phone' },
+            { data: 'reg_date', name: 'reg_date' },
         ],
         columnDefs: [
            {
@@ -62,7 +60,7 @@ $(function() {
         select: {
            'style': 'multi'
         },
-        order: [[ 5, 'desc']],
+        order: [[ 6, 'desc']],
         "paging": true,
         "pageLength": 50,
         "fixedHeader": false,
@@ -71,9 +69,9 @@ $(function() {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#appspointmemberTable tbody tr").click(function () {
-              table = $('#appspointmemberTable').dataTable();
-              window.location.href = "/appspointmemberdetail/" + this.id;
+            $("#qnanonmemberlistTable tbody tr").click(function () {
+              table = $('#qnanonmemberlistTable').dataTable();
+              window.location.href = "/qnanonmemberdetail/" + this.id;
             });
          }
     });

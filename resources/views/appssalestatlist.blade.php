@@ -60,12 +60,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 2,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/appssalestatdetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
         ],
         select: {
            'style': 'multi'
@@ -77,6 +71,13 @@ $(function() {
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
+
+        "fnDrawCallback": function () {
+            $("#appssalestatlistTable tbody tr").click(function () {
+              table = $('#appssalestatlistTable').dataTable();
+              window.location.href = "/appssalestatdetail/" + this.id;
+            });
+         }
     });
 });
 </script>

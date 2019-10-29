@@ -64,12 +64,6 @@ $(function() {
                  'selectRow': true
               },
            },
-           {
-             'targets': 6,
-             'render': function ( data, type, full, meta ) {
-                return '<a href="/appsorderdetail/'+full.idx+'">'+data+'</a>';
-             }
-           },
         ],
         select: {
            'style': 'multi'
@@ -81,6 +75,13 @@ $(function() {
         responsive: true,
         orderClasses: false,
         stateSave: false,
+
+        "fnDrawCallback": function () {
+            $("#appsorderlistTable tbody tr").click(function () {
+              table = $('#appsorderlistTable').dataTable();
+              window.location.href = "/appsorderdetail/" + this.id;
+            });
+         }
     });
 });
 </script>

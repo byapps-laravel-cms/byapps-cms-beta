@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class QnaNonmember extends Model
 {
   protected $connection = 'byapps';
-  protected $table = 'BYAPPS_myqna_data';
+  protected $table = 'BYAPPS_cs_qna';
 
-  public static function getQnaNonMemberData()
+  public static function getQnaNonmemberData()
   {
-      $qnaNonMemberData = DB::connection($connection)
+      $qnaNonmemberData = DB::connection($connection)
                             ->table($table)->get();
 
-      return $qnaNonMemberData;
+      return $qnaNonmemberData;
   }
 }

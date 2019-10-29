@@ -126,3 +126,43 @@ Breadcrumbs::for('pushonoffstatlist', function ($trail) {
   $trail->parent('statlist');
   $trail->push('푸쉬 허용 통계', route('pushonoffstatlist.view'));
 });
+
+// 고객사 관리(회원 정보)
+Breadcrumbs::for('userlist', function ($trail) {
+  $trail->push('고객사 관리', route('userinfolist.view'));
+});
+
+// 고객 정보
+Breadcrumbs::for('userinfolist', function ($trail) {
+  $trail->parent('userlist');
+  $trail->push('고객 정보', route('userinfolist.view'));
+});
+
+// 고객 문의(구 1:1 문의)
+Breadcrumbs::for('qnamemberlist', function ($trail) {
+  $trail->parent('userlist');
+  $trail->push('고객 문의', route('qnamemberlist.view'));
+});
+
+// 비고객 문의(비회원 문의) -> (구 홈페이지 문의)
+Breadcrumbs::for('qnanonmemberlist', function ($trail) {
+  $trail->parent('userlist');
+  $trail->push('비고객 문의', route('qnanonmemberlist.view'));
+});
+
+// 리셀러 관리
+Breadcrumbs::for('resellerlist', function ($trail) {
+  $trail->push('리셀러 관리', route('resellerinfolist.view'));
+});
+
+// 리셀러 정보
+Breadcrumbs::for('resellerinfolist', function ($trail) {
+  $trail->parent('resellerlist');
+  $trail->push('리셀러 정보', route('resellerinfolist.view'));
+});
+
+// 리셀러 정산
+Breadcrumbs::for('resellerpaymentlist', function ($trail) {
+  $trail->parent('resellerlist');
+  $trail->push('리셀러 정산', route('resellerpaymentlist.view'));
+});
