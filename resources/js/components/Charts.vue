@@ -65,7 +65,7 @@
       <div class="col-xs-12 col-md-4">
         <div align="center">
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsDaily">일간</button>
-          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">주간</button>
+          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsWeekly">주간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">월간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="app_stats_total()">전체</button>
         </div>
@@ -111,9 +111,13 @@ export default {
   },
   methods: {
     drawCharDefault() {
+      var today = (new Date()).toISOString().split('T')[0];
       axios({
         method: 'POST',
-        url: '/chart'
+        url: '/chart',
+        data: {
+          date: today
+        }
       }).then(
         response => {
           showChart(response.data)
@@ -124,7 +128,6 @@ export default {
       )
     },
     appStatsDaily() {
-      //alert("clicked");
       var today = (new Date()).toISOString().split('T')[0];
       console.log(today);
       axios({
@@ -143,7 +146,26 @@ export default {
           console.log(error)
         }
       )
-    }
+    },
+    appStatsWeekly() {
+      var today = (new Date()).toISOString().split('T')[0];
+      console.log(today);
+      axios({
+        method: 'POST',
+        url: '/chart/app_weekly',
+        data: {
+          date: today,
+        }
+      }).then(
+        response => {
+          console.log(response)
+          showAppChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
   }
 }
 
@@ -169,7 +191,7 @@ function showChart (data) {
         }
       },
       donut: {
-        title: "앱 통계",
+        title: "앱 서비스 통계",
         label: {
           format: function(value, ratio, id) {
             return value + "개\n" + (ratio * 100).toFixed(1) + "%";

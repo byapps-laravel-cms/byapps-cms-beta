@@ -26,6 +26,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 // 차트 데이터
 Route::post('/chart', 'ChartController@index');
 Route::post('/chart/app_daily', 'ChartController@onGetAppDailyChartData');
+Route::post('/chart/app_weekly', 'ChartController@onGetAppWeeklyChartData');
 Route::get('/chart/app_total', 'ChartController@onGetAppChartData');
 Route::get('/chart/ma_daily', 'ChartController@onGetMaDailyChartData');
 

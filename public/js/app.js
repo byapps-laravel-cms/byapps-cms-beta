@@ -1951,9 +1951,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     drawCharDefault: function drawCharDefault() {
+      var today = new Date().toISOString().split('T')[0];
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'POST',
-        url: '/chart'
+        url: '/chart',
+        data: {
+          date: today
+        }
       }).then(function (response) {
         showChart(response.data);
       }, function (error) {
@@ -1961,7 +1965,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     appStatsDaily: function appStatsDaily() {
-      //alert("clicked");
       var today = new Date().toISOString().split('T')[0];
       console.log(today);
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
@@ -1969,6 +1972,22 @@ __webpack_require__.r(__webpack_exports__);
         url: '/chart/app_daily',
         data: {
           //date: $('#start_date_chart').val(),
+          date: today
+        }
+      }).then(function (response) {
+        console.log(response);
+        showAppChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    appStatsWeekly: function appStatsWeekly() {
+      var today = new Date().toISOString().split('T')[0];
+      console.log(today);
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/app_weekly',
+        data: {
           date: today
         }
       }).then(function (response) {
@@ -2002,7 +2021,7 @@ function showChart(data) {
       }
     },
     donut: {
-      title: "앱 통계",
+      title: "앱 서비스 통계",
       label: {
         format: function format(value, ratio, id) {
           return value + "개\n" + (ratio * 100).toFixed(1) + "%";
@@ -2615,7 +2634,8 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.appStatsWeekly }
               },
               [_vm._v("주간")]
             ),

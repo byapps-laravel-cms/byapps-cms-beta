@@ -64,8 +64,57 @@ class ChartController extends Controller
     // 등록일을 기준으로 일간 데이터를 뽑음
     public function onGetAppDailyChartData(Request $request)
     {
-      info("~~~~~~~~~~~".$request->date);
+      //info("~~~~~~~~~~~".$request->date);
       $target_date = strtotime($request->date);
+
+      // 전체
+      $appsTotal = AppsData::where('app_process', '=', '7')
+                    ->where(function($query) use ($target_date) {
+                      $query->where('service_type', '=', 'lite')->orWhere('end_time', '>', $target_date);
+                    })
+                    ->where('reg_time', '=', $target_date)
+                    ->count();
+
+      // 유료
+      // 연장(pay_type = 1), 신규, 결제금액이 있는 경우, 서비스유효
+      $appsPaid = DB::table('marutm1.BYAPPS_apps_data as A')
+                  ->leftJoin('marutm1.BYAPPS_apps_payment_data as B', 'A.order_id', '=', 'B.order_id')
+                  ->where('A.app_process', '=', '7')
+                  //->selectRaw("'A.service_type' = 'lite' or 'A.end_time' > unix_timestamp()")
+                  ->where(function($query) use ($target_date) {
+                    $query->where('A.service_type', '=', 'lite')->orWhere('A.end_time', '>', $target_date);
+                  })
+                  ->where('A.reg_time', '=', $target_date)
+                  ->where('B.process', '=', '1')
+                  ->where('B.amount', '>', '0')
+                  ->distinct()
+                  ->count('A.order_id');
+
+      // 무료
+      // 결제금액이 없는 경우, 관리업체가 아닌 경우(is_cherrypicker != Y), 서비스유효
+      $appsFree = $appsTotal - $appsPaid;
+
+      // 관리
+      // 관리업체에 체크(is_cherrypicker = Y), 서비스유효
+      $appsCheck = 100;
+
+      $result = array(
+          'circle1' => array(
+            array('무료', $appsFree),
+            array('유료', $appsPaid),
+            array('관리', $appsCheck),
+          )
+      );
+
+      return $result;
+    }
+
+    // 등록일을 기준으로 주간 데이터를 뽑음
+    public function onGetAppWeeklyChartData(Request $request)
+    {
+      //info("~~~~~~~~~~~".$request->date);
+      $target_date = strtotime('-1 week', strtotime($request->date));
+      //info("~~~~~~~~~~~".$target_date);
 
       // 전체
       $appsTotal = AppsData::where('app_process', '=', '7')
