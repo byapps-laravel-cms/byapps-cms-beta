@@ -1964,6 +1964,17 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
+    appStatsTotal: function appStatsTotal() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'GET',
+        url: '/chart/app_total'
+      }).then(function (response) {
+        console.log(response);
+        showAppChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
     appStatsDaily: function appStatsDaily() {
       var today = new Date().toISOString().split('T')[0];
       console.log(today);
@@ -2654,7 +2665,7 @@ var render = function() {
               {
                 staticClass:
                   "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-                attrs: { onclick: "app_stats_total()" }
+                on: { click: _vm.appStatsTotal }
               },
               [_vm._v("전체")]
             )

@@ -67,7 +67,7 @@
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsDaily">일간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsWeekly">주간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">월간</button>
-          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="app_stats_total()">전체</button>
+          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsTotal">전체</button>
         </div>
         <div id="app_stats"></div>
       </div>
@@ -121,6 +121,20 @@ export default {
       }).then(
         response => {
           showChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    appStatsTotal() {
+      axios({
+        method: 'GET',
+        url: '/chart/app_total',
+      }).then(
+        response => {
+          console.log(response)
+          showAppChart(response.data)
         },
         error => {
           console.log(error)
