@@ -18,6 +18,7 @@ class ChartController extends Controller
       // original query: select count(*) from BYAPPS_apps_data where app_process='7' and ( service_type='lite' or ((end_time-".time().")/86400)>'0' )
       // select count(*) from BYAPPS_apps_data where app_process='7' and ( service_type='lite' or (end_time-unix_timestamp())>'0' )
       // select count(*) from BYAPPS_apps_data where app_process='7' and ( service_type='lite' or (end_time > unix_timestamp()))
+      // service_type이 lite라는 의미는 한번 등록시 평생 가는 업체임
       $appsTotal = AppsData::where('app_process', '=', '7')
                     ->where(function($query){
                       $query->where('service_type', '=', 'lite')->orWhere('end_time', '>', time());
@@ -27,7 +28,7 @@ class ChartController extends Controller
       // 유료
       // original query: select count(*) from (select order_id from BYAPPS_apps_data where app_process='7' and ( service_type='lite' or ((end_time-".time().")/86400)>'0') ) a
       //                 inner join (select order_id from BYAPPS_apps_payment_data where process='1' and amount>'0' group by order_id) b on a.order_id=b.order_id
-      // 연장(pay_type = 1), 신규, 결제금액이 있는 경우, 서비스유효
+      // 연장(pay_type = 1), 신규, 결제금액이 있는 경우, 서비스유효(end_time이 현재보다 크다는 것은 서비스 유효임)
       $appsPaid = DB::table('marutm1.BYAPPS_apps_data as A')
                   ->leftJoin('marutm1.BYAPPS_apps_payment_data as B', 'A.order_id', '=', 'B.order_id')
                   ->where('A.app_process', '=', '7')
@@ -60,6 +61,7 @@ class ChartController extends Controller
       return $result;
     }
 
+    // 등록일을 기준으로 일간 데이터를 뽑음
     public function onGetAppDailyChartData(Request $request)
     {
       info("~~~~~~~~~~~".$request->date);
@@ -70,6 +72,7 @@ class ChartController extends Controller
                     ->where(function($query) use ($target_date) {
                       $query->where('service_type', '=', 'lite')->orWhere('end_time', '>', $target_date);
                     })
+                    ->where('reg_time', '=', $target_date)
                     ->count();
 
       // 유료
@@ -81,6 +84,7 @@ class ChartController extends Controller
                   ->where(function($query) use ($target_date) {
                     $query->where('A.service_type', '=', 'lite')->orWhere('A.end_time', '>', $target_date);
                   })
+                  ->where('A.reg_time', '=', $target_date)
                   ->where('B.process', '=', '1')
                   ->where('B.amount', '>', '0')
                   ->distinct()

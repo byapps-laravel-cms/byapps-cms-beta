@@ -1961,13 +1961,15 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     appStatsDaily: function appStatsDaily() {
-      alert("clicked"); //console.log("clicked");
-
+      //alert("clicked");
+      var today = new Date().toISOString().split('T')[0];
+      console.log(today);
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'POST',
         url: '/chart/app_daily',
         data: {
-          date: $('#start_date_chart').val()
+          //date: $('#start_date_chart').val(),
+          date: today
         }
       }).then(function (response) {
         console.log(response);

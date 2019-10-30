@@ -124,13 +124,15 @@ export default {
       )
     },
     appStatsDaily() {
-      alert("clicked");
-      //console.log("clicked");
+      //alert("clicked");
+      var today = (new Date()).toISOString().split('T')[0];
+      console.log(today);
       axios({
         method: 'POST',
         url: '/chart/app_daily',
         data: {
-          date: $('#start_date_chart').val(),
+          //date: $('#start_date_chart').val(),
+          date: today,
         }
       }).then(
         response => {
