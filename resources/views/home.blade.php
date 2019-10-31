@@ -29,7 +29,7 @@
         @elseif ($layout == 'layout3')
         <!-- 매출 차트 -->
         <li class="ui-state-default card" id="layout3">
-            @include('components.saleschart')
+          <saleschart></saleschart>
         </li>
 
         @elseif ($layout == 'layout4')

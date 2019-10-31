@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('chart', require('./components/Charts.vue').default);
+Vue.component('saleschart', require('./components/SalesChart.vue').default);
 // Vue.component('sales-component', require('./components/Sales.vue').default);
 // Vue.component('expired', require('./components/ExpiredList.vue').default);
 

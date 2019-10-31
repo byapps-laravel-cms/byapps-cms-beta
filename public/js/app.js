@@ -2203,6 +2203,162 @@ function showMaChart(data) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SalesChart.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SalesChart.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  mounted: function mounted() {
+    console.log("sales chart here");
+    this.drawSalesCharDefault();
+  },
+  methods: {
+    drawSalesCharDefault: function drawSalesCharDefault() {
+      var today = new Date().toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/saleschart',
+        data: {
+          date: today
+        }
+      }).then(function (response) {
+        showSalesChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    }
+  }
+}); // 통계 기본
+
+function showSalesChart(data) {
+  var chart1 = bb.generate({
+    title: {
+      text: "매출 통계"
+    },
+    data: {
+      columns: data.bar,
+      type: "bar",
+      colors: {
+        "전체": "#97215c",
+        "신규": "#fca1b0",
+        "연장": "#f9637c",
+        "기타": "#d7215c"
+      },
+      labels: {
+        centered: true,
+        format: function format(x) {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+      }
+    },
+    bar: {
+      width: {
+        ratio: 0.8
+      }
+    },
+    tooltip: {
+      format: {
+        title: function title(d) {
+          // console.log(d);
+          return 'Data ' + d;
+        }
+      }
+    },
+    bindto: "#sale_stats"
+  });
+}
+
+/***/ }),
+
 /***/ "./node_modules/is-buffer/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/is-buffer/index.js ***!
@@ -3046,6 +3202,249 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { attrs: { id: "ma_integ_stats" } })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", { staticClass: "cal_box" }, [
+        _c("div", { staticClass: "card-title m-2" }, [
+          _c("i", { staticClass: "fi-menu" }),
+          _vm._v(" 통계\n          "),
+          _c(
+            "button",
+            {
+              staticClass: "btn float-right",
+              attrs: {
+                type: "button",
+                "data-toggle": "collapse",
+                "data-target": "#allchart",
+                "aria-expanded": "true",
+                "aria-controls": "allchart"
+              }
+            },
+            [_c("i", { staticClass: "dripicons-chevron-down" })]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-title" }, [
+        _c("div", { staticClass: "row justify-content-md-center mb-5" }, [
+          _c("div", { staticClass: "col-md-9" }, [
+            _c("div", { staticClass: "input-group" }, [
+              _c("div", { staticClass: "input-group-prepend" }, [
+                _c("span", { staticClass: "input-group-text" }, [
+                  _vm._v("통계기간")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control datepicker",
+                attrs: {
+                  type: "text",
+                  id: "start_date_chart",
+                  name: "start_date_chart",
+                  value: "",
+                  maxlength: "10",
+                  placeholder: "날짜입력",
+                  autocomplete: "false"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-append" }, [
+                _c("span", { staticClass: "input-group-text" }, [
+                  _vm._v("부터")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control datepicker",
+                attrs: {
+                  type: "text",
+                  id: "end_date_chart",
+                  name: "end_date_chart",
+                  value: "",
+                  maxlength: "10",
+                  placeholder: "날짜입력",
+                  autocomplete: "false"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-append" }, [
+                _c("span", { staticClass: "input-group-text" }, [
+                  _vm._v("까지")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-append" }, [
+                _c("span", { staticClass: "input-group-text" }, [
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "javascript:void(0)",
+                        onclick: "stat_chartDateTerm(7)"
+                      }
+                    },
+                    [_vm._v("일주일")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-append" }, [
+                _c("span", { staticClass: "input-group-text" }, [
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "javascript:void(0)",
+                        onclick: "stat_chartDateTerm(30)"
+                      }
+                    },
+                    [_vm._v("1개월")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-append" }, [
+                _c("span", { staticClass: "input-group-text" }, [
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "javascript:void(0)",
+                        onclick: "stat_chartDateTerm(90)"
+                      }
+                    },
+                    [_vm._v("3개월")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-append" }, [
+                _c("span", { staticClass: "input-group-text" }, [
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "javascript:void(0)",
+                        onclick: "stat_chartDateTerm(180)"
+                      }
+                    },
+                    [_vm._v("6개월")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-append" }, [
+                _c("span", { staticClass: "input-group-text" }, [
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        id: "getDate",
+                        href: "javascript:void(0)",
+                        onclick:
+                          "showEntireChart($('#start_date_chart').val(), $('#end_date_chart').val())"
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "entypo-chart-bar" }),
+                      _vm._v(" 보기")
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "dragbox_hover row collapse show",
+          attrs: { id: "allchart" }
+        },
+        [
+          _c("div", { staticClass: "col-xs-12 col-md-12 pl-0 pr-5" }, [
+            _c("div", { attrs: { align: "center" } }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                  attrs: { onclick: "sales_stats_daily()" }
+                },
+                [_vm._v("일간")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+                },
+                [_vm._v("주간")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+                },
+                [_vm._v("월간")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                  attrs: { onclick: "sales_stats_total()" }
+                },
+                [_vm._v("전체")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              attrs: {
+                id: "sale_stats",
+                "data-toggle": "modal",
+                "data-target": "#lankDetail"
+              }
+            })
+          ])
+        ]
+      )
     ])
   }
 ]
@@ -15183,7 +15582,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-Vue.component('chart', __webpack_require__(/*! ./components/Charts.vue */ "./resources/js/components/Charts.vue")["default"]); // Vue.component('sales-component', require('./components/Sales.vue').default);
+Vue.component('chart', __webpack_require__(/*! ./components/Charts.vue */ "./resources/js/components/Charts.vue")["default"]);
+Vue.component('saleschart', __webpack_require__(/*! ./components/SalesChart.vue */ "./resources/js/components/SalesChart.vue")["default"]); // Vue.component('sales-component', require('./components/Sales.vue').default);
 // Vue.component('expired', require('./components/ExpiredList.vue').default);
 
 /**
@@ -15262,6 +15662,76 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_template_id_340ac000___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_template_id_340ac000___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/SalesChart.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/SalesChart.vue ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SalesChart.vue?vue&type=template&id=1c74ac46& */ "./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46&");
+/* harmony import */ var _SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SalesChart.vue?vue&type=script&lang=js& */ "./resources/js/components/SalesChart.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/SalesChart.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/SalesChart.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/SalesChart.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SalesChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SalesChart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SalesChart.vue?vue&type=template&id=1c74ac46& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
