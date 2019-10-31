@@ -2306,9 +2306,68 @@ __webpack_require__.r(__webpack_exports__);
       var today = new Date().toISOString().split('T')[0];
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'POST',
-        url: '/saleschart',
+        url: '/saleschart'
+      }).then(function (response) {
+        showSalesChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    salesStatsTotal: function salesStatsTotal() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'GET',
+        url: '/saleschart/sales_total'
+      }).then(function (response) {
+        console.log(response);
+        showSalesChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    salesStatsDaily: function salesStatsDaily() {
+      var today = new Date().toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/saleschart/sales_term',
         data: {
-          date: today
+          date1: today,
+          date2: today
+        }
+      }).then(function (response) {
+        showSalesChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    salesStatsWeekly: function salesStatsWeekly() {
+      var today = new Date().toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 7);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/saleschart/sales_term',
+        data: {
+          date1: today,
+          date2: nday
+        }
+      }).then(function (response) {
+        showSalesChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    salesStatsMonthly: function salesStatsMonthly() {
+      var today = new Date().toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 30);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/saleschart/sales_term',
+        data: {
+          date1: today,
+          date2: nday
         }
       }).then(function (response) {
         showSalesChart(response.data);
@@ -2321,9 +2380,9 @@ __webpack_require__.r(__webpack_exports__);
 
 function showSalesChart(data) {
   var chart1 = bb.generate({
-    title: {
-      text: "매출 통계"
-    },
+    // title: {
+    //   text: "매출 통계"
+    // },
     data: {
       columns: data.bar,
       type: "bar",
@@ -2348,7 +2407,6 @@ function showSalesChart(data) {
     tooltip: {
       format: {
         title: function title(d) {
-          // console.log(d);
           return 'Data ' + d;
         }
       }
@@ -3226,225 +3284,259 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-title" }, [
+      _c("div", { staticClass: "row justify-content-md-center mb-5" }, [
+        _c("div", { staticClass: "col-md-9" }, [
+          _c("div", { staticClass: "input-group" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control datepicker",
+              attrs: {
+                type: "text",
+                id: "start_date_sales",
+                name: "start_date_sales",
+                value: "",
+                maxlength: "10",
+                placeholder: "날짜입력",
+                autocomplete: "false"
+              }
+            }),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control datepicker",
+              attrs: {
+                type: "text",
+                id: "end_date_sales",
+                name: "end_date_sales",
+                value: "",
+                maxlength: "10",
+                placeholder: "날짜입력",
+                autocomplete: "false"
+              }
+            }),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _vm._m(4),
+            _vm._v(" "),
+            _vm._m(5),
+            _vm._v(" "),
+            _vm._m(6),
+            _vm._v(" "),
+            _vm._m(7),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c("span", { staticClass: "input-group-text" }, [
+                _c(
+                  "a",
+                  {
+                    attrs: { id: "getDate", href: "javascript:void(0)" },
+                    on: { click: _vm.showEntireChart }
+                  },
+                  [
+                    _c("i", { staticClass: "entypo-chart-bar" }),
+                    _vm._v(" 보기")
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "dragbox_hover row collapse show",
+        attrs: { id: "allchart" }
+      },
+      [
+        _c("div", { staticClass: "col-xs-12 col-md-12 pl-0 pr-5" }, [
+          _c("div", { attrs: { align: "center" } }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.salesStatsDaily }
+              },
+              [_vm._v("일간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.salesStatsWeekly }
+              },
+              [_vm._v("주간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.salesStatsMonthly }
+              },
+              [_vm._v("월간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.salesStatsTotal }
+              },
+              [_vm._v("전체")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", {
+            attrs: {
+              id: "sale_stats",
+              "data-toggle": "modal",
+              "data-target": "#lankDetail"
+            }
+          })
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "cal_box" }, [
-        _c("div", { staticClass: "card-title m-2" }, [
-          _c("i", { staticClass: "fi-menu" }),
-          _vm._v(" 통계\n          "),
-          _c(
-            "button",
-            {
-              staticClass: "btn float-right",
-              attrs: {
-                type: "button",
-                "data-toggle": "collapse",
-                "data-target": "#allchart",
-                "aria-expanded": "true",
-                "aria-controls": "allchart"
-              }
-            },
-            [_c("i", { staticClass: "dripicons-chevron-down" })]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-title" }, [
-        _c("div", { staticClass: "row justify-content-md-center mb-5" }, [
-          _c("div", { staticClass: "col-md-9" }, [
-            _c("div", { staticClass: "input-group" }, [
-              _c("div", { staticClass: "input-group-prepend" }, [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _vm._v("통계기간")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control datepicker",
-                attrs: {
-                  type: "text",
-                  id: "start_date_chart",
-                  name: "start_date_chart",
-                  value: "",
-                  maxlength: "10",
-                  placeholder: "날짜입력",
-                  autocomplete: "false"
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _vm._v("부터")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control datepicker",
-                attrs: {
-                  type: "text",
-                  id: "end_date_chart",
-                  name: "end_date_chart",
-                  value: "",
-                  maxlength: "10",
-                  placeholder: "날짜입력",
-                  autocomplete: "false"
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _vm._v("까지")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _c(
-                    "a",
-                    {
-                      attrs: {
-                        href: "javascript:void(0)",
-                        onclick: "stat_chartDateTerm(7)"
-                      }
-                    },
-                    [_vm._v("일주일")]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _c(
-                    "a",
-                    {
-                      attrs: {
-                        href: "javascript:void(0)",
-                        onclick: "stat_chartDateTerm(30)"
-                      }
-                    },
-                    [_vm._v("1개월")]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _c(
-                    "a",
-                    {
-                      attrs: {
-                        href: "javascript:void(0)",
-                        onclick: "stat_chartDateTerm(90)"
-                      }
-                    },
-                    [_vm._v("3개월")]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _c(
-                    "a",
-                    {
-                      attrs: {
-                        href: "javascript:void(0)",
-                        onclick: "stat_chartDateTerm(180)"
-                      }
-                    },
-                    [_vm._v("6개월")]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _c(
-                    "a",
-                    {
-                      attrs: {
-                        id: "getDate",
-                        href: "javascript:void(0)",
-                        onclick:
-                          "showEntireChart($('#start_date_chart').val(), $('#end_date_chart').val())"
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "entypo-chart-bar" }),
-                      _vm._v(" 보기")
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "dragbox_hover row collapse show",
-          attrs: { id: "allchart" }
-        },
-        [
-          _c("div", { staticClass: "col-xs-12 col-md-12 pl-0 pr-5" }, [
-            _c("div", { attrs: { align: "center" } }, [
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-                  attrs: { onclick: "sales_stats_daily()" }
-                },
-                [_vm._v("일간")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
-                },
-                [_vm._v("주간")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
-                },
-                [_vm._v("월간")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-                  attrs: { onclick: "sales_stats_total()" }
-                },
-                [_vm._v("전체")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", {
-              attrs: {
-                id: "sale_stats",
-                "data-toggle": "modal",
-                "data-target": "#lankDetail"
-              }
-            })
-          ])
-        ]
-      )
+    return _c("div", { staticClass: "cal_box" }, [
+      _c("div", { staticClass: "card-title m-2" }, [
+        _c("i", { staticClass: "fi-menu" }),
+        _vm._v(" 매출 통계\n          "),
+        _c(
+          "button",
+          {
+            staticClass: "btn float-right",
+            attrs: {
+              type: "button",
+              "data-toggle": "collapse",
+              "data-target": "#allchart",
+              "aria-expanded": "true",
+              "aria-controls": "allchart"
+            }
+          },
+          [_c("i", { staticClass: "dripicons-chevron-down" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("통계기간")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("부터")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("까지")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_salesDateTerm(7)"
+            }
+          },
+          [_vm._v("일주일")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_salesDateTerm(30)"
+            }
+          },
+          [_vm._v("1개월")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_salesDateTerm(90)"
+            }
+          },
+          [_vm._v("3개월")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_salesDateTerm(180)"
+            }
+          },
+          [_vm._v("6개월")]
+        )
+      ])
     ])
   }
 ]

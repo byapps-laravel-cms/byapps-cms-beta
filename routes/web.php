@@ -33,9 +33,8 @@ Route::get('/chart/ma_total', 'ChartController@onGetMaChartData');
 
 // 매출 차트 데이터
 Route::post('/saleschart', 'SalesChartController@index');
-Route::post('/saleschart/sales_daily', 'SalesChartController@onGetAppDailyChartData');
-Route::get('/saleschart/sales_total', 'SalesChartController@onGetAppChartData');
-Route::get('/saleschart/sales_daily', 'SalesChartController@onGetMaDailyChartData');
+Route::post('/saleschart/sales_term', 'SalesChartController@onGetSalesTermChartData');
+Route::get('/saleschart/sales_total', 'SalesChartController@onGetSalesChartData');
 
 // 매출 통계표
 Route::post('/sales', 'SalesController@getPlatformData');

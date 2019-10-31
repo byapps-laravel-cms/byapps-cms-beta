@@ -2,7 +2,7 @@
   <div>
     <div class="cal_box">
         <div class="card-title m-2">
-            <i class="fi-menu"></i> 통계
+            <i class="fi-menu"></i> 매출 통계
             <button class="btn float-right" type="button" data-toggle="collapse" data-target="#allchart" aria-expanded="true" aria-controls="allchart">
               <i class="dripicons-chevron-down"></i>
             </button>
@@ -18,37 +18,37 @@
             <div class="input-group-prepend">
               <span class="input-group-text">통계기간</span>
             </div>
-            <input type="text" id="start_date_chart" name="start_date_chart" value="" maxlength="10" class="form-control datepicker" placeholder="날짜입력" autocomplete="false">
+            <input type="text" id="start_date_sales" name="start_date_sales" value="" maxlength="10" class="form-control datepicker" placeholder="날짜입력" autocomplete="false">
             <div class="input-group-append">
               <span class="input-group-text">부터</span>
             </div>
-            <input type="text" id="end_date_chart" name="end_date_chart" value="" maxlength="10" class="form-control datepicker" placeholder="날짜입력" autocomplete="false">
+            <input type="text" id="end_date_sales" name="end_date_sales" value="" maxlength="10" class="form-control datepicker" placeholder="날짜입력" autocomplete="false">
             <div class="input-group-append">
               <span class="input-group-text">까지</span>
             </div>
             <div class="input-group-append">
               <span class="input-group-text">
-                <a href="javascript:void(0)" onclick="stat_chartDateTerm(7)">일주일</a>
+                <a href="javascript:void(0)" onclick="stat_salesDateTerm(7)">일주일</a>
               </span>
             </div>
             <div class="input-group-append">
               <span class="input-group-text">
-                <a href="javascript:void(0)" onclick="stat_chartDateTerm(30)">1개월</a>
+                <a href="javascript:void(0)" onclick="stat_salesDateTerm(30)">1개월</a>
               </span>
             </div>
             <div class="input-group-append">
               <span class="input-group-text">
-                <a href="javascript:void(0)" onclick="stat_chartDateTerm(90)">3개월</a>
+                <a href="javascript:void(0)" onclick="stat_salesDateTerm(90)">3개월</a>
               </span>
             </div>
             <div class="input-group-append">
               <span class="input-group-text">
-                <a href="javascript:void(0)" onclick="stat_chartDateTerm(180)">6개월</a>
+                <a href="javascript:void(0)" onclick="stat_salesDateTerm(180)">6개월</a>
               </span>
             </div>
             <div class="input-group-append">
               <span class="input-group-text">
-                <a id="getDate" href="javascript:void(0)" onclick="showEntireChart($('#start_date_chart').val(), $('#end_date_chart').val())"><i class="entypo-chart-bar"></i> 보기</a>
+                <a id="getDate" href="javascript:void(0)" @click="showEntireChart"><i class="entypo-chart-bar"></i> 보기</a>
               </span>
             </div>
           </div>
@@ -63,10 +63,10 @@
         <!-- 매출 통계 차트 -->
         <div class="col-xs-12 col-md-12 pl-0 pr-5">
           <div align="center">
-            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="sales_stats_daily()">일간</button>
-            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">주간</button>
-            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">월간</button>
-            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="sales_stats_total()">전체</button>
+            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="salesStatsDaily">일간</button>
+            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="salesStatsWeekly">주간</button>
+            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="salesStatsMonthly">월간</button>
+            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="salesStatsTotal">전체</button>
           </div>
             <div id="sale_stats" data-toggle="modal" data-target="#lankDetail"></div>
         </div>
@@ -94,8 +94,82 @@ export default {
       axios({
         method: 'POST',
         url: '/saleschart',
+      }).then(
+        response => {
+          showSalesChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    salesStatsTotal() {
+      axios({
+        method: 'GET',
+        url: '/saleschart/sales_total',
+      }).then(
+        response => {
+          console.log(response)
+          showSalesChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    salesStatsDaily() {
+      var today = (new Date()).toISOString().split('T')[0];
+
+      axios({
+        method: 'POST',
+        url: '/saleschart/sales_term',
         data: {
-          date: today
+          date1: today,
+          date2: today,
+        }
+      }).then(
+        response => {
+          showSalesChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    salesStatsWeekly() {
+      var today = (new Date()).toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 7);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+
+      axios({
+        method: 'POST',
+        url: '/saleschart/sales_term',
+        data: {
+          date1: today,
+          date2: nday,
+        }
+      }).then(
+        response => {
+          showSalesChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    salesStatsMonthly() {
+      var today = (new Date()).toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 30);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+
+      axios({
+        method: 'POST',
+        url: '/saleschart/sales_term',
+        data: {
+          date1: today,
+          date2: nday,
         }
       }).then(
         response => {
@@ -112,9 +186,9 @@ export default {
 // 통계 기본
 function showSalesChart(data) {
   var chart1 = bb.generate({
-    title: {
-      text: "매출 통계"
-    },
+    // title: {
+    //   text: "매출 통계"
+    // },
     data: {
         columns: data.bar,
         type: "bar",
@@ -139,7 +213,6 @@ function showSalesChart(data) {
     tooltip: {
       format: {
         title: function(d) {
-           // console.log(d);
   		      return 'Data ' + d;
           },
         }

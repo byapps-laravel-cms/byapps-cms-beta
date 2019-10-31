@@ -122,53 +122,59 @@ $(document).ready(function(){
 });
 
 
-  $(function() {
-   $('#start_date_chart').datepicker();
-   $('#end_date_chart').datepicker();
-   $('#start_date_table').datepicker();
-   $('#end_date_table').datepicker();
+$(function() {
+ $('#start_date_chart').datepicker();
+ $('#end_date_chart').datepicker();
+ $('#start_date_sales').datepicker();
+ $('#end_date_sales').datepicker();
+ $('#start_date_table').datepicker();
+ $('#end_date_table').datepicker();
 
-    //초기값을 오늘 날짜로 설정
-   //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-    $('#start_date_chart').datepicker('setDate', 'today');
-    $('#end_date_chart').datepicker('setDate', 'today');
-    $('#start_date_table').datepicker('setDate', 'today');
-    $('#end_date_table').datepicker('setDate', 'today');
-  });
+  //초기값을 오늘 날짜로 설정
+ //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+  $('#start_date_chart').datepicker('setDate', 'today');
+  $('#end_date_chart').datepicker('setDate', 'today');
+  $('#start_date_sales').datepicker('setDate', 'today');
+  $('#end_date_sales').datepicker('setDate', 'today');
+  $('#start_date_table').datepicker('setDate', 'today');
+  $('#end_date_table').datepicker('setDate', 'today');
+});
 
-  function stat_chartDateTerm(term) {
-    if (term == 7) {
-      $('#start_date_chart').datepicker('setDate', '-7D');
-    } else if (term == 30) {
-       $('#start_date_chart').datepicker('setDate', '-1M');
-    } else if (term == 90) {
-       $('#start_date_chart').datepicker('setDate', '-3M');
-    } else if (term == 180) {
-      $('#start_date_chart').datepicker('setDate', '-6M');
-    }
+function stat_chartDateTerm(term) {
+  if (term == 7) {
+    $('#start_date_chart').datepicker('setDate', '-7D');
+  } else if (term == 30) {
+     $('#start_date_chart').datepicker('setDate', '-1M');
+  } else if (term == 90) {
+     $('#start_date_chart').datepicker('setDate', '-3M');
+  } else if (term == 180) {
+    $('#start_date_chart').datepicker('setDate', '-6M');
   }
+}
 
-  function stat_tableDateTerm(term) {
-    if (term == 7) {
-      $('#start_date_table').datepicker('setDate', '-7D');
-    } else if (term == 30) {
-       $('#start_date_table').datepicker('setDate', '-1M');
-    } else if (term == 90) {
-       $('#start_date_table').datepicker('setDate', '-3M');
-    } else if (term == 180) {
-      $('#start_date_table').datepicker('setDate', '-6M');
-    }
+function stat_salesDateTerm(term) {
+  if (term == 7) {
+    $('#start_date_sales').datepicker('setDate', '-7D');
+  } else if (term == 30) {
+     $('#start_date_sales').datepicker('setDate', '-1M');
+  } else if (term == 90) {
+     $('#start_date_sales').datepicker('setDate', '-3M');
+  } else if (term == 180) {
+    $('#start_date_sales').datepicker('setDate', '-6M');
   }
-  // var showEntireChart = function(date1, date2) {
-  //   console.log("시작일", date1);
-  //   console.log("종료일", date2);
-  // }
+}
 
-//  보기 버튼 눌렀을때 동작
-  $('#getDate').on('click', function(){
-    //showEntireChart($('#start_date_chart').val(), $('#end_date_chart').val());
-    //app_stats_daily($('#end_date_chart').val());
-  });
+function stat_tableDateTerm(term) {
+  if (term == 7) {
+    $('#start_date_table').datepicker('setDate', '-7D');
+  } else if (term == 30) {
+     $('#start_date_table').datepicker('setDate', '-1M');
+  } else if (term == 90) {
+     $('#start_date_table').datepicker('setDate', '-3M');
+  } else if (term == 180) {
+    $('#start_date_table').datepicker('setDate', '-6M');
+  }
+}
 </script>
 
 <script>

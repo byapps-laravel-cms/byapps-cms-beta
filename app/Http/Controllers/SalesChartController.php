@@ -9,11 +9,13 @@ use App\AppsPaymentData;
 class SalesChartController extends Controller
 {
   // 매출 통계 일간
-  public function onGetSalesDailyChartData()
+  public function onGetSalesTermChartData(Request $request)
   {
     // mktime (시, 분, 초, 월, 일, 년)
-    $from = mktime(0, 0, 0, date("03"), date("d"), date("Y"));
-    $to = mktime(23, 59, 59, date("03"), date("d"), date("Y"));
+    // $from = mktime(0, 0, 0, date("03"), date("d"), date("Y"));
+    // $to = mktime(23, 59, 59, date("03"), date("d"), date("Y"));
+    $from = strtotime($request->date1);
+    $to = strtotime($request->date2);
 
     $salesTotal = AppsPaymentData::where('process', '=', '1')
                   ->whereBetween('reg_time', [$from, $to])
