@@ -1829,10 +1829,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sales.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Sales.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Charts.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Charts.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1933,34 +1933,542 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      total: '',
-      paid: '',
-      free: ''
-    };
+    return {};
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    console.log("charts here");
+    this.drawCharDefault();
+  },
   methods: {
-    getPlatformData: function getPlatformData() {
+    drawCharDefault: function drawCharDefault() {
+      var today = new Date().toISOString().split('T')[0];
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'POST',
-        url: '/sales',
+        url: '/chart',
         data: {
-          start: '#start_date_table'.val(),
-          end: '#end_date_table'.val()
+          date: today
         }
       }).then(function (response) {
-        return response;
+        showChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    showEntireChart: function showEntireChart() {
+      var date1 = $('#start_date_chart').val();
+      var date2 = $('#end_date_chart').val();
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/entire_chart',
+        data: {
+          date1: date1,
+          date2: date2
+        }
+      }).then(function (response) {
         console.log(response);
+        showChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    appStatsTotal: function appStatsTotal() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'GET',
+        url: '/chart/app_total'
+      }).then(function (response) {
+        console.log(response);
+        showAppChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    appStatsDaily: function appStatsDaily() {
+      var today = new Date().toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/app_term',
+        data: {
+          date1: today,
+          date2: today
+        }
+      }).then(function (response) {
+        console.log(response);
+        showAppChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    appStatsWeekly: function appStatsWeekly() {
+      var today = new Date().toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 7);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/app_term',
+        data: {
+          date1: today,
+          date2: nday
+        }
+      }).then(function (response) {
+        console.log(response);
+        showAppChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    appStatsMonthly: function appStatsMonthly() {
+      var today = new Date().toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 30);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/app_term',
+        data: {
+          date1: today,
+          date2: nday
+        }
+      }).then(function (response) {
+        console.log(response);
+        showAppChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    maStatsTotal: function maStatsTotal() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'GET',
+        url: '/chart/ma_total'
+      }).then(function (response) {
+        console.log(response);
+        showMaChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    maStatsDaily: function maStatsDaily() {
+      var today = new Date().toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/ma_term',
+        data: {
+          date1: today,
+          date2: today
+        }
+      }).then(function (response) {
+        console.log(response);
+        showMaChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    maStatsWeekly: function maStatsWeekly() {
+      var today = new Date().toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 7);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/ma_term',
+        data: {
+          date1: today,
+          date2: nday
+        }
+      }).then(function (response) {
+        console.log(response);
+        showMaChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    maStatsMonthly: function maStatsMonthly() {
+      var today = new Date().toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 30);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/ma_term',
+        data: {
+          date1: today,
+          date2: nday
+        }
+      }).then(function (response) {
+        console.log(response);
+        showMaChart(response.data);
       }, function (error) {
         console.log(error);
       });
     }
   }
 });
+
+function showChart(data) {
+  var chart1 = bb.generate({
+    data: {
+      columns: data.circle1,
+      type: "donut",
+      colors: {
+        "무료": "#17b4dd",
+        "유료": "#038db2",
+        "관리": "#69bbd1"
+      },
+      onover: function onover(d) {//console.log("onover", d)
+      }
+    },
+    tooltip: {
+      format: {
+        value: function value(_value) {
+          return _value;
+        }
+      }
+    },
+    donut: {
+      title: "앱 서비스 통계",
+      label: {
+        format: function format(value, ratio, id) {
+          return value + "개\n" + (ratio * 100).toFixed(1) + "%";
+        }
+      }
+    },
+    bindto: "#app_stats"
+  });
+  var chart2 = bb.generate({
+    data: {
+      columns: data.circle2,
+      type: "donut",
+      colors: {
+        "무료": "#f6b300",
+        "유료": "#e88d00",
+        "관리": "#fcca8f"
+      }
+    },
+    donut: {
+      title: "MA 통계",
+      label: {
+        format: function format(value, ratio, id) {
+          return value + "개 \n" + (ratio * 100).toFixed(1) + "%";
+        }
+      }
+    },
+    bindto: "#ma_stats"
+  });
+  var chart3 = bb.generate({
+    data: {
+      columns: data.circle3,
+      type: "donut",
+      colors: {
+        "무료": "#009634",
+        "유료": "#35ba62",
+        "관리": "#95dbac"
+      }
+    },
+    donut: {
+      title: "MA 통합",
+      label: {
+        format: function format(value, ratio, id) {
+          return value + "개 \n" + (ratio * 100).toFixed(1) + "%";
+        }
+      }
+    },
+    bindto: "#ma_integ_stats"
+  });
+}
+
+function showAppChart(data) {
+  var chart = bb.generate({
+    data: {
+      columns: data.circle1,
+      type: "donut",
+      colors: {
+        "무료": "#17b4dd",
+        "유료": "#038db2",
+        "관리": "#69bbd1"
+      }
+    },
+    tooltip: {
+      format: {
+        value: function value(_value2) {
+          return _value2;
+        }
+      }
+    },
+    donut: {
+      title: "앱 통계",
+      label: {
+        format: function format(value, ratio, id) {
+          return value + "개\n" + (ratio * 100).toFixed(1) + "%";
+        }
+      }
+    },
+    bindto: "#app_stats"
+  });
+}
+
+function showMaChart(data) {
+  var chart2 = bb.generate({
+    data: {
+      columns: data.circle2,
+      type: "donut",
+      colors: {
+        "무료": "#f6b300",
+        "유료": "#e88d00",
+        "관리": "#fcca8f"
+      }
+    },
+    donut: {
+      title: "MA 통계",
+      label: {
+        format: function format(value, ratio, id) {
+          return value + "개 \n" + (ratio * 100).toFixed(1) + "%";
+        }
+      }
+    },
+    bindto: "#ma_stats"
+  });
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SalesChart.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SalesChart.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  mounted: function mounted() {
+    console.log("sales chart here");
+    this.drawSalesCharDefault();
+  },
+  methods: {
+    drawSalesCharDefault: function drawSalesCharDefault() {
+      var today = new Date().toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/saleschart'
+      }).then(function (response) {
+        showSalesChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    showEntireSalesChart: function showEntireSalesChart() {
+      var date1 = $('#start_date_sales').val();
+      var date2 = $('#end_date_sales').val();
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/saleschart/entire_chart',
+        data: {
+          date1: date1,
+          date2: date2
+        }
+      }).then(function (response) {
+        console.log(response);
+        showSalesChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    salesStatsTotal: function salesStatsTotal() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'GET',
+        url: '/saleschart/sales_total'
+      }).then(function (response) {
+        console.log(response);
+        showSalesChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    salesStatsDaily: function salesStatsDaily() {
+      var today = new Date().toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/saleschart/sales_term',
+        data: {
+          date1: today,
+          date2: today
+        }
+      }).then(function (response) {
+        showSalesChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    salesStatsWeekly: function salesStatsWeekly() {
+      var today = new Date().toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 7);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/saleschart/sales_term',
+        data: {
+          date1: today,
+          date2: nday
+        }
+      }).then(function (response) {
+        showSalesChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    salesStatsMonthly: function salesStatsMonthly() {
+      var today = new Date().toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 30);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/saleschart/sales_term',
+        data: {
+          date1: today,
+          date2: nday
+        }
+      }).then(function (response) {
+        showSalesChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    }
+  }
+}); // 통계 기본
+
+function showSalesChart(data) {
+  var chart1 = bb.generate({
+    // title: {
+    //   text: "매출 통계"
+    // },
+    data: {
+      columns: data.bar,
+      type: "bar",
+      colors: {
+        "전체": "#97215c",
+        "신규": "#fca1b0",
+        "연장": "#f9637c",
+        "기타": "#d7215c"
+      },
+      labels: {
+        centered: true,
+        format: function format(x) {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+      }
+    },
+    bar: {
+      width: {
+        ratio: 0.8
+      }
+    },
+    tooltip: {
+      format: {
+        title: function title(d) {
+          return 'Data ' + d;
+        }
+      }
+    },
+    bindto: "#sale_stats"
+  });
+}
 
 /***/ }),
 
@@ -2454,10 +2962,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sales.vue?vue&type=template&id=6545489e&":
-/*!********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Sales.vue?vue&type=template&id=6545489e& ***!
-  \********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Charts.vue?vue&type=template&id=340ac000&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Charts.vue?vue&type=template&id=340ac000& ***!
+  \*********************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2465,8 +2973,631 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
-var staticRenderFns = []
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-title" }, [
+      _c("div", { staticClass: "row justify-content-md-center mb-5" }, [
+        _c("div", { staticClass: "col-md-9" }, [
+          _c("div", { staticClass: "input-group" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control datepicker",
+              attrs: {
+                type: "text",
+                id: "start_date_chart",
+                name: "start_date_chart",
+                value: "",
+                maxlength: "10",
+                placeholder: "날짜입력",
+                autocomplete: "false"
+              }
+            }),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control datepicker",
+              attrs: {
+                type: "text",
+                id: "end_date_chart",
+                name: "end_date_chart",
+                value: "",
+                maxlength: "10",
+                placeholder: "날짜입력",
+                autocomplete: "false"
+              }
+            }),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _vm._m(4),
+            _vm._v(" "),
+            _vm._m(5),
+            _vm._v(" "),
+            _vm._m(6),
+            _vm._v(" "),
+            _vm._m(7),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c("span", { staticClass: "input-group-text" }, [
+                _c(
+                  "a",
+                  {
+                    attrs: { id: "getDate", href: "javascript:void(0)" },
+                    on: { click: _vm.showEntireChart }
+                  },
+                  [
+                    _c("i", { staticClass: "entypo-chart-bar" }),
+                    _vm._v(" 보기")
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "dragbox_hover row collapse show", attrs: { id: "app" } },
+      [
+        _c("div", { staticClass: "col-xs-12 col-md-4" }, [
+          _c("div", { attrs: { align: "center" } }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.appStatsDaily }
+              },
+              [_vm._v("일간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.appStatsWeekly }
+              },
+              [_vm._v("주간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.appStatMonthly }
+              },
+              [_vm._v("월간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.appStatsTotal }
+              },
+              [_vm._v("전체")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "app_stats" } })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-xs-12 col-md-4" }, [
+          _c("div", { attrs: { align: "center" } }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.maStatsDaily }
+              },
+              [_vm._v("일간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.maStatsWeekly }
+              },
+              [_vm._v("주간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.maStatsMonthly }
+              },
+              [_vm._v("월간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.maStatsTotal }
+              },
+              [_vm._v("전체")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "ma_stats" } })
+        ]),
+        _vm._v(" "),
+        _vm._m(8)
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cal_box" }, [
+      _c("div", { staticClass: "card-title m-2" }, [
+        _c("i", { staticClass: "fi-menu" }),
+        _vm._v(" 통계\n        "),
+        _c(
+          "button",
+          {
+            staticClass: "btn float-right",
+            attrs: {
+              type: "button",
+              "data-toggle": "collapse",
+              "data-target": "#allchart",
+              "aria-expanded": "true",
+              "aria-controls": "allchart"
+            }
+          },
+          [_c("i", { staticClass: "dripicons-chevron-down" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("통계기간")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("부터")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("까지")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_chartDateTerm(7)"
+            }
+          },
+          [_vm._v("일주일")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_chartDateTerm(30)"
+            }
+          },
+          [_vm._v("1개월")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_chartDateTerm(90)"
+            }
+          },
+          [_vm._v("3개월")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_chartDateTerm(180)"
+            }
+          },
+          [_vm._v("6개월")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xs-12 col-md-4" }, [
+      _c("div", { attrs: { align: "center" } }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+            attrs: { onclick: "ma_integ_stats_daily()" }
+          },
+          [_vm._v("일간")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+          },
+          [_vm._v("주간")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+          },
+          [_vm._v("월간")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+            attrs: { onclick: "ma_integ_stats_total()" }
+          },
+          [_vm._v("전체")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "ma_integ_stats" } })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-title" }, [
+      _c("div", { staticClass: "row justify-content-md-center mb-5" }, [
+        _c("div", { staticClass: "col-md-9" }, [
+          _c("div", { staticClass: "input-group" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control datepicker",
+              attrs: {
+                type: "text",
+                id: "start_date_sales",
+                name: "start_date_sales",
+                value: "",
+                maxlength: "10",
+                placeholder: "날짜입력",
+                autocomplete: "false"
+              }
+            }),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control datepicker",
+              attrs: {
+                type: "text",
+                id: "end_date_sales",
+                name: "end_date_sales",
+                value: "",
+                maxlength: "10",
+                placeholder: "날짜입력",
+                autocomplete: "false"
+              }
+            }),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _vm._m(4),
+            _vm._v(" "),
+            _vm._m(5),
+            _vm._v(" "),
+            _vm._m(6),
+            _vm._v(" "),
+            _vm._m(7),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c("span", { staticClass: "input-group-text" }, [
+                _c(
+                  "a",
+                  {
+                    attrs: { id: "getDate", href: "javascript:void(0)" },
+                    on: { click: _vm.showEntireSalesChart }
+                  },
+                  [
+                    _c("i", { staticClass: "entypo-chart-bar" }),
+                    _vm._v(" 보기")
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "dragbox_hover row collapse show",
+        attrs: { id: "allchart" }
+      },
+      [
+        _c("div", { staticClass: "col-xs-12 col-md-12 pl-0 pr-5" }, [
+          _c("div", { attrs: { align: "center" } }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.salesStatsDaily }
+              },
+              [_vm._v("일간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.salesStatsWeekly }
+              },
+              [_vm._v("주간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.salesStatsMonthly }
+              },
+              [_vm._v("월간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.salesStatsTotal }
+              },
+              [_vm._v("전체")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", {
+            attrs: {
+              id: "sale_stats",
+              "data-toggle": "modal",
+              "data-target": "#lankDetail"
+            }
+          })
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cal_box" }, [
+      _c("div", { staticClass: "card-title m-2" }, [
+        _c("i", { staticClass: "fi-menu" }),
+        _vm._v(" 매출 통계\n          "),
+        _c(
+          "button",
+          {
+            staticClass: "btn float-right",
+            attrs: {
+              type: "button",
+              "data-toggle": "collapse",
+              "data-target": "#allchart",
+              "aria-expanded": "true",
+              "aria-controls": "allchart"
+            }
+          },
+          [_c("i", { staticClass: "dripicons-chevron-down" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("통계기간")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("부터")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("까지")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_salesDateTerm(7)"
+            }
+          },
+          [_vm._v("일주일")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_salesDateTerm(30)"
+            }
+          },
+          [_vm._v("1개월")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_salesDateTerm(90)"
+            }
+          },
+          [_vm._v("3개월")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_salesDateTerm(180)"
+            }
+          },
+          [_vm._v("6개월")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
 
 
 
@@ -14600,7 +15731,9 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-Vue.component('sales-component', __webpack_require__(/*! ./components/Sales.vue */ "./resources/js/components/Sales.vue")["default"]); // Vue.component('expired', require('./components/ExpiredList.vue').default);
+Vue.component('chart', __webpack_require__(/*! ./components/Charts.vue */ "./resources/js/components/Charts.vue")["default"]);
+Vue.component('saleschart', __webpack_require__(/*! ./components/SalesChart.vue */ "./resources/js/components/SalesChart.vue")["default"]); // Vue.component('sales-component', require('./components/Sales.vue').default);
+// Vue.component('expired', require('./components/ExpiredList.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -14614,17 +15747,17 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ "./resources/js/components/Sales.vue":
-/*!*******************************************!*\
-  !*** ./resources/js/components/Sales.vue ***!
-  \*******************************************/
+/***/ "./resources/js/components/Charts.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/Charts.vue ***!
+  \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Sales_vue_vue_type_template_id_6545489e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sales.vue?vue&type=template&id=6545489e& */ "./resources/js/components/Sales.vue?vue&type=template&id=6545489e&");
-/* harmony import */ var _Sales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Sales.vue?vue&type=script&lang=js& */ "./resources/js/components/Sales.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Charts_vue_vue_type_template_id_340ac000___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Charts.vue?vue&type=template&id=340ac000& */ "./resources/js/components/Charts.vue?vue&type=template&id=340ac000&");
+/* harmony import */ var _Charts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Charts.vue?vue&type=script&lang=js& */ "./resources/js/components/Charts.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -14634,9 +15767,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Sales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Sales_vue_vue_type_template_id_6545489e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Sales_vue_vue_type_template_id_6545489e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Charts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Charts_vue_vue_type_template_id_340ac000___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Charts_vue_vue_type_template_id_340ac000___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -14646,38 +15779,108 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Sales.vue"
+component.options.__file = "resources/js/components/Charts.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Sales.vue?vue&type=script&lang=js&":
-/*!********************************************************************!*\
-  !*** ./resources/js/components/Sales.vue?vue&type=script&lang=js& ***!
-  \********************************************************************/
+/***/ "./resources/js/components/Charts.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Charts.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Sales.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sales.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Charts.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Charts.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Sales.vue?vue&type=template&id=6545489e&":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/Sales.vue?vue&type=template&id=6545489e& ***!
-  \**************************************************************************/
+/***/ "./resources/js/components/Charts.vue?vue&type=template&id=340ac000&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/Charts.vue?vue&type=template&id=340ac000& ***!
+  \***************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sales_vue_vue_type_template_id_6545489e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Sales.vue?vue&type=template&id=6545489e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sales.vue?vue&type=template&id=6545489e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sales_vue_vue_type_template_id_6545489e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_template_id_340ac000___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Charts.vue?vue&type=template&id=340ac000& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Charts.vue?vue&type=template&id=340ac000&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_template_id_340ac000___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sales_vue_vue_type_template_id_6545489e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_template_id_340ac000___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/SalesChart.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/SalesChart.vue ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SalesChart.vue?vue&type=template&id=1c74ac46& */ "./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46&");
+/* harmony import */ var _SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SalesChart.vue?vue&type=script&lang=js& */ "./resources/js/components/SalesChart.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/SalesChart.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/SalesChart.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/SalesChart.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SalesChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SalesChart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SalesChart.vue?vue&type=template&id=1c74ac46& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

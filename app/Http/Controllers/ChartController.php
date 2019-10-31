@@ -18,6 +18,7 @@ class ChartController extends Controller
       // original query: select count(*) from BYAPPS_apps_data where app_process='7' and ( service_type='lite' or ((end_time-".time().")/86400)>'0' )
       // select count(*) from BYAPPS_apps_data where app_process='7' and ( service_type='lite' or (end_time-unix_timestamp())>'0' )
       // select count(*) from BYAPPS_apps_data where app_process='7' and ( service_type='lite' or (end_time > unix_timestamp()))
+      // service_type이 lite라는 의미는 한번 등록시 평생 가는 업체임
       $appsTotal = AppsData::where('app_process', '=', '7')
                     ->where(function($query){
                       $query->where('service_type', '=', 'lite')->orWhere('end_time', '>', time());
@@ -27,7 +28,7 @@ class ChartController extends Controller
       // 유료
       // original query: select count(*) from (select order_id from BYAPPS_apps_data where app_process='7' and ( service_type='lite' or ((end_time-".time().")/86400)>'0') ) a
       //                 inner join (select order_id from BYAPPS_apps_payment_data where process='1' and amount>'0' group by order_id) b on a.order_id=b.order_id
-      // 연장(pay_type = 1), 신규, 결제금액이 있는 경우, 서비스유효
+      // 연장(pay_type = 1), 신규, 결제금액이 있는 경우, 서비스유효(end_time이 현재보다 크다는 것은 서비스 유효임)
       $appsPaid = DB::table('marutm1.BYAPPS_apps_data as A')
                   ->leftJoin('marutm1.BYAPPS_apps_payment_data as B', 'A.order_id', '=', 'B.order_id')
                   ->where('A.app_process', '=', '7')
@@ -60,23 +61,20 @@ class ChartController extends Controller
       return $result;
     }
 
-    public function onGetAppDailyChartData(Request $request)
+    // 등록일을 기준으로 일간, 주간, 월간 데이터를 뽑음
+    public function onGetAppTermChartData(Request $request)
     {
-      // $result = array(
-      //     'circle1' => array(
-      //         array('무료', 300),
-      //         array('유료', 200),
-      //         array('관리', 100),
-      //     )
-      // );
-      info($request);
-      $date = strtotime($date);
+      //info("~~~~~~~~~~~".$request->date);
+      $target_date1 = strtotime($request->date1);
+      $target_date2 = strtotime($request->date2);
+      //$target_date2 = strtotime('-1 week', strtotime($request->date));
 
       // 전체
       $appsTotal = AppsData::where('app_process', '=', '7')
-                    ->where(function($query){
-                      $query->where('service_type', '=', 'lite')->orWhere('end_time', '>', $date);
+                    ->where(function($query) use ($target_date1, $target_date2) {
+                      $query->where('service_type', '=', 'lite')->orWhere('end_time', '>', $target_date2);
                     })
+                    ->whereBetween('reg_time', [ $target_date1, $target_date2 ])
                     ->count();
 
       // 유료
@@ -85,9 +83,10 @@ class ChartController extends Controller
                   ->leftJoin('marutm1.BYAPPS_apps_payment_data as B', 'A.order_id', '=', 'B.order_id')
                   ->where('A.app_process', '=', '7')
                   //->selectRaw("'A.service_type' = 'lite' or 'A.end_time' > unix_timestamp()")
-                  ->where(function($query){
-                    $query->where('A.service_type', '=', 'lite')->orWhere('A.end_time', '>', $date);
+                  ->where(function($query) use ($target_date1, $target_date2) {
+                    $query->where('A.service_type', '=', 'lite')->orWhere('A.end_time', '>', $target_date2);
                   })
+                  ->whereBetween('A.reg_time', [ $target_date1, $target_date2 ])
                   ->where('B.process', '=', '1')
                   ->where('B.amount', '>', '0')
                   ->distinct()
@@ -112,7 +111,7 @@ class ChartController extends Controller
       return $result;
     }
 
-    // MA 통계
+    // MA 전체 통계
     public function onGetMaChartData()
     {
       // 전체
@@ -125,7 +124,6 @@ class ChartController extends Controller
       // original query: select count(*) from (select order_id from BYAPPS_MA_data where app_process='3' and ((end_time-".time().")/86400)>'0') a
       //                 inner join (select order_id from BYAPPS_apps_payment_data where process='1' and amount>'0' group by order_id) b on a.order_id=b.order_id
       // select count(*) from (select order_id from BYAPPS_MA_data where app_process='3' and ((end_time-unix_timestamp())/86400)>'0') a inner join (select order_id from BYAPPS_apps_payment_data where process='1' and amount>'0' group by order_id) b on a.order_id=b.order_id
-
       $maPaid = DB::table('marutm1.BYAPPS_MA_data as A')
                 ->leftJoin('marutm1.BYAPPS_apps_payment_data as B', 'A.order_id', '=', 'B.order_id')
                 ->where('A.app_process', '=', '3')
@@ -153,10 +151,58 @@ class ChartController extends Controller
       return $result;
     }
 
-    public function onGetMaDailyChartData()
+    // MA 통계 일간, 주간, 월간
+    public function onGetMaTermChartData(Request $request)
     {
+      $target_date1 = strtotime($request->date1);
+      $target_date2 = strtotime($request->date2);
+      //  $target_date2 = strtotime('-1 week', strtotime($request->date));
+
+      // 전체
+      // original query: select count(*) from BYAPPS_MA_data where app_process='3' and ((end_time-".time().")/86400)>'0'";
+      $maTotal = MAData::where('app_process', '=', '3')
+                  ->where('end_time', '>', $target_date2)
+                  ->whereBetween('reg_time', [ $target_date1, $target_date2 ])
+                  ->count();
+
+      // 유료
+      // original query: select count(*) from (select order_id from BYAPPS_MA_data where app_process='3' and ((end_time-".time().")/86400)>'0') a
+      //                 inner join (select order_id from BYAPPS_apps_payment_data where process='1' and amount>'0' group by order_id) b on a.order_id=b.order_id
+      // select count(*) from (select order_id from BYAPPS_MA_data where app_process='3' and ((end_time-unix_timestamp())/86400)>'0') a inner join (select order_id from BYAPPS_apps_payment_data where process='1' and amount>'0' group by order_id) b on a.order_id=b.order_id
+
+      $maPaid = DB::table('marutm1.BYAPPS_MA_data as A')
+                ->leftJoin('marutm1.BYAPPS_apps_payment_data as B', 'A.order_id', '=', 'B.order_id')
+                ->where('A.app_process', '=', '3')
+                ->where('A.end_time', '>', $target_date2)
+                ->where('B.process', '=', '1')
+                ->where('B.amount', '>', '0')
+                ->whereBetween('A.reg_time', [ $target_date1, $target_date2 ])
+                ->distinct()
+                ->count('A.order_id');
+
+      // 무료
+      $maFree = $maTotal - $maPaid;
+
+      // 관리
+      // original query: 없음
+      $maCheck = 10;
+
       $result = array(
         'circle2' => array(
+            array('무료', $maFree),
+            array('유료', $maPaid),
+            array('관리', $maCheck),
+        )
+      );
+
+      return $result;
+    }
+
+    // MA 통합 기본
+    public function onGetMaIntegChartData()
+    {
+      $result = array(
+        'circle3' => array(
             array('무료', 180),
             array('유료', 270),
             array('관리', 100),
@@ -166,83 +212,29 @@ class ChartController extends Controller
       return $result;
     }
 
-    // 매출 통계 일간
-    public function onGetSalesDailyChartData()
+    // MA 통합 일간
+    public function onGetMaIntegDailyChartData()
     {
-      // mktime (시, 분, 초, 월, 일, 년)
-      $from = mktime(0, 0, 0, date("03"), date("d"), date("Y"));
-      $to = mktime(23, 59, 59, date("03"), date("d"), date("Y"));
-
-      $salesTotal = AppsPaymentData::where('process', '=', '1')
-                    ->whereBetween('reg_time', [$from, $to])
-                    ->orderBy('idx', 'asc')
-                    ->sum('amount');
-
-      // 신규
-      $salesNew = AppsPaymentData::where('process', '=', '1')
-                  ->whereBetween('reg_time', [$from, $to])
-                  ->orderBy('idx', 'asc')
-                  ->sum(DB::Raw("case when pay_type='0' then amount end"));
-
-      // 연장
-      $salesCon = AppsPaymentData::where('process', '=', '1')
-                  ->whereBetween('reg_time', [$from, $to])
-                  ->orderBy('idx', 'asc')
-                  ->sum(DB::Raw("case when pay_type='1' then amount end"));
-
-      $salesEtc = $salesTotal - ($salesNew + $salesCon);
-
       $result = array(
-        'bar' => array(
-            array('전체', $salesTotal),
-            array('신규', $salesNew),
-            array('연장', $salesCon),
-            array('기타', $salesEtc),
+        'circle3' => array(
+            array('무료', 180),
+            array('유료', 270),
+            array('관리', 100),
         )
       );
 
       return $result;
     }
 
-    // 매출 통계
-    public function onGetSalesChartData()
+    public function onGetEntireChartData(Request $request)
     {
-      // 전체
-      // origianl query: SELECT sum(amount) as total, sum(case when pay_type='0' then amount end) as newt, sum(case when pay_type='1' then amount end) as con
-      //                 FROM BYAPPS_apps_payment_data where process=1 and (reg_time between '".get_mktime(date("Y-m")."-01-0-0-0")."' and '".get_mktime(date("Y-m")."-31-23-59-59")."')
-      //                 order by idx asc
-      // SELECT sum(amount) as total, sum(case when pay_type='0' then amount end) as newt, sum(case when pay_type='1' then amount end) as con
-      // FROM BYAPPS_apps_payment_data where process=1 and (reg_time between unix_timestamp('2019-03-01 00:00:00') and unix_timestamp('2019-03-31 23:59:59')) order by idx asc
-
-      $from = mktime(0, 0, 0, date("03"), 01, date("Y"));
-      $to = mktime(23, 59, 59, date("03"), 31, date("Y"));
-
-      $salesTotal = AppsPaymentData::where('process', '=', '1')
-                    ->whereBetween('reg_time', [$from, $to])
-                    ->orderBy('idx', 'asc')
-                    ->sum('amount');
-
-      // 신규
-      $salesNew = AppsPaymentData::where('process', '=', '1')
-                  ->whereBetween('reg_time', [$from, $to])
-                  ->orderBy('idx', 'asc')
-                  ->sum(DB::Raw("case when pay_type='0' then amount end"));
-
-      // 연장
-      $salesCon = AppsPaymentData::where('process', '=', '1')
-                  ->whereBetween('reg_time', [$from, $to])
-                  ->orderBy('idx', 'asc')
-                  ->sum(DB::Raw("case when pay_type='1' then amount end"));
-
-      $salesEtc = $salesTotal - ($salesNew + $salesCon);
+      $target_date1 = strtotime($request->date1);
+      $target_date2 = strtotime($request->date2);
 
       $result = array(
-        'bar' => array(
-            array('전체', $salesTotal),
-            array('신규', $salesNew),
-            array('연장', $salesCon),
-            array('기타', $salesEtc),
-        )
+        'circle1' => $this->onGetAppTermChartData($request)['circle1'],
+        'circle2' => $this->onGetMaTermChartData($request)['circle2'],
+        'circle3' => $this->onGetMaIntegChartData()['circle3']
       );
 
       return $result;
@@ -253,7 +245,7 @@ class ChartController extends Controller
       $result = array(
         'circle1' => $this->onGetAppChartData()['circle1'],
         'circle2' => $this->onGetMaChartData()['circle2'],
-        'bar' => $this->onGetSalesChartData()['bar']
+        'circle3' => $this->onGetMaIntegChartData()['circle3']
       );
 
       return $result;

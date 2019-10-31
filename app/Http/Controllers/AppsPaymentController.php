@@ -58,7 +58,8 @@ class AppsPaymentController extends Controller
       $appsPaymentData->receipt = $request->input('receipt');
       $appsPaymentData->save();
 
-      Session::flash('success', '업데이트 성공');
+      //Session::flash('success', '업데이트 성공');
+      toastr()->success('업데이트 성공', '', ['timeOut' => 1000, 'positionClass' => 'toast-center-center']);
 
       return redirect()->back();
     }

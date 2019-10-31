@@ -25,9 +25,17 @@ Route::get('logout', 'Auth\LoginController@logout');
 
 // 차트 데이터
 Route::post('/chart', 'ChartController@index');
-Route::post('/chart/app_daily', 'ChartController@onGetAppDailyChartData');
+Route::post('/chart/entire_chart', 'ChartController@onGetEntireChartData');
+Route::post('/chart/app_term', 'ChartController@onGetAppTermChartData');
 Route::get('/chart/app_total', 'ChartController@onGetAppChartData');
-Route::get('/chart/ma_daily', 'ChartController@onGetMaDailyChartData');
+Route::post('/chart/ma_term', 'ChartController@onGetMaTermChartData');
+Route::get('/chart/ma_total', 'ChartController@onGetMaChartData');
+
+// 매출 차트 데이터
+Route::post('/saleschart', 'SalesChartController@index');
+Route::post('/saleschart/entire_chart', 'SalesChartController@onGetEntireSalesChartData');
+Route::post('/saleschart/sales_term', 'SalesChartController@onGetSalesTermChartData');
+Route::get('/saleschart/sales_total', 'SalesChartController@onGetSalesChartData');
 
 // 매출 통계표
 Route::post('/sales', 'SalesController@getPlatformData');

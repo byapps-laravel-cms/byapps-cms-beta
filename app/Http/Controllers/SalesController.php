@@ -34,12 +34,12 @@ class SalesController extends Controller
 
         $term = $this->getTerm($start, $end);
 
-        info(strtotime($start));
-        info((60*60*24*$term));
+        //info(strtotime($start));
+        //info((60*60*24*$term));
 
         // 이번주
         $thisTotal = AppsData::where('app_process', '!=', 8)
-                           ->whereBetween('reg_time', [strtotime($start), strtotime($end)])
+                          ->whereBetween('reg_time', [strtotime($start), strtotime($end)])
                           ->count();
 
         $thisFree = AppsData::where('app_process', '!=', 8)
