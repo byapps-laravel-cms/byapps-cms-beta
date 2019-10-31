@@ -72,7 +72,7 @@ class ChartController extends Controller
       // 전체
       $appsTotal = AppsData::where('app_process', '=', '7')
                     ->where(function($query) use ($target_date1, $target_date2) {
-                      $query->where('service_type', '=', 'lite')->orWhere('end_time', '>', $target_date1);
+                      $query->where('service_type', '=', 'lite')->orWhere('end_time', '>', $target_date2);
                     })
                     ->whereBetween('reg_time', [ $target_date1, $target_date2 ])
                     ->count();
@@ -84,7 +84,7 @@ class ChartController extends Controller
                   ->where('A.app_process', '=', '7')
                   //->selectRaw("'A.service_type' = 'lite' or 'A.end_time' > unix_timestamp()")
                   ->where(function($query) use ($target_date1, $target_date2) {
-                    $query->where('A.service_type', '=', 'lite')->orWhere('A.end_time', '>', $target_date1);
+                    $query->where('A.service_type', '=', 'lite')->orWhere('A.end_time', '>', $target_date2);
                   })
                   ->whereBetween('A.reg_time', [ $target_date1, $target_date2 ])
                   ->where('B.process', '=', '1')
@@ -161,7 +161,7 @@ class ChartController extends Controller
       // 전체
       // original query: select count(*) from BYAPPS_MA_data where app_process='3' and ((end_time-".time().")/86400)>'0'";
       $maTotal = MAData::where('app_process', '=', '3')
-                  ->where('end_time', '>', $target_date1)
+                  ->where('end_time', '>', $target_date2)
                   ->whereBetween('reg_time', [ $target_date1, $target_date2 ])
                   ->count();
 
@@ -173,7 +173,7 @@ class ChartController extends Controller
       $maPaid = DB::table('marutm1.BYAPPS_MA_data as A')
                 ->leftJoin('marutm1.BYAPPS_apps_payment_data as B', 'A.order_id', '=', 'B.order_id')
                 ->where('A.app_process', '=', '3')
-                ->where('A.end_time', '>', $target_date1)
+                ->where('A.end_time', '>', $target_date2)
                 ->where('B.process', '=', '1')
                 ->where('B.amount', '>', '0')
                 ->whereBetween('A.reg_time', [ $target_date1, $target_date2 ])

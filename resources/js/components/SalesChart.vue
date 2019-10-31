@@ -48,7 +48,7 @@
             </div>
             <div class="input-group-append">
               <span class="input-group-text">
-                <a id="getDate" href="javascript:void(0)" @click="showEntireChart"><i class="entypo-chart-bar"></i> 보기</a>
+                <a id="getDate" href="javascript:void(0)" @click="showEntireSalesChart"><i class="entypo-chart-bar"></i> 보기</a>
               </span>
             </div>
           </div>
@@ -96,6 +96,26 @@ export default {
         url: '/saleschart',
       }).then(
         response => {
+          showSalesChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    showEntireSalesChart() {
+      var date1 = $('#start_date_sales').val();
+      var date2 = $('#end_date_sales').val();
+      axios({
+        method: 'POST',
+        url: '/saleschart/entire_chart',
+        data: {
+          date1: date1,
+          date2: date2,
+        }
+      }).then(
+        response => {
+          console.log(response)
           showSalesChart(response.data)
         },
         error => {

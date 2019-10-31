@@ -1950,6 +1950,20 @@ __webpack_require__.r(__webpack_exports__);
     this.drawCharDefault();
   },
   methods: {
+    drawCharDefault: function drawCharDefault() {
+      var today = new Date().toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart',
+        data: {
+          date: today
+        }
+      }).then(function (response) {
+        showChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
     showEntireChart: function showEntireChart() {
       var date1 = $('#start_date_chart').val();
       var date2 = $('#end_date_chart').val();
@@ -1962,20 +1976,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         console.log(response);
-        showChart(response.data);
-      }, function (error) {
-        console.log(error);
-      });
-    },
-    drawCharDefault: function drawCharDefault() {
-      var today = new Date().toISOString().split('T')[0];
-      axios__WEBPACK_IMPORTED_MODULE_0___default()({
-        method: 'POST',
-        url: '/chart',
-        data: {
-          date: today
-        }
-      }).then(function (response) {
         showChart(response.data);
       }, function (error) {
         console.log(error);
@@ -2027,6 +2027,25 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
+    appStatsMonthly: function appStatsMonthly() {
+      var today = new Date().toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 30);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/app_term',
+        data: {
+          date1: today,
+          date2: nday
+        }
+      }).then(function (response) {
+        console.log(response);
+        showAppChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
     maStatsTotal: function maStatsTotal() {
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'GET',
@@ -2058,6 +2077,25 @@ __webpack_require__.r(__webpack_exports__);
       var today = new Date().toISOString().split('T')[0];
       var newDate = new Date(today);
       newDate.setDate(newDate.getDate() - 7);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/ma_term',
+        data: {
+          date1: today,
+          date2: nday
+        }
+      }).then(function (response) {
+        console.log(response);
+        showMaChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    maStatsMonthly: function maStatsMonthly() {
+      var today = new Date().toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 30);
       var nday = new Date(newDate).toISOString().split('T')[0];
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'POST',
@@ -2308,6 +2346,23 @@ __webpack_require__.r(__webpack_exports__);
         method: 'POST',
         url: '/saleschart'
       }).then(function (response) {
+        showSalesChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    showEntireSalesChart: function showEntireSalesChart() {
+      var date1 = $('#start_date_sales').val();
+      var date2 = $('#end_date_sales').val();
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/saleschart/entire_chart',
+        data: {
+          date1: date1,
+          date2: date2
+        }
+      }).then(function (response) {
+        console.log(response);
         showSalesChart(response.data);
       }, function (error) {
         console.log(error);
@@ -3019,7 +3074,8 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.appStatMonthly }
               },
               [_vm._v("월간")]
             ),
@@ -3064,7 +3120,8 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.maStatsMonthly }
               },
               [_vm._v("월간")]
             ),
@@ -3337,7 +3394,7 @@ var render = function() {
                   "a",
                   {
                     attrs: { id: "getDate", href: "javascript:void(0)" },
-                    on: { click: _vm.showEntireChart }
+                    on: { click: _vm.showEntireSalesChart }
                   },
                   [
                     _c("i", { staticClass: "entypo-chart-bar" }),

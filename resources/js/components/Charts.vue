@@ -66,7 +66,7 @@
         <div align="center">
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsDaily">일간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsWeekly">주간</button>
-          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">월간</button>
+          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatMonthly">월간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsTotal">전체</button>
         </div>
         <div id="app_stats"></div>
@@ -77,7 +77,7 @@
           <div align="center">
             <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="maStatsDaily">일간</button>
             <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="maStatsWeekly">주간</button>
-            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">월간</button>
+            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="maStatsMonthly">월간</button>
             <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="maStatsTotal">전체</button>
           </div>
           <div id="ma_stats"></div>
@@ -110,6 +110,23 @@ export default {
     this.drawCharDefault();
   },
   methods: {
+    drawCharDefault() {
+      var today = (new Date()).toISOString().split('T')[0];
+      axios({
+        method: 'POST',
+        url: '/chart',
+        data: {
+          date: today
+        }
+      }).then(
+        response => {
+          showChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
     showEntireChart() {
       var date1 = $('#start_date_chart').val();
       var date2 = $('#end_date_chart').val();
@@ -123,23 +140,6 @@ export default {
       }).then(
         response => {
           console.log(response)
-          showChart(response.data)
-        },
-        error => {
-          console.log(error)
-        }
-      )
-    },
-    drawCharDefault() {
-      var today = (new Date()).toISOString().split('T')[0];
-      axios({
-        method: 'POST',
-        url: '/chart',
-        data: {
-          date: today
-        }
-      }).then(
-        response => {
           showChart(response.data)
         },
         error => {
@@ -203,6 +203,29 @@ export default {
         }
       )
     },
+    appStatsMonthly() {
+      var today = (new Date()).toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 30);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+
+      axios({
+        method: 'POST',
+        url: '/chart/app_term',
+        data: {
+          date1: today,
+          date2: nday,
+        }
+      }).then(
+        response => {
+          console.log(response)
+          showAppChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
     maStatsTotal() {
       axios({
         method: 'GET',
@@ -241,6 +264,29 @@ export default {
       var today = (new Date()).toISOString().split('T')[0];
       var newDate = new Date(today);
       newDate.setDate(newDate.getDate() - 7);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+
+      axios({
+        method: 'POST',
+        url: '/chart/ma_term',
+        data: {
+          date1: today,
+          date2: nday,
+        }
+      }).then(
+        response => {
+          console.log(response)
+          showMaChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    maStatsMonthly() {
+      var today = (new Date()).toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 30);
       var nday = new Date(newDate).toISOString().split('T')[0];
 
       axios({

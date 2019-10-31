@@ -33,6 +33,7 @@ Route::get('/chart/ma_total', 'ChartController@onGetMaChartData');
 
 // 매출 차트 데이터
 Route::post('/saleschart', 'SalesChartController@index');
+Route::post('/saleschart/entire_chart', 'SalesChartController@onGetEntireSalesChartData');
 Route::post('/saleschart/sales_term', 'SalesChartController@onGetSalesTermChartData');
 Route::get('/saleschart/sales_total', 'SalesChartController@onGetSalesChartData');
 

@@ -92,6 +92,18 @@ class SalesChartController extends Controller
     return $result;
   }
 
+  public function onGetEntireSalesChartData(Request $request)
+  {
+    $from = strtotime($request->date1);
+    $to = strtotime($request->date2);
+
+    $result = array(
+      'bar' => $this->onGetSalesTermChartData($request)['bar']
+    );
+
+    return $result;
+  }
+
   public function index() {
 
     $result = array(
