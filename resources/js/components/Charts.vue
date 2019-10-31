@@ -49,7 +49,7 @@
           </div>
           <div class="input-group-append">
             <span class="input-group-text">
-              <a id="getDate" href="javascript:void(0)" onclick="showEntireChart($('#start_date_chart').val(), $('#end_date_chart').val())"><i class="entypo-chart-bar"></i> 보기</a>
+              <a id="getDate" href="javascript:void(0)" @click="showEntireChart"><i class="entypo-chart-bar"></i> 보기</a>
             </span>
           </div>
         </div>
@@ -75,10 +75,10 @@
       <!-- MA 통계 차트 -->
       <div class="col-xs-12 col-md-4">
           <div align="center">
-            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="ma_stats_daily()">일간</button>
-            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">주간</button>
+            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="maStatsDaily">일간</button>
+            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="maStatsWeekly">주간</button>
             <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs">월간</button>
-            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" onclick="ma_stats_total()">전체</button>
+            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="maStatsTotal">전체</button>
           </div>
           <div id="ma_stats"></div>
       </div>
@@ -110,6 +110,26 @@ export default {
     this.drawCharDefault();
   },
   methods: {
+    showEntireChart() {
+      var date1 = $('#start_date_chart').val();
+      var date2 = $('#end_date_chart').val();
+      axios({
+        method: 'POST',
+        url: '/chart/entire_chart',
+        data: {
+          date1: date1,
+          date2: date2,
+        }
+      }).then(
+        response => {
+          console.log(response)
+          showChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
     drawCharDefault() {
       var today = (new Date()).toISOString().split('T')[0];
       axios({
@@ -143,13 +163,12 @@ export default {
     },
     appStatsDaily() {
       var today = (new Date()).toISOString().split('T')[0];
-      console.log(today);
       axios({
         method: 'POST',
-        url: '/chart/app_daily',
+        url: '/chart/app_term',
         data: {
-          //date: $('#start_date_chart').val(),
-          date: today,
+          date1: today,
+          date2: today,
         }
       }).then(
         response => {
@@ -163,17 +182,78 @@ export default {
     },
     appStatsWeekly() {
       var today = (new Date()).toISOString().split('T')[0];
-      console.log(today);
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 7);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+
       axios({
         method: 'POST',
-        url: '/chart/app_weekly',
+        url: '/chart/app_term',
         data: {
-          date: today,
+          date1: today,
+          date2: nday,
         }
       }).then(
         response => {
           console.log(response)
           showAppChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    maStatsTotal() {
+      axios({
+        method: 'GET',
+        url: '/chart/ma_total',
+      }).then(
+        response => {
+          console.log(response)
+          showMaChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    maStatsDaily() {
+      var today = (new Date()).toISOString().split('T')[0];
+
+      axios({
+        method: 'POST',
+        url: '/chart/ma_term',
+        data: {
+          date1: today,
+          date2: today,
+        }
+      }).then(
+        response => {
+          console.log(response)
+          showMaChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    maStatsWeekly() {
+      var today = (new Date()).toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 7);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+
+      axios({
+        method: 'POST',
+        url: '/chart/ma_term',
+        data: {
+          date1: today,
+          date2: nday,
+        }
+      }).then(
+        response => {
+          console.log(response)
+          showMaChart(response.data)
         },
         error => {
           console.log(error)
@@ -285,6 +365,29 @@ function showAppChart (data) {
       }
     },
     bindto: "#app_stats"
+  });
+}
+
+function showMaChart (data) {
+  var chart2 = bb.generate({
+    data: {
+      columns: data.circle2,
+      type: "donut",
+      colors: {
+          "무료": "#f6b300",
+          "유료": "#e88d00",
+          "관리": "#fcca8f"
+      },
+    },
+    donut: {
+      title: "MA 통계",
+      label: {
+        format: function(value, ratio, id) {
+          return value + "개 \n" + (ratio * 100).toFixed(1) + "%";
+        }
+      }
+    },
+    bindto: "#ma_stats"
   });
 }
 

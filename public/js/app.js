@@ -1950,6 +1950,23 @@ __webpack_require__.r(__webpack_exports__);
     this.drawCharDefault();
   },
   methods: {
+    showEntireChart: function showEntireChart() {
+      var date1 = $('#start_date_chart').val();
+      var date2 = $('#end_date_chart').val();
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/entire_chart',
+        data: {
+          date1: date1,
+          date2: date2
+        }
+      }).then(function (response) {
+        console.log(response);
+        showChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
     drawCharDefault: function drawCharDefault() {
       var today = new Date().toISOString().split('T')[0];
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
@@ -1977,13 +1994,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     appStatsDaily: function appStatsDaily() {
       var today = new Date().toISOString().split('T')[0];
-      console.log(today);
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'POST',
-        url: '/chart/app_daily',
+        url: '/chart/app_term',
         data: {
-          //date: $('#start_date_chart').val(),
-          date: today
+          date1: today,
+          date2: today
         }
       }).then(function (response) {
         console.log(response);
@@ -1994,16 +2010,65 @@ __webpack_require__.r(__webpack_exports__);
     },
     appStatsWeekly: function appStatsWeekly() {
       var today = new Date().toISOString().split('T')[0];
-      console.log(today);
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 7);
+      var nday = new Date(newDate).toISOString().split('T')[0];
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'POST',
-        url: '/chart/app_weekly',
+        url: '/chart/app_term',
         data: {
-          date: today
+          date1: today,
+          date2: nday
         }
       }).then(function (response) {
         console.log(response);
         showAppChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    maStatsTotal: function maStatsTotal() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'GET',
+        url: '/chart/ma_total'
+      }).then(function (response) {
+        console.log(response);
+        showMaChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    maStatsDaily: function maStatsDaily() {
+      var today = new Date().toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/ma_term',
+        data: {
+          date1: today,
+          date2: today
+        }
+      }).then(function (response) {
+        console.log(response);
+        showMaChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    maStatsWeekly: function maStatsWeekly() {
+      var today = new Date().toISOString().split('T')[0];
+      var newDate = new Date(today);
+      newDate.setDate(newDate.getDate() - 7);
+      var nday = new Date(newDate).toISOString().split('T')[0];
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/chart/ma_term',
+        data: {
+          date1: today,
+          date2: nday
+        }
+      }).then(function (response) {
+        console.log(response);
+        showMaChart(response.data);
       }, function (error) {
         console.log(error);
       });
@@ -2110,6 +2175,29 @@ function showAppChart(data) {
       }
     },
     bindto: "#app_stats"
+  });
+}
+
+function showMaChart(data) {
+  var chart2 = bb.generate({
+    data: {
+      columns: data.circle2,
+      type: "donut",
+      colors: {
+        "무료": "#f6b300",
+        "유료": "#e88d00",
+        "관리": "#fcca8f"
+      }
+    },
+    donut: {
+      title: "MA 통계",
+      label: {
+        format: function format(value, ratio, id) {
+          return value + "개 \n" + (ratio * 100).toFixed(1) + "%";
+        }
+      }
+    },
+    bindto: "#ma_stats"
   });
 }
 
@@ -2623,7 +2711,69 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _vm._m(1),
+    _c("div", { staticClass: "card-title" }, [
+      _c("div", { staticClass: "row justify-content-md-center mb-5" }, [
+        _c("div", { staticClass: "col-md-9" }, [
+          _c("div", { staticClass: "input-group" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control datepicker",
+              attrs: {
+                type: "text",
+                id: "start_date_chart",
+                name: "start_date_chart",
+                value: "",
+                maxlength: "10",
+                placeholder: "날짜입력",
+                autocomplete: "false"
+              }
+            }),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control datepicker",
+              attrs: {
+                type: "text",
+                id: "end_date_chart",
+                name: "end_date_chart",
+                value: "",
+                maxlength: "10",
+                placeholder: "날짜입력",
+                autocomplete: "false"
+              }
+            }),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _vm._m(4),
+            _vm._v(" "),
+            _vm._m(5),
+            _vm._v(" "),
+            _vm._m(6),
+            _vm._v(" "),
+            _vm._m(7),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c("span", { staticClass: "input-group-text" }, [
+                _c(
+                  "a",
+                  {
+                    attrs: { id: "getDate", href: "javascript:void(0)" },
+                    on: { click: _vm.showEntireChart }
+                  },
+                  [
+                    _c("i", { staticClass: "entypo-chart-bar" }),
+                    _vm._v(" 보기")
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -2674,9 +2824,52 @@ var render = function() {
           _c("div", { attrs: { id: "app_stats" } })
         ]),
         _vm._v(" "),
-        _vm._m(2),
+        _c("div", { staticClass: "col-xs-12 col-md-4" }, [
+          _c("div", { attrs: { align: "center" } }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.maStatsDaily }
+              },
+              [_vm._v("일간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.maStatsWeekly }
+              },
+              [_vm._v("주간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
+              },
+              [_vm._v("월간")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
+                on: { click: _vm.maStatsTotal }
+              },
+              [_vm._v("전체")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "ma_stats" } })
+        ]),
         _vm._v(" "),
-        _vm._m(3)
+        _vm._m(8)
       ]
     )
   ])
@@ -2711,131 +2904,42 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-title" }, [
-      _c("div", { staticClass: "row justify-content-md-center mb-5" }, [
-        _c("div", { staticClass: "col-md-9" }, [
-          _c("div", { staticClass: "input-group" }, [
-            _c("div", { staticClass: "input-group-prepend" }, [
-              _c("span", { staticClass: "input-group-text" }, [
-                _vm._v("통계기간")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control datepicker",
-              attrs: {
-                type: "text",
-                id: "start_date_chart",
-                name: "start_date_chart",
-                value: "",
-                maxlength: "10",
-                placeholder: "날짜입력",
-                autocomplete: "false"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c("span", { staticClass: "input-group-text" }, [_vm._v("부터")])
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control datepicker",
-              attrs: {
-                type: "text",
-                id: "end_date_chart",
-                name: "end_date_chart",
-                value: "",
-                maxlength: "10",
-                placeholder: "날짜입력",
-                autocomplete: "false"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c("span", { staticClass: "input-group-text" }, [_vm._v("까지")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c("span", { staticClass: "input-group-text" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      href: "javascript:void(0)",
-                      onclick: "stat_chartDateTerm(7)"
-                    }
-                  },
-                  [_vm._v("일주일")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c("span", { staticClass: "input-group-text" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      href: "javascript:void(0)",
-                      onclick: "stat_chartDateTerm(30)"
-                    }
-                  },
-                  [_vm._v("1개월")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c("span", { staticClass: "input-group-text" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      href: "javascript:void(0)",
-                      onclick: "stat_chartDateTerm(90)"
-                    }
-                  },
-                  [_vm._v("3개월")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c("span", { staticClass: "input-group-text" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      href: "javascript:void(0)",
-                      onclick: "stat_chartDateTerm(180)"
-                    }
-                  },
-                  [_vm._v("6개월")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c("span", { staticClass: "input-group-text" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      id: "getDate",
-                      href: "javascript:void(0)",
-                      onclick:
-                        "showEntireChart($('#start_date_chart').val(), $('#end_date_chart').val())"
-                    }
-                  },
-                  [
-                    _c("i", { staticClass: "entypo-chart-bar" }),
-                    _vm._v(" 보기")
-                  ]
-                )
-              ])
-            ])
-          ])
-        ])
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("통계기간")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("부터")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("까지")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_chartDateTerm(7)"
+            }
+          },
+          [_vm._v("일주일")]
+        )
       ])
     ])
   },
@@ -2843,48 +2947,57 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xs-12 col-md-4" }, [
-      _c("div", { attrs: { align: "center" } }, [
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
         _c(
-          "button",
+          "a",
           {
-            staticClass:
-              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-            attrs: { onclick: "ma_stats_daily()" }
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_chartDateTerm(30)"
+            }
           },
-          [_vm._v("일간")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
-          },
-          [_vm._v("주간")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs"
-          },
-          [_vm._v("월간")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-            attrs: { onclick: "ma_stats_total()" }
-          },
-          [_vm._v("전체")]
+          [_vm._v("1개월")]
         )
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "ma_stats" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_chartDateTerm(90)"
+            }
+          },
+          [_vm._v("3개월")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "javascript:void(0)",
+              onclick: "stat_chartDateTerm(180)"
+            }
+          },
+          [_vm._v("6개월")]
+        )
+      ])
     ])
   },
   function() {
