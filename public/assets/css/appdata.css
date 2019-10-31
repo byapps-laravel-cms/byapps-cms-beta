@@ -116,3 +116,9 @@ html.open #sidebar {
   border-color: grey;
   color: #000;
 }
+
+/* toastr center class */
+.toast-center-center {
+   top: 150px;
+   left: 40%;
+}

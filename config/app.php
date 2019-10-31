@@ -176,6 +176,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Yajra\Datatables\DatatablesServiceProvider::class,
+
+        // toastr
+        Yoeunes\Toastr\ToastrServiceProvider::class,
     ],
 
     /*
