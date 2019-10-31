@@ -85,7 +85,15 @@ $(function() {
               table = $('#appspaymentTable').dataTable();
               window.location.href = "/appspaydetail/" + this.id;
             });
-         }
+         },
+         "rowCallback": function(row, data, index) {
+           var cellValue = data['pay_type'];
+           if (cellValue == '신규') {
+             $('td:eq(2)', row).addClass('btn btn-success btn-rounded btn-xs');
+           } else if (cellValue == '연장') {
+             $('td:eq(2)', row).addClass('btn btn-warning btn-rounded btn-xs');
+           }
+         },
     });
 });
 
