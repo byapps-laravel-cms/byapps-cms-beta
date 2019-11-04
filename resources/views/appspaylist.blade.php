@@ -2,7 +2,6 @@
 
 @section('content')
 
-  @if (Auth::user())
   <div class="container col-12 col-md-12">
 
     <div class="method">
@@ -32,7 +31,6 @@
     </div>
 
   </div>
-  @endif
 @endsection
 
 @push('scripts')

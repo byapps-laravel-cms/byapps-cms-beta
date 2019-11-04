@@ -2,29 +2,31 @@
 
 @section('content')
 
-<div class="container col-12 col-md-12">
+  <div class="container col-12 col-md-12">
 
-  <div class="method">
-    <div class="col-md-12 mt-3">
-      {{ Breadcrumbs::render('promolist') }}
+    <div class="method">
+      <div class="col-md-12 mt-3">
+        {{ Breadcrumbs::render('promolist') }}
 
-     <table id="promotionTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
-         <thead>
-             <tr>
-                 <th>idx</th>
-                 <th>프로모션명</th>
-                 <th>회원</th>
-                 <th>사용</th>
-                 <th>적용대상</th>
-                 <th>적용내용</th>
-                 <th>등록일</th>
-             </tr>
-         </thead>
+       <table id="promotionTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+           <thead>
+               <tr>
+                   <th>idx</th>
+                   <th>프로모션명</th>
+                   <th>회원</th>
+                   <th>사용</th>
+                   <th>적용대상</th>
+                   <th>적용내용</th>
+                   <th>등록일</th>
+               </tr>
+           </thead>
 
-       </table>
-      </div>
+         </table>
+        </div>
+    </div>
+
   </div>
-</div>
+
 @endsection
 
 @push('scripts')
