@@ -20,18 +20,23 @@ class SalesChartController extends Controller
     $salesTotal = AppsPaymentData::where('process', '=', '1')
                   ->whereBetween('reg_time', [$from, $to])
                   ->orderBy('idx', 'asc')
+                  ->groupBy('reg_time')
                   ->sum('amount');
+
+    //info(gettype($salesTotal);
 
     // 신규
     $salesNew = AppsPaymentData::where('process', '=', '1')
                 ->whereBetween('reg_time', [$from, $to])
                 ->orderBy('idx', 'asc')
+                ->groupBy('reg_time')
                 ->sum(DB::Raw("case when pay_type='0' then amount end"));
 
     // 연장
     $salesCon = AppsPaymentData::where('process', '=', '1')
                 ->whereBetween('reg_time', [$from, $to])
                 ->orderBy('idx', 'asc')
+                ->groupBy('reg_time')
                 ->sum(DB::Raw("case when pay_type='1' then amount end"));
 
     $salesEtc = $salesTotal - ($salesNew + $salesCon);
@@ -58,7 +63,7 @@ class SalesChartController extends Controller
     // SELECT sum(amount) as total, sum(case when pay_type='0' then amount end) as newt, sum(case when pay_type='1' then amount end) as con
     // FROM BYAPPS_apps_payment_data where process=1 and (reg_time between unix_timestamp('2019-03-01 00:00:00') and unix_timestamp('2019-03-31 23:59:59')) order by idx asc
 
-    $from = mktime(0, 0, 0, date("03"), 01, date("Y"));
+    $from = mktime(0, 0, 0, date("01"), 01, date("Y"));
     $to = mktime(23, 59, 59, date("03"), 31, date("Y"));
 
     $salesTotal = AppsPaymentData::where('process', '=', '1')
