@@ -2,18 +2,17 @@
 
 @section('content')
 
-  @if (Auth::user())
-<div class="container col-12 col-md-12">
+  <div class="container col-12 col-md-12">
 
-  <div class="method">
-    <div class="col-md-12 margin-5">
-      {{ Breadcrumbs::render('appspaylist') }}
+    <div class="method">
+      <div class="col-md-12 margin-5">
+        {{ Breadcrumbs::render('appspaylist') }}
 
-     <table id="appspaymentTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+       <table id="appspaymentTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+         <col width="3%">
+         <col width="33%">
          <col width="5%">
-         <col width="35%">
-         <col width="15%">
-         <col width="15%">
+         <col width="20%">
          <col width="15%">
          <col width="15%">
          <thead>
@@ -27,11 +26,11 @@
              </tr>
          </thead>
 
-       </table>
+        </table>
       </div>
+    </div>
+
   </div>
-</div>
-  @endif
 @endsection
 
 @push('scripts')
@@ -62,6 +61,10 @@ $(function() {
                  'selectRow': true
               },
            },
+           {
+             'targets': 2,
+             'className': 'dt-body-center',
+           }
            // {
            //   'targets': 1,
            //   'render': function ( data, type, full, meta ) {
@@ -85,7 +88,15 @@ $(function() {
               table = $('#appspaymentTable').dataTable();
               window.location.href = "/appspaydetail/" + this.id;
             });
-         }
+         },
+         "rowCallback": function(row, data, index) {
+           var cellValue = data['pay_type'];
+           if (cellValue == '신규') {
+             $('td:eq(2)', row).addClass('btn btn-success btn-rounded btn-xs');
+           } else if (cellValue == '연장') {
+             $('td:eq(2)', row).addClass('btn btn-warning btn-rounded btn-xs dt-body-center');
+           }
+         },
     });
 });
 

@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\UserInfo;
+
 class AppsOrderData extends Model
 {
   protected $connection = 'byapps';
@@ -15,5 +17,10 @@ class AppsOrderData extends Model
                             ->table($table)->get();
 
       return $appsOrderData;
+  }
+
+  public function userinfo()
+  {
+    return $this->belongsTo('App\UserInfo', 'mem_id');
   }
 }

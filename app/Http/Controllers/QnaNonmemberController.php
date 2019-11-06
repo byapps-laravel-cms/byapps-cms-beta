@@ -24,9 +24,14 @@ class QnaNonmemberController extends Controller
                                   'reg_date'
                                   );
 
+    $proc_cate = array("","접수","상담완료");
+
     return Datatables::of($qnaNonmemberListData)
             ->setRowId(function($qnaNonmemberListData) {
                 return $qnaNonmemberListData->idx;
+            })
+            ->editColumn('process', function($eloquent) use ($proc_cate) {
+              return $proc_cate[$eloquent->process];
             })
             ->orderColumn('reg_date', 'reg_date $1')
             ->make(true);

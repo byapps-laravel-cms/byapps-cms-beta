@@ -41,7 +41,7 @@ $(function() {
         columns: [
             { data: 'idx', name: 'idx' },
             { data: 'mem_id', name: 'mem_id' },
-            { data: 'mem_level', name: 'mem_level' },
+            { data: 'type', name: 'type' },
             { data: 'mem_nick', name: 'mem_nick' },
             { data: 'mem_name', name: 'mem_name' },
             { data: 'cellno', name: 'cellno' },
@@ -62,7 +62,7 @@ $(function() {
         select: {
            'style': 'multi'
         },
-        order: [[ 5, 'desc']],
+        order: [[ 7, 'desc']],
         "paging": true,
         "pageLength": 50,
         "fixedHeader": false,

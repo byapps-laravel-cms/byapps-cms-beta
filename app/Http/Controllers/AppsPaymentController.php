@@ -11,11 +11,6 @@ use Session;
 
 class AppsPaymentController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function getIndex()
     {
         return view('paylist');
@@ -23,7 +18,7 @@ class AppsPaymentController extends Controller
 
     public function getAppsPaymentData()
     {
-      $appsPaymentData = AppsPaymentData::select('idx', 'app_name', 'pay_type', 'term', 'amount', 'start_time', 'reg_time');
+      $appsPaymentData = AppsPaymentData::select('idx', 'app_name', 'pay_type', 'term', 'amount', 'start_time', 'end_time', 'reg_time');
 
       return Datatables::of($appsPaymentData)
               ->setRowId(function($appsPaymentData) {
@@ -33,9 +28,9 @@ class AppsPaymentController extends Controller
               ->editColumn('amount', '{{ number_format($amount)." 원" }}')
               ->editColumn('term', function($eloquent) {
                  if (empty($eloquent->start_time)) {
-                   return $eloquent->term." 일(미정)";
+                   return $eloquent->term." 일 (미정)";
                  } else {
-                   return $eloquent->term." 일";
+                   return $eloquent->term." 일 (".date("Y-m-d", $eloquent->start_time)." ~ ".date("Y-m-d", $eloquent->end_time).")";
                  }
               })
               ->rawColumns([ 'term' ])

@@ -4,9 +4,9 @@
 # {{ $greeting }}
 @else
 @if ($level === 'error')
-# @lang('Whoops!')
+# @lang('어머나!')
 @else
-# @lang('Hello!')
+# @lang('안녕하세요!')
 @endif
 @endif
 
@@ -51,8 +51,8 @@
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser: [:actionURL](:actionURL)',
+    "만약 \":actionText\" 버튼을 클릭하는데 문제가 있으시면, 아래의 URL을 복사해서\n".
+    '웹 브라우저에 붙여넣으세요: [:actionURL](:actionURL)',
     [
         'actionText' => $actionText,
         'actionURL' => $actionUrl,

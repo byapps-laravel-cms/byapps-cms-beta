@@ -41,115 +41,115 @@ Route::get('/saleschart/sales_total', 'SalesChartController@onGetSalesChartData'
 Route::post('/sales', 'SalesController@getPlatformData');
 
 
+Route::group(['middleware' => ['auth']], function() {
+  // 결제관리
+  Route::view('/appspaylist', 'appspaylist')->name('appspaylist.view');
+  Route::get('/appspaylist/data', 'AppsPaymentController@getAppsPaymentData')->name('appspaylist');
+  Route::get('/appspaydetail/{idx}', 'AppsPaymentController@getSingleData')->name('appspaydetail');
+  Route::post('/appspayupdate/{idx}', 'AppsPaymentController@update')->name('appspayupdate');
 
+  // 프로모션
+  Route::view('/promolist', 'promolist')->name('promolist.view');
+  Route::get('/promolist/data', 'PromotionController@getPromotionData')->name('promolist');
+  Route::get('/promodetail/{idx}', 'PromotionController@getSingleData')->name('promodetail');
 
-// 결제관리
-Route::view('/appspaylist', 'appspaylist')->name('appspaylist.view');
-Route::get('/appspaylist/data', 'AppsPaymentController@getAppsPaymentData')->name('appspaylist');
-Route::get('/appspaydetail/{idx}', 'AppsPaymentController@getSingleData')->name('appspaydetail');
-Route::post('/appspayupdate/{idx}', 'AppsPaymentController@update')->name('appspayupdate');
+  // 앱 접수
+  Route::view('/appsorderlist', 'appsorderlist')->name('appsorderlist.view');
+  Route::get('/appsorderlist/data', 'AppsOrderController@getAppsOrderData')->name('appsorderlist');
+  Route::get('/appsorderdetail/{idx}', 'AppsOrderController@getSingleData')->name('appsorderdetail');
 
-// 프로모션
-Route::view('/promolist', 'promolist')->name('promolist.view');
-Route::get('/promolist/data', 'PromotionController@getPromotionData')->name('promolist');
-Route::get('/promodetail/{idx}', 'PromotionController@getSingleData')->name('promodetail');
+  // 앱 목록
+  Route::view('/appslist', 'appslist')->name('appslist.view');
+  Route::get('/appslist/data', 'AppsListController@getAppsListData')->name('appslist');
+  Route::get('/appsdetail/{idx}', 'AppsListController@getSingleData')->name('appsdetail');
 
-// 앱 접수
-Route::view('/appsorderlist', 'appsorderlist')->name('appsorderlist.view');
-Route::get('/appsorderlist/data', 'AppsOrderController@getAppsOrderData')->name('appsorderlist');
-Route::get('/appsorderdetail/{idx}', 'AppsOrderController@getSingleData')->name('appsorderdetail');
+  // 업데이트 관리
+  Route::view('/appsupdatelist', 'appsupdatelist')->name('appsupdatelist.view');
+  Route::get('/appsupdatelist/data', 'AppsUpdateController@getAppsUpdateData')->name('appsupdatelist');
+  Route::get('/appsupdatedetail/{idx}', 'AppsUpdateController@getSingleData')->name('appsupdatedetail');
 
-// 앱 목록
-Route::view('/appslist', 'appslist')->name('appslist.view');
-Route::get('/appslist/data', 'AppsListController@getAppsListData')->name('appslist');
-Route::get('/appsdetail/{idx}', 'AppsListController@getSingleData')->name('appsdetail');
+  // APK 관리
+  Route::view('/apklist', 'apklist')->name('apklist.view');
+  Route::get('/apklist/data', 'ApkController@getApkData')->name('apklist');
+  Route::get('/apkdetail/{idx}', 'ApkController@getSingleData')->name('apkdetail');
 
-// 업데이트 관리
-Route::view('/appsupdatelist', 'appsupdatelist')->name('appsupdatelist.view');
-Route::get('/appsupdatelist/data', 'AppsUpdateController@getAppsUpdateData')->name('appsupdatelist');
-Route::get('/appsupdatedetail/{idx}', 'AppsUpdateController@getSingleData')->name('appsupdatedetail');
+  // 푸쉬 현황
+  Route::view('/pushlist', 'pushlist')->name('pushlist.view');
+  Route::get('/pushlist/data', 'PushController@getPushListData')->name('pushlist');
+  Route::get('/pushdetail/{idx}', 'PushController@getSingleData')->name('pushdetail');
 
-// APK 관리
-Route::view('/apklist', 'apklist')->name('apklist.view');
-Route::get('/apklist/data', 'ApkController@getApkData')->name('apklist');
-Route::get('/apkdetail/{idx}', 'ApkController@getSingleData')->name('apkdetail');
+  // 소식 관리
+  Route::view('/pushnewslist', 'pushnewslist')->name('pushnewslist.view');
+  Route::get('/pushnewslist/data', 'PushNewsController@getPushNewsListData')->name('pushnewslist');
+  Route::get('/pushnewsdetail/{idx}', 'PushNewsController@getSingleData')->name('pushnewsdetail');
 
-// 푸쉬 현황
-Route::view('/pushlist', 'pushlist')->name('pushlist.view');
-Route::get('/pushlist/data', 'PushController@getPushListData')->name('pushlist');
-Route::get('/pushdetail/{idx}', 'PushController@getSingleData')->name('pushdetail');
+  // 인증회원 관리
+  Route::view('/appspointmemberlist', 'appspointmemberlist')->name('appspointmemberlist.view');
+  Route::get('/appspointmemberlist/data', 'AppsPointMemberController@getAppsPointMemberListData')->name('appspointmemberlist');
+  Route::get('/appspointmemberdetail/{idx}', 'AppsPointMemberController@getSingleData')->name('appspointmemberdetail');
 
-// 소식 관리
-Route::view('/pushnewslist', 'pushnewslist')->name('pushnewslist.view');
-Route::get('/pushnewslist/data', 'PushNewsController@getPushNewsListData')->name('pushnewslist');
-Route::get('/pushnewsdetail/{idx}', 'PushNewsController@getSingleData')->name('pushnewsdetail');
+  // 앱포인트 관리
+  Route::view('/appspointlist', 'appspointlist')->name('appspointlist.view');
+  Route::get('/appspointlist/data', 'AppsPointController@getAppsPointListData')->name('appspointlist');
+  Route::get('/appspointdetail/{idx}', 'AppsPointController@getSingleData')->name('appspointdetail');
 
-// 인증회원 관리
-Route::view('/appspointmemberlist', 'appspointmemberlist')->name('appspointmemberlist.view');
-Route::get('/appspointmemberlist/data', 'AppsPointMemberController@getAppsPointMemberListData')->name('appspointmemberlist');
-Route::get('/appspointmemberdetail/{idx}', 'AppsPointMemberController@getSingleData')->name('appspointmemberdetail');
+  //  테스터 관리
+  Route::view('/pushtesterlist', 'pushtesterlist')->name('pushtesterlist.view');
+  Route::get('/pushtesterlist/data', 'PushTesterController@getPushTesterListData')->name('pushtesterlist');
+  Route::get('/pushtesterdetail/{idx}', 'PushTesterController@getSingleData')->name('pushtesterdetail');
 
-// 앱포인트 관리
-Route::view('/appspointlist', 'appspointlist')->name('appspointlist.view');
-Route::get('/appspointlist/data', 'AppsPointController@getAppsPointListData')->name('appspointlist');
-Route::get('/appspointdetail/{idx}', 'AppsPointController@getSingleData')->name('appspointdetail');
+  //  부가서비스 관리
+  Route::view('/appendixorderlist', 'appendixorderlist')->name('appendixorderlist.view');
+  Route::get('/appendixorderlist/data', 'AppendixOrderController@getAppendixOrderListData')->name('appendixorderlist');
+  Route::get('/appendixorderdetail/{idx}', 'AppendixOrderController@getSingleData')->name('appendixorderdetail');
 
-//  테스터 관리
-Route::view('/pushtesterlist', 'pushtesterlist')->name('pushtesterlist.view');
-Route::get('/pushtesterlist/data', 'PushTesterController@getPushTesterListData')->name('pushtesterlist');
-Route::get('/pushtesterdetail/{idx}', 'PushTesterController@getSingleData')->name('pushtesterdetail');
+  //  MA 이용 업체
+  Route::view('/malist', 'malist')->name('malist.view');
+  Route::get('/malist/data', 'MAController@getMAListData')->name('malist');
+  Route::get('/madetail/{idx}', 'MAController@getSingleData')->name('madetail');
 
-//  부가서비스 관리
-Route::view('/appendixorderlist', 'appendixorderlist')->name('appendixorderlist.view');
-Route::get('/appendixorderlist/data', 'AppendixOrderController@getAppendixOrderListData')->name('appendixorderlist');
-Route::get('/appendixorderdetail/{idx}', 'AppendixOrderController@getSingleData')->name('appendixorderdetail');
+  //  앱 설치 통계
+  Route::view('/appsdownstatlist', 'appsdownstatlist')->name('appsdownstatlist.view');
+  Route::get('/appsdownstatlist/data', 'AppsDownStatController@getAppsDownStatListData')->name('appsdownstatlist');
+  Route::get('/appsdownstatdetail/{idx}', 'AppsDownStatController@getSingleData')->name('appsdownstatdetail');
 
-//  MA 이용 업체
-Route::view('/malist', 'malist')->name('malist.view');
-Route::get('/malist/data', 'MAController@getMAListData')->name('malist');
-Route::get('/madetail/{idx}', 'MAController@getSingleData')->name('madetail');
+  //  앱 이용 통계
+  Route::view('/appsstatlist', 'appsstatlist')->name('appsstatlist.view');
+  Route::get('/appsstatlist/data', 'AppsStatController@getAppsStatListData')->name('appsstatlist');
+  Route::get('/appsstatdetail/{idx}', 'AppsStatController@getSingleData')->name('appsstatdetail');
 
-//  앱 설치 통계
-Route::view('/appsdownstatlist', 'appsdownstatlist')->name('appsdownstatlist.view');
-Route::get('/appsdownstatlist/data', 'AppsDownStatController@getAppsDownStatListData')->name('appsdownstatlist');
-Route::get('/appsdownstatdetail/{idx}', 'AppsDownStatController@getSingleData')->name('appsdownstatdetail');
+  //  앱 매출 통계
+  Route::view('/appssalestatlist', 'appssalestatlist')->name('appssalestatlist.view');
+  Route::get('/appssalestatlist/data', 'AppsSaleStatController@getAppsSaleStatListData')->name('appssalestatlist');
+  Route::get('/appssalestatdetail/{idx}', 'AppsSaleStatController@getSingleData')->name('appssalestatdetail');
 
-//  앱 이용 통계
-Route::view('/appsstatlist', 'appsstatlist')->name('appsstatlist.view');
-Route::get('/appsstatlist/data', 'AppsStatController@getAppsStatListData')->name('appsstatlist');
-Route::get('/appsstatdetail/{idx}', 'AppsStatController@getSingleData')->name('appsstatdetail');
+  //  푸쉬 허용 통계
+  Route::view('/pushonoffstatlist', 'pushonoffstatlist')->name('pushonoffstatlist.view');
+  Route::get('/pushonoffstatlist/data', 'PushOnoffStatController@getPushOnoffStatListData')->name('pushonoffstatlist');
+  Route::get('/pushonoffstatstatdetail/{idx}', 'PushOnoffStatController@getSingleData')->name('pushonoffstatdetail');
 
-//  앱 매출 통계
-Route::view('/appssalestatlist', 'appssalestatlist')->name('appssalestatlist.view');
-Route::get('/appssalestatlist/data', 'AppsSaleStatController@getAppsSaleStatListData')->name('appssalestatlist');
-Route::get('/appssalestatdetail/{idx}', 'AppsSaleStatController@getSingleData')->name('appssalestatdetail');
+  //  회원 정보
+  Route::view('/userinfolist', 'userinfolist')->name('userinfolist.view');
+  Route::get('/userinfolist/data', 'UserInfoController@getUserInfoListData')->name('userinfolist');
+  Route::get('/userinfodetail/{idx}', 'UserInfoController@getSingleData')->name('userinfodetail');
 
-//  푸쉬 허용 통계
-Route::view('/pushonoffstatlist', 'pushonoffstatlist')->name('pushonoffstatlist.view');
-Route::get('/pushonoffstatlist/data', 'PushOnoffStatController@getPushOnoffStatListData')->name('pushonoffstatlist');
-Route::get('/pushonoffstatstatdetail/{idx}', 'PushOnoffStatController@getSingleData')->name('pushonoffstatdetail');
+  //  회원 문의
+  Route::view('/qnamemberlist', 'qnamemberlist')->name('qnamemberlist.view');
+  Route::get('/qnamemberlist/data', 'QnaMemberController@getQnaMemberListData')->name('qnamemberlist');
+  Route::get('/qnamemberdetail/{idx}', 'QnaMemberController@getSingleData')->name('qnamemberdetail');
 
-//  회원 정보
-Route::view('/userinfolist', 'userinfolist')->name('userinfolist.view');
-Route::get('/userinfolist/data', 'UserInfoController@getUserInfoListData')->name('userinfolist');
-Route::get('/userinfodetail/{idx}', 'UserInfoController@getSingleData')->name('userinfodetail');
+  //  비회원 문의
+  Route::view('/qnanonmemberlist', 'qnanonmemberlist')->name('qnanonmemberlist.view');
+  Route::get('/qnanonmemberlist/data', 'QnaNonmemberController@getQnaNonmemberListData')->name('qnanonmemberlist');
+  Route::get('/qnanonmemberdetail/{idx}', 'QnaNonmemberController@getSingleData')->name('qnanonmemberdetail');
 
-//  회원 문의
-Route::view('/qnamemberlist', 'qnamemberlist')->name('qnamemberlist.view');
-Route::get('/qnamemberlist/data', 'QnaMemberController@getQnaMemberListData')->name('qnamemberlist');
-Route::get('/qnamemberdetail/{idx}', 'QnaMemberController@getSingleData')->name('qnamemberdetail');
+  //  리셀러 정보
+  Route::view('/resellerinfolist', 'resellerinfolist')->name('resellerinfolist.view');
+  Route::get('/resellerinfolist/data', 'ResellerInfoController@getResellerInfoListData')->name('resellerinfolist');
+  Route::get('/resellerinfodetail/{idx}', 'ResellerInfoController@getSingleData')->name('resellerinfodetail');
 
-//  비회원 문의
-Route::view('/qnanonmemberlist', 'qnanonmemberlist')->name('qnanonmemberlist.view');
-Route::get('/qnanonmemberlist/data', 'QnaNonmemberController@getQnaNonmemberListData')->name('qnanonmemberlist');
-Route::get('/qnanonmemberdetail/{idx}', 'QnaNonmemberController@getSingleData')->name('qnanonmemberdetail');
-
-//  리셀러 정보
-Route::view('/resellerinfolist', 'resellerinfolist')->name('resellerinfolist.view');
-Route::get('/resellerinfolist/data', 'ResellerInfoController@getResellerInfoListData')->name('resellerinfolist');
-Route::get('/resellerinfodetail/{idx}', 'ResellerInfoController@getSingleData')->name('resellerinfodetail');
-
-//  리셀러 정산
-Route::view('/resellerpaymentlist', 'resellerpaymentlist')->name('resellerpaymentlist.view');
-Route::get('/resellerpaymentlist/data', 'ResellerPaymentController@getResellerPaymentListData')->name('resellerpaymentlist');
-Route::get('/resellerpaymentdetail/{idx}', 'ResellerPaymentController@getSingleData')->name('resellerpaymentdetail');
+  //  리셀러 정산
+  Route::view('/resellerpaymentlist', 'resellerpaymentlist')->name('resellerpaymentlist.view');
+  Route::get('/resellerpaymentlist/data', 'ResellerPaymentController@getResellerPaymentListData')->name('resellerpaymentlist');
+  Route::get('/resellerpaymentdetail/{idx}', 'ResellerPaymentController@getSingleData')->name('resellerpaymentdetail');
+});
