@@ -35,4 +35,9 @@ class AppsData extends Model implements Searchable
   {
     return $this->hasMany('App\AppsPaymentData','mem_id');
   }
+
+  public function userinfo()
+  {
+    return $this->belongsTo('App\UserInfo','mem_id');
+  }
 }

@@ -24,9 +24,14 @@ class QnaMemberController extends Controller
                                   'reg_time'
                                   );
 
+    $proc_cate = array("","접수","확인중","답변완료");
+
     return Datatables::of($qnaMemberListData)
             ->setRowId(function($qnaMemberListData) {
                 return $qnaMemberListData->idx;
+            })
+            ->editColumn('process', function($eloquent) use ($proc_cate) {
+               return $proc_cate[$eloquent->process];
             })
             ->editColumn('reg_time', '{{ date("Y-m-d", $reg_time) }}')
             ->orderColumn('reg_time', 'reg_time $1')
