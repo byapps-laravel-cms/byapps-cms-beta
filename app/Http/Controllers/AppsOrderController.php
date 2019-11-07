@@ -38,7 +38,8 @@ class AppsOrderController extends Controller
                 return "미발행";
               } else {
               //  return substr($eloquent->receipt, 0, 50);
-                return str_replace("|","\n", $eloquent->receipt);
+              //  return str_replace("|","\n", $eloquent->receipt);
+                return "발행";
               }
             })
             ->editColumn('app_process', function($eloquent) use ($app_process) {
