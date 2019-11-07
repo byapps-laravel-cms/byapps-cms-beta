@@ -36,7 +36,7 @@
                     @endif
 
                     <div class="row">
-                    <div class="col-md-12 col-xs-12">
+                    <div class="col-md-12 col-xs-12 px-4">
                         <!-- form start -->
                         {!! Form::open([ 'route' => ['appspayupdate', $appsPaymentData->idx] ]) !!}
 
@@ -47,14 +47,14 @@
                         <div class="form-group row" id="paymentData">
                             <label class="col-md-2 col-form-label ">주문번호</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static">  {{ $appsPaymentData->order_id }} </p>
+                            <p class="form-control-static mt-1 mb-1">  {{ $appsPaymentData->order_id }} </p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">결제날짜</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static">  {{ $appsPaymentData->reg_time }} </p>
+                            <p class="form-control-static mt-1 mb-1">  {{ $appsPaymentData->reg_time }} </p>
                             </div>
                         </div>
 
@@ -63,7 +63,7 @@
                             <div class="col-md-10 col-xs-9">
                                 <div class="form-inline">
                                     <div class="input-group">
-                                        <p class="form-control-static"> <i class="fa fa-user"></i>&nbsp;&nbsp;{{ $appsPaymentData->mem_id }} </p>
+                                        <p class="form-control-static mt-1 mb-1"> <i class="fa fa-user"></i>&nbsp;&nbsp;{{ $appsPaymentData->mem_id }} </p>
                                         <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="회원정보">
                                         <input class="btn btn-info waves-effect btn-xs mr-1" type="button" value="주문내역">
                                         <input class="btn btn-success waves-effect btn-xs" type="button" value="앱관리">
@@ -75,14 +75,14 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">App 명</label>
                             <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static"> {{ $appsPaymentData->app_name }} ({{ $appsPaymentData->apps_type }}) </p>
+                                <p class="form-control-static mt-1 mb-1"> {{ $appsPaymentData->app_name }} ({{ $appsPaymentData->apps_type }}) </p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">결제기간</label>
                             <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static">
+                                <p class="form-control-static mt-1 mb-1">
                                 @php
                                     $arrPaytype = [ '신규', '연장', '충전', '추가', '기타' ];
                                 @endphp
@@ -99,7 +99,7 @@
                             <div class="col-md-10 col-xs-9">
                                 <div class="form-inline">
                                     <p class="input-group">
-                                        <p class="form-control-static">
+                                        <p class="form-control-static mt-1 mb-1">
                                             {{ number_format($appsPaymentData->amount, 0) }}원
                                         </p>
                                         <input class="btn btn-danger btn-xs ml-1 mr-1" type="button" value="결제취소">
@@ -113,7 +113,7 @@
                             <label class="col-md-2 col-form-label">결제정보</label>
                             <div class="col-md-10 col-xs-9">
                                 <div class="form-inline">
-                                    <p class="form-control-static">
+                                    <p class="form-control-static mt-1 mb-1">
                                         @php $pay = explode('{:}', $appsPaymentData->payment) @endphp
                                         {{ $pay[0] }} {{ !empty($pay[1]) ? "(".$pay[1].")" : "" }}
                                         승인번호: {{ !empty($pay[3]) ? $pay[3] : "" }}
@@ -128,7 +128,7 @@
                         <div class="form-group row">
                         <label class="col-md-2 col-form-label">영수증정보</label>
                             <div class="col-md-10 col-xs-9">
-                                <textarea id="receipt" name="receipt" class="form-control" style="height:200px;">{{ $appsPaymentData->receipt != '' ? $appsPaymentData->receipt : "미발행" }}</textarea>
+                                <textarea id="receipt" name="receipt" class="form-control" rows="5">{{ $appsPaymentData->receipt != '' ? $appsPaymentData->receipt : "미발행" }}</textarea>
                             </div>
                         </div>
 
