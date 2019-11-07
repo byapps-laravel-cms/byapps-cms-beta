@@ -95,21 +95,21 @@ html.open #sidebar {
 }
 
 /* 앱 데이터 표시부분 */
-.form-control[disabled] {
+/* .form-control[disabled] {
   background-color: #f7f7f7;
   box-shadow: none;
   border: 0;
   border-bottom: 1px solid grey;
   color: grey;
-}
+} */
 
-.form-control {
+/* .form-control {
   background-color: #f7f7f7;
   box-shadow: none;
   border: 0;
   border-bottom: 1px solid grey;
   border-radius: 0px;
-}
+} */
 
 .alert-info {
   background-color: #f7f7f7;
