@@ -30,4 +30,9 @@ class UserInfo extends Model
   {
     return $this->hasMany('App\AppsData', 'mem_id');
   }
+
+  public function payments()
+  {
+    return $this->hasMany('App\AppsPaymentData', 'mem_id');
+  }
 }

@@ -4,12 +4,12 @@
 
 <div class="container-fluid">
 
-    {{ Breadcrumbs::render('appspaydetail') }}
+  {{ Breadcrumbs::render('appspaydetail') }}
 
 <div class="row">
     <!-- col-sm-12 start -->
     <div class="col-sm-12">
-    <!-- card -->    
+    <!-- card -->
     <div class="card">
         <!-- cardbody start -->
         <div class="card-body">
@@ -64,9 +64,9 @@
                                 <div class="form-inline">
                                     <div class="input-group">
                                         <p class="form-control-static mt-1 mb-1"> <i class="fa fa-user"></i>&nbsp;&nbsp;{{ $appsPaymentData->mem_id }} </p>
-                                        <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="회원정보">
+                                        <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="고객정보" onclick="getMemberInfo({!! json_encode($appsPaymentData->idx)!!})">
                                         <input class="btn btn-info waves-effect btn-xs mr-1" type="button" value="주문내역">
-                                        <input class="btn btn-success waves-effect btn-xs" type="button" value="앱관리">
+                                        <input class="btn btn-success waves-effect btn-xs" type="button" value="앱관리" onclick="goToAppsOrderList()">
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
 
                         <div class="form-group row">
                         <label class="col-md-2 col-form-label">영수증정보</label>
@@ -159,5 +159,42 @@
 @toastr_css
 @toastr_js
 @toastr_render
+
+<script>
+// 사이드바 열고 고객정보 보기
+function getMemberInfo(idx) {
+  console.log(idx);
+  sidebarOpen();
+}
+
+// 앱관리 눌렀을 때 실행되는 함수 내에서 호출함
+function getAddpsOrderIdx() {
+  var mem_id = {!! json_encode($appsPaymentData->mem_id) !!};
+
+  $.ajax({
+    async: false,
+    url: '{{ Route("getappsorderidx") }}',
+    type: 'POST',
+    data: {
+      mem_id: mem_id,
+      _token: "{{ csrf_token() }}"
+    },
+    success: function(response) {
+      console.log(response['idx']);
+      idx = response['idx'];
+    },
+  });
+
+  return idx;
+}
+
+// 앱 관리 버튼 눌렀을 때 실행 --> 앱 접수 정보로 이동시킴
+function goToAppsOrderList() {
+  var idx = getAddpsOrderIdx();
+  //console.log(idx);
+  window.location.href = "/appsorderdetail/"+idx;
+}
+</script>
+
 
 @endsection

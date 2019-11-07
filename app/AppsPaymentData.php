@@ -33,4 +33,9 @@ class AppsPaymentData extends Model implements Searchable
 
     return new SearchResult($this, $this->app_name, $url);
   }
+
+  public function userinfo()
+  {
+    return $this->belongsTo('App\UserInfo', 'mem_id');
+  }
 }
