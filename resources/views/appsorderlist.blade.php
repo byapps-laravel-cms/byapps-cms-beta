@@ -21,7 +21,6 @@
                  <th>업체명</th>
                  <th>연락처</th>
                  <th>앱명</th>
-                 <th>카테고리</th>
                  <th>개발OS</th>
              </tr>
          </thead>
@@ -51,7 +50,6 @@ $(function() {
             { data: 'app_company', name: 'app_company' },
             { data: 'cellno', name: 'cellno' },
             { data: 'app_name', name: 'app_name' },
-            { data: 'app_cate', name: 'app_cate' },
             { data: 'apps_type', name: 'apps_type' },
         ],
         columnDefs: [

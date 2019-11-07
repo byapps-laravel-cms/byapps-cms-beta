@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 //use App\Http\Requests;
 use DB;
 use App\AppsPaymentData;
+use App\AppsOrderData;
 use Yajra\Datatables\Datatables;
 use Session;
 
@@ -59,4 +60,12 @@ class AppsPaymentController extends Controller
       return redirect()->back();
     }
 
+    public function getAppsOrderIdx()
+    {
+      $memId = $_POST['mem_id'];
+
+      $idx = AppsOrderData::where('mem_id', '=', $memId)->first();
+
+      return $idx;
+    }
 }

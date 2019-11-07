@@ -12,6 +12,7 @@ $(document).ready(function(){
       }
       return "";
   }
+
   function byapps_setCookie (name, value, ex) {
       if (!ex) ex = 365;
       var todayDate = new Date();
@@ -21,12 +22,14 @@ $(document).ready(function(){
 
   var now_page = location.href;
   var cookie_history = byapps_getCookie("link_history");
-  var pagename = now_page.split("http://jmh.innoi.kr/");
+  var pagename = now_page.split({!! json_encode(url('/')) !!} + '/');
+
   if(!pagename[1]||pagename[1]=="") {
-    pagename[1]="home";
+    pagename[1] = "Home";
   }
+
   if(!cookie_history||cookie_history=="") {
-    byapps_setCookie("link_history", pagename[1]+"&"+now_page, 14);
+      byapps_setCookie("link_history", pagename[1]+"&"+now_page, 14);
   } else {
       byapps_setCookie("link_history", cookie_history+"|"+pagename[1]+"&"+location.href, 14)
 
@@ -34,21 +37,20 @@ $(document).ready(function(){
       var newcookie, prev = "";
 
       for(i=0; i < ch.length; i++){
-      var a = ch
-          if(i!=0) {
-              if( prev == a[i] ) {
-                  newcookie += "";
-              } else {
-                  !a[i] ? newcookie += "": newcookie += a[i]+"|";
-              }
-          } else {
-              !a[i] ? newcookie += "": newcookie += a[i]+"|";
-
-          }
-          prev = a[i];
+        var a = ch
+        if(i!=0) {
+            if( prev == a[i] ) {
+                newcookie += "";
+            } else {
+                !a[i] ? newcookie += "": newcookie += a[i]+"|";
+            }
+        } else {
+            !a[i] ? newcookie += "": newcookie += a[i]+"|";
+        }
+        prev = a[i];
       }
       newcookie = newcookie.replace("undefined|","");
-      console.log( "newcookie",newcookie);
+      console.log("newcookie",newcookie);
       console.log("newcookie.length", newcookie.split("|").length);
       if(ch.length >= 10) {
           cookie_history = cookie_history.split(ch[0]+"|")[1];
