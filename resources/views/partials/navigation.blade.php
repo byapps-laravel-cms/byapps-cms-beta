@@ -114,7 +114,7 @@
                                     <li><a href="/appsorderlist">앱 접수</a></li>
                                     <li><a href="/appsupdatelist">업데이트 관리</a></li>
                                     <li><a href="/apklist">APK 관리</a></li>
-                                    <li><a href="#">CAFE24 앱 설치</a></li>
+                                    <li><a href="/cafe24tokenlist">CAFE24 앱 설치</a></li>
                                     <li><a href="/appslist">앱 목록</a></li>
                                     <li><a href="/pushlist">푸쉬 현황</a></li>
                                     <li><a href="/pushnewslist">소식 관리</a></li>
