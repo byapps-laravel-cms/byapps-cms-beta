@@ -32,6 +32,23 @@ class Cafe24ApiTokenController extends Controller
                 ->setRowId(function($cafe24ApiTokenData) {
                   return $cafe24ApiTokenData->idx;
                 })
+                ->editColumn('mall_id', function($eloquent) {
+                  return $eloquent->mall_id." (".$eloquent->shop_no.")";
+                })
+                ->editColumn('app_id', function($eloquent) {
+                  if (!$eloquent->app_id) {
+                    return "신규";
+                  } else {
+                    return $eloquent->app_id;
+                  }
+                })
+                ->editColumn('mem_id', function($eloquent) {
+                  if (!$eloquent->mem_id) {
+                    return "비회원";
+                  } else {
+                    return $eloquent->mem_id;
+                  }
+                })
                 ->make('true');
   }
 
