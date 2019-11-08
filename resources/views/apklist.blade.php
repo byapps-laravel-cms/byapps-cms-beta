@@ -71,7 +71,16 @@ $(function() {
               table = $('#apklistTable').dataTable();
               window.location.href = "/apkdetail/" + this.id;
             });
-         }
+         },
+
+         "rowCallback": function(row, data, index) {
+           var cellValue = data['app_process'];
+           if (cellValue == '대기') {
+             $('td:eq(3)', row).addClass('btn btn-info btn-rounded btn-xs');
+           } else if (cellValue == '완료') {
+             $('td:eq(3)', row).addClass('btn btn-success btn-rounded btn-xs');
+           }
+         },
     });
 });
 </script>

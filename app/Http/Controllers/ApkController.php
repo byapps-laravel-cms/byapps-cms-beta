@@ -29,20 +29,15 @@ class ApkController extends Controller
                             'apk_file',
                             'reg_time');
 
+	 $app_process = array("","대기","완료");
+
     return Datatables::of($apkData)
             ->setRowId(function($apkData) {
               return $apkData->idx;
             })
-            // ->editColumn('pay_type', '{{ $pay_type == 1 ? "연장" : "신규" }}')
-            // ->editColumn('amount', '{{ number_format($amount)." 원" }}')
-            // ->editColumn('term', function($eloquent) {
-            //    if (empty($eloquent->start_time)) {
-            //      return $eloquent->term." 일(미정)";
-            //    } else {
-            //      return $eloquent->term." 일";
-            //    }
-            // })
-            // ->rawColumns([ 'term' ])
+            ->editColumn('app_process', function($eloquent) use ($app_process){
+              return $app_process[$eloquent->app_process];
+            })
             ->editColumn('reg_time', '{{ date("Y-m-d", $reg_time) }}')
             ->orderColumn('reg_time', 'reg_time $1')
             ->make(true);
