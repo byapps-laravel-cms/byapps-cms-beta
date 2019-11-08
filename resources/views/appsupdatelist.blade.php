@@ -76,7 +76,22 @@ $(function() {
               table = $('#appsupdatelistTable').dataTable();
               window.location.href = "/appsupdatedetail/" + this.id;
             });
-         }
+         },
+
+         "rowCallback": function(row, data, index) {
+           var cellValue = data['update_process'];
+           if (cellValue == '취소') {
+             $('td:eq(2)', row).addClass('btn btn-pink btn-rounded btn-xs');
+           } else if (cellValue == '접수') {
+             $('td:eq(2)', row).addClass('btn btn-info btn-rounded btn-xs');
+           } else if (cellValue == '신청확인') {
+             $('td:eq(2)', row).addClass('btn btn-success btn-rounded btn-xs');
+           } else if (cellValue == '진행중') {
+             $('td:eq(2)', row).addClass('btn btn-warning btn-rounded btn-xs');
+           } else if (cellValue == '완료') {
+             $('td:eq(2)', row).addClass('btn btn-purple btn-rounded btn-xs');
+           }
+         },
     });
 });
 </script>
