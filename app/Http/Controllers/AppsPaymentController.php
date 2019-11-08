@@ -21,11 +21,15 @@ class AppsPaymentController extends Controller
     {
       $appsPaymentData = AppsPaymentData::select('idx', 'app_name', 'pay_type', 'term', 'amount', 'start_time', 'end_time', 'reg_time');
 
+      $pay_types = array("신규", "연장", "", "추가", "기타", "충전");
+
       return Datatables::of($appsPaymentData)
               ->setRowId(function($appsPaymentData) {
                 return $appsPaymentData->idx;
               })
-              ->editColumn('pay_type', '{{ $pay_type == 1 ? "연장" : "신규" }}')
+              ->editColumn('pay_type', function($eloquent) use ($pay_types){
+                return ($eloquent->pay_type != '') ? $pay_types[$eloquent->pay_type] : '';
+              })
               ->editColumn('amount', '{{ number_format($amount)." 원" }}')
               ->editColumn('term', function($eloquent) {
                  if (empty($eloquent->start_time)) {
