@@ -4,12 +4,12 @@
 
 <div class="container-fluid">
 
-  {{ Breadcrumbs::render('promodetail') }}
+  {{ Breadcrumbs::render('appsorderdetail') }}
 
     <div class="row">
         <!-- col-sm-12 start -->
         <div class="col-sm-12">
-        <!-- card -->    
+        <!-- card -->
         <div class="card">
             <!-- cardbody start -->
             <div class="card-body">
@@ -27,12 +27,12 @@
                         <hr />
                     </div> --}}
 
-                    
+
 
                     <div class="col-md-12 col-xs-12 px-4">
                         <form method="POST" action="">
                         <input type="hidden" name="idx" value="1"/>
-                        
+
                         <div class="form-group row" id="paymentData">
                             <label class="col-md-2 col-form-label ">주문번호</label>
                             <div class="col-md-10 col-xs-9">
@@ -53,7 +53,7 @@
                             <p class="form-control-static mt-1 mb-1"> 접수 </p>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">RESELLER ID</label>
                             <div class="col-md-10 col-xs-9">
@@ -77,14 +77,14 @@
                             <p class="form-control-static mt-1 mb-1"> 메디캠프 </p>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">신청자명</label>
                             <div class="col-md-10 col-xs-9">
                             <p class="form-control-static mt-1 mb-1"> 김영준 </p>
                             </div>
                         </div>
-    
+
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">연락처</label>
                             <div class="col-md-10 col-xs-9">
@@ -153,7 +153,7 @@
                             </label>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">App. Name</label>
                             <div class="col-md-10 col-xs-9">
@@ -167,7 +167,7 @@
                                 <input type="text" class="form-control" value="m.medicamp.co.kr">
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">App. URL</label>
                             <div class="col-md-10 col-xs-9">
@@ -188,7 +188,7 @@
                                 <input type="text" class="form-control" value="070-7124-8911">
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                         <label class="col-md-2 col-form-label">영수증정보</label>
                             <div class="col-md-10 col-xs-9">
@@ -221,6 +221,6 @@
 </div>
 <!-- container-fluid end -->
 
-    
+
 
 @endsection
