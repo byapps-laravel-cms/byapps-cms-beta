@@ -89,7 +89,15 @@ $(function() {
               table = $('#pushtesterlistTable').dataTable();
               window.location.href = "/pushtesterdetail/" + this.id;
             });
-         }
+         },
+         "rowCallback": function(row, data, index) {
+           var cellValue = data['app_os'];
+           if (cellValue == 'ios') {
+             $('td:eq(5)', row).addClass('btn btn-info btn-rounded btn-xs');
+           } else if (cellValue == 'android') {
+             $('td:eq(5)', row).addClass('btn btn-success btn-rounded btn-xs');
+           }
+         },
     });
 });
 </script>
