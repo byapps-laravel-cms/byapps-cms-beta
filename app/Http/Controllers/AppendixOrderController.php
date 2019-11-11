@@ -25,9 +25,21 @@ class AppendixOrderController extends Controller
                                              'cellno',
                                              'reg_time');
 
+   $app_process = array("주문취소","접수","주문확인","SDK설치중","설치완료","서비스중지","서비스해지");
+
     return Datatables::of($appendixOrderListData)
             ->setRowId(function($appendixOrderListData) {
                 return $appendixOrderListData->idx;
+            })
+            ->editColumn('app_process', function($eloquent) use ($app_process) {
+              return $app_process[$eloquent->app_process];
+            })
+            ->editColumn('service_type', function($eloquent) {
+              if ($eloquent->service_type == 'ma') {
+                return "마케팅 오토메이션";
+              } else {
+                return "리타겟팅";
+              }
             })
             ->editColumn('receipt', function($eloquent) {
               return $eloquent->receipt == '' ? "미발행" : "발행";
