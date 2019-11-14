@@ -75,10 +75,11 @@ $(function() {
 
          "rowCallback": function(row, data, index) {
            var cellValue = data['app_process'];
+           $('td:eq(3)', row).addClass("align-middle text-center");
            if (cellValue == '대기') {
-             $('td:eq(3)', row).addClass('btn btn-info btn-rounded btn-xs');
+             $('td:eq(3)', row).html("<button class='btn btn-info btn-rounded btn-xs'>대기</button>");
            } else if (cellValue == '완료') {
-             $('td:eq(3)', row).addClass('btn btn-success btn-rounded btn-xs');
+             $('td:eq(3)', row).html("<button class='btn btn-success btn-rounded btn-xs'>완료</button>");
            }
          },
     });
