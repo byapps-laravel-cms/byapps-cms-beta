@@ -7,17 +7,21 @@
   <div class="method">
     <div class="col-md-12 mt-3">
 
-      {{ Breadcrumbs::render('apklist') }}
+      {{ Breadcrumbs::render('cafe24tokenlist') }}
 
-     <table id="apklistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+     <table id="cafe24tokenlistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
          <thead>
              <tr>
                  <th>idx</th>
+                 <th>설치일</th>
+                 <th>토큰갱신</th>
+                 <th>삭제일</th>
+                 <th>몰아이디</th>
+                 <th>구분</th>
                  <th>앱아이디</th>
-                 <th>앱명</th>
-                 <th>상태</th>
-                 <th>등록일</th>
-                 <th>다운로드</th>
+                 <th>회원아이디</th>
+                 <!-- <th>주문번호</th> -->
+                 <!-- <th>API</th> -->
              </tr>
          </thead>
        </table>
@@ -29,20 +33,22 @@
 @push('scripts')
 <script type="text/javascript">
 $(function() {
-    $('#apklistTable').DataTable({
+    $('#cafe24tokenlistTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('apklist') }}",
+          url: "{{ route('cafe24tokenlist') }}",
           crossDomain: true
         },
         columns: [
             { data: 'idx', name: 'idx' },
+            { data: 'issued_date', name: 'issued_date' },
+            { data: 'refresh_date', name: 'refresh_date' },
+            { data: 'refresh_date', name: 'refresh_date' },
+            { data: 'mall_id', name: 'mall_id' },
+            { data: 'shop_no', name: 'shop_no' },
             { data: 'app_id', name: 'app_id' },
-            { data: 'app_name', name: 'app_name' },
-            { data: 'app_process', name: 'app_process' },
-            { data: 'reg_time', name: 'reg_time' },
-            { data: 'apk_file', name: 'apk_file' },
+            { data: 'mem_id', name: 'mem_id' },
         ],
         columnDefs: [
            {
@@ -67,20 +73,11 @@ $(function() {
         stateSave: false,
 
         "fnDrawCallback": function () {
-            $("#apklistTable tbody tr").click(function () {
-              table = $('#apklistTable').dataTable();
-              window.location.href = "/apkdetail/" + this.id;
+            $("#cafe24tokenlistTable tbody tr").click(function () {
+              table = $('#cafe24tokenlistTable').dataTable();
+              window.location.href = "/cafe24tokendetail/" + this.id;
             });
-         },
-
-         "rowCallback": function(row, data, index) {
-           var cellValue = data['app_process'];
-           if (cellValue == '대기') {
-             $('td:eq(3)', row).addClass('btn btn-info btn-rounded btn-xs');
-           } else if (cellValue == '완료') {
-             $('td:eq(3)', row).addClass('btn btn-success btn-rounded btn-xs');
-           }
-         },
+         }
     });
 });
 </script>

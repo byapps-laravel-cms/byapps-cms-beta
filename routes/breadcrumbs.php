@@ -39,6 +39,12 @@ Breadcrumbs::for('appsorderlist', function ($trail) {
   $trail->push('앱 접수', route('appsorderlist.view'));
 });
 
+// 앱 접수 상세
+Breadcrumbs::for('appsorderdetail', function ($trail) {
+  $trail->parent('appsorderlist');
+  $trail->push('앱 접수 상세', route('appsorderlist'));
+});
+
 // 업데이트 관리
 Breadcrumbs::for('appsupdatelist', function ($trail) {
   $trail->parent('appslist');
@@ -49,6 +55,12 @@ Breadcrumbs::for('appsupdatelist', function ($trail) {
 Breadcrumbs::for('apklist', function ($trail) {
   $trail->parent('appslist');
   $trail->push('APK 관리', route('apklist.view'));
+});
+
+// CAFE24 앱 설치
+Breadcrumbs::for('cafe24tokenlist', function ($trail) {
+  $trail->parent('appslist');
+  $trail->push('CAFE24 앱 설치', route('cafe24tokenlist.view'));
 });
 
 // Push 현황

@@ -26,13 +26,15 @@ class AppsUpdateController extends Controller
                                     'update_ver'
                                     );
 
+    $app_process = array("취소","접수","신청확인","진행중","심사중","","","","","완료");
+
     return Datatables::of($appsupdateData)
             ->setRowId(function($appsupdateData) {
               return $appsupdateData->idx;
             })
-            // ->editColumn('mem_name', function($eloquent) {
-            //   return $eloquent->mem_name."(".$eloquent->mem_id.")";
-            // })
+            ->editColumn('update_process', function($eloquent) use ($app_process){
+              return $app_process[$eloquent->update_process];
+            })
             // ->editColumn('pm_used', function($eloquent) {
             //   if ($eloquent->pm_used == 0) return "미사용";
             //   else return "사용 ".date('Y-m-d', $eloquent->used_time);

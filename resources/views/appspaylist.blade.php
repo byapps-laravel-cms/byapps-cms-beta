@@ -91,10 +91,16 @@ $(function() {
          },
          "rowCallback": function(row, data, index) {
            var cellValue = data['pay_type'];
-           if (cellValue == '신규') {
+           if (cellValue == '기타') {
+             $('td:eq(2)', row).addClass('btn btn-pink btn-rounded btn-xs');
+           } else if (cellValue == '신규') {
              $('td:eq(2)', row).addClass('btn btn-success btn-rounded btn-xs');
            } else if (cellValue == '연장') {
-             $('td:eq(2)', row).addClass('btn btn-warning btn-rounded btn-xs dt-body-center');
+             $('td:eq(2)', row).addClass('btn btn-warning btn-rounded btn-xs');
+           } else if (cellValue == '추가') {
+             $('td:eq(2)', row).addClass('btn btn-info btn-rounded btn-xs');
+           } else if (cellValue == '충전') {
+             $('td:eq(2)', row).addClass('btn btn-purple btn-rounded btn-xs');
            }
          },
     });
