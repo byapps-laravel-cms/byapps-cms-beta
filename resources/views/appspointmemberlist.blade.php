@@ -78,11 +78,18 @@ $(function() {
          },
          "rowCallback": function(row, data, index) {
            var cellValue = data['app_os'];
-           if (cellValue == 'ios') {
-             $('td:eq(5)', row).addClass('btn btn-info btn-rounded btn-xs');
-           } else if (cellValue == 'android') {
-             $('td:eq(5)', row).addClass('btn btn-success btn-rounded btn-xs');
-           }
+
+           $('td:eq(5)', row).addClass('align-middle text-center');
+           switch (cellValue) {
+            case 'ios':
+                $('td:eq(5)', row).html("<button class='btn btn-info btn-rounded btn-xs'>ios</button>");
+                break;
+            case 'android': 
+                $('td:eq(5)', row).html("<button class='btn btn-success btn-rounded btn-xs'>android</button>");
+                break;
+            case 'default':
+                break;
+            }
          },
     });
 });
