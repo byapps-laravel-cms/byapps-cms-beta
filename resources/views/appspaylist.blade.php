@@ -91,17 +91,26 @@ $(function() {
          },
          "rowCallback": function(row, data, index) {
            var cellValue = data['pay_type'];
-           if (cellValue == '기타') {
-             $('td:eq(2)', row).addClass('btn btn-pink btn-rounded btn-xs');
-           } else if (cellValue == '신규') {
-             $('td:eq(2)', row).addClass('btn btn-success btn-rounded btn-xs');
-           } else if (cellValue == '연장') {
-             $('td:eq(2)', row).addClass('btn btn-warning btn-rounded btn-xs');
-           } else if (cellValue == '추가') {
-             $('td:eq(2)', row).addClass('btn btn-info btn-rounded btn-xs');
-           } else if (cellValue == '충전') {
-             $('td:eq(2)', row).addClass('btn btn-purple btn-rounded btn-xs');
-           }
+
+           $('td:eq(2)', row).addClass('align-middle text-center');
+           switch (cellValue) {
+                case '기타':
+                $('td:eq(2)', row).html("<btn btn-pink btn-rounded btn-xs'>기타</button>");
+                break;
+            case '신규': 
+                $('td:eq(2)', row).html("<button class='btn btn-success btn-rounded btn-xs'>신규</button>");
+                break;
+            case '연장':
+                $('td:eq(2)', row).html("<button class='btn btn-warning btn-rounded btn-xs'>연장</button>");
+                break;
+            case '추가':
+                $('td:eq(2)', row).html("<button class='btn btn-info btn-rounded btn-xs'>추가</button>");
+                break;
+            case '충전':
+                $('td:eq(2)', row).html("<button class='btn btn-purple btn-rounded btn-xs'>충전</button>");
+            case 'default':
+                break;
+            }
          },
     });
 });
