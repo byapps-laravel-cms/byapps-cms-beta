@@ -43,8 +43,12 @@
                             <div class="col-md-10 col-xs-9">
                               <p class="form-control-static mt-1 mb-1">
                                 {{ $userInfoData->recom_id }} &nbsp&nbsp
+
+                                @if ($resellerData)
                                 <strong>{{ $resellerData->company }}
-                                ({{ $resellerData->mem_name }}, {{ $resellerData->cellno }}, {{ $resellerData->phoneno }})</strong>
+                                ({{ $resellerData->mem_name }}, {{ $resellerData->cellno }}, {{ $resellerData->phoneno }})
+                                </strong>
+                                @endif
                               </p>
 
                             </div>

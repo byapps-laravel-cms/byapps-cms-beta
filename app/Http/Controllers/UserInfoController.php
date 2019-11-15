@@ -26,10 +26,7 @@ class UserInfoController extends Controller
                                          'cellno',
                                          'ip',
                                          'reg_date'
-                                      )
-                                      // ->with('order')
-                                      // ->with('apps')
-                                      ->get();
+                                      );
 
     $orderProcess = array('주문취소','접수', '주문확인',
                         '개발진행', '앱등록', '서비스중지',
@@ -67,8 +64,6 @@ class UserInfoController extends Controller
     $recom_id = UserInfo::where('idx', $idx)->select('recom_id')->get();
     $recom_id = $recom_id[0]['recom_id'];
     $resellerData = ResellerInfo::where('mem_id', $recom_id)->first();
-
-    
 
     return view('userinfodetail')->with('userInfoData', $userInfoData)
                                  ->with('resellerData', $resellerData);
