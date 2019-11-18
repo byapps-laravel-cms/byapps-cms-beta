@@ -17,7 +17,7 @@
                 <div class="col-sm-12">
 
                     @if ($userInfoData)
-                    <h4 class="header-title">{{ $userInfoData->app_name }}</h2>
+                    <h4 class="header-title">{{ $userInfoData->mem_nick }}</h2>
                     @else
                     <h4 class="header-title">Something went wrong.</h4>
                     @endif
@@ -123,7 +123,7 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="text" class="form-control" id="cell_no" value="{{ $userInfoData->cell_no }}">
+                                      <input type="text" class="form-control" id="cell_no" value="{{ $userInfoData->cellno }}">
                                       <input class="btn btn-info waves-effect btn-xs ml-1" type="button" value="SMS 보내기">
                                     </div>
                                 </div>
@@ -135,7 +135,7 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="text" class="form-control" id="phone_no" value="{{ $userInfoData->phone_no }}">
+                                      <input type="text" class="form-control" id="phone_no" value="{{ $userInfoData->phoneno }}">
                                       <input class="btn btn-info waves-effect btn-xs ml-1" type="button" value="SMS 보내기">
                                     </div>
                                 </div>
@@ -170,10 +170,10 @@
                             <label class="col-md-2 col-form-label">옵션</label>
                             <div class="col-md-10 col-xs-9">
                                 <label for="" class="radio-inline">
-                                <input type="checkbox" name="modify" value="modify">수정하기
+                                  <input type="checkbox" name="modify" value="modify">수정하기
                                 </label>
                                 <label for="" class="radio-inline">
-                                <input type="checkbox" name="delete" value="delete">삭제하기
+                                  <input type="checkbox" name="delete" value="delete">삭제하기
                                 </label>
                             </div>
                         </div>
