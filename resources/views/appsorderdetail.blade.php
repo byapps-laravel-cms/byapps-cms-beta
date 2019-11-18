@@ -15,9 +15,9 @@
             <div class="card-body">
                 <div class="row">
                     {{-- <div class="col-sm-12">
-                        @if ($promotionData)
+                        @if ($appsOrderData)
                         <h4>
-                        <strong>{{ $promotionData->mem_name }}</strong>
+                        <strong>{{ $appsOrderData->app_name }}</strong>
                         </h4>
                         @else
                         <h4>
@@ -36,75 +36,87 @@
                         <div class="form-group row" id="paymentData">
                             <label class="col-md-2 col-form-label ">주문번호</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1"> BA1573116381 </p>
+                            <p class="form-control-static mt-1 mb-1">{{ $appsOrderData->order_id }}</p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                                 <label class="col-md-2 col-form-label">주문일</label>
                                 <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1"> 2019/11/07 [17:48:34] </p>
+                                <p class="form-control-static mt-1 mb-1">{{ date("Y-m-d", $appsOrderData->reg_time) }}</p>
                                 </div>
                             </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Process</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1"> 접수 </p>
+                              @php
+                                $app_process = array("주문취소","접수","주문확인","개발진행","앱등록","서비스중지","서비스해지","","취소요청","접수대기");
+                              @endphp
+                            <p class="form-control-static mt-1 mb-1">{{ $app_process[$appsOrderData->app_process] }}</p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">RESELLER ID</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1"> cafe24   카페24 (담당자: 강윤정, 연락처: 010-6312-2761, 02-6386-7340) </p>
+                              <p class="form-control-static mt-1 mb-1">{{ $appsOrderData->recom_id }}
+
+                                  @if ($resellerData)
+                                  <strong>{{ $resellerData->company }}
+                                  (담당자: {{ $resellerData->mem_name }}, 연락처: {{ $resellerData->cellno }}, {{ $resellerData->phoneno }})
+                                  </strong>
+                                  @endif
+                              </p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">회원 ID</label>
                             <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1"> <i class="fa fa-user"></i>&nbsp;&nbsp;medi_camp@naver.com </p>
-                                <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="회원정보">
-                                <input class="btn btn-info waves-effect btn-xs mr-1" type="button" value="주문내역">
-                                <input class="btn btn-success waves-effect btn-xs" type="button" value="앱관리">
+                                <p class="form-control-static mt-1 mb-1"> <i class="fa fa-user"></i>&nbsp;&nbsp;{{ $appsOrderData->mem_id }}
+                                  <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="회원정보">
+                                </p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">업체명</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1"> 메디캠프 </p>
+                            <p class="form-control-static mt-1 mb-1">{{ $appsOrderData->app_company }}</p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">신청자명</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1"> 김영준 </p>
+                            <p class="form-control-static mt-1 mb-1">{{ $appsOrderData->order_name }}</p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">연락처</label>
                             <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1"> <i class="fa fa-user"></i>&nbsp;&nbsp;010-9847-2046</p>
-                                <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="sms보내기">
+                                <p class="form-control-static mt-1 mb-1"> <i class="fa fa-user"></i>&nbsp;&nbsp;{{ $appsOrderData->cellno }}
+                                  <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="sms보내기">
+                                </p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">이메일</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1"> medi_camp@naver.com </p>
+                            <p class="form-control-static mt-1 mb-1">{{ $appsOrderData->email }}</p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">결제정보</label>
                             <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1"> <i class="fa fa-user"></i>&nbsp;&nbsp;3개월(손효연, 승인번호: 0, 승인날짜: 2019/11/07 [18:22]) </p>
-                                <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="결제내역">
+                                <p class="form-control-static mt-1 mb-1"> <i class="fa fa-user"></i>
+                                  &nbsp;&nbsp;{{ $appsOrderData->pay_way }} (손효연, 승인번호: 0, 승인날짜: 2019/11/07 [18:22])
+                                  <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="결제내역">
+                                </p>
                             </div>
                         </div>
 
@@ -115,14 +127,14 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label class="col-md-2 col-form-label">App. Category</label>
                             <div class="col-md-10 col-xs-9">
                                 <select name="pm_content" id="" class="form-control">
                                 <option value="">기타</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Service Type</label>
@@ -157,14 +169,14 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">App. Name</label>
                             <div class="col-md-10 col-xs-9">
-                                <input type="text" class="form-control" value="메디캠프">
+                                <input type="text" class="form-control" value="{{ $appsOrderData->app_name }}">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">App. URL</label>
                             <div class="col-md-10 col-xs-9">
-                                <input type="text" class="form-control" value="m.medicamp.co.kr">
+                                <input type="text" class="form-control" value="{{ $appsOrderData->app_home_url }}">
                             </div>
                         </div>
 
@@ -185,7 +197,7 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">고객센터</label>
                             <div class="col-md-10 col-xs-9">
-                                <input type="text" class="form-control" value="070-7124-8911">
+                                <input type="text" class="form-control" value="{{ $appsOrderData->call_no }}">
                             </div>
                         </div>
 
@@ -199,7 +211,7 @@
                         <div class="form-group row">
                         <label class="col-md-2 col-form-label">앱소개</label>
                             <div class="col-md-10 col-xs-9">
-                                <textarea id="receipt" name="receipt" class="form-control" rows="5"></textarea>
+                                <textarea id="receipt" name="receipt" class="form-control" rows="5">{{ $appsOrderData->app_intro }}</textarea>
                             </div>
                         </div>
 
