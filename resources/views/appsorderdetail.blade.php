@@ -14,7 +14,7 @@
             <!-- cardbody start -->
             <div class="card-body">
                 <div class="row">
-                    {{-- <div class="col-sm-12">
+                    <div class="col-sm-12">
                         @if ($appsOrderData)
                         <h4>
                         <strong>{{ $appsOrderData->app_name }}</strong>
@@ -25,7 +25,7 @@
                         </h4>
                         @endif
                         <hr />
-                    </div> --}}
+                    </div>
 
 
 
