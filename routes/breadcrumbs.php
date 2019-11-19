@@ -150,6 +150,12 @@ Breadcrumbs::for('userinfolist', function ($trail) {
   $trail->push('고객 정보', route('userinfolist.view'));
 });
 
+// 고객 정보 상세
+Breadcrumbs::for('userinfodetail', function ($trail) {
+  $trail->parent('userinfolist');
+  $trail->push('고객 정보 상세', route('userinfolist'));
+});
+
 // 고객 문의(구 1:1 문의)
 Breadcrumbs::for('qnamemberlist', function ($trail) {
   $trail->parent('userlist');
