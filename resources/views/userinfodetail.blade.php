@@ -17,7 +17,7 @@
                 <div class="col-sm-12">
 
                     @if ($userInfoData)
-                    <h4 class="header-title">{{ $userInfoData->app_name }}</h2>
+                    <h4 class="header-title">{{ $userInfoData->mem_nick }}</h2>
                     @else
                     <h4 class="header-title">Something went wrong.</h4>
                     @endif
@@ -43,8 +43,12 @@
                             <div class="col-md-10 col-xs-9">
                               <p class="form-control-static mt-1 mb-1">
                                 {{ $userInfoData->recom_id }} &nbsp&nbsp
+
+                                @if ($resellerData)
                                 <strong>{{ $resellerData->company }}
-                                ({{ $resellerData->mem_name }}, {{ $resellerData->cellno }}, {{ $resellerData->phoneno }})</strong>
+                                ({{ $resellerData->mem_name }}, {{ $resellerData->cellno }}, {{ $resellerData->phoneno }})
+                                </strong>
+                                @endif
                               </p>
 
                             </div>
@@ -57,9 +61,9 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="mem_id" value="{{ $userInfoData->mem_id }}">
                                         <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="회원로그인" onclick="getMemberInfo({!! json_encode($userInfoData->idx)!!})">
-                                        <input class="btn btn-info waves-effect btn-xs mr-1" type="button" value="주문내역">
-                                        <input class="btn btn-info waves-effect btn-xs mr-1" type="button" value="결제내역">
-                                        <input class="btn btn-success waves-effect btn-xs mr-1" type="button" value="앱 관리" onclick="goToAppsOrderList()">
+                                        <input class="btn btn-info waves-effect btn-xs mr-1" type="button" value="주문내역" onclick="goToAppsOrderList()">
+                                        <input class="btn btn-info waves-effect btn-xs mr-1" type="button" value="결제내역" onclick="goToAppsPaymentList()">
+                                        <input class="btn btn-success waves-effect btn-xs mr-1" type="button" value="앱 관리">
                                         <input class="btn btn-warning waves-effect btn-xs mr-1" type="button" value="프로모션 발급">
                                         <input class="btn btn-danger waves-effect btn-xs mr-1" type="button" value="ID 변경">
                                     </div>
@@ -119,7 +123,7 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="text" class="form-control" id="cell_no" value="{{ $userInfoData->cell_no }}">
+                                      <input type="text" class="form-control" id="cell_no" value="{{ $userInfoData->cellno }}">
                                       <input class="btn btn-info waves-effect btn-xs ml-1" type="button" value="SMS 보내기">
                                     </div>
                                 </div>
@@ -131,7 +135,7 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="text" class="form-control" id="phone_no" value="{{ $userInfoData->phone_no }}">
+                                      <input type="text" class="form-control" id="phone_no" value="{{ $userInfoData->phoneno }}">
                                       <input class="btn btn-info waves-effect btn-xs ml-1" type="button" value="SMS 보내기">
                                     </div>
                                 </div>
@@ -166,10 +170,10 @@
                             <label class="col-md-2 col-form-label">옵션</label>
                             <div class="col-md-10 col-xs-9">
                                 <label for="" class="radio-inline">
-                                <input type="checkbox" name="modify" value="modify">수정하기
+                                  <input type="checkbox" name="modify" value="modify">수정하기
                                 </label>
                                 <label for="" class="radio-inline">
-                                <input type="checkbox" name="delete" value="delete">삭제하기
+                                  <input type="checkbox" name="delete" value="delete">삭제하기
                                 </label>
                             </div>
                         </div>
@@ -210,7 +214,7 @@ function getMemberInfo(idx) {
   sidebarOpen();
 }
 
-// 앱관리 눌렀을 때 실행되는 함수 내에서 호출함
+// 주문내역 눌렀을 때 실행되는 함수 내에서 호출함
 function getAddpsOrderIdx() {
   var mem_id = {!! json_encode($userInfoData->mem_id) !!};
 
@@ -223,20 +227,57 @@ function getAddpsOrderIdx() {
       _token: "{{ csrf_token() }}"
     },
     success: function(response) {
-      console.log(response['idx']);
-      idx = response['idx'];
+      if (response != null || response != '') {
+        console.log(response['idx']);
+        idx = response['idx'];
+      }
     },
+    error: function(err) {
+      console.log("에러".err);
+    }
   });
 
   return idx;
 }
 
-// 앱 관리 버튼 눌렀을 때 실행 --> 앱 접수 정보로 이동시킴
+// 결제내역 눌렀을 때 실행되는 함수 내에서 호출함
+function getAppsPaymentIdx() {
+  var mem_id = {!! json_encode($userInfoData->mem_id) !!};
+
+  $.ajax({
+    async: false,
+    url: '{{ Route("getappspaymentidx") }}',
+    type: 'POST',
+    data: {
+      mem_id: mem_id,
+      _token: "{{ csrf_token() }}"
+    },
+    success: function(response) {
+      console.log(response['idx']);
+      idx = response['idx'];
+    },
+    error: function(err) {
+      console.log("에러".err);
+    }
+  });
+
+  return idx;
+}
+
+// 결제내역 버튼 눌렀을 때 실행 --> 결제 상세페이지로 이동시킴
+function goToAppsPaymentList() {
+  var idx = getAppsPaymentIdx();
+  console.log(idx);
+  window.location.href = "/appspaydetail/"+idx;
+}
+
+// 주문내역 버튼 눌렀을 때 실행 --> 앱 접수 정보로 이동시킴
 function goToAppsOrderList() {
   var idx = getAddpsOrderIdx();
   //console.log(idx);
   window.location.href = "/appsorderdetail/"+idx;
 }
+
 </script>
 
 

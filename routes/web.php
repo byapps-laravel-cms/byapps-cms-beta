@@ -47,7 +47,9 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('/appspaylist/data', 'AppsPaymentController@getAppsPaymentData')->name('appspaylist');
   Route::get('/appspaydetail/{idx}', 'AppsPaymentController@getSingleData')->name('appspaydetail');
   Route::post('/appspayupdate/{idx}', 'AppsPaymentController@update')->name('appspayupdate');
+
   Route::post('/getappsorderidx', 'AppsPaymentController@getAppsOrderIdx')->name('getappsorderidx');
+  Route::post('/getappspaymentidx', 'AppsPaymentController@getAppsPaymentIdx')->name('getappspaymentidx');
 
   // 프로모션
   Route::view('/promolist', 'promolist')->name('promolist.view');

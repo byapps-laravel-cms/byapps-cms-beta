@@ -67,8 +67,15 @@ class AppsPaymentController extends Controller
     public function getAppsOrderIdx()
     {
       $memId = $_POST['mem_id'];
-
       $idx = AppsOrderData::where('mem_id', '=', $memId)->first();
+
+      return $idx;
+    }
+
+    public function getAppsPaymentIdx()
+    {
+      $memId = $_POST['mem_id'];
+      $idx = AppsPaymentData::where('mem_id', '=', $memId)->first();
 
       return $idx;
     }
