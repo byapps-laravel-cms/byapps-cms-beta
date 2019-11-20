@@ -1,11 +1,13 @@
 @extends('layouts.default')
 
-@section('content')
+@section('style')
 <style>
 .input-group-text {
   font-size: 11px;
 }
 </style>
+@endsection
+@section('content')
 
 @if (Auth::user())
 <div class="container-fluid">

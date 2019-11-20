@@ -66,7 +66,7 @@
         <div align="center">
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsDaily">일간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsWeekly">주간</button>
-          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatMonthly">월간</button>
+          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsMonthly">월간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsTotal">전체</button>
         </div>
         <div id="app_stats"></div>

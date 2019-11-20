@@ -109,6 +109,7 @@
     </div>
 </div>
 
+@section('script')
 <script>
 $(document).ready(function() {
   // 기본 표 출력
@@ -337,3 +338,5 @@ Date.prototype.format = function (mask, utc) {
     return dateFormat(this, mask, utc);
 };
 </script>
+
+@endsection
