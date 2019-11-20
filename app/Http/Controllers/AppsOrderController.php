@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\AppsOrderData;
+use App\ResellerInfo;
 use Yajra\Datatables\Datatables;
 
 class AppsOrderController extends Controller
@@ -55,6 +56,11 @@ class AppsOrderController extends Controller
   {
     $appsOrderData = AppsOrderData::where('idx', $idx)->first();
 
-    return view('appsorderdetail')->with('appsOrderData', $appsOrderData);
+    $recom_id = AppsOrderData::where('idx', $idx)->select('recom_id')->get();
+    $recom_id = $recom_id[0]['recom_id'];
+    $resellerData = ResellerInfo::where('mem_id', $recom_id)->first();
+
+    return view('appsorderdetail')->with('appsOrderData', $appsOrderData)
+                                  ->with('resellerData', $resellerData);
   }
 }
