@@ -331,7 +331,7 @@ function showChart (data) {
         }
       },
       donut: {
-        title: "앱 서비스 통계",
+        title: "앱 통계",
         label: {
           format: function(value, ratio, id) {
             return value + "개\n" + (ratio * 100).toFixed(1) + "%";
