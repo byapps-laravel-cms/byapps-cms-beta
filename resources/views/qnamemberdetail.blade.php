@@ -123,6 +123,7 @@
 @toastr_render
 
 <script>
+
 // 사이드바 열고 고객정보 보기
 function getMemberInfo(idx) {
   console.log(idx);
@@ -141,7 +142,7 @@ function answer() {
                           <h4 class="card-title text-success mb-1">{{ $replyData->subject }}</h4>\
                       </div>\
                       <div class="card-body">\
-                          <textarea class="mb-0" rows="10" style="width:100%;"></textarea>\
+                          <textarea id="answer_content" class="mb-0" rows="10" style="width:100%;"></textarea>\
                           <div class="col-md-10 col-xs-9 offset-md-2">\
                               <button type="submit" class="btn btn-success btn-sm float-right" onclick="register()">등록</button>\
                           </div>\
@@ -152,7 +153,12 @@ function answer() {
   document.getElementById('replyData').appendChild(div);
   document.getElementById('answer').remove();
 }
+</script>
 
+<script>
+  $(document).ready(function() {
+    $('#answer_content').summernote();
+  });
 </script>
 
 @endsection
