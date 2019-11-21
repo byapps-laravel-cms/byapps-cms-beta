@@ -1,3 +1,12 @@
+
+<script>
+        if (location.href.indexOf("/appsdetail/") == -1) {
+           <?
+            $tablist = '<a class="nav-item nav-link" id="nav-search-info-tab" data-toggle="tab" href="#nav-search-info" role="tab" aria-controls="nav-search-info" aria-selected="false">검색업체 정보</a>';
+           ?>
+        }
+    </script>
+
 <div id="sidebar-close" class="my-2"><i class="mdi mdi-close"></i></div>
 
         <form class="navbar-nav flex-row ml-md-auto d-none d-md-flex form-inline">
@@ -14,7 +23,7 @@
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-comment-tab" data-toggle="tab" href="#nav-comment" role="tab" aria-controls="nav-comment" aria-selected="true">댓글</a>
-                            <a class="nav-item nav-link" id="nav-search-info-tab" data-toggle="tab" href="#nav-search-info" role="tab" aria-controls="nav-search-info" aria-selected="false">검색업체 정보</a>
+                            <?= $tablist ?>
                         </div>
                     </nav>
                     <div class="tab-content">
