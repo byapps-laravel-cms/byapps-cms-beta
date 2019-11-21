@@ -169,11 +169,9 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">옵션</label>
                             <div class="col-md-10 col-xs-9">
-                                <label for="" class="radio-inline">
-                                  <input type="checkbox" name="modify" value="modify">수정하기
-                                </label>
-                                <label for="" class="radio-inline">
-                                  <input type="checkbox" name="delete" value="delete">삭제하기
+                                <label for="" class="radio-inline" id="radio-inline">
+                                  <input type="checkbox" name="radios" id="modify" value="modify">수정하기
+                                  <input type="checkbox" name="radios" id="delete" value="delete">삭제하기
                                 </label>
                             </div>
                         </div>
@@ -206,6 +204,33 @@
 @toastr_css
 @toastr_js
 @toastr_render
+
+<script>
+$(document).ready(function() {
+
+checkRadiobutton();
+
+// radio button 눌렸는지 체크
+function checkRadiobutton() {
+  var update_select = function (){
+    if ($('#modify').is(':checked')) {
+      $('#delete').attr('disabled', "disabled");
+    }
+    else if ($('#delete').is(':checked')){
+      $("#delete").removeAttr("disabled");
+      $('#modify').attr('disabled', "disabled");
+    } else {
+      $("#modify").removeAttr("disabled");
+      $("#delete").removeAttr("disabled");
+    }
+  };
+
+  $(update_select);
+  $('#radio-inline').change(update_select);
+}
+
+});
+</script>
 
 <script>
 // 사이드바 열고 고객정보 보기
@@ -291,7 +316,6 @@ function goToAppsOrderList() {
     window.location.href = "/appsorderdetail/"+idx;
   }
 }
-
 </script>
 
 
