@@ -47,6 +47,12 @@
                                 <div class="box-footer">
                                     <form action="#" method="post">
                                     <div class="input-group">
+                                    <div class="checkbox checkbox-danger my-2">
+                                            <label>
+                                                <input type="checkbox" value="" >
+                                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                            </label>
+                                        </div>
                                         <input type="text" name="message" placeholder="Type Message ..." class="form-control">
                                         <span class="input-group-btn">
                                             <button type="submit" class="btn btn-warning btn-flat">Send</button>
@@ -123,7 +129,7 @@
                                                 <!-- //#nav-company-info -->
 
                                                     <!-- #nav-company-info -->
-                                                    <div class="tab-pane fade px-3" id="nav-app-info" role="tabpanel" aria-labelledby="nav-app-info-tab">
+                                                    <div class="tab-pane fade px-3 text-black" id="nav-app-info" role="tabpanel" aria-labelledby="nav-app-info-tab">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group row">

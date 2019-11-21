@@ -18,9 +18,9 @@ $("#sidebar-close,#sidebar-toggle").click(function (e) {
 });
 
 function sidebarOpen() {
-  $('#content').attr("class","col-md-9 p-0");
-  $('#topnav').attr("class","col-md-9 p-0");
-  $("#sidebar").attr("class","col-md-3");
+  $('#content').attr("class","col-md-8 p-0");
+  $('#topnav').attr("class","col-md-8 p-0");
+  $("#sidebar").attr("class","col-md-4");
   $("#sidebar").css("display","block");
   $("#sidebar-toggle").hide();
 
