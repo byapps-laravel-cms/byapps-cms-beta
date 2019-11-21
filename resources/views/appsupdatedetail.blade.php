@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
 
-  {{ Breadcrumbs::render('appsupdatedetail') }}
+  {{-- {{ Breadcrumbs::render('appsupdatedetail') }} --}}
 
     <div class="row">
         <!-- col-sm-12 start -->
