@@ -79,20 +79,20 @@
 
                     </div><!--row end-->
 
-                    @if ($replyData)
-                    <!-- <label class="col-md-2 col-form-label ">답변내용</label> -->
                     <div class="col-md-10 col-xs-9" id="replyData">
+                        @if ($replyData)
                         <div class="card card-border">
                             <div class="card-header border-success pb-1">
                                 <h4 class="card-title text-success mb-1">{{ $replyData->subject }}</h4>
                                 <h5 class="card-title text-success mb-1 float-right">{{ date("Y-m-d h:i:s", $replyData->reg_time) }}</h5>
                             </div>
+
                             <div class="card-body">
                                 <p class="mb-0">{!! $replyData->content !!}</p>
                             </div>
                         </div>
+                          @endif
                     </div>
-                    @endif
 
                     <div class="form-group row" id="answer">
                         <div class="col-md-10 col-xs-9 offset-md-2">
@@ -100,8 +100,6 @@
                             <button type="submit" class="btn btn-info btn-sm float-right" onclick="answer()">답변하기</button>
                         </div>
                     </div>
-                    {!! Form::close() !!}
-                    <!-- form end -->
 
                 </div>
                     <!-- col-md-12 -->
@@ -122,6 +120,7 @@
 @toastr_js
 @toastr_render
 
+
 <script>
 
 // 사이드바 열고 고객정보 보기
@@ -136,13 +135,13 @@ function answer() {
 
   div.className = 'row';
 
-  div.innerHTML = '<div class="col-md-10 col-xs-9">\
+  div.innerHTML = '<div class="col-md-12 col-xs-12">\
                     <div class="card card-border">\
                       <div class="card-header border-success pb-1">\
-                          <h4 class="card-title text-success mb-1">{{ $replyData->subject }}</h4>\
+                          <h4 class="card-title text-success mb-1">{{ $qnaMemberData->subject }}</h4>\
                       </div>\
                       <div class="card-body">\
-                          <textarea id="answer_content" class="mb-0" rows="10" style="width:100%;"></textarea>\
+                          <textarea id="answer_content" class="mb-0" rows="20" style="width:100%;" name="editor"></textarea>\
                           <div class="col-md-10 col-xs-9 offset-md-2">\
                               <button type="submit" class="btn btn-success btn-sm float-right" onclick="register()">등록</button>\
                           </div>\
@@ -152,13 +151,13 @@ function answer() {
 
   document.getElementById('replyData').appendChild(div);
   document.getElementById('answer').remove();
-}
-</script>
 
-<script>
-  $(document).ready(function() {
-    $('#answer_content').summernote();
+  $('#answer_content').summernote({
+      // placeholder: {!! json_encode($qnaMemberData->content) !!},
+      tabsize: 2,
+      height: 200
   });
+}
 </script>
 
 @endsection
