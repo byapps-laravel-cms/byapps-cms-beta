@@ -140,6 +140,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/userinfolist', 'userinfolist')->name('userinfolist.view');
   Route::get('/userinfolist/data', 'UserInfoController@getUserInfoListData')->name('userinfolist');
   Route::get('/userinfodetail/{idx}', 'UserInfoController@getSingleData')->name('userinfodetail');
+  Route::post('/userinfoupdate/{idx}', 'UserInfoController@update')->name('userinfoupdate');
 
   //  회원 문의
   Route::view('/qnamemberlist', 'qnamemberlist')->name('qnamemberlist.view');

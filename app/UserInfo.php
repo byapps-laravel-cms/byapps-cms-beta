@@ -11,7 +11,9 @@ class UserInfo extends Model
   protected $primaryKey = 'idx';
   public $timestamps = false;
 
-  protected $fillable = [];
+  protected $fillable = [
+    'mem_id', 'mem_email', 'passwd', 'mem_nick', 'mem_name', 'ceo_name', 'phoneno', 'cellno'
+  ];
 
   public static function getUserInfoData()
   {
