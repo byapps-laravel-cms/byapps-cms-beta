@@ -15,19 +15,16 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12">
+
                         @if ($appsOrderData)
-                        <h4>
-                        <strong>{{ $appsOrderData->app_name }}</strong>
-                        </h4>
+                        <h4><strong>{{ $appsOrderData->app_name }}</strong></h4>
                         @else
-                        <h4>
-                        <strong>Something went wrong.</strong>
-                        </h4>
+                        <h4><strong>데이터가 없습니다.</strong></h4>
                         @endif
+
                         <hr />
+
                     </div>
-
-
 
                     <div class="col-md-12 col-xs-12 px-4">
                         <form method="POST" action="">

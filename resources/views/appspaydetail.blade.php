@@ -16,10 +16,10 @@
             <div class="row">
                 <div class="col-sm-12">
 
-                    @if ($appsPaymentData)
+                    @if ($appsPaymentData != 'undefined')
                     <h4 class="header-title">{{ $appsPaymentData->app_name }}</h2>
                     @else
-                    <h4 class="header-title">Something went wrong.</h4>
+                    <h4 class="header-title">데이터가 없습니다.</h4>
                     @endif
 
                     <hr />

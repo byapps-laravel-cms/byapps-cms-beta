@@ -19,7 +19,7 @@
                     @if ($userInfoData)
                     <h4 class="header-title">{{ $userInfoData->mem_nick }}</h2>
                     @else
-                    <h4 class="header-title">Something went wrong.</h4>
+                    <h4 class="header-title">데이터가 없습니다.</h4>
                     @endif
 
                     <hr />
@@ -229,7 +229,12 @@ function getAddpsOrderIdx() {
     success: function(response) {
       if (response != null || response != '') {
         console.log(response['idx']);
-        idx = response['idx'];
+        if (response['idx'] != undefined) {
+          idx = response['idx'];
+        } else {
+          alert('주문내역이 없습니다.');
+          idx = '';
+        }
       }
     },
     error: function(err) {
@@ -254,7 +259,12 @@ function getAppsPaymentIdx() {
     },
     success: function(response) {
       console.log(response['idx']);
-      idx = response['idx'];
+      if (response['idx'] != undefined) {
+        idx = response['idx'];
+      } else {
+        alert('결제내역이 없습니다.');
+        idx = '';
+      }
     },
     error: function(err) {
       console.log("에러".err);
@@ -267,15 +277,19 @@ function getAppsPaymentIdx() {
 // 결제내역 버튼 눌렀을 때 실행 --> 결제 상세페이지로 이동시킴
 function goToAppsPaymentList() {
   var idx = getAppsPaymentIdx();
-  console.log(idx);
-  window.location.href = "/appspaydetail/"+idx;
+  //console.log(idx);
+  if (idx) {
+    window.location.href = "/appspaydetail/"+idx;
+  }
 }
 
 // 주문내역 버튼 눌렀을 때 실행 --> 앱 접수 정보로 이동시킴
 function goToAppsOrderList() {
   var idx = getAddpsOrderIdx();
   //console.log(idx);
-  window.location.href = "/appsorderdetail/"+idx;
+  if (idx) {
+    window.location.href = "/appsorderdetail/"+idx;
+  }
 }
 
 </script>

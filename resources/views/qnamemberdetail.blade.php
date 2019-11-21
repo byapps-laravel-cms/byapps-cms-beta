@@ -91,7 +91,7 @@
                                 <p class="mb-0">{!! $replyData->content !!}</p>
                             </div>
                         </div>
-                          @endif
+                        @endif
                     </div>
 
                     <div class="form-group row" id="answer">
@@ -129,6 +129,7 @@ function getMemberInfo(idx) {
   sidebarOpen();
 }
 
+// 답변하기 버튼 눌렀을 때 동작
 function answer() {
   console.log('answer');
   var div = document.createElement('div');
@@ -142,7 +143,7 @@ function answer() {
                       </div>\
                       <div class="card-body">\
                           <textarea id="answer_content" class="mb-0" rows="20" style="width:100%;" name="editor"></textarea>\
-                          <div class="col-md-10 col-xs-9 offset-md-2">\
+                          <div class="col-md-10 col-xs-9 offset-md-2 mt-1">\
                               <button type="submit" class="btn btn-success btn-sm float-right" onclick="register()">등록</button>\
                           </div>\
                       </div>\
