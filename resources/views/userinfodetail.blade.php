@@ -19,7 +19,7 @@
                     @if ($userInfoData)
                     <h4 class="header-title">{{ $userInfoData->mem_nick }}</h2>
                     @else
-                    <h4 class="header-title">Something went wrong.</h4>
+                    <h4 class="header-title">데이터가 없습니다.</h4>
                     @endif
 
                     <hr />
@@ -169,11 +169,9 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">옵션</label>
                             <div class="col-md-10 col-xs-9">
-                                <label for="" class="radio-inline">
-                                  <input type="checkbox" name="modify" value="modify">수정하기
-                                </label>
-                                <label for="" class="radio-inline">
-                                  <input type="checkbox" name="delete" value="delete">삭제하기
+                                <label for="" class="radio-inline" id="radio-inline">
+                                  <input type="checkbox" name="radios" id="modify" value="modify">수정하기
+                                  <input type="checkbox" name="radios" id="delete" value="delete">삭제하기
                                 </label>
                             </div>
                         </div>
@@ -208,6 +206,33 @@
 @toastr_render
 
 <script>
+$(document).ready(function() {
+
+checkRadiobutton();
+
+// radio button 눌렸는지 체크
+function checkRadiobutton() {
+  var update_select = function (){
+    if ($('#modify').is(':checked')) {
+      $('#delete').attr('disabled', "disabled");
+    }
+    else if ($('#delete').is(':checked')){
+      $("#delete").removeAttr("disabled");
+      $('#modify').attr('disabled', "disabled");
+    } else {
+      $("#modify").removeAttr("disabled");
+      $("#delete").removeAttr("disabled");
+    }
+  };
+
+  $(update_select);
+  $('#radio-inline').change(update_select);
+}
+
+});
+</script>
+
+<script>
 // 사이드바 열고 고객정보 보기
 function getMemberInfo(idx) {
   console.log(idx);
@@ -229,7 +254,12 @@ function getAddpsOrderIdx() {
     success: function(response) {
       if (response != null || response != '') {
         console.log(response['idx']);
-        idx = response['idx'];
+        if (response['idx'] != undefined) {
+          idx = response['idx'];
+        } else {
+          alert('주문내역이 없습니다.');
+          idx = '';
+        }
       }
     },
     error: function(err) {
@@ -254,7 +284,12 @@ function getAppsPaymentIdx() {
     },
     success: function(response) {
       console.log(response['idx']);
-      idx = response['idx'];
+      if (response['idx'] != undefined) {
+        idx = response['idx'];
+      } else {
+        alert('결제내역이 없습니다.');
+        idx = '';
+      }
     },
     error: function(err) {
       console.log("에러".err);
@@ -267,17 +302,20 @@ function getAppsPaymentIdx() {
 // 결제내역 버튼 눌렀을 때 실행 --> 결제 상세페이지로 이동시킴
 function goToAppsPaymentList() {
   var idx = getAppsPaymentIdx();
-  console.log(idx);
-  window.location.href = "/appspaydetail/"+idx;
+  //console.log(idx);
+  if (idx) {
+    window.location.href = "/appspaydetail/"+idx;
+  }
 }
 
 // 주문내역 버튼 눌렀을 때 실행 --> 앱 접수 정보로 이동시킴
 function goToAppsOrderList() {
   var idx = getAddpsOrderIdx();
   //console.log(idx);
-  window.location.href = "/appsorderdetail/"+idx;
+  if (idx) {
+    window.location.href = "/appsorderdetail/"+idx;
+  }
 }
-
 </script>
 
 

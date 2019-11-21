@@ -47,4 +47,8 @@
     <!-- Avatar like Google -->
     <script src="{{ asset('assets/javascript/initial.min.js') }}"></script>
 
+    <!-- include summernote css/js -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+
 </head>

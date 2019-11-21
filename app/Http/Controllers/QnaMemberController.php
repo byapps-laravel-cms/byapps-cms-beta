@@ -42,6 +42,12 @@ class QnaMemberController extends Controller
   {
     $qnaMemberData = QnaMember::where('idx', $idx)->first();
 
-    return view('qnamemberdetail')->with('qnaMemberData', $qnaMemberData);
+    $replyData = '';
+    if ($qnaMemberData->process == 3) {
+      $replyData = QnaMember::where('pid', $idx)->first();
+    }
+
+    return view('qnamemberdetail')->with('qnaMemberData', $qnaMemberData)
+                                  ->with('replyData', $replyData);
   }
 }
