@@ -37,7 +37,7 @@ html #sidebar {
     height: 100%;
     background: white;
     border-left: 1px solid #c6c6c6;
-    color: #fff;
+    color: #000;
     position: fixed;
     font-size: .8em;
     z-index: 100;
