@@ -84,19 +84,19 @@ $(function() {
            $('td:eq(2)', row).addClass('align-middle text-center');
            switch (cellValue) {
             case '취소':
-                $('td:eq(2)', row).html("<button class='btn btn-pink btn-rounded btn-xs'>취소</button>");
+                $('td:eq(2)', row).html("<button class='btn btn-light btn-rounded btn-xs'>취소</button>");
                 break;
             case '접수': 
-                $('td:eq(2)', row).html("<button class='btn btn-info btn-rounded btn-xs'>접수</button>");
+                $('td:eq(2)', row).html("<button class='btn btn-primary btn-rounded btn-xs'>접수</button>");
                 break;
             case '신청확인':
                 $('td:eq(2)', row).html("<button class='btn btn-success btn-rounded btn-xs'>신청확인</button>");
                 break;
             case '진행중':
-                $('td:eq(2)', row).html("<button class='btn btn-warning btn-rounded btn-xs'>진행중</button>");
+                $('td:eq(2)', row).html("<button class='btn btn-danger btn-rounded btn-xs'>진행중</button>");
                 break;
             case '완료':
-                $('td:eq(2)', row).html("<button class='btn btn-purple btn-rounded btn-xs'>완료</button>");
+                $('td:eq(2)', row).html("<button class='btn btn-inverse btn-rounded btn-xs'>완료</button>");
                 case 'default':
                 break;
             }

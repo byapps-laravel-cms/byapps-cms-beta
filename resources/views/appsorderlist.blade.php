@@ -79,7 +79,34 @@ $(function() {
               table = $('#appsorderlistTable').dataTable();
               window.location.href = "/appsorderdetail/" + this.id;
             });
-         }
+         },
+         "rowCallback": function(row, data, index) {
+           var cellValue = data['app_process'];
+
+           $('td:eq(2)', row).addClass('align-middle text-center');
+           switch (cellValue) {
+            case '접수대기':
+                $('td:eq(2)', row).html("<button class='btn btn-purple btn-rounded btn-xs'>접수대기</button>");
+                break;
+            case '접수': 
+                $('td:eq(2)', row).html("<button class='btn btn-primary btn-rounded btn-xs'>접수</button>");
+                break;
+            case '주문확인':
+                $('td:eq(2)', row).html("<button class='btn btn-success btn-rounded btn-xs'>주문확인</button>");
+                break;
+            case '개발진행':
+                $('td:eq(2)', row).html("<button class='btn btn-danger btn-rounded btn-xs'>개발진행</button>");
+                break;
+            case '주문취소':
+                $('td:eq(2)', row).html("<button class='btn btn-light btn-rounded btn-xs'>주문취소</button>");
+                break;
+            case '앱등록':
+                $('td:eq(2)', row).html("<button class='btn btn-inverse btn-rounded btn-xs'>앱등록</button>");
+                break;
+                case 'default':
+                break;
+            }
+         },
     });
 });
 </script>
