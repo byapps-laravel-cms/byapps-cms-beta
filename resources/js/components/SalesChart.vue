@@ -63,8 +63,6 @@
         <!-- 매출 통계 차트 -->
         <div class="col-xs-12 col-md-12 pl-0 pr-5">
           <div align="center">
-            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="salesStatsDaily">일간</button>
-            <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="salesStatsWeekly">주간</button>
             <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="salesStatsMonthly">월간</button>
             <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="salesStatsTotal">전체</button>
           </div>
@@ -89,26 +87,11 @@ export default {
   },
   methods: {
     drawSalesCharDefault() {
-      var today = (new Date()).toISOString().split('T')[0];
-
-      axios({
-        method: 'POST',
-        url: '/saleschart',
-      }).then(
-        response => {
-          showSalesChart(response.data)
-        },
-        error => {
-          console.log(error)
-        }
-      )
-    },
-    showEntireSalesChart() {
       var date1 = $('#start_date_sales').val();
       var date2 = $('#end_date_sales').val();
       axios({
         method: 'POST',
-        url: '/saleschart/entire_chart',
+        url: '/saleschart',
         data: {
           date1: date1,
           date2: date2,
@@ -123,10 +106,17 @@ export default {
         }
       )
     },
-    salesStatsTotal() {
+    showEntireSalesChart() {
+      var date1 = $('#start_date_sales').val();
+      var date2 = $('#end_date_sales').val();
       axios({
-        method: 'GET',
-        url: '/saleschart/sales_total',
+        method: 'POST',
+        url: '/saleschart/sales_term',
+        data: {
+          date1: date1,
+          date2: date2,
+	  gubun: 'S'
+        }
       }).then(
         response => {
           console.log(response)
@@ -137,59 +127,38 @@ export default {
         }
       )
     },
-    salesStatsDaily() {
-      var today = (new Date()).toISOString().split('T')[0];
-
-      axios({
-        method: 'POST',
-        url: '/saleschart/sales_term',
-        data: {
-          date1: today,
-          date2: today,
-        }
-      }).then(
-        response => {
-          showSalesChart(response.data)
-        },
-        error => {
-          console.log(error)
-        }
-      )
-    },
-    salesStatsWeekly() {
-      var today = (new Date()).toISOString().split('T')[0];
-      var newDate = new Date(today);
-      newDate.setDate(newDate.getDate() - 7);
-      var nday = new Date(newDate).toISOString().split('T')[0];
-
-      axios({
-        method: 'POST',
-        url: '/saleschart/sales_term',
-        data: {
-          date1: today,
-          date2: nday,
-        }
-      }).then(
-        response => {
-          showSalesChart(response.data)
-        },
-        error => {
-          console.log(error)
-        }
-      )
-    },
     salesStatsMonthly() {
-      var today = (new Date()).toISOString().split('T')[0];
-      var newDate = new Date(today);
-      newDate.setDate(newDate.getDate() - 30);
-      var nday = new Date(newDate).toISOString().split('T')[0];
+      var date1 = $('#start_date_sales').val();
+      var date2 = $('#end_date_sales').val();
 
       axios({
         method: 'POST',
         url: '/saleschart/sales_term',
         data: {
-          date1: today,
-          date2: nday,
+          date1: date1,
+          date2: date2,
+	  gubun: 'M'
+        }
+      }).then(
+        response => {
+          showSalesLineChart(response.data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    salesStatsTotal() {
+      var date1 = $('#start_date_sales').val();
+      var date2 = $('#end_date_sales').val();
+
+      axios({
+        method: 'POST',
+        url: '/saleschart/sales_total',
+        data: {
+          date1: date1,
+          date2: date2,
+	  gubun: 'T'
         }
       }).then(
         response => {
@@ -241,5 +210,35 @@ function showSalesChart(data) {
   });
 }
 
+function showSalesLineChart(data) {
+var chart1 = bb.generate({
+  data: {
+    x: "x", 
+    columns: data.line,
+    colors: {
+      "전체": "#97215c",
+      "신규": "#fca1b0",
+      "연장": "#f9637c",
+    },
+    labels: {
+      centered: true,
+      format: function(x) {
+	  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+    }
+  },
+  zoom: {
+    enabled: {
+      type: "drag"
+    }
+  },
+  axis: {
+    x: {
+      type: "category",
+    }
+  },
+  bindto: "#sale_stats"
+});
+}
 
 </script>

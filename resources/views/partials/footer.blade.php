@@ -136,7 +136,7 @@ $(function() {
  //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
   $('#start_date_chart').datepicker('setDate', 'today');
   $('#end_date_chart').datepicker('setDate', 'today');
-  $('#start_date_sales').datepicker('setDate', 'today');
+  $('#start_date_sales').datepicker('setDate', '-1Y');
   $('#end_date_sales').datepicker('setDate', 'today');
   $('#start_date_table').datepicker('setDate', 'today');
   $('#end_date_table').datepicker('setDate', 'today');
