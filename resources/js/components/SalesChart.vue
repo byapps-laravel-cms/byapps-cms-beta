@@ -219,6 +219,7 @@ var chart1 = bb.generate({
       "전체": "#97215c",
       "신규": "#fca1b0",
       "연장": "#f9637c",
+      "기타": "#d7215c"
     },
     labels: {
       centered: true,

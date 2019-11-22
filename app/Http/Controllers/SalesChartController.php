@@ -59,19 +59,21 @@ class SalesChartController extends Controller
 			$salesTotal[0]="전체";
 			$salesNew[0]="신규";
 			$salesCon[0]="연장";
+			$salesEtc[0]="기타";
 			foreach($sales as $valu) {
 				$ym=date("Y-m",$valu['reg_time']);
 				if($oldym!=$ym){
 					$salesTotal[$i]=$total;
 					$salesNew[$i]=$keep;
 					$salesCon[$i]=$new;
+					$salesEtc[$i]=$total - ($new+$keep);
+					$month[]=$oldym;
+					$oldym=$ym;
 					$total=$valu['amount'];
 					$keep=0;
 					$new=0;
 					if($valu['pay_type']=="1") $keep=$valu['amount'];
 					elseif($valu['pay_type']=="0") $new=$valu['amount'];
-					$oldym=$ym;
-					$month[]=$ym;
 					$i++;
 				}else{
 					$total+=$valu['amount'];
@@ -80,13 +82,20 @@ class SalesChartController extends Controller
 					elseif($valu['pay_type']=="0") $new+=$valu['amount'];
 				}
 			}
+			$month[]=$ym;
+			$salesTotal[$i]=$total;
+			$salesNew[$i]=$keep;
+			$salesCon[$i]=$new;
+			$salesEtc[$i]=$total - ($new+$keep);
 		} else {
 			$month=0;
 			$salesTotal=0;
 			$salesNew=0;
 			$salesCon=0;
+			$salesEtc=0;
 		}
 	}
+	
 	if($request->gubun == 'S') {
 		$result = array(
 		  'bar' => array(
@@ -103,6 +112,7 @@ class SalesChartController extends Controller
 			  $salesTotal,
 			  $salesNew,
 			  $salesCon,
+			  $salesEtc,
 		  ),
 		);
 	}
