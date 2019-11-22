@@ -44,7 +44,7 @@ $(function() {
             { data: 'mem_id', name: 'mem_id' },
             { data: 'point', name: 'point' },
             { data: 'point_title', name: 'point_title' },
-            { data: 'reg_time', name: 'reg_time' }
+            { data: 'reg_time', name: 'idx' }
         ],
         columnDefs: [
            {
@@ -60,7 +60,7 @@ $(function() {
         select: {
            'style': 'multi'
         },
-        order: [[ 5, 'desc']],
+        order: [[ 6, 'desc']],
         "paging": true,
         "pageLength": 50,
         "fixedHeader": false,

@@ -28,7 +28,8 @@ class AppsPointController extends Controller
                 return $appspointlistData->idx;
             })
             ->editColumn('reg_time', '{{ date("Y-m-d", $reg_time) }}')
-            ->orderColumn('reg_time', 'reg_time $1')
+            // ->orderColumn('reg_time', 'reg_time $1')
+            // ->orderColumn('idx')
             ->make(true);
   }
 
