@@ -19,6 +19,7 @@ class Comment extends Controller
             return $data->orderBy('reg_time','desc')->get($this->colmus);
         }
     }
+    
     public function send(){
         $data = request()->only(['pidx','mmid','comment']);
         $data['mmid'] = request()->input('mmid') == 'all' ? 'apps' : request()->input('mmid');
