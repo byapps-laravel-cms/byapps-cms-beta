@@ -3,6 +3,7 @@
 
 @include('partials.head')
 
+@yield('style')
 <body>
 
   <!-- Navigation Bar-->
@@ -35,7 +36,7 @@
 
     </section>
   </div>
-
+  @yield('script')
   @include('partials.footer')
 
 </body>
