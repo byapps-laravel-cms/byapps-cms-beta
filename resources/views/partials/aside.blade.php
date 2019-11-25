@@ -4,7 +4,7 @@
         $tablist = '<a class="nav-item nav-link" id="nav-search-info-tab" data-toggle="tab" href="#nav-search-info" role="tab" aria-controls="nav-search-info" aria-selected="false">검색업체 정보</a>';
        ?>
     }
-    var mode = 'apps';
+    var mode = 'all';
     $(document).ready(function(){
         $.ajax({
             async: false,
@@ -17,10 +17,31 @@
             },
             success: function(response) {
                 response.forEach( data =>
-                    $('.comments').append(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}</li>`)
+                    $('.comments').append(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}<span style="float:right;margin-right:5px;">${data.mmid}</span></li>`)
                 );
+                $('#nav-comment .custom-select').change(function(){
+                    mode = $(this).val();
+                    $.ajax({
+                        async: false,
+                        url: '{{ Route("comment") }}',
+                        type: 'POST',
+                        data: {
+                            idx: {{ request()->route()->parameter('idx') }},
+                            mmid: mode,
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            $('.comments').html('');
+                            response.forEach( data =>
+                                $('.comments').append(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}</li>`)
+                            );
+                        }
+                    });
+                })
                 $('#sendComment').submit(function( event ) {
+                    event.preventDefault();
                     var msg = $(this).find('input[name=message]').val();
+                    if(!msg)return;
                     $(this).find('input[name=message]').val('')
                     $.ajax({
                         async: false,
@@ -36,25 +57,8 @@
                             $('.comments').html(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}</li>`+$('.comments').html())
                         },
                     });
-                    event.preventDefault();
                 });
             },
-        });
-        $('#search').submit(function( event ) {
-            var search = $(this).find('input[name=search]').val();
-            $.ajax({
-                async: false,
-                url: '',
-                type: 'POST',
-                data: {
-                    q: search,
-                    _token: "{{ csrf_token() }}"
-                },
-                success: function(data) {
-
-                },
-            });
-            event.preventDefault();
         });
     })
 
@@ -85,14 +89,14 @@
                                 <div>
                                 <!-- 코멘트박스 -->
                                     <select name="" class="custom-select my-1 mr-sm-2">
-                                        <option value="1">주문</option>
-                                        <option value="2">결제</option>
-                                        <option value="3">업데이트</option>
-                                        <option value="4">앱상세</option>
-                                        <option value="5">리셀러</option>
-                                        <option value="6">문의</option>
-                                        <option value="7">MA</option>
-                                        <option value="8" selected>전체</option>
+                                        <option value="order">주문</option>
+                                        <option value="payment">결제</option>
+                                        <option value="new_update">업데이트</option>
+                                        <option value="apps">앱상세</option>
+                                        <option value="reseller">리셀러</option>
+                                        <option value="myqna">문의</option>
+                                        <option value="ma">MA</option>
+                                        <option value="all" selected>전체</option>
                                     </select>
                                     <ul class="comments" style="overflow-y: auto;max-height:500px;">
                                     </ul>
