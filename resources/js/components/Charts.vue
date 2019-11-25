@@ -66,7 +66,7 @@
         <div align="center">
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsDaily">일간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsWeekly">주간</button>
-          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatMonthly">월간</button>
+          <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsMonthly">월간</button>
           <button class="btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs" @click="appStatsTotal">전체</button>
         </div>
         <div id="app_stats"></div>
@@ -331,7 +331,7 @@ function showChart (data) {
         }
       },
       donut: {
-        title: "앱 서비스 통계",
+        title: "앱 통계",
         label: {
           format: function(value, ratio, id) {
             return value + "개\n" + (ratio * 100).toFixed(1) + "%";
