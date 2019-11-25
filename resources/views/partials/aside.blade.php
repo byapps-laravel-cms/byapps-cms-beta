@@ -1,20 +1,72 @@
-
 <script>
-        if (location.href.indexOf("/appsdetail/") == -1) {
-           <?
-            $tablist = '<a class="nav-item nav-link" id="nav-search-info-tab" data-toggle="tab" href="#nav-search-info" role="tab" aria-controls="nav-search-info" aria-selected="false">검색업체 정보</a>';
-           ?>
-        }
-    </script>
+    if (location.href.indexOf("/appsdetail/") == -1) {
+       <?
+        $tablist = '<a class="nav-item nav-link" id="nav-search-info-tab" data-toggle="tab" href="#nav-search-info" role="tab" aria-controls="nav-search-info" aria-selected="false">검색업체 정보</a>';
+       ?>
+    }
+    var mode = 'apps';
+    $(document).ready(function(){
+        $.ajax({
+            async: false,
+            url: '{{ Route("comment") }}',
+            type: 'POST',
+            data: {
+                idx: {{ request()->route()->parameter('idx') }},
+                mmid: mode,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                response.forEach( data =>
+                    $('.comments').append(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}</li>`)
+                );
+                $('#sendComment').submit(function( event ) {
+                    var msg = $(this).find('input[name=message]').val();
+                    $(this).find('input[name=message]').val('')
+                    $.ajax({
+                        async: false,
+                        url: '{{ Route("comment.send") }}',
+                        type: 'POST',
+                        data: {
+                            pidx: {{ request()->route()->parameter('idx') }},
+                            mmid: mode,
+                            comment: msg,
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(data) {
+                            $('.comments').html(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}</li>`+$('.comments').html())
+                        },
+                    });
+                    event.preventDefault();
+                });
+            },
+        });
+        $('#search').submit(function( event ) {
+            var search = $(this).find('input[name=search]').val();
+            $.ajax({
+                async: false,
+                url: '',
+                type: 'POST',
+                data: {
+                    q: search,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(data) {
+
+                },
+            });
+            event.preventDefault();
+        });
+    })
+
+</script>
 
 <div id="sidebar-close" class="my-2"><i class="mdi mdi-close"></i></div>
 
-        <form class="navbar-nav flex-row ml-md-auto d-none d-md-flex form-inline">
-                <div class="form-group">
-
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-                </div>
+        <form id="search" class="navbar-nav flex-row ml-md-auto d-none d-md-flex form-inline">
+            <div class="form-group">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+            </div>
         </form>
 
 
@@ -29,7 +81,8 @@
                     <div class="tab-content">
                         <!-- #nav-comment -->
                         <div class="tab-pane px-3 active" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
-                                <div id="comment">
+                                <!-- <div id="comment"> -->
+                                <div>
                                 <!-- 코멘트박스 -->
                                     <select name="" class="custom-select my-1 mr-sm-2">
                                         <option value="1">주문</option>
@@ -41,11 +94,8 @@
                                         <option value="7">MA</option>
                                         <option value="8" selected>전체</option>
                                     </select>
-                                    <h3 class="card-title p-2">
-                                        <a class="text-dark">
-                                                Comment
-                                        </a>
-                                    </h3>
+                                    <ul class="comments" style="overflow-y: auto;max-height:500px;">
+                                    </ul>
 
                                     <div id="comment_box" class="row" >
                                         <!-- comment component 자리 -->
@@ -54,7 +104,7 @@
                                 </div>
                                 <!-- 코멘트 푸터 고정-->
                                 <div class="box-footer">
-                                    <form action="#" method="post">
+                                    <form id="sendComment" method="post">
                                     <div class="input-group">
                                     <div class="checkbox checkbox-danger my-2">
                                             <label>
@@ -62,7 +112,7 @@
                                                 <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                             </label>
                                         </div>
-                                        <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                                        <input type="text" name="message" placeholder="Type Message ..." class="form-control" style="height:35px">
                                         <span class="input-group-btn">
                                             <button type="submit" class="btn btn-warning btn-flat">Send</button>
                                         </span>
