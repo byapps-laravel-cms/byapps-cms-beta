@@ -161,4 +161,8 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/resellerpaymentlist', 'resellerpaymentlist')->name('resellerpaymentlist.view');
   Route::get('/resellerpaymentlist/data', 'ResellerPaymentController@getResellerPaymentListData')->name('resellerpaymentlist');
   Route::get('/resellerpaymentdetail/{idx}', 'ResellerPaymentController@getSingleData')->name('resellerpaymentdetail');
+
+  //댓글
+  Route::post('/comment','Comment')->name('comment');
+  Route::post('/commentSend','Comment@send')->name('comment.send');
 });
