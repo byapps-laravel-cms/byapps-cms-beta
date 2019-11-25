@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Comment extends Controller
+class CommentController extends Controller
 {
     protected $colmus;
     public function __construct(){
@@ -19,7 +19,7 @@ class Comment extends Controller
             return $data->orderBy('reg_time','desc')->get($this->colmus);
         }
     }
-    
+
     public function send(){
         $data = request()->only(['pidx','mmid','comment']);
         $data['mmid'] = request()->input('mmid') == 'all' ? 'apps' : request()->input('mmid');

@@ -146,6 +146,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/qnamemberlist', 'qnamemberlist')->name('qnamemberlist.view');
   Route::get('/qnamemberlist/data', 'QnaMemberController@getQnaMemberListData')->name('qnamemberlist');
   Route::get('/qnamemberdetail/{idx}', 'QnaMemberController@getSingleData')->name('qnamemberdetail');
+  Route::post('/qnamemberupdate/{idx}', 'QnaMemberController@update')->name('qnamemberupdate');
 
   //  비회원 문의
   Route::view('/qnanonmemberlist', 'qnanonmemberlist')->name('qnanonmemberlist.view');
@@ -163,6 +164,6 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('/resellerpaymentdetail/{idx}', 'ResellerPaymentController@getSingleData')->name('resellerpaymentdetail');
 
   //댓글
-  Route::post('/comment','Comment')->name('comment');
-  Route::post('/commentSend','Comment@send')->name('comment.send');
+  Route::post('/comment','CommentController')->name('comment');
+  Route::post('/commentSend','CommentController@send')->name('comment.send');
 });
