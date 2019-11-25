@@ -54,7 +54,7 @@ class AppsUpdateController extends Controller
 
   public function getSingleData($idx)
   {
-    $appsupdateData = AppsUpdateData::where('idx', $idx)->first();
+    $appsupdateData = AppsUpdateData::find($idx);
 
     return view('appsupdatedetail')->with('appsupdateData', $appsupdateData);
   }

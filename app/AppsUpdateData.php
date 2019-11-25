@@ -8,6 +8,7 @@ class AppsUpdateData extends Model
 {
   protected $connection = 'byapps';
   protected $table = 'BYAPPS2015_apps_update_data';
+  protected $primaryKey = "idx";
 
   public static function getUpdateData()
   {

@@ -45,15 +45,12 @@ class MAController extends Controller
               } else if ($eloquent->service_type == 'ma') {
                 $value = "MA";
               }
-
               if ($eloquent->web_push == 'Y') {
                 $value = $value."/웹푸쉬";
               }
-
               if ($eloquent->auto_push == 'Y') {
                 $value = $value."/푸쉬자동화";
               }
-
               return $value;
             })
             ->editColumn('server_group', function($eloquent) {

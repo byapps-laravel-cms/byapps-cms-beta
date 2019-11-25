@@ -14,7 +14,7 @@ $(document).ready(function(){
   }
 
   function byapps_setCookie (name, value, ex) {
-      if (!ex) ex = 365;
+      if (!ex) ex = 60 * 60 * 24 * 365;
       var todayDate = new Date();
       todayDate.setDate(todayDate.getDate() + ex);
       document.cookie = name + "=" + encodeURIComponent(value) + "; path=/; expires=" + todayDate.toGMTString() + ";"

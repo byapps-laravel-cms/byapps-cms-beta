@@ -47,7 +47,7 @@ $(function() {
             { data: 'service_type', name: 'service_type' },
             { data: 'server_group', name: 'server_group' },
             { data: 'app_process', name: 'app_process' },
-            { data: 'service_term', name: 'service_term' },
+            { data: 'service_term', name: 'end_time' },
             { data: 'reg_time', name: 'reg_time' }
         ],
         columnDefs: [
