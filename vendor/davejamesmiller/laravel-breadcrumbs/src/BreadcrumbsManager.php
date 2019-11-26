@@ -205,7 +205,9 @@ class BreadcrumbsManager
     {
         $breadcrumbs = $this->generate($name, ...$params);
 
-        $html = $this->viewFactory->make($view, compact('breadcrumbs'))->render();
+        $title = $this->generator->getTitle();
+        
+        $html = $this->viewFactory->make($view, compact('breadcrumbs','title'))->render();
 
         return new HtmlString($html);
     }

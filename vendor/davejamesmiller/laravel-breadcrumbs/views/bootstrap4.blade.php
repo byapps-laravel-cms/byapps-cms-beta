@@ -2,11 +2,11 @@
     <?$history = array('title'=>'','url'=>url(request()->getPathInfo()));?>
     <ol class="breadcrumb">
         @foreach ($breadcrumbs as $key => $breadcrumb)
-            <?$history['title'].= $breadcrumb->title;?>
             @if ($breadcrumb->url && !$loop->last)
-                <?$history['title'].= " > ";?>
+                <?$history['title'].= $breadcrumb->title." > ";?>
                 <li class="breadcrumb-item"><a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a></li>
             @else
+                <?$history['title'].= $title ? $title : $breadcrumb->title;?>
                 <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
             @endif
 

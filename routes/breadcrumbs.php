@@ -42,7 +42,7 @@ Breadcrumbs::for('appsorderlist', function ($trail) {
 // 앱 접수 상세
 Breadcrumbs::for('appsorderdetail', function ($trail) {
   $trail->parent('appsorderlist');
-  // $trail->title('App\UserInfo','app_name');
+  $trail->title('\App\AppsOrderData','app_name');
   $trail->push('앱 접수 상세', route('appsorderlist'));
 });
 
