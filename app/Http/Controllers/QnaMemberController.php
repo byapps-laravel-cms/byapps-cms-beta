@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\QnaMember;
 use Yajra\Datatables\Datatables;
@@ -44,10 +45,34 @@ class QnaMemberController extends Controller
 
     $replyData = '';
     if ($qnaMemberData->process == 3) {
-      $replyData = QnaMember::where('pid', $idx)->first();
+      $replyData = QnaMember::where('pid', $idx)->get();
     }
 
     return view('qnamemberdetail')->with('qnaMemberData', $qnaMemberData)
                                   ->with('replyData', $replyData);
+  }
+
+  public function create(Request $request, $idx)
+  {
+
+    //dd($request->user());
+    $qnaMemberData = QnaMember::where('idx', $idx)->first();
+    $answerData = new QnaMember;
+
+    $answerData->pid = $idx;
+    $answerData->mem_id = $request->user()->user_id;
+    $answerData->mem_name = $request->user()->name;
+    $answerData->subject = "RE: ".$request->subject;
+    $answerData->content = $request->add_answer;
+    $answerData->reg_time = Carbon::now()->timestamp;
+    $qnaMemberData->process = 3;
+
+    //dd($answerData);
+    $answerData->save();
+    $qnaMemberData->save();
+
+    toastr()->success('답변 등록완료', '', ['timeOut' => 1000, 'positionClass' => 'toast-center-center']);
+
+    return redirect()->back();
   }
 }

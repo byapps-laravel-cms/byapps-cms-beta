@@ -2135,7 +2135,7 @@ function showChart(data) {
       }
     },
     donut: {
-      title: "앱 서비스 통계",
+      title: "앱 통계",
       label: {
         format: function format(value, ratio, id) {
           return value + "개\n" + (ratio * 100).toFixed(1) + "%";
@@ -2328,8 +2328,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2341,22 +2339,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     drawSalesCharDefault: function drawSalesCharDefault() {
-      var today = new Date().toISOString().split('T')[0];
-      axios__WEBPACK_IMPORTED_MODULE_0___default()({
-        method: 'POST',
-        url: '/saleschart'
-      }).then(function (response) {
-        showSalesChart(response.data);
-      }, function (error) {
-        console.log(error);
-      });
-    },
-    showEntireSalesChart: function showEntireSalesChart() {
       var date1 = $('#start_date_sales').val();
       var date2 = $('#end_date_sales').val();
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'POST',
-        url: '/saleschart/entire_chart',
+        url: '/saleschart',
         data: {
           date1: date1,
           date2: date2
@@ -2368,10 +2355,17 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    salesStatsTotal: function salesStatsTotal() {
+    showEntireSalesChart: function showEntireSalesChart() {
+      var date1 = $('#start_date_sales').val();
+      var date2 = $('#end_date_sales').val();
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
-        method: 'GET',
-        url: '/saleschart/sales_total'
+        method: 'POST',
+        url: '/saleschart/sales_term',
+        data: {
+          date1: date1,
+          date2: date2,
+          gubun: 'S'
+        }
       }).then(function (response) {
         console.log(response);
         showSalesChart(response.data);
@@ -2379,50 +2373,33 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    salesStatsDaily: function salesStatsDaily() {
-      var today = new Date().toISOString().split('T')[0];
-      axios__WEBPACK_IMPORTED_MODULE_0___default()({
-        method: 'POST',
-        url: '/saleschart/sales_term',
-        data: {
-          date1: today,
-          date2: today
-        }
-      }).then(function (response) {
-        showSalesChart(response.data);
-      }, function (error) {
-        console.log(error);
-      });
-    },
-    salesStatsWeekly: function salesStatsWeekly() {
-      var today = new Date().toISOString().split('T')[0];
-      var newDate = new Date(today);
-      newDate.setDate(newDate.getDate() - 7);
-      var nday = new Date(newDate).toISOString().split('T')[0];
-      axios__WEBPACK_IMPORTED_MODULE_0___default()({
-        method: 'POST',
-        url: '/saleschart/sales_term',
-        data: {
-          date1: today,
-          date2: nday
-        }
-      }).then(function (response) {
-        showSalesChart(response.data);
-      }, function (error) {
-        console.log(error);
-      });
-    },
     salesStatsMonthly: function salesStatsMonthly() {
-      var today = new Date().toISOString().split('T')[0];
-      var newDate = new Date(today);
-      newDate.setDate(newDate.getDate() - 30);
-      var nday = new Date(newDate).toISOString().split('T')[0];
+      var date1 = $('#start_date_sales').val();
+      var date2 = $('#end_date_sales').val();
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'POST',
         url: '/saleschart/sales_term',
         data: {
-          date1: today,
-          date2: nday
+          date1: date1,
+          date2: date2,
+          gubun: 'M'
+        }
+      }).then(function (response) {
+        showSalesLineChart(response.data);
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    salesStatsTotal: function salesStatsTotal() {
+      var date1 = $('#start_date_sales').val();
+      var date2 = $('#end_date_sales').val();
+      axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        method: 'POST',
+        url: '/saleschart/sales_total',
+        data: {
+          date1: date1,
+          date2: date2,
+          gubun: 'T'
         }
       }).then(function (response) {
         showSalesChart(response.data);
@@ -2464,6 +2441,38 @@ function showSalesChart(data) {
         title: function title(d) {
           return 'Data ' + d;
         }
+      }
+    },
+    bindto: "#sale_stats"
+  });
+}
+
+function showSalesLineChart(data) {
+  var chart1 = bb.generate({
+    data: {
+      x: "x",
+      columns: data.line,
+      colors: {
+        "전체": "#97215c",
+        "신규": "#fca1b0",
+        "연장": "#f9637c",
+        "기타": "#d7215c"
+      },
+      labels: {
+        centered: true,
+        format: function format(x) {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+      }
+    },
+    zoom: {
+      enabled: {
+        type: "drag"
+      }
+    },
+    axis: {
+      x: {
+        type: "category"
       }
     },
     bindto: "#sale_stats"
@@ -3075,7 +3084,7 @@ var render = function() {
               {
                 staticClass:
                   "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-                on: { click: _vm.appStatMonthly }
+                on: { click: _vm.appStatsMonthly }
               },
               [_vm._v("월간")]
             ),
@@ -3417,26 +3426,6 @@ var render = function() {
       [
         _c("div", { staticClass: "col-xs-12 col-md-12 pl-0 pr-5" }, [
           _c("div", { attrs: { align: "center" } }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-                on: { click: _vm.salesStatsDaily }
-              },
-              [_vm._v("일간")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-light btn-rounded btn-bordered waves-effect waves-light btn-xs",
-                on: { click: _vm.salesStatsWeekly }
-              },
-              [_vm._v("주간")]
-            ),
-            _vm._v(" "),
             _c(
               "button",
               {
@@ -15820,15 +15809,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************!*\
   !*** ./resources/js/components/SalesChart.vue ***!
   \************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SalesChart_vue_vue_type_template_id_1c74ac46___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SalesChart.vue?vue&type=template&id=1c74ac46& */ "./resources/js/components/SalesChart.vue?vue&type=template&id=1c74ac46&");
 /* harmony import */ var _SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SalesChart.vue?vue&type=script&lang=js& */ "./resources/js/components/SalesChart.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -15858,7 +15846,7 @@ component.options.__file = "resources/js/components/SalesChart.vue"
 /*!*************************************************************************!*\
   !*** ./resources/js/components/SalesChart.vue?vue&type=script&lang=js& ***!
   \*************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

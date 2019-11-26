@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\User;
 use App\HomeLayout;
 use App\AppsData;
+use App\AppsOrderData;
 use App\AppsPaymentData;
 use App\PromotionData;
+use App\UserInfo;
 
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\SalesChartController;
@@ -126,10 +128,15 @@ class HomeController extends Controller
       $searchResults = (new Search())
                         ->registerModel(AppsPaymentData::class, 'app_name')
                         ->registerModel(PromotionData::class, 'mem_name')
-                        ->perform($request->input('query'));
+                        ->registerModel(AppsOrderData::class, 'app_company')
+                        ->registerModel(UserInfo::class, 'mem_name')
+                        // ->perform($request->input('query'));
+                        ->search($request->input('query'));
 
       $typesArray = [ 'BYAPPS_apps_payment_data' => '결제 관리',
                       'BYAPPS2016_promotion_data' => '프로모션',
+                      'BYAPPS_apps_order_data' => '앱 접수',
+                      'BYAPPS_user_info' => '고객 정보',
                     ];
 
       //dd($searchResults);

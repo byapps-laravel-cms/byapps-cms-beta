@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+
 use App\UserInfo;
 
-class AppsOrderData extends Model
+class AppsOrderData extends Model implements Searchable
 {
   protected $connection = 'byapps';
   protected $table = 'BYAPPS_apps_order_data';
@@ -17,6 +20,13 @@ class AppsOrderData extends Model
                             ->table($table)->get();
 
       return $appsOrderData;
+  }
+
+  public function getSearchResult(): SearchResult
+  {
+    $url = route('appsorderdetail', $this->idx);
+
+    return new SearchResult($this, $this->app_company, $url);
   }
 
   public function userinfo()

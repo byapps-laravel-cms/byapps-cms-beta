@@ -146,7 +146,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/qnamemberlist', 'qnamemberlist')->name('qnamemberlist.view');
   Route::get('/qnamemberlist/data', 'QnaMemberController@getQnaMemberListData')->name('qnamemberlist');
   Route::get('/qnamemberdetail/{idx}', 'QnaMemberController@getSingleData')->name('qnamemberdetail');
-  Route::post('/qnamemberupdate/{idx}', 'QnaMemberController@update')->name('qnamemberupdate');
+  Route::post('/qnamembercreate/{idx}', 'QnaMemberController@create')->name('qnamembercreate');
 
   //  비회원 문의
   Route::view('/qnanonmemberlist', 'qnanonmemberlist')->name('qnanonmemberlist.view');

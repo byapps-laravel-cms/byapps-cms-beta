@@ -71,4 +71,16 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    protected function registered(Request $request, $user)
+    {
+      // 세션 생성
+      Auth::attempt([
+        'user_id' => $request->input('user_id'),
+        'name' => $request->input('name'),
+        'password' => $request->input('password')
+      ]);
+
+      return response(null, 204);
+    }
 }
