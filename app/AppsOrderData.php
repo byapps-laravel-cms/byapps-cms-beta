@@ -10,6 +10,7 @@ class AppsOrderData extends Model
 {
   protected $connection = 'byapps';
   protected $table = 'BYAPPS_apps_order_data';
+  protected $primaryKey  = 'idx';
 
   public static function getAppsOrderData()
   {

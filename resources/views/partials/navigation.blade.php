@@ -235,9 +235,11 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                    <li><a href="{!! config('app.now_page.url') !!}">{{ config('app.now_page.title') }}</a></li>
                                  @if(Cookie::get('link_history'))
-                                  @foreach(array_reverse(json_decode(Cookie::get('link_history'))) as $history)
+                                  @if(config('app.now_page.url') != Cookie::get('refer'))
+                                    <li><a href="{!! config('app.now_page.url') !!}">{{ config('app.now_page.title') }}</a></li>
+                                  @endif
+                                  @foreach(array_reverse((array)json_decode(Cookie::get('link_history'))) as $key => $history)
                                     <li><a href="{!! $history->url !!}">{{ $history->title }}</a></li>
                                   @endforeach
                                  @endif
