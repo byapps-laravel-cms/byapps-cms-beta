@@ -132,7 +132,7 @@ class HomeController extends Controller
                       'BYAPPS2016_promotion_data' => '프로모션',
                     ];
 
-      //dd($searchResults);
+      dd($searchResults);
 
       return view('search', compact('searchResults', 'typesArray'));
     }
