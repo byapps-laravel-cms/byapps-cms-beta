@@ -20,9 +20,9 @@
     }
     if(Cookie::get('refer') != null && $history['url'] != Cookie::get('refer')){
         $historys[] = (array)$history;
-        if(count($historys) > 10){
-            unset($historys[0]);
-        }
+    }
+    if(count($historys) > 5){
+        array_splice($historys,0,1);
     }
     Cookie::queue(Cookie::make('link_history',json_encode($historys), 60*24*365));
     Cookie::queue(Cookie::make('refer',$history['url'], 60*24*365));?>
