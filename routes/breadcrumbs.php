@@ -33,6 +33,13 @@ Breadcrumbs::for('appslist', function ($trail) {
   $trail->push('앱 관리', route('appslist.view'));
 });
 
+// 앱 관리 > 앱 상세
+Breadcrumbs::for('appdetail', function ($trail) {
+  $trail->parent('appslist');
+  $trail->title('\App\AppsData','app_name');
+  $trail->push('앱 상세','');
+});
+
 // 앱 접수
 Breadcrumbs::for('appsorderlist', function ($trail) {
   $trail->parent('appslist');
@@ -43,7 +50,7 @@ Breadcrumbs::for('appsorderlist', function ($trail) {
 Breadcrumbs::for('appsorderdetail', function ($trail) {
   $trail->parent('appsorderlist');
   $trail->title('\App\AppsOrderData','app_name');
-  $trail->push('앱 접수 상세', route('appsorderlist'));
+  $trail->push('앱 접수 상세','');
 });
 
 // 업데이트 관리

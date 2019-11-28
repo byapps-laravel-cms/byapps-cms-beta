@@ -32,6 +32,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //route param pattern
+        \Illuminate\Support\Facades\Route::pattern('idx','^[0-9]*$');
+
         Schema::defaultStringLength(191);
     }
 }
