@@ -52,6 +52,7 @@ class LoginController extends Controller
         if($user->count() == 0)return response()->json(['success' => false,'message' => 'user_id'], 200);
         $idx = $user->where('passwd','=',DB::raw('password(\'' . request()->input('password') . '\')'))->max('idx');
         if(is_null($idx))return response()->json(['success' => false,'message' => 'password'], 200);
+        User::find($idx)->update(['log_time' => 'now']);
         $this->guard()->loginUsingId($idx);
         return response()->json(['success' => 'true',], 200);
     }
