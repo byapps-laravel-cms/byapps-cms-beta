@@ -91,8 +91,6 @@ class AppsListController extends Controller
 
         AppsData::find($idx)->update($data);
 
-        dd($data);
-
         return request()->ajax() ? response()->json(['success' => 'true',], 200) : $this->getSingleData($idx);
     }
 }
