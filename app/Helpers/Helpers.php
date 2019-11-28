@@ -15,8 +15,9 @@ class Helpers
   // unix_timestamp를 'Y-m-d' 연월일로 변경
   public static function dateFormat($val)
   {
-     $dateString = date("Y-m-d", $val);
-     return $dateString;
+      if(gettype($val) != 'integer') return 'NAN';
+      $dateString = date("Y-m-d", $val);
+      return $dateString;
   }
 
 }
