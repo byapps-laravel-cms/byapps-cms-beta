@@ -17,6 +17,9 @@ Route::get('/session',function(){
 });
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/load-more-data', 'ExpiredController@more_data');
+
 Route::get('/layout', 'HomeController@onLayoutChange');
 Route::post('/search', 'HomeController@search')->name('search');
 
