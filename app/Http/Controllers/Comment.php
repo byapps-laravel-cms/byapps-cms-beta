@@ -19,12 +19,12 @@ class Comment extends Controller
             return $data->orderBy('reg_time','desc')->get($this->colmus);
         }
     }
-    
+
     public function send(){
         $data = request()->only(['pidx','mmid','comment']);
         $data['mmid'] = request()->input('mmid') == 'all' ? 'apps' : request()->input('mmid');
         $data['pmid'] = request()->user()->email;
-        $data['mem_name'] = request()->user()->name;
+        $data['mem_name'] = request()->user()->mem_name;
         $data['mem_id'] = request()->user()->user_id;
         $data['reg_time'] = time();
         return \App\Comment::find(\App\Comment::insertGetId($data),$this->colmus);

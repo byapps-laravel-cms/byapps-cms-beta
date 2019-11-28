@@ -227,6 +227,7 @@
                             </li>
                         </ul>
                     </li>
+                  @if(Cookie::get('link_history'))
                     <li class="has-submenu">
                         <a href="#">
                             <i class="mdi mdi-history"></i>
@@ -235,18 +236,17 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                 @if(Cookie::get('link_history'))
                                   @if(config('app.now_page.url') != Cookie::get('refer'))
                                     <li><a href="{!! config('app.now_page.url') !!}">{{ config('app.now_page.title') }}</a></li>
                                   @endif
                                   @foreach(array_reverse((array)json_decode(Cookie::get('link_history'))) as $key => $history)
                                     <li><a href="{!! $history->url !!}">{{ $history->title }}</a></li>
                                   @endforeach
-                                 @endif
                                 </ul>
                             </li>
                         </ul>
                     </li>
+                  @endif
                 </ul>
                 <!-- End navigation menu  -->
                 <div class="clearfix"></div>

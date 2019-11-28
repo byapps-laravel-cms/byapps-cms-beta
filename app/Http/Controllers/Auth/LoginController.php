@@ -54,6 +54,6 @@ class LoginController extends Controller
         if(is_null($idx))return response()->json(['success' => false,'message' => 'password'], 200);
         User::find($idx)->update(['log_time' => 'now']);
         $this->guard()->loginUsingId($idx);
-        return response()->json(['success' => 'true',], 200);
+        return response()->json(['success' => 'true'], 200);
     }
 }
