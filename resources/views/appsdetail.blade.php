@@ -358,7 +358,7 @@
                             <label class="col-md-2 col-form-label">플랫폼 사용기간</label>
                             <div class="col-md-10 col-xs-9 form-inline">
                                 <div class="col-md-2 col-xs-9 pl-0">
-                                    <input type="text" name="start_date" class="form-control input-sm" value="{!! $appData->start_time !!}">
+                                    <input type="text" name="start_time" class="form-control input-sm" value="{!! $appData->start_time !!}">
                                 </div>
                                 ~
                                 <div class="col-md-2 col-xs-9">
@@ -698,8 +698,8 @@
             cache : false,
             contentType: false,
             processData: false,
-            error : function(jqXHR, textStatus, errorThrown) {
-                // location.href += '';
+            error : function(jqXHR, textStatus, error) {
+                alert(jqXHR.responseJSON.message)
             },
             success : function(data, jqXHR, textStatus) {
                 alert('처리되었습니다');

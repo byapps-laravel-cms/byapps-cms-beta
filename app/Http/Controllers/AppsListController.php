@@ -65,31 +65,34 @@ class AppsListController extends Controller
 
     public function update($idx)
     {
-        if(!request()->ajax())abort(400);
-        $data = request()->only(['app_process','service_type','app_os_type','byapps_ver','app_ver','app_build','app_ver_ios','app_build_ios','app_cate','noti_gcm','noti_gcm_num','noti_fcm_num','noti_ios_cerp','ios_cer_exp','ios_dev_exp','push_server','token','start_time','end_time','app_android_url','app_ios_url','surl','vender','hashkey','ioshack','host_id','txtencode','host_name','app_lang','auto_login','login_point','push_point','install_point','point_transfer_btn','cscall','app_intro','developer_info']);
+        $data = request()->only(['app_process','service_type','app_os_type','byapps_ver','app_ver','app_build','app_ver_ios','app_build_ios','app_cate','noti_gcm','noti_gcm_num','noti_fcm_num','noti_ios_cerp','ios_cer_exp','ios_dev_exp','push_server','token','start_time','end_time','app_android_url','app_ios_url','surl','vender','hashkey','ioshack','host_id','txtencode','host_name','app_lang','auto_login','login_point','push_point','install_point','point_transfer_btn','cscall','app_intro','developer_info','start_date','end_time']);
         $data['developer_info'] = $this->XSS($data['developer_info']);
         $data['app_lang'] = join($data['app_lang'],'|');
         //카테고리 01~07사이
-        if(!preg_match('/^0[1-7]$/',$data['app_cate']))abort(400);
+        if(!preg_match('/^0[1-7]$/',$data['app_cate']))abort(400,'카테고리 입력이 잘못됨');
         //날짜 형식
-        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['ios_cer_exp']))abort(400);
-        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['ios_dev_exp']))abort(400);
+        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['ios_cer_exp']))abort(400,'인증서 만료일이 날짜형식이 아님');
+        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['ios_dev_exp']))abort(400,'개발자 만료일이 날짜형식이 아님');
+        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['start_time']))abort(400,'플랫폼 시작일이 날짜형식이 아님');
+        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['end_time']))abort(400,'플랫폼 종료일이 날짜형식이 아님');
         //Y or N
         if(!isset($data['auto_login']))$data['auto_login'] = 'N';
-        elseif($data['auto_login'] != 'Y')abort(400);
+        elseif($data['auto_login'] != 'Y')abort(400,'자동로그인 입력이 잘못됨');
         if(!isset($data['login_point']))$data['login_point'] = 'N';
-        elseif($data['login_point'] != 'Y')abort(400);
+        elseif($data['login_point'] != 'Y')abort(400,'출석체크 포인트 입력이 잘못됨');
         if(!isset($data['push_point']))$data['push_point'] = 'N';
-        elseif($data['push_point'] != 'Y')abort(400);
+        elseif($data['push_point'] != 'Y')abort(400,'푸쉬체크 포인트 입력이 잘못됨');
         if(!isset($data['install_point']))$data['install_point'] = 'N';
-        elseif($data['install_point'] != 'Y')abort(400);
+        elseif($data['install_point'] != 'Y')abort(400,'앱설치 포인트 입력이 잘못됨');
         if(!isset($data['point_transfer_btn']))$data['point_transfer_btn'] = 'N';
-        elseif($data['point_transfer_btn'] != 'Y')abort(400);
+        elseif($data['point_transfer_btn'] != 'Y')abort(400,'앱 포인트,수동전환 입력이 잘못됨');
 
         $data['modify_time'] = time();
 
         AppsData::find($idx)->update($data);
 
-        return $data;
+        dd($data);
+
+        return request()->ajax() ? response()->json(['success' => 'true',], 200) : $this->getSingleData($idx);
     }
 }
