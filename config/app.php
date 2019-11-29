@@ -54,7 +54,7 @@ return [
 
     'url' => env('APP_URL', 'http://jmh.innoi.kr'),
 
-    'asset_url' => env('ASSET_URL', 'http://jmh.innoi.kr'),
+    'asset_url' => env('ASSET_URL', 'http://lara.innoi.kr'),
 
     /*
     |--------------------------------------------------------------------------
