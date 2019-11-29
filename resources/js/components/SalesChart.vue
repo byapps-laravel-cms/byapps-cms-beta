@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="cal_box">
+    <div>
         <div class="card-title m-2">
             <i class="fi-menu"></i> 매출 통계
             <button class="btn float-right" type="button" data-toggle="collapse" data-target="#salechart" aria-expanded="true" aria-controls="salechart">

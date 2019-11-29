@@ -21,7 +21,21 @@ class ExpiredController extends Controller
               ->orderBy('ios_dev_exp')
               ->take(50)
               ->get();
+	  
+      return $data;
+    }
 
+	// iOS 계정 만료된 업체들 총 카운트
+    public function getExpiredIosTotCnt()
+    {
+      $todate=date("Y-m-d");
+
+      $data = AppsData::select('app_name', 'app_id', 'ios_dev_exp')
+              ->where('ios_dev_exp', '!=', '')
+              ->where('ios_dev_exp', '<', $todate)
+              ->orderBy('ios_dev_exp')
+              ->count();
+	  
       return $data;
     }
 
