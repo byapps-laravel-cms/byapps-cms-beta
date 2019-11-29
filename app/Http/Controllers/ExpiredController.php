@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\AppsData;
 use App\MAData;
+use App\Helpers\Helpers;
 
 class ExpiredController extends Controller
 {
@@ -18,10 +19,35 @@ class ExpiredController extends Controller
               ->where('ios_dev_exp', '!=', '')
               ->where('ios_dev_exp', '<', $todate)
               ->orderBy('ios_dev_exp')
+              ->take(50)
               ->get();
 
       return $data;
     }
+
+    public function more_data(Request $request)
+    {
+      $todate=date("Y-m-d");
+
+      if ($request->ajax()) {
+        $skip = $request->skip;
+        $take = 50;
+        $expiredIos = AppsData::select('app_name', 'app_id', 'ios_dev_exp')
+                ->where('ios_dev_exp', '!=', '')
+                ->where('ios_dev_exp', '<', $todate)
+                ->orderBy('ios_dev_exp')
+                ->skip($skip)
+                ->take($take)
+                ->get();
+        return response()->json($expiredIos);
+      } else {
+        return response()->json('Direct Access Not Allowed');
+      }
+    }
+
+
+
+
 
     // iOS 계정 만료예정 업체들
     public function getWillBeExpiredIos()

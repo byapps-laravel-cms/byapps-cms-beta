@@ -58,7 +58,14 @@
 
                               <label class="col-md-2 col-form-label ">첨부파일</label>
                               <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{ $qnaMemberData->attach_file ? $qnaMemberData->attach_file : '없음' }}</p>
+
+                                <p class="form-control-static mt-1 mb-1">
+                                  @if ($qnaMemberData->attach_file)
+                                    <a href="" target="_blank">{{ $qnaMemberData->attach_file }}</a>
+                                  @else
+                                  <p>없음</p>
+                                  @endif
+                                </p>
                               </div>
 
                               <label class="col-md-2 col-form-label ">문의내용</label>
@@ -81,16 +88,18 @@
 
                     <div class="col-md-10 col-xs-9" id="replyData">
                         @if ($replyData)
+                          @foreach($replyData as $reply)
                         <div class="card card-border">
                             <div class="card-header border-success pb-1">
-                                <h4 class="card-title text-success mb-1">{{ $replyData->subject }}</h4>
-                                <h5 class="card-title text-success mb-1 float-right">{{ date("Y-m-d h:i:s", $replyData->reg_time) }}</h5>
+                                <h4 class="card-title text-success mb-1">{{ $reply->subject }}</h4>
+                                <h5 class="card-title text-success mb-1 float-right">{{ date("Y-m-d h:i:s", $reply->reg_time) }}</h5>
                             </div>
 
                             <div class="card-body">
-                                <p class="mb-0">{!! $replyData->content !!}</p>
+                                <p class="mb-0">{!! $reply->content !!}</p>
                             </div>
                         </div>
+                          @endforeach
                         @endif
                     </div>
 
@@ -135,20 +144,17 @@ function answer() {
   var div = document.createElement('div');
 
   div.className = 'row';
-
-  div.innerHTML = '<div class="col-md-12 col-xs-12">\
-                    <div class="card card-border">\
-                      <div class="card-header border-success pb-1">\
-                          <h4 class="card-title text-success mb-1">{{ $qnaMemberData->subject }}</h4>\
-                      </div>\
+  div.innerHTML = '<!-- form start -->\
+                {!! Form::open([ 'route' => ['qnamembercreate', $qnaMemberData->idx] ])!!}\
+                <div class="col-md-12 col-xs-12">\
                       <div class="card-body">\
-                          <textarea id="answer_content" class="mb-0" rows="20" style="width:100%;" name="editor"></textarea>\
-                          <div class="col-md-10 col-xs-9 offset-md-2 mt-1">\
-                              <button type="submit" class="btn btn-success btn-sm float-right" onclick="register()">등록</button>\
-                          </div>\
+                          <input type="hidden" name="subject" value=" {{ $qnaMemberData->subject }}">\
+                          <textarea id="answer_content" class="mb-0" rows="20" style="width:100%;" name="add_answer"></textarea>\
+                          <button type="submit" class="btn btn-success btn-sm float-right mt-1" >등록</button>\
                       </div>\
-                    </div>\
-                  </div>';
+                  </div>\
+                  {!! Form::close() !!}\
+                  <!-- form end -->';
 
   document.getElementById('replyData').appendChild(div);
   document.getElementById('answer').remove();

@@ -66,7 +66,7 @@ $(function() {
         "fixedHeader": false,
         "responsive": true,
         "orderClasses": false,
-        "stateSave": false,
+        "stateSave": true,
 
         "fnDrawCallback": function () {
             $("#qnamemberlistTable tbody tr").click(function () {
