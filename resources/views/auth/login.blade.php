@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('로그인') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}" onsubmit="return login(this)">
                         @csrf
 
                         <div class="form-group row">
@@ -17,11 +17,9 @@
                             <div class="col-md-6">
                                 <input id="user_id" type="text" class="form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ old('user_id') }}" required autocomplete="user_id" autofocus>
 
-                                @error('user_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <span class="invalid-feedback" id="userIdError" role="alert">
+                                    <strong>asdf</strong>
+                                </span>
                             </div>
                         </div>
 
@@ -31,11 +29,9 @@
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                    <span class="invalid-feedback" id="passwordError" role="alert">
+                                        <strong>asdf</strong>
                                     </span>
-                                @enderror
                             </div>
                         </div>
 
@@ -70,4 +66,37 @@
         </div>
     </div>
 </div>
+<script>
+    function login(obj){
+        var request = new FormData(obj);
+        obj = $(obj);
+        $('#user_id').removeClass('is-invalid')
+        $('#password').removeClass('is-invalid')
+        $.ajax({
+            url : obj.attr('action'),
+            type : 'POST',
+            data : request,
+            cache : false,
+            contentType: false,
+            processData: false,
+            error : function(jqXHR, textStatus, error) {
+                alert(jqXHR.responseJSON.message)
+            },
+            success : function(data, jqXHR, textStatus) {
+                if(data.success){
+                    location.href = '{!! URL::previous() !!}';
+                }else{
+                    if(data.message == 'user_id'){
+                        $('#user_id').addClass('is-invalid')
+                        $('#userIdError').html('<strong>존재하지 않는 아이디 입니다.</strong>')
+                    }else if(data.message == 'password'){
+                        $('#password').addClass('is-invalid')
+                        $('#passwordError').html('<strong>비밀번호가 일치하지 않습니다</strong>')
+                    }
+                }
+            }
+        });
+        return false;
+    }
+</script>
 @endsection

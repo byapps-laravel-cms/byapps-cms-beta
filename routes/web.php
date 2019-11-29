@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 // 세션정보 확인용
 Route::get('/session',function(){
     dd(session()->all());
@@ -68,6 +57,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/appslist', 'appslist')->name('appslist.view');
   Route::get('/appslist/data', 'AppsListController@getAppsListData')->name('appslist');
   Route::get('/appsdetail/{idx}', 'AppsListController@getSingleData')->name('appsdetail');
+  Route::post('/appsdetail/{idx}', 'AppsListController@update')->name('appsdetail');
 
   // 업데이트 관리
   Route::view('/appsupdatelist', 'appsupdatelist')->name('appsupdatelist.view');

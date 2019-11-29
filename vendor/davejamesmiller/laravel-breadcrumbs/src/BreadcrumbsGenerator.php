@@ -13,6 +13,7 @@ use Illuminate\Support\Collection;
  */
 class BreadcrumbsGenerator
 {
+    protected $titleQuery;
     /**
      * @var Collection Breadcrumbs currently being generated.
      */
@@ -48,7 +49,6 @@ class BreadcrumbsGenerator
         foreach ($after as $callback) {
             $callback($this);
         }
-
         return $this->breadcrumbs;
     }
 
@@ -91,8 +91,19 @@ class BreadcrumbsGenerator
      * @param string|null $url The URL of the page.
      * @param array $data Optional associative array of additional data to pass to the view.
      */
-    public function push(string $title, string $url = null, array $data = []): void
-    {
-        $this->breadcrumbs->push((object) array_merge($data, compact('title', 'url')));
-    }
+     public function push(string $title, string $url = null, array $data = []): void
+     {
+         $this->breadcrumbs->push((object) array_merge($data, compact('title', 'url')));
+     }
+
+     public function title(string $model,string $col): void
+     {
+         $this->titleQuery = '$temp = '.$model."::find(request()->route()->parameter('idx'),'" . $col . "')->" . $col;
+     }
+     public function getTitle(){
+         if($this->titleQuery != "" && $this->titleQuery != null){
+             eval($this->titleQuery.";");
+             return $temp;
+         }
+     }
 }

@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
 
-  {{-- {{ Breadcrumbs::render('appsorderdetail') }}수정필요 영역 --}}
+  {{ Breadcrumbs::render('appdetail') }}
 
     <div class="row">
         <!-- col-sm-12 start -->
@@ -14,52 +14,52 @@
             <!-- cardbody start -->
             <div class="card-body">
                 <div class="row">
-                    {{-- <div class="col-sm-12">
-                        @if ($promotionData)
+                    <div class="col-sm-12">
                         <h4>
-                        <strong>{{ $promotionData->mem_name }}</strong>
+                            <strong>{{ $appData->app_name }}</strong>
                         </h4>
-                        @else
-                        <h4>
-                        <strong>Something went wrong.</strong>
-                        </h4>
-                        @endif
-                        <hr />
-                    </div> --}}
+                        <hr/>
+                    </div>
 
-
-
-                    <div class="col-md-12 col-xs-12 px-4">
-                        <form method="POST" action="">
-                        <input type="hidden" name="idx" value="1"/>
-
-                        <div class="form-group row" id="paymentData">
+                <div class="col-md-12 col-xs-12 px-4">
+                    <form method="POST" onsubmit="return modify(this)">
+                        @csrf
+                        <div class="form-group row">
                             <label class="col-md-2 col-form-label ">Process</label>
                             <div class="col-md-6 col-xs-9">
-                                <select name="pm_content" id="" class="form-control input-sm">
-                                <option value="">등록대기</option>
+                                <select name="app_process" id="" class="form-control input-sm">
+                                    <option value="" >선택해 주세요</option>
+                                    <option value="1"{!! $appData->app_process == 1 ? 'selected' : '' !!}> 개발준비중</option>
+                                    <option value="2"{!! $appData->app_process == 2 ? 'selected' : '' !!}> 개발진행중</option>
+                                    <option value="3"{!! $appData->app_process == 3 ? 'selected' : '' !!}> 심사중</option>
+                                    <option value="4"{!! $appData->app_process == 4 ? 'selected' : '' !!}> 등록거부</option>
+                                    <option value="5"{!! $appData->app_process == 5 ? 'selected' : '' !!}> 재심사중</option>
+                                    <option value="6"{!! $appData->app_process == 6 ? 'selected' : '' !!}> 등록대기</option>
+                                    <option value="7"{!! $appData->app_process == 7 ? 'selected' : '' !!}> 등록완료</option>
+                                    <option value="8"{!! $appData->app_process == 8 ? 'selected' : '' !!}> 서비스중지</option>
+                                    <option value="10"{!! $appData->app_process == 10 ? 'selected' : '' !!}> 서비스유효</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="form-group row" id="paymentData">
+                        <div class="form-group row">
                             <label class="col-md-2 col-form-label ">등록일</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1"> 2019/11/21 [10:59:21] </p>
+                            <p class="form-control-static mt-1 mb-1"> {{ $appData->reg_time }} </p>
                             </div>
                         </div>
 
-                        <div class="form-group row" id="paymentData">
+                        <div class="form-group row">
                             <label class="col-md-2 col-form-label ">주문번호</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1"> BA1573116381 </p>
+                            <p class="form-control-static mt-1 mb-1"> {{ $appData->order_id }} </p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">회원 ID</label>
                             <div class="col-md-10 col-xs-9">
-                                <span class="form-control-static mt-1 mb-1 d-p-inline"> <i class="fa fa-user"></i>&nbsp;&nbsp;medi_camp@naver.com </span>
+                                <span class="form-control-static mt-1 mb-1 d-p-inline"> <i class="fa fa-user"></i>&nbsp;&nbsp; {{ $appData->mem_id }} </span>
                                 <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" >회원정보</button>
                                 <button class="btn btn-info waves-effect btn-xs mr-1" type="button" >Transfer</button>
                             </div>
@@ -71,11 +71,11 @@
                                 <p class="form-control-static mt-1 mb-1"> - </p>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">APP ID</label>
                             <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1"> peoplen </p>
+                                <p class="form-control-static mt-1 mb-1"> {{ $appData->app_id }} </p>
                             </div>
                         </div>
 
@@ -84,21 +84,21 @@
                             <div class="col-md-10 col-xs-9 form-inline mt-2">
                                 <div class="radio radio-success mr-2">
                                     <label>
-                                        <input type="radio" name="servicetype" value="basic" checked>
+                                        <input type="radio" name="service_type" value="biz"{!! $appData->service_type == 'biz' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon mdi mdi-checkbox-blank-circle"></i></span>
                                         &nbsp;일반
                                     </label>
                                 </div>
                                 <div class="radio radio-info mr-2">
                                     <label>
-                                        <input type="radio" name="servicetype" value="lite" >
+                                        <input type="radio" name="service_type" value="lite"{!! $appData->service_type == 'lite' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon mdi mdi-checkbox-blank-circle"></i></span>
                                         &nbsp;라이트
                                     </label>
                                 </div>
                                 <div class="radio radio-warning mr-2">
                                     <label>
-                                        <input type="radio" name="servicetype" value="tester" >
+                                        <input type="radio" name="service_type" value="tester"{!! $appData->service_type == 'tester' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon mdi mdi-checkbox-blank-circle"></i></span>
                                         &nbsp;테스터
                                     </label>
@@ -111,14 +111,14 @@
                             <div class="col-md-10 col-xs-9 form-inline mt-2">
                                 <div class="checkbox checkbox-success mr-2">
                                     <label>
-                                        <input type="checkbox" value="" checked>
+                                        <input type="checkbox" value="android"{!! $appData->app_os_type == 'android' || $appData->app_os_type == 'both' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                         &nbsp;안드로이드
                                     </label>
                                 </div>
                                 <div class="checkbox checkbox-info mr-2">
                                     <label>
-                                        <input type="checkbox" value="" >
+                                        <input type="checkbox" value="ios"{!! $appData->app_os_type == 'ios' || $appData->app_os_type == 'both' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                         &nbsp;아이폰
                                     </label>
@@ -129,27 +129,27 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Byapps ver</label>
                             <div class="col-md-1 col-xs-9">
-                                <input type="text" class="form-control input-sm" value="5.5" >
+                                <input type="text" class="form-control input-sm" value="{!! $appData->byapps_ver !!}" >
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">업체명</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1"> 메디캠프 </p>
+                            <p class="form-control-static mt-1 mb-1"> {{ $appData->member->mem_name }} </p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">android</label>
                             <div class="col-md-6 col-xs-9 form-inline">
-                                ver - 
+                                ver -
                                 <div class="col-md-2 col-xs-9">
-                                    <input type="text" class="form-control input-sm" value="1.1" > 
+                                    <input type="text" class="form-control input-sm" value="{!! $appData->app_ver !!}" >
                                 </div>
-                                build - 
+                                build -
                                 <div class="col-md-2 col-xs-9">
-                                    <input type="text" class="form-control input-sm" value="3" >
+                                    <input type="text" class="form-control input-sm" value="{!! $appData->app_build !!}" >
                                 </div>
                             </div>
                         </div>
@@ -159,11 +159,11 @@
                             <div class="col-md-6 col-xs-9 form-inline">
                                 ver -
                                 <div class="col-md-2 col-xs-9">
-                                    <input type="text" class="form-control input-sm" value="1.1" > 
+                                    <input type="text" class="form-control input-sm" value="{!! $appData->app_ver_ios !!}" >
                                 </div>
-                                build - 
+                                build -
                                 <div class="col-md-2 col-xs-9">
-                                    <input type="text" class="form-control input-sm" value="3" >
+                                    <input type="text" class="form-control input-sm" value="{!! $appData->app_build_ios !!}" >
                                 </div>
                             </div>
                         </div>
@@ -171,8 +171,15 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">App. Category</label>
                             <div class="col-md-6 col-xs-9">
-                                <select name="pm_content" id="" class="form-control">
-                                <option value="">기타</option>
+                                <select name="app_cate" id="" class="form-control">
+                                    <option value="">선택해 주세요</option>
+                                    <option value="01"{!! $appData->app_cate == 01 ? ' selected' : '' !!}> 패션/의류</option>
+                                    <option value="06"{!! $appData->app_cate == 06 ? ' selected' : '' !!}> 화장품/뷰티</option>
+                                    <option value="07"{!! $appData->app_cate == 07 ? ' selected' : '' !!}> 아동/유아</option>
+                                    <option value="02"{!! $appData->app_cate == 02 ? ' selected' : '' !!}> 스포츠/레져</option>
+                                    <option value="03"{!! $appData->app_cate == 03 ? ' selected' : '' !!}> 건강/농수산물</option>
+                                    <option value="04"{!! $appData->app_cate == 04 ? ' selected' : '' !!}> 가전/가구</option>
+                                    <option value="05"{!! $appData->app_cate == 05 ? ' selected' : '' !!}> 기타</option>
                                 </select>
                             </div>
                         </div>
@@ -180,7 +187,13 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">앱설치통계</label>
                             <div class="col-md-8 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1"> 전체: 3,926 /오늘: 2 /어제: 38 /평균: 21 /최고: 96 /기간: 192 (2019-05-14~2019/11/22)
+                                <p class="form-control-static mt-1 mb-1">
+                                    전체: {{ $downData['total_c'] }} /
+                                    오늘: {{ $downData['today_c'] }} /
+                                    어제: {{ $downData['yesterday_c'] }} /
+                                    평균: {{ $downData['average'] }} /
+                                    최고: {{ $downData['max_c'] }} /
+                                    기간: {{ $downData['time'] }} ({{ $downData['launch_date'] }}~{{ date('Y/m/d') }})
                                     <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button">버전별 설치 통계</button>
                                 </p>
                             </div>
@@ -189,7 +202,13 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">앱이용통계</label>
                             <div class="col-md-8 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">전체: 4,017 /오늘: 10 /어제: 54 /평균: 21 /최고: 120 /기간: 192 (2019-05-14~2019/11/22) 
+                                <p class="form-control-static mt-1 mb-1">
+                                    전체: {{ $downData['total_c'] }} /
+                                    오늘: {{ $downData['today_c'] }} /
+                                    어제: {{ $downData['yesterday_c'] }} /
+                                    평균: {{ $downData['average'] }} /
+                                    최고: {{ $downData['max_c'] }} /
+                                    기간: {{ $downData['time'] }} ({{ $downData['launch_date'] }}~{{ date('Y/m/d') }})
                                     <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button">주간통계재발송</button>
                                 </p>
                             </div>
@@ -198,7 +217,14 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">앱매출통계</label>
                             <div class="col-md-8 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">전체: 0(0) /오늘: 0(0) /어제: 0(0) /평균: 0(0) /최고: 0(0) /기간: 192 (2019-05-14~2019/11/22)</p>
+                                <p class="form-control-static mt-1 mb-1">
+                                    전체: 0(0) /
+                                    오늘: 0(0) /
+                                    어제: 0(0) /
+                                    평균: 0(0) /
+                                    최고: 0(0) /
+                                    기간: 192 (2019-05-14~2019/11/22)
+                                </p>
                             </div>
                         </div>
 
@@ -206,7 +232,7 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Group</label>
                             <div class="col-md-8 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1"> 1그룹 </p>
+                                <p class="form-control-static mt-1 mb-1"> {{ $appData->server_group }}그룹 </p>
                             </div>
                         </div>
 
@@ -214,69 +240,67 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">GCM Key</label>
                             <div class="col-md-6 col-xs-9">
-                                <input type="text" class="form-control input-sm" value="AIzaSyAqF-hoCqmGAGEcD1UigdSoQJKCKALFYFw" >
+                                <input type="text" class="form-control input-sm" name="noti_gcm" value="{!! $appData->noti_gcm !!}" >
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">GCM Number</label>
                             <div class="col-md-6 col-xs-9">
-                                <input type="text" class="form-control input-sm" value="566138366797" >
+                                <input type="text" class="form-control input-sm" name="noti_gcm_num" value="{!! $appData->noti_gcm_num !!}" >
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Google Project Id</label>
                             <div class="col-md-6 col-xs-9">
-                                <input type="text" class="form-control input-sm" value="byapps-peoplen-20191121" >
+                                <input type="text" class="form-control input-sm" name="" value="" >
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Google App Id</label>
                             <div class="col-md-6 col-xs-9">
-                                <input type="text" class="form-control input-sm" value="b39a2c50324496adaa6504" >
+                                <input type="text" class="form-control input-sm" name="noti_fcm_num" value="{!! $appData->noti_fcm_num !!}" >
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Google Api Key</label>
                             <div class="col-md-6 col-xs-9">
-                                <input type="text" class="form-control input-sm" value="AIzaSyAPMKcByNVvKfwEs9BVaCKkLChs6VaqNxE" >
+                                <input type="text" class="form-control input-sm" name="" value="" >
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">아이폰 인증서 .pem</label>
                             <div class="col-md-6 col-xs-9">
-                                <input type="file" class="filestyle" data-buttonname="btn-secondary">
+                                <input type="file" accept=".pem" name="noti_ios" class="filestyle" data-buttonname="btn-secondary">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">아이폰 인증서 정보</label>
                             <div class="col-md-10 col-xs-9 form-inline">
-                                비밀번호 : 
+                                비밀번호 :
                                 <div class="col-md-2 col-xs-9">
-                                    <input type="text" class="form-control input-sm" value="8933">
+                                    <input type="text" class="form-control input-sm" name="noti_ios_cerp" value="{!! $appData->noti_ios_cerp !!}">
                                 </div>
-                                인증서 만료일 : 
-                                <div class="col-md-2 col-xs-9">                                    
-                                    <input type="text" class="form-control input-sm" value="2020-01-01">
+                                인증서 만료일 :
+                                <div class="col-md-2 col-xs-9">
+                                    <input type="text" class="form-control input-sm" name="ios_cer_exp" value="{!! $appData->ios_cer_exp !!}">
                                 </div>
                                 개발자 만료일 :
                                 <div class="col-md-2 col-xs-9">
-                                    <input type="text" class="form-control input-sm" value="2020-01-01">
+                                    <input type="text" class="form-control input-sm" name="ios_dev_exp" value="{!! $appData->ios_dev_exp !!}">
                                 </div>
                             </div>
                         </div>
 
-
-
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">연락처</label>
                             <div class="col-md-10 col-xs-9 mt-1">
-                                <span class="form-control-static"> <i class="fa fa-user"></i>&nbsp;&nbsp;010-9847-2046</span>
+                                <span class="form-control-static"> <i class="fa fa-user"></i>&nbsp;&nbsp;{{ $appData->member->cellno }}</span>
                                 <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" >sms보내기</button>
                             </div>
                         </div>
@@ -284,7 +308,7 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">이메일</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1"> medi_camp@naver.com </p>
+                            <p class="form-control-static mt-1 mb-1"> {{ $appData->member->mem_email }} </p>
                             </div>
                         </div>
 
@@ -308,11 +332,11 @@
                             <div class="col-md-6 col-xs-9">
                                 <select name="push_server" class="form-control input-sm">
                                     <option value="default">default</option>
-                                    <option value="http://byapps.cafe24app.com/">http://byapps.cafe24app.com/</option>
-                                    <option value="http://push1.cafe24app.com/">http://push1.cafe24app.com/</option>
-                                    <option value="http://byappspush2.cafe24app.com/">http://byappspush2.cafe24app.com/</option>
-                                    <option value="http://byappspush3.cafe24app.com/" selected="">http://byappspush3.cafe24app.com/</option>
-                                    <option value="http://byappspush4.cafe24app.com/">http://byappspush4.cafe24app.com/</option>
+                                    <option value="http://byapps.cafe24app.com/"{!! $appData->push_server == 'http://byapps.cafe24app.com/' ? ' selected' : '' !!}>http://byapps.cafe24app.com/</option>
+                                    <option value="http://push1.cafe24app.com/"{!! $appData->push_server == 'http://push1.cafe24app.com/' ? ' selected' : '' !!}>http://push1.cafe24app.com/</option>
+                                    <option value="http://byappspush2.cafe24app.com/"{!! $appData->push_server == 'http://byappspush2.cafe24app.com/' ? ' selected' : '' !!}>http://byappspush2.cafe24app.com/</option>
+                                    <option value="http://byappspush3.cafe24app.com/"{!! $appData->push_server == 'http://byappspush3.cafe24app.com/' ? ' selected' : '' !!}>http://byappspush3.cafe24app.com/</option>
+                                    <option value="http://byappspush4.cafe24app.com/"{!! $appData->push_server == 'http://byappspush4.cafe24app.com/' ? ' selected' : '' !!}>http://byappspush4.cafe24app.com/</option>
                                 </select>
                             </div>
                         </div>
@@ -321,9 +345,9 @@
                             <label class="col-md-2 col-form-label">Push Token</label>
                             <div class="col-md-8 col-xs-9">
                                 <div class="input-group">
-                                    <input type="text" name="pushtoken" class="form-control input-sm" >
+                                    <input type="text" name="token" readonly class="form-control input-sm" value="{!! $appData->token !!}">
                                     <span class="input-group-append">
-                                        <button type="button" class="btn btn-sm waves-effect waves-light btn-warning">토큰생성</button>
+                                        <button type="button" class="btn btn-sm waves-effect waves-light btn-warning" style="height:30px">토큰생성</button>
                                     </span>
                                 </div>
                             </div>
@@ -334,11 +358,11 @@
                             <label class="col-md-2 col-form-label">플랫폼 사용기간</label>
                             <div class="col-md-10 col-xs-9 form-inline">
                                 <div class="col-md-2 col-xs-9 pl-0">
-                                    <input type="text" class="form-control input-sm" value="2019-08-23">
+                                    <input type="text" name="start_time" class="form-control input-sm" value="{!! $appData->start_time !!}">
                                 </div>
                                 ~
-                                <div class="col-md-2 col-xs-9">                                    
-                                    <input type="text" class="form-control input-sm" value="2020-01-01">
+                                <div class="col-md-2 col-xs-9">
+                                    <input type="text" name="end_time" class="form-control input-sm" value="{!! $appData->end_time !!}">
                                 </div>
                             </div>
                         </div>
@@ -347,33 +371,33 @@
                             <label class="col-md-2 col-form-label">Android URL</label>
                             <div class="col-md-8 col-xs-9">
                                 <div class="input-group">
-                                    <input type="text" name="android_url" class="form-control input-sm" value="http://play.google.com/store/apps/details?id=com.envin2.byapps">
+                                    <input type="text" name="app_android_url" class="form-control input-sm" value="{!! $appData->app_android_url !!}">
                                     <span class="input-group-append">
-                                        <button type="button" class="btn btn-sm waves-effect waves-light btn-success">Play Store</button>
+                                        <button type="button" class="btn btn-sm waves-effect waves-light btn-success" onclick="goLink(this)">Play Store</button>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                    
+
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">IOS URL</label>
                             <div class="col-md-8 col-xs-9">
                                 <div class="input-group">
-                                    <input type="text" name="ios_url" class="form-control input-sm" value="http://itunes.apple.com/kr/app/id1464489128?l=ko&ls=1&mt=8">
+                                    <input type="text" name="app_ios_url" class="form-control input-sm" value="{!! $appData->app_ios_url !!}">
                                     <span class="input-group-append">
-                                        <button type="button" class="btn btn-sm waves-effect waves-light btn-light">App Store</button>
+                                        <button type="button" class="btn btn-sm waves-effect waves-light btn-light" onclick="goLink(this)">App Store</button>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Mobile URL</label>
                             <div class="col-md-8 col-xs-9">
                                 <div class="input-group">
-                                    <input type="text" name="pushtoken" class="form-control input-sm" value="http://www.envin.co.kr/m/index.html?">
+                                    <input type="text" name="surl" class="form-control input-sm" value="{!! $appData->surl !!}">
                                     <span class="input-group-append">
-                                        <button type="button" class="btn btn-sm waves-effect waves-light btn-inverse">Mobile Home</button>
+                                        <button type="button" class="btn btn-sm waves-effect waves-light btn-inverse" onclick="goLink(this)">Mobile Home</button>
                                     </span>
                                 </div>
                             </div>
@@ -386,13 +410,13 @@
                                     <span class="input-group-append">
                                         <button type="button" class="btn btn-sm waves-effect waves-light btn-success"><i class="fa fa-android"></i> </button>
                                     </span>
-                                    <input type="text" name="androi_pk" class="form-control input-sm" value="co.kr.byapps.dev">
+                                    <input type="text" name="androi_pk" class="form-control input-sm" value="{!! substr($appData->app_android_url,45) !!}">
                                 </div>
                                 <div class="input-group col-md-5 col-xs-9 px-0">
                                     <span class="input-group-append">
                                         <button type="button" class="btn btn-sm waves-effect waves-light btn-light"><i class="fa fa-apple"></i></button>
                                     </span>
-                                    <input type="text" name="ios_pk" class="form-control input-sm" value="co.kr.byapps.dev">
+                                    <input type="text" name="bundleid" class="form-control input-sm" value="{!! $appData->bundleid !!}">
                                 </div>
                             </div>
                         </div>
@@ -402,7 +426,7 @@
                             <label class="col-md-2 col-form-label">Android-Vender</label>
                             <div class="col-md-8 col-xs-9">
                                 <div class="input-group">
-                                    <input type="text" name="android_vendor" class="form-control input-sm" placeholder="안드로이드 무결성 검증" value="com.android.vending">
+                                    <input type="text" name="vender" class="form-control input-sm" value="{!! $appData->vender !!}">
                                     <p class="mt-1 ml-1 mb-0">(예 - com.android.vending)</p>
                                 </div>
                             </div>
@@ -412,8 +436,8 @@
                             <label class="col-md-2 col-form-label">Android-Hash</label>
                             <div class="col-md-8 col-xs-9">
                                 <div class="input-group">
-                                    <input type="text" name="android_hash" class="form-control input-sm" placeholder="안드로이드 무결성 검증" value="">    
-                                    <p class="mt-1 ml-1 mb-0">(자동인증: byapps_cert // 키스토어 SHA-1: keytool -printcert -file META_INF/CERT.RSA)</p>                              
+                                    <input type="text" name="hashkey" class="form-control input-sm" placeholder="안드로이드 무결성 검증" value="{!! $appData->hashkey !!}">
+                                    <p class="mt-1 ml-1 mb-0">(자동인증: byapps_cert // 키스토어 SHA-1: keytool -printcert -file META_INF/CERT.RSA)</p>
                                 </div>
                             </div>
                         </div>
@@ -422,7 +446,7 @@
                             <label class="col-md-2 col-form-label">Ios-Hash</label>
                             <div class="col-md-8 col-xs-9">
                                 <div class="input-group">
-                                    <input type="text" name="android_hash" class="form-control input-sm" placeholder="IOS 무결성 검증" value="">
+                                    <input type="text" name="android_hash" class="form-control input-sm" placeholder="IOS 무결성 검증" value="{!! $appData->ioshack !!}">
                                     <p class="mt-1 ml-1 mb-0">IOS 무결성 검증(sc:pl:id)</p>
                                 </div>
                             </div>
@@ -431,7 +455,7 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Cafe24 Mall Id</label>
                             <div class="col-md-3 col-xs-9">
-                                <input type="text" name="android_hash" class="form-control input-sm" placeholder="카페24 몰아이디" value="">
+                                <input type="text" name="host_id" class="form-control input-sm" placeholder="카페24 몰아이디" value="{!! $appData->host_id !!}">
                             </div>
                         </div>
 
@@ -440,14 +464,14 @@
                             <div class="col-md-10 col-xs-9 form-inline mt-2">
                                 <div class="radio radio-success mr-2">
                                     <label>
-                                        <input type="radio" name="servicetype" value="basic" checked>
+                                        <input type="radio" name="txtencode" value="utf-8"{!! $appData->txtencode == 'utf-8' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon mdi mdi-checkbox-blank-circle"></i></span>
                                         &nbsp;UTF-8
                                     </label>
                                 </div>
                                 <div class="radio radio-info mr-2">
                                     <label>
-                                        <input type="radio" name="servicetype" value="lite" >
+                                        <input type="radio" name="txtencode" value="euc-kr"{!! $appData->txtencode == 'euc-kr' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon mdi mdi-checkbox-blank-circle"></i></span>
                                         &nbsp;EUC-KR
                                     </label>
@@ -460,91 +484,84 @@
                             <div class="col-md-10 col-xs-9 form-inline mt-2">
                                 <div class="radio radio-primary mr-2">
                                     <label>
-                                        <input type="radio" name="servicetype" value="basic" checked>
+                                        <input type="radio" name="host_name" value="cafe24"{!! $appData->host_name == 'cafe24' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon mdi mdi-checkbox-blank-circle"></i></span>
                                         &nbsp;카페24
                                     </label>
                                 </div>
                                 <div class="radio radio-warning mr-2">
                                     <label>
-                                        <input type="radio" name="servicetype" value="lite" >
+                                        <input type="radio" name="host_name" value="makeshop"{!! $appData->host_name == 'makeshop' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon mdi mdi-checkbox-blank-circle"></i></span>
-                                        &nbsp;메이크샵  
+                                        &nbsp;메이크샵
                                     </label>
                                 </div>
                                 <div class="radio radio-info mr-2">
                                     <label>
-                                        <input type="radio" name="servicetype" value="basic" checked>
+                                        <input type="radio" name="host_name" value="godo"{!! $appData->host_name == 'godo' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon mdi mdi-checkbox-blank-circle"></i></span>
-                                        &nbsp;고도몰4
-                                    </label>
-                                </div>
-                                <div class="radio radio-danger mr-2">
-                                    <label>
-                                        <input type="radio" name="servicetype" value="lite" >
-                                        <span class="cr"><i class="cr-icon mdi mdi-checkbox-blank-circle"></i></span>
-                                        &nbsp;고도몰5  
+                                        &nbsp;고도몰
                                     </label>
                                 </div>
                                 <div class="radio radio-inverse mr-2">
                                     <label>
-                                        <input type="radio" name="servicetype" value="lite" >
+                                        <input type="radio" name="host_name" value="wisa"{!! $appData->host_name == 'wisa' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon mdi mdi-checkbox-blank-circle"></i></span>
-                                        &nbsp;위사  
+                                        &nbsp;위사
                                     </label>
                                 </div>
                                 <div class="radio radio-inverse mr-2">
                                     <label>
-                                        <input type="radio" name="servicetype" value="lite" >
+                                        <input type="radio" name="host_name" value="etc"{!! $appData->host_name == 'etc' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon mdi mdi-checkbox-blank-circle"></i></span>
-                                        &nbsp;기타  
+                                        &nbsp;기타
                                     </label>
                                 </div>
                             </div>
                         </div>
 
-                        
+
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">App OS</label>
                             <div class="col-md-10 col-xs-9 form-inline mt-2">
                                 <div class="checkbox checkbox-inverse mr-2">
                                     <label>
-                                        <input type="checkbox" value="" checked>
+                                        <input type="checkbox" name="app_lang[]" value="ko" {!! in_array('ko',$appLang) ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                         &nbsp;한국어
                                     </label>
                                 </div>
                                 <div class="checkbox checkbox-inverse mr-2">
                                     <label>
-                                        <input type="checkbox" value="" checked>
+                                        <input type="checkbox" name="app_lang[]" value="en" {!! in_array('en',$appLang) ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                         &nbsp;영어
                                     </label>
                                 </div>
                                 <div class="checkbox checkbox-inverse mr-2">
                                     <label>
-                                        <input type="checkbox" value="" checked>
+                                        <input type="checkbox" name="app_lang[]" value="zh" {!! in_array('zh',$appLang) ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                         &nbsp;중국어
                                     </label>
                                 </div>
                                 <div class="checkbox checkbox-inverse mr-2">
                                     <label>
-                                        <input type="checkbox" value="" checked>
+                                        <input type="checkbox" name="app_lang[]" value="tw" {!! in_array('tw',$appLang) ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                         &nbsp;대만어
                                     </label>
                                 </div>
                                 <div class="checkbox checkbox-inverse mr-2">
                                     <label>
-                                        <input type="checkbox" value="" checked>
+                                        <input type="checkbox" name="app_lang[]" value="ja" {!! in_array('ja',$appLang) ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                         &nbsp;일본어
                                     </label>
                                 </div>
                                 <div class="checkbox checkbox-inverse mr-2">
                                     <label>
-                                        <input type="checkbox" value="" checked>
+                                        <input type="checkbox" name="app_lang[]" value="vi" {!! in_array('vi',$appLang) ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                         &nbsp;베트남어
                                     </label>
@@ -557,119 +574,50 @@
                             <div class="col-md-10 col-xs-9 form-inline mt-2">
                                 <div class="checkbox checkbox-inverse mr-2">
                                     <label>
-                                        <input type="checkbox" value="" checked>
+                                        <input type="checkbox" value="Y" name="auto_login"{!! $appData->auto_login == 'Y' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                         &nbsp;자동로그인 허용
                                     </label>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
-                                <label class="col-md-2 col-form-label">포인트</label>
-                                <div class="col-md-10 col-xs-9 form-inline mt-2">
-                                    <div class="checkbox checkbox-inverse mr-2">
-                                        <label>
-                                            <input type="checkbox" value="" checked>
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            &nbsp;출석체크
-                                        </label>
-                                    </div>
-                                    <div class="checkbox checkbox-inverse mr-2">
-                                        <label>
-                                            <input type="checkbox" value="" checked>
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            &nbsp;푸쉬체크
-                                        </label>
-                                    </div>
-                                    <div class="checkbox checkbox-inverse mr-2">
-                                        <label>
-                                            <input type="checkbox" value="" checked>
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            &nbsp;앱설치
-                                        </label>
-                                    </div>
-                                    <div class="checkbox checkbox-inverse mr-2">
-                                        <label>
-                                            <input type="checkbox" value="" checked>
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            &nbsp;앱 포인트 수동전환
-                                        </label>
-                                    </div>
+                            <label class="col-md-2 col-form-label">포인트</label>
+                            <div class="col-md-10 col-xs-9 form-inline mt-2">
+                                <div class="checkbox checkbox-inverse mr-2">
+                                    <label>
+                                        <input type="checkbox" value="Y" name="login_point" {!! $appData->login_point == 'Y' ? ' checked' : '' !!}>
+                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                        &nbsp;출석체크
+                                    </label>
+                                </div>
+                                <div class="checkbox checkbox-inverse mr-2">
+                                    <label>
+                                        <input type="checkbox" value="Y" name="push_point" {!! $appData->push_point == 'Y' ? ' checked' : '' !!}>
+                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                        &nbsp;푸쉬체크
+                                    </label>
+                                </div>
+                                <div class="checkbox checkbox-inverse mr-2">
+                                    <label>
+                                        <input type="checkbox" value="Y" name="install_point" {!! $appData->install_point == 'Y' ? ' checked' : '' !!}>
+                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                        &nbsp;앱설치
+                                    </label>
+                                </div>
+                                <div class="checkbox checkbox-inverse mr-2">
+                                    <label>
+                                        <input type="checkbox" value="Y" name="point_transfer_btn" {!! $appData->point_transfer_btn == 'Y' ? ' checked' : '' !!}>
+                                        <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                        &nbsp;앱 포인트 수동전환
+                                    </label>
                                 </div>
                             </div>
-
-                        <div class="form-group row">
-                                <label class="col-md-2 col-form-label">Google App Id</label>
-                                <div class="col-md-6 col-xs-9">
-                                    <input type="text" class="form-control input-sm" value="b39a2c50324496adaa6504" >
-                                </div>
-                            </div>
-
-
-                        <div class="form-group row">
-                            <label class="col-md-2 col-form-label">신청경로</label>
-                            <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">전화영업 </p>
-                            </div>
-                        </div>    
-
-                        <div class="form-group row" id="paymentData">
-                                <label class="col-md-2 col-form-label ">Process</label>
-                                <div class="col-md-8 col-xs-9">
-                                    <select name="pm_content" id="" class="form-control">
-                                    <option value="">등록대기</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                        <div class="form-group row">
-                            <label class="col-md-2 col-form-label">Push Server</label>
-                            <div class="col-md-10 col-xs-9 mt-1">
-                            <label class="radio-inline">
-                                <input type="radio" class=" mt-1 mb-1" name="option_ilban" checked="" value="">
-                                일반
-                            </label>
-                            &nbsp;
-                            <label class="radio-inline">
-                                <input type="radio" class=" mt-1 mb-1" name="option_lite" value="">
-                                라이트
-                            </label>
-                            </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2 col-form-label">App. OS</label>
-                            <div class="col-md-10 col-xs-9">
-                            <label class="radio-inline mt-1 mb-1">
-                                <input type="radio" name="android" checked="" value="">
-                                안드로이드
-                            </label>
-                            &nbsp;
-                            <label class="radio-inline mt-1 mb-1">
-                                <input type="radio" name="ios" checked="" value="">
-                                아이폰
-                            </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-2 col-form-label">App. Name</label>
-                            <div class="col-md-10 col-xs-9">
-                                <input type="text" class="form-control" value="메디캠프">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-2 col-form-label">App. URL</label>
-                            <div class="col-md-10 col-xs-9">
-                                <input type="text" class="form-control" value="m.medicamp.co.kr">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-2 col-form-label">App. URL</label>
+                            <label class="col-md-2 col-form-label">App. IMG</label>
                             <div class="col-md-10 col-xs-9">
                                 <a href="javascript:void(0);">앱아이콘</a>,
                                 <a href="javascript:void(0);">스플래쉬</a>,
@@ -685,21 +633,28 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">고객센터</label>
                             <div class="col-md-10 col-xs-9">
-                                <input type="text" class="form-control" value="070-7124-8911">
+                                <input type="text" class="form-control" name="cscall" value="{!! $appData->cscall !!}">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                        <label class="col-md-2 col-form-label">영수증정보</label>
+                            <label class="col-md-2 col-form-label">영수증정보</label>
                             <div class="col-md-10 col-xs-9">
                                 <textarea id="receipt" name="receipt" class="form-control" rows="5">미발행</textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                        <label class="col-md-2 col-form-label">앱소개</label>
+                            <label class="col-md-2 col-form-label">앱소개</label>
                             <div class="col-md-10 col-xs-9">
-                                <textarea id="receipt" name="receipt" class="form-control" rows="5"></textarea>
+                                <textarea id="receipt" name="app_intro" class="form-control" rows="5">{!! $appData->app_intro !!}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">앱소개</label>
+                            <div class="col-md-10 col-xs-9">
+                                <textarea id="developer_info" name="developer_info" class="form-control" rows="5">{!! $appData->developer_info !!}</textarea>
                             </div>
                         </div>
 
@@ -720,7 +675,42 @@
     <!-- row end -->
 </div>
 <!-- container-fluid end -->
-
-
-
+<script>
+    $(document).ready(function() {
+        $('#developer_info').summernote({
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true                  // set focus to editable area after initializing summernote
+        });
+    });
+</script>
 @endsection
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<script>
+    function modify(obj){
+        var request = new FormData(obj);
+        $.ajax({
+            url : location.href,
+            type : 'POST',
+            data : request,
+            cache : false,
+            contentType: false,
+            processData: false,
+            error : function(jqXHR, textStatus, error) {
+                alert(jqXHR.responseJSON.message)
+            },
+            success : function(data, jqXHR, textStatus) {
+                alert('처리되었습니다');
+            }
+        });
+        return false;
+    }
+    function goLink(obj){
+        obj = $(obj)
+        var url = obj.parent().parent().find('input[type=text]').val()
+        if(!url) return;
+        window.open(url, "_blank");
+    }
+</script>

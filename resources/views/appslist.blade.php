@@ -28,8 +28,9 @@
 
 @push('scripts')
 <script type="text/javascript">
+var a;
 $(function() {
-    $('#appslistTable').DataTable({
+        a = $('#appslistTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
@@ -65,14 +66,14 @@ $(function() {
         "fixedHeader": false,
         "responsive": true,
         "orderClasses": false,
-        "stateSave": false,
+        stateSave: false,
 
         "fnDrawCallback": function () {
             $("#appslistTable tbody tr").click(function () {
               table = $('#appslistTable').dataTable();
-              window.location.href = "/appsDetail/" + this.id;
+              window.location.href = "{{ route('appsdetail','') }}/" + this.id;
             });
-         }
+        },
     });
 });
 </script>
