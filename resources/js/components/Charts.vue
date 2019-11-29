@@ -10,57 +10,55 @@
       </div>
   </div>
 
-  <!-- 기간조회 -->
-  <div class="card-title">
-    <div class="row justify-content-md-center mb-5">
+  <div class="dragbox_hover row collapse show" id="allchart">
+	 <!-- 기간조회 -->
+	  <div class="card-title col-md-12">
+	    <div class="row justify-content-md-center mb-5">
 
-      <div class="col-md-9">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">통계기간</span>
-          </div>
-          <input type="text" id="start_date_chart" name="start_date_chart" value="" maxlength="10" class="form-control datepicker" placeholder="날짜입력" autocomplete="false">
-          <div class="input-group-append">
-            <span class="input-group-text">부터</span>
-          </div>
-          <input type="text" id="end_date_chart" name="end_date_chart" value="" maxlength="10" class="form-control datepicker" placeholder="날짜입력" autocomplete="false">
-          <div class="input-group-append">
-            <span class="input-group-text">까지</span>
-          </div>
-          <div class="input-group-append">
-            <span class="input-group-text">
-              <a href="javascript:void(0)" onclick="stat_chartDateTerm(7)">일주일</a>
-            </span>
-          </div>
-          <div class="input-group-append">
-            <span class="input-group-text">
-              <a href="javascript:void(0)" onclick="stat_chartDateTerm(30)">1개월</a>
-            </span>
-          </div>
-          <div class="input-group-append">
-            <span class="input-group-text">
-              <a href="javascript:void(0)" onclick="stat_chartDateTerm(90)">3개월</a>
-            </span>
-          </div>
-          <div class="input-group-append">
-            <span class="input-group-text">
-              <a href="javascript:void(0)" onclick="stat_chartDateTerm(180)">6개월</a>
-            </span>
-          </div>
-          <div class="input-group-append">
-            <span class="input-group-text">
-              <a id="getDate" href="javascript:void(0)" @click="showEntireChart"><i class="entypo-chart-bar"></i> 보기</a>
-            </span>
-          </div>
-        </div>
-      </div>
+	      <div class="col-md-9">
+		<div class="input-group">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text">통계기간</span>
+		  </div>
+		  <input type="text" id="start_date_chart" name="start_date_chart" value="" maxlength="10" class="form-control datepicker" placeholder="날짜입력" autocomplete="false">
+		  <div class="input-group-append">
+		    <span class="input-group-text">부터</span>
+		  </div>
+		  <input type="text" id="end_date_chart" name="end_date_chart" value="" maxlength="10" class="form-control datepicker" placeholder="날짜입력" autocomplete="false">
+		  <div class="input-group-append">
+		    <span class="input-group-text">까지</span>
+		  </div>
+		  <div class="input-group-append">
+		    <span class="input-group-text">
+		      <a href="javascript:void(0)" onclick="stat_chartDateTerm(7)">일주일</a>
+		    </span>
+		  </div>
+		  <div class="input-group-append">
+		    <span class="input-group-text">
+		      <a href="javascript:void(0)" onclick="stat_chartDateTerm(30)">1개월</a>
+		    </span>
+		  </div>
+		  <div class="input-group-append">
+		    <span class="input-group-text">
+		      <a href="javascript:void(0)" onclick="stat_chartDateTerm(90)">3개월</a>
+		    </span>
+		  </div>
+		  <div class="input-group-append">
+		    <span class="input-group-text">
+		      <a href="javascript:void(0)" onclick="stat_chartDateTerm(180)">6개월</a>
+		    </span>
+		  </div>
+		  <div class="input-group-append">
+		    <span class="input-group-text">
+		      <a id="getDate" href="javascript:void(0)" @click="showEntireChart"><i class="entypo-chart-bar"></i> 보기</a>
+		    </span>
+		  </div>
+		</div>
+	      </div>
 
-    </div>
-  </div>
-  <!-- 기간조회 End -->
-
-  <div class="dragbox_hover row collapse show" id="app">
-
+	    </div>
+	  </div>
+	  <!-- 기간조회 End -->
       <!-- 앱 통계 차트 -->
       <div class="col-xs-12 col-md-4">
         <div align="center">

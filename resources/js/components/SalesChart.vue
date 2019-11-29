@@ -3,62 +3,61 @@
     <div class="cal_box">
         <div class="card-title m-2">
             <i class="fi-menu"></i> 매출 통계
-            <button class="btn float-right" type="button" data-toggle="collapse" data-target="#allchart" aria-expanded="true" aria-controls="allchart">
+            <button class="btn float-right" type="button" data-toggle="collapse" data-target="#salechart" aria-expanded="true" aria-controls="salechart">
               <i class="dripicons-chevron-down"></i>
             </button>
         </div>
     </div>
 
-    <!-- 기간조회 -->
-    <div class="card-title">
-      <div class="row justify-content-md-center mb-5">
+    <div class="dragbox_hover row collapse show" id="salechart">
+	    <!-- 기간조회 -->
+	    <div class="card-title col-md-12">
+	      <div class="row justify-content-md-center mb-5">
 
-        <div class="col-md-9">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">통계기간</span>
-            </div>
-            <input type="text" id="start_date_sales" name="start_date_sales" value="" maxlength="10" class="form-control datepicker" placeholder="날짜입력" autocomplete="false">
-            <div class="input-group-append">
-              <span class="input-group-text">부터</span>
-            </div>
-            <input type="text" id="end_date_sales" name="end_date_sales" value="" maxlength="10" class="form-control datepicker" placeholder="날짜입력" autocomplete="false">
-            <div class="input-group-append">
-              <span class="input-group-text">까지</span>
-            </div>
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <a href="javascript:void(0)" onclick="stat_salesDateTerm(7)">일주일</a>
-              </span>
-            </div>
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <a href="javascript:void(0)" onclick="stat_salesDateTerm(30)">1개월</a>
-              </span>
-            </div>
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <a href="javascript:void(0)" onclick="stat_salesDateTerm(90)">3개월</a>
-              </span>
-            </div>
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <a href="javascript:void(0)" onclick="stat_salesDateTerm(180)">6개월</a>
-              </span>
-            </div>
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <a id="getDate" href="javascript:void(0)" @click="showEntireSalesChart"><i class="entypo-chart-bar"></i> 보기</a>
-              </span>
-            </div>
-          </div>
-        </div>
+		<div class="col-md-9">
+		  <div class="input-group">
+		    <div class="input-group-prepend">
+		      <span class="input-group-text">통계기간</span>
+		    </div>
+		    <input type="text" id="start_date_sales" name="start_date_sales" value="" maxlength="10" class="form-control datepicker" placeholder="날짜입력" autocomplete="false">
+		    <div class="input-group-append">
+		      <span class="input-group-text">부터</span>
+		    </div>
+		    <input type="text" id="end_date_sales" name="end_date_sales" value="" maxlength="10" class="form-control datepicker" placeholder="날짜입력" autocomplete="false">
+		    <div class="input-group-append">
+		      <span class="input-group-text">까지</span>
+		    </div>
+		    <div class="input-group-append">
+		      <span class="input-group-text">
+			<a href="javascript:void(0)" onclick="stat_salesDateTerm(7)">일주일</a>
+		      </span>
+		    </div>
+		    <div class="input-group-append">
+		      <span class="input-group-text">
+			<a href="javascript:void(0)" onclick="stat_salesDateTerm(30)">1개월</a>
+		      </span>
+		    </div>
+		    <div class="input-group-append">
+		      <span class="input-group-text">
+			<a href="javascript:void(0)" onclick="stat_salesDateTerm(90)">3개월</a>
+		      </span>
+		    </div>
+		    <div class="input-group-append">
+		      <span class="input-group-text">
+			<a href="javascript:void(0)" onclick="stat_salesDateTerm(180)">6개월</a>
+		      </span>
+		    </div>
+		    <div class="input-group-append">
+		      <span class="input-group-text">
+			<a id="getDate" href="javascript:void(0)" @click="showEntireSalesChart"><i class="entypo-chart-bar"></i> 보기</a>
+		      </span>
+		    </div>
+		  </div>
+		</div>
 
-      </div>
-    </div>
-    <!-- 기간조회 End -->
-
-    <div class="dragbox_hover row collapse show" id="allchart">
+	      </div>
+	    </div>
+	    <!-- 기간조회 End -->
 
         <!-- 매출 통계 차트 -->
         <div class="col-xs-12 col-md-12 pl-0 pr-5">
