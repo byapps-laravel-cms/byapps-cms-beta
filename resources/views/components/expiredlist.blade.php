@@ -1,7 +1,7 @@
-<div class="">
+<div>
     <div class="card-title m-2">
         <i class="fi-menu"></i> 만료예정업체
-        <button class="btn float-right" type="button" data-toggle="collapse" data-target="#endList" aria-expanded="true" aria-controls="endList">
+        <button class="btn float-right" type="button">
           <i class="dripicons-chevron-down"></i>
         </button>
     </div>
@@ -57,7 +57,7 @@
           </div>
 
             @if(count($expiredIos)>0)
-             <p class="text-center mt-4 mb-5"><button class="load-more btn btn-dark" data-totalResult="{{ count($expiredIos) }}">Load More</button></p>
+             <p class="text-center mt-4 mb-5"><button class="load-more btn btn-pink btn-rounded btn-bordered waves-effect w-md waves-light" data-totalResult="{{ $expiredIosTotCnt }}">Load More</button></p>
              @endif
 
           </div>
@@ -198,6 +198,13 @@
 </div>
 
 <script type="text/javascript">
+	function calculateDday(dt) {
+		 // 오늘 기준 입력날짜 d-day 계산
+		 var todate ='{{time()}}';
+		 var date = (new Date(dt).valueOf() / 1000);
+		 var dday = parseInt((todate - date) / 86400);
+		 return dday;
+	}
     $(document).ready(function(){
         $(".load-more").on('click',function(){
             var _totalCurrentResult=$(".expiredIos").length;
@@ -215,11 +222,11 @@
                 },
                 success:function(response){
                     var _html = '';
-
+					
                     $.each(response,function(index,value){
                         _html += '<div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block expiredIos">';
                         _html += '  <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">';
-                        _html += value.app_name+'<br><span class="badge badge-pink">D+ {{ App\Helpers\Helpers::calculateDday('+value.ios_dev_exp+') }}</span> ';
+                         _html += value.app_name+'<br><span class="badge badge-pink">D+ '+calculateDday(value.ios_dev_exp)+'</span> ';
                         _html += value.ios_dev_exp;
                         _html += '  </div>';
                         _html += '</div>';

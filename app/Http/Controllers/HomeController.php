@@ -67,6 +67,7 @@ class HomeController extends Controller
         // 만료예정 데이터
         $preData = new ExpiredController;
         $expiredIos = $preData->getExpiredIos();
+		$expiredIosTotCnt = $preData->getExpiredIosTotCnt();
         $willBeExpiredIos = $preData->getWillBeExpiredIos();
         $expiredPush = $preData->getExpiredPush();
         $willBeExpiredPush = $preData->getWillBeExpiredPush();
@@ -88,6 +89,7 @@ class HomeController extends Controller
                                         'appendixOrderCount' => $appendixOrderCount,
                                         'updateCount' => $updateCount,
                                         'expiredIos' => $expiredIos,
+										'expiredIosTotCnt' => $expiredIosTotCnt,
                                         'willBeExpiredIos' => $willBeExpiredIos,
                                         'expiredPush' => $expiredPush,
                                         'willBeExpiredPush' => $willBeExpiredPush,

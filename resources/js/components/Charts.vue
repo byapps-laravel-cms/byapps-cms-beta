@@ -1,7 +1,7 @@
 <template>
   <div>
 
-  <div class="cal_box">
+  <div>
       <div class="card-title m-2">
           <i class="fi-menu"></i> 통계
           <button class="btn float-right" type="button" data-toggle="collapse" data-target="#allchart" aria-expanded="true" aria-controls="allchart">

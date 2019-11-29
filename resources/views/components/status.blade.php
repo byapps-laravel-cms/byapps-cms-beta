@@ -1,4 +1,4 @@
-<div class="cal_box">
+<div>
     <div class="card-title m-2">
         <i class="fi-menu"></i> 주문요청현황
         <button class="btn float-right" type="button" data-toggle="collapse" data-target="#salesList" aria-expanded="true" aria-controls="salesList"><i class="dripicons-chevron-down"></i></button>
