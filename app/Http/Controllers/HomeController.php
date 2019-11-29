@@ -139,7 +139,7 @@ class HomeController extends Controller
                       'BYAPPS_user_info' => '고객 정보',
                     ];
 
-      //dd($searchResults);
+      dd($searchResults);
 
       return view('search', compact('searchResults', 'typesArray'));
     }

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%">
 
 @include('partials.head')
 
 @yield('style')
-<body>
+<body style="height: 100%; padding:0;">
 
   <!-- Navigation Bar-->
   <header id="topnav">
@@ -13,8 +13,8 @@
   <!-- End Navigation Bar-->
 
   <!-- Content -->
-  <div class="wrapper">
-    <section id="layout-content">
+  <div class="wrapper"  style="height: 100%">
+    <section id="layout-content"  style="height: 100%">
       <div id="content" class="col-md-12 mt-3">
 
         <div id="app">

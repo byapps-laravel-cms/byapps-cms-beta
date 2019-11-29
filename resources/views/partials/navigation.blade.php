@@ -227,12 +227,24 @@
                             </li>
                         </ul>
                     </li>
-                    <li id="page_history" class="has-submenu">
+                    <li class="has-submenu">
                         <a href="#">
                             <i class="mdi mdi-history"></i>
                             히스토리
                         </a>
-                        <ul class="submenu megamenu" style="display:none;">
+                        <ul class="submenu megamenu">
+                            <li>
+                                <ul>
+                                 @if(Cookie::get('link_history'))
+                                  @if(config('app.now_page.url') != Cookie::get('refer'))
+                                    <li><a href="{!! config('app.now_page.url') !!}">{{ config('app.now_page.title') }}</a></li>
+                                  @endif
+                                  @foreach(array_reverse((array)json_decode(Cookie::get('link_history'))) as $key => $history)
+                                    <li><a href="{!! $history->url !!}">{{ $history->title }}</a></li>
+                                  @endforeach
+                                 @endif
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                 </ul>

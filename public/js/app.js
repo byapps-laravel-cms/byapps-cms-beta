@@ -1938,8 +1938,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2327,8 +2325,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
@@ -2989,74 +2985,77 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "card-title" }, [
-      _c("div", { staticClass: "row justify-content-md-center mb-5" }, [
-        _c("div", { staticClass: "col-md-9" }, [
-          _c("div", { staticClass: "input-group" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control datepicker",
-              attrs: {
-                type: "text",
-                id: "start_date_chart",
-                name: "start_date_chart",
-                value: "",
-                maxlength: "10",
-                placeholder: "날짜입력",
-                autocomplete: "false"
-              }
-            }),
-            _vm._v(" "),
-            _vm._m(2),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control datepicker",
-              attrs: {
-                type: "text",
-                id: "end_date_chart",
-                name: "end_date_chart",
-                value: "",
-                maxlength: "10",
-                placeholder: "날짜입력",
-                autocomplete: "false"
-              }
-            }),
-            _vm._v(" "),
-            _vm._m(3),
-            _vm._v(" "),
-            _vm._m(4),
-            _vm._v(" "),
-            _vm._m(5),
-            _vm._v(" "),
-            _vm._m(6),
-            _vm._v(" "),
-            _vm._m(7),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c("span", { staticClass: "input-group-text" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: { id: "getDate", href: "javascript:void(0)" },
-                    on: { click: _vm.showEntireChart }
-                  },
-                  [
-                    _c("i", { staticClass: "entypo-chart-bar" }),
-                    _vm._v(" 보기")
-                  ]
-                )
+    _c(
+      "div",
+      {
+        staticClass: "dragbox_hover row collapse show",
+        attrs: { id: "allchart" }
+      },
+      [
+        _c("div", { staticClass: "card-title col-md-12" }, [
+          _c("div", { staticClass: "row justify-content-md-center mb-5" }, [
+            _c("div", { staticClass: "col-md-9" }, [
+              _c("div", { staticClass: "input-group" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control datepicker",
+                  attrs: {
+                    type: "text",
+                    id: "start_date_chart",
+                    name: "start_date_chart",
+                    value: "",
+                    maxlength: "10",
+                    placeholder: "날짜입력",
+                    autocomplete: "false"
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(2),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control datepicker",
+                  attrs: {
+                    type: "text",
+                    id: "end_date_chart",
+                    name: "end_date_chart",
+                    value: "",
+                    maxlength: "10",
+                    placeholder: "날짜입력",
+                    autocomplete: "false"
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _vm._m(4),
+                _vm._v(" "),
+                _vm._m(5),
+                _vm._v(" "),
+                _vm._m(6),
+                _vm._v(" "),
+                _vm._m(7),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c("span", { staticClass: "input-group-text" }, [
+                    _c(
+                      "a",
+                      {
+                        attrs: { id: "getDate", href: "javascript:void(0)" },
+                        on: { click: _vm.showEntireChart }
+                      },
+                      [
+                        _c("i", { staticClass: "entypo-chart-bar" }),
+                        _vm._v(" 보기")
+                      ]
+                    )
+                  ])
+                ])
               ])
             ])
           ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "dragbox_hover row collapse show", attrs: { id: "app" } },
-      [
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "col-xs-12 col-md-4" }, [
           _c("div", { attrs: { align: "center" } }, [
             _c(
@@ -3162,7 +3161,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "cal_box" }, [
       _c("div", { staticClass: "card-title m-2" }, [
         _c("i", { staticClass: "fi-menu" }),
-        _vm._v(" 통계\n        "),
+        _vm._v(" 통계\n          "),
         _c(
           "button",
           {
@@ -3353,77 +3352,77 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "card-title" }, [
-      _c("div", { staticClass: "row justify-content-md-center mb-5" }, [
-        _c("div", { staticClass: "col-md-9" }, [
-          _c("div", { staticClass: "input-group" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control datepicker",
-              attrs: {
-                type: "text",
-                id: "start_date_sales",
-                name: "start_date_sales",
-                value: "",
-                maxlength: "10",
-                placeholder: "날짜입력",
-                autocomplete: "false"
-              }
-            }),
-            _vm._v(" "),
-            _vm._m(2),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control datepicker",
-              attrs: {
-                type: "text",
-                id: "end_date_sales",
-                name: "end_date_sales",
-                value: "",
-                maxlength: "10",
-                placeholder: "날짜입력",
-                autocomplete: "false"
-              }
-            }),
-            _vm._v(" "),
-            _vm._m(3),
-            _vm._v(" "),
-            _vm._m(4),
-            _vm._v(" "),
-            _vm._m(5),
-            _vm._v(" "),
-            _vm._m(6),
-            _vm._v(" "),
-            _vm._m(7),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c("span", { staticClass: "input-group-text" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: { id: "getDate", href: "javascript:void(0)" },
-                    on: { click: _vm.showEntireSalesChart }
-                  },
-                  [
-                    _c("i", { staticClass: "entypo-chart-bar" }),
-                    _vm._v(" 보기")
-                  ]
-                )
-              ])
-            ])
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
     _c(
       "div",
       {
         staticClass: "dragbox_hover row collapse show",
-        attrs: { id: "allchart" }
+        attrs: { id: "salechart" }
       },
       [
+        _c("div", { staticClass: "card-title col-md-12" }, [
+          _c("div", { staticClass: "row justify-content-md-center mb-5" }, [
+            _c("div", { staticClass: "col-md-9" }, [
+              _c("div", { staticClass: "input-group" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control datepicker",
+                  attrs: {
+                    type: "text",
+                    id: "start_date_sales",
+                    name: "start_date_sales",
+                    value: "",
+                    maxlength: "10",
+                    placeholder: "날짜입력",
+                    autocomplete: "false"
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(2),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control datepicker",
+                  attrs: {
+                    type: "text",
+                    id: "end_date_sales",
+                    name: "end_date_sales",
+                    value: "",
+                    maxlength: "10",
+                    placeholder: "날짜입력",
+                    autocomplete: "false"
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _vm._m(4),
+                _vm._v(" "),
+                _vm._m(5),
+                _vm._v(" "),
+                _vm._m(6),
+                _vm._v(" "),
+                _vm._m(7),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c("span", { staticClass: "input-group-text" }, [
+                    _c(
+                      "a",
+                      {
+                        attrs: { id: "getDate", href: "javascript:void(0)" },
+                        on: { click: _vm.showEntireSalesChart }
+                      },
+                      [
+                        _c("i", { staticClass: "entypo-chart-bar" }),
+                        _vm._v(" 보기")
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "col-xs-12 col-md-12 pl-0 pr-5" }, [
           _c("div", { attrs: { align: "center" } }, [
             _c(
@@ -3467,7 +3466,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "cal_box" }, [
       _c("div", { staticClass: "card-title m-2" }, [
         _c("i", { staticClass: "fi-menu" }),
-        _vm._v(" 매출 통계\n          "),
+        _vm._v(" 매출 통계\n            "),
         _c(
           "button",
           {
@@ -3475,9 +3474,9 @@ var staticRenderFns = [
             attrs: {
               type: "button",
               "data-toggle": "collapse",
-              "data-target": "#allchart",
+              "data-target": "#salechart",
               "aria-expanded": "true",
-              "aria-controls": "allchart"
+              "aria-controls": "salechart"
             }
           },
           [_c("i", { staticClass: "dripicons-chevron-down" })]
@@ -15763,7 +15762,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -15783,7 +15782,7 @@ component.options.__file = "resources/js/components/Charts.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Charts.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Charts.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -15832,7 +15831,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -15852,7 +15851,7 @@ component.options.__file = "resources/js/components/SalesChart.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SalesChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SalesChart.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SalesChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -15892,8 +15891,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/ljw/public_html/byappscms/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/ljw/public_html/byappscms/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/lara/public_html/byapps-cms-beta/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/lara/public_html/byapps-cms-beta/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

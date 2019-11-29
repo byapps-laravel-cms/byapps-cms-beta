@@ -21,7 +21,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/load-more-data', 'ExpiredController@more_data');
 
 Route::get('/layout', 'HomeController@onLayoutChange');
-Route::post('/search', 'HomeController@search')->name('search');
+Route::any('/search', 'HomeController@search')->name('search');
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');

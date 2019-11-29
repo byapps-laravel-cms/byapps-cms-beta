@@ -27,10 +27,17 @@ class AppsPaymentData extends Model implements Searchable
       return $paymentData;
   }
 
+  public function __construct()
+  {
+      parent::__construct(['app_name']);
+  }
+  
   public function getSearchResult(): SearchResult
   {
     $url = route('appspaydetail', $this->idx);
+    $url = '/';
 
+    dd(new SearchResult($this, $this->app_name, $url));
     return new SearchResult($this, $this->app_name, $url);
   }
 
