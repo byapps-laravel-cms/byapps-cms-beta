@@ -68,4 +68,20 @@ class UserInfoController extends Controller
     return view('userinfodetail')->with('userInfoData', $userInfoData)
                                  ->with('resellerData', $resellerData);
   }
+
+  public function update(Request $request, $idx)
+  {
+    $userInfoData = UserInfo::where('idx', $idx)->first();
+
+    $userInfoData->mem_id = $request->input('mem_id');
+    $userInfoData->mem_name = $request->input('mem_name');
+    $userInfoData->mem_nick = $request->input('mem_nick');
+    $userInfoData->mem_email = $request->input('mem_email');
+    $userInfoData->save();
+
+    //Session::flash('success', '업데이트 성공');
+    toastr()->success('업데이트 성공', '', ['timeOut' => 1000, 'positionClass' => 'toast-center-center']);
+
+    return redirect()->back();
+  }
 }

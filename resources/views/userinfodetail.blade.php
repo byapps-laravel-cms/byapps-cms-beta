@@ -38,6 +38,9 @@
                     <div class="row">
                     <div class="col-md-12 col-xs-12 px-4">
 
+                      <!-- form start -->
+                      {!! Form::open([ 'route' => ['userinfoupdate', $userInfoData->idx] ]) !!}
+
                         <div class="form-group row" id="paymentData">
                             <label class="col-md-2 col-form-label ">RESELLER ID</label>
                             <div class="col-md-10 col-xs-9">
@@ -59,7 +62,7 @@
                             <div class="col-md-10 col-xs-9">
                                 <div class="form-inline">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="mem_id" value="{{ $userInfoData->mem_id }}">
+                                        <input type="text" class="form-control" id="mem_id" name="mem_id" value="{{ $userInfoData->mem_id }}">
                                         <input class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" value="회원로그인" onclick="getMemberInfo({!! json_encode($userInfoData->idx)!!})">
                                         <input class="btn btn-info waves-effect btn-xs mr-1" type="button" value="주문내역" onclick="goToAppsOrderList()">
                                         <input class="btn btn-info waves-effect btn-xs mr-1" type="button" value="결제내역" onclick="goToAppsPaymentList()">
@@ -76,9 +79,9 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="password" class="form-control mr-1" id="new_passwd" value="">
+                                      <input type="password" class="form-control mr-1" id="new_passwd" name="new_passwd" value="">
                                       <p class="form-control-static mt-1 mb-1">새 비밀번호 확인</p>
-                                      <input type="password" class="form-control ml-1 mr-1" id="new_passwd_confirm" value="">
+                                      <input type="password" class="form-control ml-1 mr-1" id="new_passwd_confirm" name="new_passwd_confirm" value="">
                                       <input class="btn btn-info waves-effect btn-xs mr-1" type="button" value="비밀번호 초기화 메일발송">
                                     </div>
                                 </div>
@@ -90,7 +93,7 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="text" class="form-control" id="mem_nick" value="{{ $userInfoData->mem_nick }}">
+                                      <input type="text" class="form-control" id="mem_nick" name="mem_nick" value="{{ $userInfoData->mem_nick }}">
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +104,7 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="text" class="form-control" id="ceo_name" value="{{ $userInfoData->ceo_name }}">
+                                      <input type="text" class="form-control" id="ceo_name" name="ceo_name"  value="{{ $userInfoData->ceo_name }}">
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +115,7 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="text" class="form-control" id="mem_name" value="{{ $userInfoData->mem_name }}">
+                                      <input type="text" class="form-control" id="mem_name" name="mem_name" value="{{ $userInfoData->mem_name }}">
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +126,7 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="text" class="form-control" id="cell_no" value="{{ $userInfoData->cellno }}">
+                                      <input type="text" class="form-control" id="cellno" name="cellno" value="{{ $userInfoData->cellno }}">
                                       <input class="btn btn-info waves-effect btn-xs ml-1" type="button" value="SMS 보내기">
                                     </div>
                                 </div>
@@ -135,7 +138,7 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="text" class="form-control" id="phone_no" value="{{ $userInfoData->phoneno }}">
+                                      <input type="text" class="form-control" id="phoneno" name="phoneno" value="{{ $userInfoData->phoneno }}">
                                       <input class="btn btn-info waves-effect btn-xs ml-1" type="button" value="SMS 보내기">
                                     </div>
                                 </div>
@@ -147,7 +150,7 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="text" class="form-control" id="mem_email" value="{{ $userInfoData->mem_email }}">
+                                      <input type="text" class="form-control" id="mem_email" name="mem_email" value="{{ $userInfoData->mem_email }}">
                                     </div>
                                 </div>
                             </div>
@@ -178,8 +181,8 @@
 
                         <div class="form-group row">
                             <div class="col-md-10 col-xs-9 offset-md-2">
-                                <button type="submit" class="btn btn-info btn-sm float-left" >등록하기</button>
-                                <button type="submit" class="btn btn-danger btn-sm float-left ml-1" >취소</button>
+                                <button type="submit" class="btn btn-info btn-sm float-center" >등록하기</button>
+                                <button type="submit" class="btn btn-danger btn-sm float-center ml-1" >취소</button>
                             </div>
                         </div>
                         {!! Form::close() !!}
