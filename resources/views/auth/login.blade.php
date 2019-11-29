@@ -70,6 +70,8 @@
     function login(obj){
         var request = new FormData(obj);
         obj = $(obj);
+        $('#user_id').removeClass('is-invalid')
+        $('#password').removeClass('is-invalid')
         $.ajax({
             url : obj.attr('action'),
             type : 'POST',
@@ -84,7 +86,6 @@
                 if(data.success){
                     location.href = '{!! URL::previous() !!}';
                 }else{
-                    $('#user_id').removeClass('is-invalid')
                     if(data.message == 'user_id'){
                         $('#user_id').addClass('is-invalid')
                         $('#userIdError').html('<strong>존재하지 않는 아이디 입니다.</strong>')
