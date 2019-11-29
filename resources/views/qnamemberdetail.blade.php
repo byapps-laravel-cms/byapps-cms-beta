@@ -58,7 +58,14 @@
 
                               <label class="col-md-2 col-form-label ">첨부파일</label>
                               <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{ $qnaMemberData->attach_file ? $qnaMemberData->attach_file : '없음' }}</p>
+
+                                <p class="form-control-static mt-1 mb-1">
+                                  @if ($qnaMemberData->attach_file)
+                                    <a href="" target="_blank">{{ $qnaMemberData->attach_file }}</a>
+                                  @else
+                                  <p>없음</p>
+                                  @endif
+                                </p>
                               </div>
 
                               <label class="col-md-2 col-form-label ">문의내용</label>
