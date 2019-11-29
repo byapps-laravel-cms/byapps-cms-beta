@@ -1,7 +1,7 @@
 <div>
     <div class="card-title m-2">
         <i class="fi-menu"></i> 만료예정업체
-        <button class="btn float-right" type="button" data-toggle="collapse" data-target="#endList" aria-expanded="true" aria-controls="endList">
+        <button class="btn float-right" type="button">
           <i class="dripicons-chevron-down"></i>
         </button>
     </div>
@@ -57,7 +57,7 @@
           </div>
 
             @if(count($expiredIos)>0)
-             <p class="text-center mt-4 mb-5"><button class="load-more btn btn-dark" data-totalResult="{{ $expiredIosTotCnt }}">Load More</button></p>
+             <p class="text-center mt-4 mb-5"><button class="load-more btn btn-pink btn-rounded btn-bordered waves-effect w-md waves-light" data-totalResult="{{ $expiredIosTotCnt }}">Load More</button></p>
              @endif
 
           </div>
