@@ -21,7 +21,7 @@ class ExpiredController extends Controller
               ->orderBy('ios_dev_exp')
               ->take(50)
               ->get();
-	  
+
       return $data;
     }
 
@@ -35,7 +35,7 @@ class ExpiredController extends Controller
               ->where('ios_dev_exp', '<', $todate)
               ->orderBy('ios_dev_exp')
               ->count();
-	  
+
       return $data;
     }
 
@@ -58,10 +58,6 @@ class ExpiredController extends Controller
         return response()->json('Direct Access Not Allowed');
       }
     }
-
-
-
-
 
     // iOS 계정 만료예정 업체들
     public function getWillBeExpiredIos()

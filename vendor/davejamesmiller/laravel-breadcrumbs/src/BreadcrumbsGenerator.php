@@ -37,6 +37,7 @@ class BreadcrumbsGenerator
      */
     public function generate(array $callbacks, array $before, array $after, string $name, array $params): Collection
     {
+
         $this->breadcrumbs = new Collection;
         $this->callbacks   = $callbacks;
 
