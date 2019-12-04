@@ -69,7 +69,7 @@ class RegisterController extends Controller
     protected function register()
     {
         $data = request()->all();
-        if($this->validator($data)->fails()) abort(400);
+
         Auth::guard('web')->loginUsingId(
           User::insertGetId([
             'mem_id' => $data['user_id'],
@@ -82,6 +82,8 @@ class RegisterController extends Controller
             'guestMN' => 'Y'
           ])
         );
+
+        return redirect($this->redirectPath())->with('message', '등록되었습니다');
     }
 
     protected function registered(Request $request, $user)
@@ -90,12 +92,10 @@ class RegisterController extends Controller
       Auth::attempt([
         'user_id' => $request->input('user_id'),
         'name' => $request->input('name'),
-        'password' => $request->input('password')
+        //'password' => $request->input('password')
       ]);
 
       return response(null, 204);
     }
-    // public function register(){
-    //   dd('asdf');
-    // }
+
 }
