@@ -86,22 +86,42 @@
 
                     </div><!--row end-->
 
-                    <div class="col-md-10 col-xs-9" id="replyData">
-                        @if ($replyData)
-                          @foreach($replyData as $reply)
-                        <div class="card card-border">
-                            <div class="card-header border-success pb-1">
-                                <h4 class="card-title text-success mb-1">{{ $reply->subject }}</h4>
-                                <h5 class="card-title text-success mb-1 float-right">{{ date("Y-m-d h:i:s", $reply->reg_time) }}</h5>
+                    @if ($replyData)
+                      @foreach($replyData as $reply)
+                    <hr />
+
+                      <div class="form-group row">
+                          <label class="col-md-2 col-form-label ">답변자</label>
+                          <div class="col-md-10 col-xs-9">
+                            <p class="form-control-static mt-1 mb-1">{{ $reply->mem_name }}
+                            </p>
+                          </div>
+
+                          <label class="col-md-2 col-form-label ">답변일시</label>
+                          <div class="col-md-10 col-xs-9">
+                            <p class="form-control-static mt-1 mb-1">{{ date("Y-m-d h:i:s", $reply->reg_time) }}
+                            </p>
+                          </div>
+
+                          <label class="col-md-2 col-form-label ">답변내용</label>
+                          <div class="col-md-10 col-xs-9" >
+
+                            <div class="card card-border">
+                                <div class="card-header border-success pb-1">
+                                    <h4 class="card-title text-success mb-1">{{ $reply->subject }}</h4>
+                                    <!-- <h5 class="card-title text-success mb-1 float-right">{{ date("Y-m-d h:i:s", $reply->reg_time) }}</h5> -->
+                                </div>
+
+                                <div class="card-body">
+                                    <p class="mb-0">{!! $reply->content !!}</p>
+                                </div>
                             </div>
 
-                            <div class="card-body">
-                                <p class="mb-0">{!! $reply->content !!}</p>
-                            </div>
-                        </div>
-                          @endforeach
-                        @endif
+                          </div>
                     </div>
+                    @endforeach
+                  @endif
+                  <div id="replyData"></div>
 
                     <div class="form-group row" id="answer">
                         <div class="col-md-10 col-xs-9 offset-md-2">
@@ -148,7 +168,7 @@ function answer() {
                 {!! Form::open([ 'route' => ['qnamembercreate', $qnaMemberData->idx] ])!!}\
                 <div class="col-md-12 col-xs-12">\
                       <div class="card-body">\
-                          <input type="hidden" name="subject" value=" {{ $qnaMemberData->subject }}">\
+                          <input type="hidden" name="subject" value="{{ $qnaMemberData->subject }}">\
                           <textarea id="answer_content" class="mb-0" rows="20" style="width:100%;" name="add_answer"></textarea>\
                           <button type="submit" class="btn btn-success btn-sm float-right mt-1" >등록</button>\
                       </div>\

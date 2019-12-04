@@ -60,8 +60,8 @@ class QnaMemberController extends Controller
     $answerData = new QnaMember;
 
     $answerData->pid = $idx;
-    $answerData->mem_id = $request->user()->user_id;
-    $answerData->mem_name = $request->user()->name;
+    $answerData->mem_id = $request->user()->mem_id;
+    $answerData->mem_name = $request->user()->mem_name;
     $answerData->subject = "RE: ".$request->subject;
     $answerData->content = $request->add_answer;
     $answerData->reg_time = Carbon::now()->timestamp;
