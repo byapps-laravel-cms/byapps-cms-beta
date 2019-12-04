@@ -125,7 +125,7 @@
 
                     <div class="form-group row" id="answer">
                         <div class="col-md-10 col-xs-9 offset-md-2">
-                            <button type="submit" class="btn btn-danger btn-sm float-right ml-1">취소</button>
+                            <button type="submit" class="btn btn-danger btn-sm float-right ml-1" onclick="window.location.assign('/qnamemberlist')">취소</button>
                             <button type="submit" class="btn btn-info btn-sm float-right" onclick="answer()">답변하기</button>
                         </div>
                     </div>
@@ -170,6 +170,7 @@ function answer() {
                       <div class="card-body">\
                           <input type="hidden" name="subject" value="{{ $qnaMemberData->subject }}">\
                           <textarea id="answer_content" class="mb-0" rows="20" style="width:100%;" name="add_answer"></textarea>\
+                            <button type="button" class="btn btn-danger btn-sm float-right ml-1 mt-1" onclick="history.back()">취소</button>\
                           <button type="submit" class="btn btn-success btn-sm float-right mt-1" >등록</button>\
                       </div>\
                   </div>\
