@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+//use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use \Illuminate\Support\Facades\Auth;
+
+use App\Admin as User;
+use DB;
 
 class RegisterController extends Controller
 {
@@ -49,10 +53,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'user_id' => ['required', 'string', 'max:255', 'unique:users'],
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:4', 'confirmed'],
+            'mem_id' => ['required', 'string', 'max:255', 'unique:users'],
+            'mem_name' => ['required', 'string', 'max:255'],
+            //'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'passwd' => ['required', 'string', 'min:4', 'confirmed'],
         ]);
     }
 
@@ -62,14 +66,22 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function register()
     {
-        return User::create([
-            'user_id' => $data['user_id'],
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $data = request()->all();
+        if($this->validator($data)->fails()) abort(400);
+        Auth::guard('web')->loginUsingId(
+          User::insertGetId([
+            'mem_id' => $data['user_id'],
+            'mem_name' => $data['name'],
+            //'email' => $data['email'],
+            //'password' => Hash::make($data['password']),
+            'passwd' => DB::raw('password(\'' . $data['password'] . '\')'),
+            'reg_date' => \Carbon\Carbon::now()->toDateTimeString(),
+            'adminMN' => '-free_order-',
+            'guestMN' => 'Y'
+          ])
+        );
     }
 
     protected function registered(Request $request, $user)
@@ -83,4 +95,7 @@ class RegisterController extends Controller
 
       return response(null, 204);
     }
+    // public function register(){
+    //   dd('asdf');
+    // }
 }
