@@ -172,8 +172,8 @@
                 @foreach ($expiredApps as $data)
                 <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
                     <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">
-                      {{ $data->app_name }}<br><span class="badge badge-pink">D+ {{ App\Helpers\Helpers::calculateDday(App\Helpers\Helpers::dateFormat($data->end_time)) }}</span>
-                      {{ App\Helpers\Helpers::dateFormat($data->end_time) }}
+                      {{ $data->app_name }}<br><span class="badge badge-pink">D+ {{ App\Helpers\Helpers::calculateDday(str_limit($data->end_time, 10)) }}</span>
+                      {{ str_limit($data->end_time, 10) }}
                     </div>
                 </div>
                 @endforeach
@@ -183,8 +183,8 @@
                 @foreach ($willBeExpiredApps as $data)
                 <div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block">
                     <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">
-                      {{ $data->app_name }}<br><span class="badge badge-info">D {{ App\Helpers\Helpers::calculateDday(App\Helpers\Helpers::dateFormat($data->end_time)) }}</span>
-                      {{ App\Helpers\Helpers::dateFormat($data->end_time) }}
+                      {{ $data->app_name }}<br><span class="badge badge-info">D {{ App\Helpers\Helpers::calculateDday(str_limit($data->end_time, 10)) }}</span>
+                      {{ str_limit($data->end_time, 10)}}
                     </div>
                 </div>
                 @endforeach
