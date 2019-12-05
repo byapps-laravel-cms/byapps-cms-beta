@@ -1,18 +1,16 @@
 @if (count($breadcrumbs))
-
     <?$history = array('title'=>'','url'=>url(request()->getPathInfo()));?>
     <ol class="breadcrumb">
+        @foreach ($breadcrumbs as $key => $breadcrumb)
+            @if ($breadcrumb->url && !$loop->last)
+                <?$history['title'].= $breadcrumb->title." > ";?>
+                <li class="breadcrumb-item"><a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a></li>
+            @else
+                <?$history['title'].= $title ? $title : $breadcrumb->title;?>
+                <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
+            @endif
 
-    @foreach ($breadcrumbs as $key => $breadcrumb)
-        @if ($breadcrumb->url && !$loop->last)
-            <?$history['title'].= $breadcrumb->title." > ";?>
-            <li class="breadcrumb-item"><a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a></li>
-        @else
-            <?$history['title'].= $title ? $title : $breadcrumb->title;?>
-            <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
-        @endif
-
-    @endforeach
+        @endforeach
     </ol>
     <?
     config(['app.now_page' => $history]);

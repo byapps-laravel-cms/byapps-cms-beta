@@ -24,7 +24,7 @@
                     @if (Route::has('login'))
                       @auth
                     <li class="list-inline-item user-box mt-3">
-                        <img data-name="{{ Auth::user()->name }}" class="profile" />
+                        <img data-name="{{ Auth::user()->mem_name }}" class="profile" />
                     </li>
 
                     <li class="list-inline-item user-box">
