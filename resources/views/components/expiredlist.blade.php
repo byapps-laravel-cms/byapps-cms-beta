@@ -243,6 +243,7 @@
                     }else{
                         $(".load-more").html('Load More');
                     }
+					$(".load-more").blur();
                 }
             });
         });
