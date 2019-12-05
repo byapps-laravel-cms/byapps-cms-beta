@@ -196,7 +196,7 @@ function answer() {
   $('#answer_content').summernote({
       // placeholder: {!! json_encode($qnaMemberData->content) !!},
       tabsize: 2,
-      height: 200
+      height: 200,
   });
 }
 </script>
