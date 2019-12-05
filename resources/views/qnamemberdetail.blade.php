@@ -103,6 +103,19 @@
                             </p>
                           </div>
 
+                          <label class="col-md-2 col-form-label ">첨부파일</label>
+                          <div class="col-md-10 col-xs-9">
+
+                            <p class="form-control-static mt-1 mb-1">
+                              @if ($reply->attach_file)
+                                <a href="" target="_blank">{{ $reply->attach_file }}</a>
+                              @else
+                              <p>없음</p>
+                              @endif
+                            </p>
+                          </div>
+
+
                           <label class="col-md-2 col-form-label ">답변내용</label>
                           <div class="col-md-10 col-xs-9" >
 
