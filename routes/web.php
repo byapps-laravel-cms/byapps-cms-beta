@@ -1,4 +1,8 @@
 <?php
+Route::get('/test',function(){
+  dd(config('filesystems'));
+  Storage::get('5de8bd2a668e6.jpeg');
+});
 
 // 세션정보 확인용
 Route::get('/session',function(){
