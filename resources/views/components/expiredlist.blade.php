@@ -1,7 +1,7 @@
 <div>
     <div class="card-title m-2">
         <i class="fi-menu"></i> 만료예정업체
-        <button class="btn float-right" type="button">
+        <button class="btn float-right" type="button" data-toggle="collapse" data-target="#endList" aria-expanded="true" aria-controls="endList">
           <i class="dripicons-chevron-down"></i>
         </button>
     </div>
@@ -222,7 +222,7 @@
                 },
                 success:function(response){
                     var _html = '';
-
+					
                     $.each(response,function(index,value){
                         _html += '<div class="card col-xs-12 col-md-5 col-lg-2 m-1 p-0 d-inline-block expiredIos">';
                         _html += '  <div class="mx-0 p-2 text-truncate" style="width:10rem;vertical-align:middle;">';
@@ -249,3 +249,35 @@
         });
     });
 </script>
+
+<!-- <script>
+$(document).ready(function() {
+  var _token = $('input[name="_token"]').val();
+  load_more('');
+
+  function load_more(id = '', _token)
+  {
+    $.ajax({
+       url: "/loadmore/load_more",
+       method: "POST",
+       data: {
+         idx: id,
+         _token:_token
+       },
+       success:function(data)
+       {
+         $('#load_more_button').remove();
+         $('#expiredIos').append(data);
+       }
+      })
+     }
+
+     $(document).on('click', '#load_more_button', function(){
+      var id = $(this).data('id');
+      $('#load_more_button').html('<b>불러오는 중...</b>');
+      load_more(id, _token);
+     });
+
+});
+
+</script> -->
