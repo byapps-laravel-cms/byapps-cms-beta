@@ -45,6 +45,10 @@ class AppsListController extends Controller
 
     public function getSingleData($idx)
     {
+        if(request()->ajax()){
+            return request()->file('file');
+
+        }
       $this->colums[] = 'app_id';
       $data['appData'] = AppsData::find($idx);
       if($data['appData'] == null) abort(404);
@@ -66,26 +70,30 @@ class AppsListController extends Controller
     public function update($idx)
     {
         $data = request()->only(['app_process','service_type','app_os_type','byapps_ver','app_ver','app_build','app_ver_ios','app_build_ios','app_cate','noti_gcm','noti_gcm_num','noti_fcm_num','noti_ios_cerp','ios_cer_exp','ios_dev_exp','push_server','token','start_time','end_time','app_android_url','app_ios_url','surl','vender','hashkey','ioshack','host_id','txtencode','host_name','app_lang','auto_login','login_point','push_point','install_point','point_transfer_btn','cscall','app_intro','developer_info','start_date','end_time']);
-        $data['developer_info'] = $this->XSS($data['developer_info']);
+        $data['developer_info'] = XSS($data['developer_info']);
         $data['app_lang'] = join($data['app_lang'],'|');
         //카테고리 01~07사이
-        if(!preg_match('/^0[1-7]$/',$data['app_cate']))abort(400,'카테고리 입력이 잘못됨');
+        if(!preg_match('/^0[1-7]$/',$data['app_cate']))return validateExit(['col'=>'app_cate','message'=>'카테고리 입력이 잘못됨']);
+        if($data['app_process'] > 10 || $data['app_process'] < 0)return validateExit(['col'=>'app_process','message'=>'process 입력이 잘못됨']);
         //날짜 형식
-        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['ios_cer_exp']))abort(400,'인증서 만료일이 날짜형식이 아님');
-        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['ios_dev_exp']))abort(400,'개발자 만료일이 날짜형식이 아님');
-        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['start_time']))abort(400,'플랫폼 시작일이 날짜형식이 아님');
-        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['end_time']))abort(400,'플랫폼 종료일이 날짜형식이 아님');
+        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['ios_cer_exp']) && $data['ios_cer_exp'] != '')return validateExit(['col'=>'ios_cer_exp','message'=>'인증서 만료일이 날짜형식이 아님']);
+        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['ios_dev_exp']) && $data['ios_dev_exp'] != '')return validateExit(['col'=>'ios_dev_exp','message'=>'개발자 만료일이 날짜형식이 아님']);
+        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['start_time']))return validateExit(['col'=>'start_time','message'=>'플랫폼 시작일이 날짜형식이 아님']);
+        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['end_time']))return validateExit(['col'=>'end_time','message'=>'플랫폼 종료일이 날짜형식이 아님']);
         //Y or N
         if(!isset($data['auto_login']))$data['auto_login'] = 'N';
-        elseif($data['auto_login'] != 'Y')abort(400,'자동로그인 입력이 잘못됨');
+        elseif($data['auto_login'] != 'Y')return validateExit(['col'=>'auto_login','message'=>'자동로그인 입력이 잘못됨']);
         if(!isset($data['login_point']))$data['login_point'] = 'N';
-        elseif($data['login_point'] != 'Y')abort(400,'출석체크 포인트 입력이 잘못됨');
+        elseif($data['login_point'] != 'Y')return validateExit(['col'=>'login_point','message'=>'출석체크 포인트 입력이 잘못됨']);
         if(!isset($data['push_point']))$data['push_point'] = 'N';
-        elseif($data['push_point'] != 'Y')abort(400,'푸쉬체크 포인트 입력이 잘못됨');
+        elseif($data['push_point'] != 'Y')return validateExit(['col'=>'push_point','message'=>'푸쉬체크 포인트 입력이 잘못됨']);
         if(!isset($data['install_point']))$data['install_point'] = 'N';
-        elseif($data['install_point'] != 'Y')abort(400,'앱설치 포인트 입력이 잘못됨');
+        elseif($data['install_point'] != 'Y')return validateExit(['col'=>'install_point','message'=>'앱설치 포인트 입력이 잘못됨']);
         if(!isset($data['point_transfer_btn']))$data['point_transfer_btn'] = 'N';
-        elseif($data['point_transfer_btn'] != 'Y')abort(400,'앱 포인트,수동전환 입력이 잘못됨');
+        elseif($data['point_transfer_btn'] != 'Y')return validateExit(['col'=>'point_transfer_btn','message'=>'앱 포인트,수동전환 입력이 잘못됨']);
+        //app_os 둘다 체크시 both 로 변경
+        if(!isset($data['app_os_type']) || count($data['app_os_type']) == 0)return validateExit(['col'=>'app_os_type','message'=>'OS를 하나이상 선택 하세요.']);
+        $data['app_os_type'] = count($data['app_os_type']) > 1 ? 'both' : $data['app_os_type'][0];
 
         $data['modify_time'] = time();
 

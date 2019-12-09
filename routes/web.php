@@ -105,6 +105,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/malist', 'malist')->name('malist.view');
   Route::get('/malist/data', 'MAController@getMAListData')->name('malist');
   Route::get('/madetail/{idx}', 'MAController@getSingleData')->name('madetail');
+  Route::post('/madetail/{idx}', 'MAController@update')->name('madetail');
 
   //  앱 설치 통계
   Route::view('/appsdownstatlist', 'appsdownstatlist')->name('appsdownstatlist.view');
