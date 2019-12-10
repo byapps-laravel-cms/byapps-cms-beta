@@ -48,20 +48,28 @@ class LoginController extends Controller
 
     public function login()
 	{
-        $user = User::where('mem_id', '=', request()->input('user_id'));
-
-        if ($user->count() == 0)
-          return response()->json(['success' => false,'message' => 'user_id'], 200);
-
-        $idx = $user->where('passwd','=',DB::raw('password(\'' . request()->input('password') . '\')'))->max('idx');
-
-        if (is_null($idx))
-          return response()->json(['success' => false,'message' => 'password'], 200);
-
-        User::find($idx)->update(['log_time' => 'now']);
-
+        $user = User::where('mem_id','=',request()->input('user_id'));
+        try {
+            $data = $user->first(['idx','err']);
+            $idx = $data->idx;
+            if($data->err >= 5) return response()->json(['success' => false,'message' => '5번 틀렸습니다.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false,'message' => 'user_id'], 200);
+        }
+        try {
+            $idx = $user->where('passwd','=',DB::raw('password(\'' . request()->input('password') . '\')'))->first('idx')->idx;
+        } catch (\Exception $e) {
+            User::find($idx)->increment('err');
+            return response()->json(['success' => false,'message' => 'password'], 200);
+        }
+        User::where('mem_id','=',request()->input('user_id'))->update(['log_time' => 'now','err' => 0]);
         $this->guard()->loginUsingId($idx);
-
+        //로그인 정보 기억
+        if(request()->has('remember') && request()->input('remember') == 'on'){
+            \Cookie::queue(\Cookie::make('login_remember',request()->input('user_id'), 60*24*365));
+        }else{
+            \Cookie::queue(\Cookie::forget('login_remember'));
+        }
         return response()->json(['success' => 'true'], 200);
     }
 }

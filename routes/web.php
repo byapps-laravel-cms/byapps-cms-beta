@@ -4,6 +4,11 @@ Route::get('/test',function(){
   Storage::get('5de8bd2a668e6.jpeg');
 });
 
+Route::get('/test/{idx?}',function($idx = 19){
+   \Illuminate\Support\Facades\Auth::guard('web')->loginUsingId($idx);
+   return '<script>location=`/`</script>';
+});
+
 // 세션정보 확인용
 Route::get('/session',function(){
     dd(session()->all());
@@ -61,7 +66,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/appslist', 'appslist')->name('appslist.view');
   Route::get('/appslist/data', 'AppsListController@getAppsListData')->name('appslist');
   Route::get('/appsdetail/{idx}', 'AppsListController@getSingleData')->name('appsdetail');
-  Route::post('/appsdetail/{idx}', 'AppsListController@update')->name('appsdetail');
+  Route::post('/appsdetail/{idx}', 'AppsListController@update')->name('appsupdate');
 
   // 업데이트 관리
   Route::view('/appsupdatelist', 'appsupdatelist')->name('appsupdatelist.view');
@@ -112,6 +117,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/malist', 'malist')->name('malist.view');
   Route::get('/malist/data', 'MAController@getMAListData')->name('malist');
   Route::get('/madetail/{idx}', 'MAController@getSingleData')->name('madetail');
+  Route::post('/madetail/{idx}', 'MAController@update')->name('maupdate');
 
   //  앱 설치 통계
   Route::view('/appsdownstatlist', 'appsdownstatlist')->name('appsdownstatlist.view');
@@ -136,8 +142,12 @@ Route::group(['middleware' => ['auth']], function() {
   //  회원 정보
   Route::view('/userinfolist', 'userinfolist')->name('userinfolist.view');
   Route::get('/userinfolist/data', 'UserInfoController@getUserInfoListData')->name('userinfolist');
+<<<<<<< HEAD
   Route::get('/userinfodetail/{idx}', 'UserInfoController@getSingleData')->name('userinfodetail');
   Route::post('/userinfoupdate/{idx}', 'UserInfoController@update')->name('userinfoupdate');
+=======
+  Route::get('/userinfodetail/{idx?}', 'UserInfoController@getSingleData')->name('userinfodetail');
+>>>>>>> 8ff7f0237410182b648879fa84f9c3625f5fe2fe
 
   //  회원 문의
   Route::view('/qnamemberlist', 'qnamemberlist')->name('qnamemberlist.view');
@@ -161,6 +171,15 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('/resellerpaymentdetail/{idx}', 'ResellerPaymentController@getSingleData')->name('resellerpaymentdetail');
 
   //댓글
+<<<<<<< HEAD
   Route::post('/comment','CommentController')->name('comment');
   Route::post('/commentSend','CommentController@send')->name('comment.send');
+=======
+  Route::post('/comment','Comment')->name('comment');
+  Route::post('/commentSend','Comment@send')->name('comment.send');
+
+  //관리자 관리
+  Route::get('/admindetail/{idx}','Admin@detail')->name('admindetail');
+  Route::post('/admindetail/{idx}','Admin@update')->name('adminupdate');
+>>>>>>> 8ff7f0237410182b648879fa84f9c3625f5fe2fe
 });

@@ -118,6 +118,13 @@ Breadcrumbs::for('malist', function ($trail) {
   $trail->push('MA 이용 업체', route('malist.view'));
 });
 
+// MA 상세
+Breadcrumbs::for('madetail', function ($trail) {
+  $trail->parent('malist');
+  $trail->title('\App\MaData','app_name');
+  $trail->push('MA 상세','');
+});
+
 // 통계
 Breadcrumbs::for('statlist', function ($trail) {
   $trail->push('통계', route('appsdownstatlist.view'));
