@@ -1,5 +1,10 @@
 <?php
 
+Route::get('/test/{idx?}',function($idx = 19){
+   \Illuminate\Support\Facades\Auth::guard('web')->loginUsingId($idx);
+   return '<script>location=`/`</script>';
+});
+
 // 세션정보 확인용
 Route::get('/session',function(){
     dd(session()->all());
@@ -130,7 +135,7 @@ Route::group(['middleware' => ['auth']], function() {
   //  회원 정보
   Route::view('/userinfolist', 'userinfolist')->name('userinfolist.view');
   Route::get('/userinfolist/data', 'UserInfoController@getUserInfoListData')->name('userinfolist');
-  Route::get('/userinfodetail/{idx}', 'UserInfoController@getSingleData')->name('userinfodetail');
+  Route::get('/userinfodetail/{idx?}', 'UserInfoController@getSingleData')->name('userinfodetail');
 
   //  회원 문의
   Route::view('/qnamemberlist', 'qnamemberlist')->name('qnamemberlist.view');
