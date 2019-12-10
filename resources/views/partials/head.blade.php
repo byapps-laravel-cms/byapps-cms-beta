@@ -1,5 +1,6 @@
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="UTF-8" />
     <title>CMS :: BYAPPS - </title>
     <meta name="description" content="BYAPPS CMS">
     <meta name="title" content="BYAPPS CMS">
@@ -50,5 +51,7 @@
     <!-- include summernote css/js -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+    <!-- include summernote-ko-KR -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/lang/summernote-ko-KR.js"></script>
 
 </head>
