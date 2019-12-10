@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/appslist', 'appslist')->name('appslist.view');
   Route::get('/appslist/data', 'AppsListController@getAppsListData')->name('appslist');
   Route::get('/appsdetail/{idx}', 'AppsListController@getSingleData')->name('appsdetail');
-  Route::post('/appsdetail/{idx}', 'AppsListController@update')->name('appsdetail');
+  Route::post('/appsdetail/{idx}', 'AppsListController@update')->name('appsupdate');
 
   // 업데이트 관리
   Route::view('/appsupdatelist', 'appsupdatelist')->name('appsupdatelist.view');
@@ -110,7 +110,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/malist', 'malist')->name('malist.view');
   Route::get('/malist/data', 'MAController@getMAListData')->name('malist');
   Route::get('/madetail/{idx}', 'MAController@getSingleData')->name('madetail');
-  Route::post('/madetail/{idx}', 'MAController@update')->name('madetail');
+  Route::post('/madetail/{idx}', 'MAController@update')->name('maupdate');
 
   //  앱 설치 통계
   Route::view('/appsdownstatlist', 'appsdownstatlist')->name('appsdownstatlist.view');
@@ -160,4 +160,7 @@ Route::group(['middleware' => ['auth']], function() {
   //댓글
   Route::post('/comment','Comment')->name('comment');
   Route::post('/commentSend','Comment@send')->name('comment.send');
+
+  //관리자 관리
+  Route::post('/adminedit/{idx}','Admin@update')->name('adminupdate');
 });

@@ -15,7 +15,7 @@
                             <label for="user_id" class="col-md-4 col-form-label text-md-right">{{ __('사용자 ID') }}</label>
 
                             <div class="col-md-6">
-                                <input id="user_id" type="text" class="form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ old('user_id') }}" required autocomplete="user_id" autofocus>
+                                <input id="user_id" type="text" class="form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ Cookie::get('login_remember') ?: '' }}" required autocomplete="user_id" autofocus>
 
                                 <span class="invalid-feedback" id="userIdError" role="alert">
                                     <strong>asdf</strong>
@@ -38,7 +38,7 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ Cookie::get('login_remember') != null ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
                                         {{ __('로그인 정보 기억') }}
