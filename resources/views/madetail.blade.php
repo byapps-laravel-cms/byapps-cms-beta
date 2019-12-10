@@ -51,7 +51,7 @@
                                 <label class="col-md-2 col-form-label">회원 ID</label>
                                 <div class="col-md-10 col-xs-9">
                                     <span class="form-control-static mt-1 mb-1 d-p-inline"> <i class="fa fa-user"></i>&nbsp;&nbsp; {{ $maData->mem_id }} </span>
-                                    <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" >회원정보</button>
+                                    <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" onclick="getMemData('{!! $maData->mem_id !!}')">회원정보</button>
                                     <button class="btn btn-info waves-effect btn-xs mr-1" type="button" >Transfer</button>
                                 </div>
                             </div>
@@ -357,6 +357,7 @@
         .no-drag {-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;}
     </style>
 @endsection
+@section('script')
 <script>
     function goLink(obj){
         obj = $(obj)
@@ -414,9 +415,9 @@ barsQ('appi','${$('[name=pn]').val()}|${$('[name=aid]').val()}|${$('[name=schm]'
         document.execCommand('copy');
         document.body.removeChild(t);
     }
-    function getInfo(){
+    function getInfo(memId){
         var request = {
-            mode : 'get_info'
+            mode : memId
         }
         $.ajax({
             url : location.href,
@@ -433,3 +434,4 @@ barsQ('appi','${$('[name=pn]').val()}|${$('[name=aid]').val()}|${$('[name=schm]'
         });
     }
 </script>
+@endsection

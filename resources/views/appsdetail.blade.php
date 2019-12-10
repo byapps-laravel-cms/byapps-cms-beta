@@ -60,7 +60,7 @@
                             <label class="col-md-2 col-form-label">회원 ID</label>
                             <div class="col-md-10 col-xs-9">
                                 <span class="form-control-static mt-1 mb-1 d-p-inline"> <i class="fa fa-user"></i>&nbsp;&nbsp; {{ $appData->mem_id }} </span>
-                                <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" >회원정보</button>
+                                <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" onclick="getMemData('{!! $appData->mem_id !!})'">회원정보</button>
                                 <button class="btn btn-info waves-effect btn-xs mr-1" type="button" >Transfer</button>
                             </div>
                         </div>
@@ -648,7 +648,7 @@
                                 <textarea id="receipt" name="app_intro" class="form-control" rows="5">{!! $appData->app_intro !!}</textarea>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">앱소개</label>
                             <div class="col-md-10 col-xs-9">
@@ -683,6 +683,7 @@
     });
 </script>
 @endsection
+@section('script')
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <script>
@@ -712,6 +713,7 @@
         window.open(url, "_blank");
     }
 </script>
+@endsection
 @section('style')
     <style>
         .no-drag {-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;}
