@@ -55,31 +55,12 @@ class QnaMemberController extends Controller
 
   public function create(Request $request, $idx)
   {
-
-    //dd($request->user());
-
-
-    // $dom = new \DomDocument();
-    // $dom->loadHtml($request->add_answer, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-    // $images = $dom->getElementsByTagName('img');
-    //
-    //  foreach($images as $k => $img){
-    //
-    //      $data = $img->getAttribute('src');
-    //      list($type, $data) = explode(';', $data);
-    //      list(, $data)      = explode(',', $data);
-    //      $data = base64_decode($data);
-    //      $image_name= "/storage/qnamember/" . time().$k.'.png';
-    //      $path = public_path() . $image_name;
-    //      file_put_contents($path, $data);
-    //      $img->removeAttribute('src');
-    //      $img->setAttribute('src', $image_name);
-    //  }
-    // $detail = $dom->saveHTML();
+    $attachFile = $this->uploadFilePost($request);
 
     $dom = new \DomDocument();
     $dom->loadHtml($request->add_answer, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
     $images = $dom->getElementsByTagName('img');
+    $answer = '';
 
      foreach($images as $img){
 
@@ -93,7 +74,7 @@ class QnaMemberController extends Controller
                  // Generating a random filename
                  $filename = uniqid();
                  $filepath = "/storage/qnamember/$filename.$mimetype";
-                 $answer = preg_replace('/data:image.*\"/',$filepath.'"',$request->add_answer);
+                 $answer = preg_replace('/data:image.*\"/',$filepath.'"', $request->add_answer);
                  // @see http://image.intervention.io/api/
                  $image = Image::make($src)
                    // resize if required
@@ -117,16 +98,32 @@ class QnaMemberController extends Controller
      $answerData->mem_id = $request->user()->mem_id;
      $answerData->mem_name = $request->user()->mem_name;
      $answerData->subject = "RE: ".$request->subject;
-     $answerData->content = $answer;
+     $answerData->attach_file = $attachFile;
+     //$answerData->content = $request->add_answer;
+     $answerData->content = $detail;
      $answerData->reg_time = Carbon::now()->timestamp;
      $qnaMemberData->process = 3;
 
-    //dd($answerData);
-    $answerData->save();
     $qnaMemberData->save();
+    $answerData->save();
 
     toastr()->success('답변 등록완료', '', ['timeOut' => 1000, 'positionClass' => 'toast-center-center']);
 
     return redirect()->back();
+  }
+
+  public function uploadFilePost(Request $request)
+  {
+    if(!$request->hasFile('fileToUpload')) return null;
+
+    $request->validate([
+        'fileToUpload' => 'required|file|max:1024',
+    ]);
+
+    $fileName = "fileName".time().'.'.request()->fileToUpload->getClientOriginalExtension();
+
+    $request->fileToUpload->storeAs('qnafiles', $fileName);
+
+    return $fileName;
   }
 }
