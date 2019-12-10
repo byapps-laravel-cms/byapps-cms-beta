@@ -218,18 +218,18 @@
                             <label class="col-md-2 col-form-label">앱매출통계</label>
                             <div class="col-md-8 col-xs-9">
                                 <p class="form-control-static mt-1 mb-1">
-                                    전체: {{ number_format($saleData['total_m'])?:0 }}
-                                          ({{ number_format($saleData['total_c'])?:0 }}) /
-                                    오늘: {{ number_format($saleData['today_m'])?:0 }}
-                                          ({{ number_format($saleData['today_c'])?:0 }}) /
-                                    어제: {{ number_format($saleData['yesterday_m'])?:0 }}
-                                          ({{ number_format($saleData['yesterday_c'])?:0 }}) /
-                                    평균: {{ number_format($saleData['average_m'])?:0 }}
-                                          ({{ number_format($saleData['average_c'])?:0 }}) /
-                                    최고: {{ number_format($saleData['max_m'])?:0 }}
-                                          ({{ number_format($saleData['max_c'])?:0 }}) /
-                                    기간: {{ number_format($saleData['time'])?:0 }}
-                                          ({{ $saleData['launch_date']?:0 }}~{{ date('Y/m/d') }})
+                                    전체: {{ isset($saleData['total_m']) ? number_format($saleData['total_m']) :0 }}
+                                          ({{ isset($saleData['total_c']) ? number_format($saleData['total_c']) :0 }}) /
+                                    오늘: {{ isset($saleData['today_m']) ? number_format($saleData['today_m']) :0 }}
+                                          ({{ isset($saleData['today_c']) ? number_format($saleData['today_c']) :0 }}) /
+                                    어제: {{ isset($saleData['yesterday_m']) ? number_format($saleData['yesterday_m']) :0 }}
+                                          ({{ isset($saleData['yesterday_c']) ? number_format($saleData['yesterday_c']) :0 }}) /
+                                    평균: {{ isset($saleData['average_m']) ? number_format($saleData['average_m']) :0 }}
+                                          ({{ isset($saleData['average_c']) ? number_format($saleData['average_c']) :0 }}) /
+                                    최고: {{ isset($saleData['max_m']) ? number_format($saleData['max_m']) :0 }}
+                                          ({{ isset($saleData['max_c']) ? number_format($saleData['max_c']) :0 }}) /
+                                    기간: {{ isset($saleData['time']) ? number_format($saleData['time']) :0 }}
+                                          ({{ isset($saleData['launch_date']) ? $saleData[''] :0 }}~{{ date('Y/m/d') }})
                                 </p>
                             </div>
                         </div>

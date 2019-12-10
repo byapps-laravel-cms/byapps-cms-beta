@@ -11,6 +11,9 @@ Route::get('/session',function(){
 });
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/load-more-data', 'ExpiredController@more_data');
+
 Route::get('/layout', 'HomeController@onLayoutChange');
 Route::any('/search', 'HomeController@search')->name('search');
 
@@ -157,11 +160,11 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('/resellerpaymentlist/data', 'ResellerPaymentController@getResellerPaymentListData')->name('resellerpaymentlist');
   Route::get('/resellerpaymentdetail/{idx}', 'ResellerPaymentController@getSingleData')->name('resellerpaymentdetail');
 
-  //댓글
+  // 댓글
   Route::post('/comment','Comment')->name('comment');
-  Route::post('/commentSend','Comment@send')->name('comment.send');
+  Route::post('/commentSend','Comment@send')->name('commentsend');
 
-  //관리자 관리
+  // 관리자 관리
   Route::get('/admindetail/{idx}','Admin@detail')->name('admindetail');
   Route::post('/admindetail/{idx}','Admin@update')->name('adminupdate');
 });
