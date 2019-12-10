@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\AppsData;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
+
+use App\AppsData;
+use App\AppsStat;
+use App\AppsSaleStat;
 
 class AppsListController extends Controller
 {
@@ -45,10 +48,6 @@ class AppsListController extends Controller
 
     public function getSingleData($idx)
     {
-        if(request()->ajax()){
-            return request()->file('file');
-
-        }
       $this->colums[] = 'app_id';
       $data['appData'] = AppsData::find($idx);
       if($data['appData'] == null) abort(404);
@@ -57,12 +56,34 @@ class AppsListController extends Controller
 
       $now = Carbon::now();
 
-      //이용 통계
+      //설치 통계
       $downs = $data['appData']->downs->toArray();
       $downs['time'] = $now->diffInDays(Carbon::createFromFormat('Y-m-d H:i:s',$downs['reg_date']));
       $downs['average'] = round($downs['total_c']/$downs['time']);
 
       $data['downData'] = $downs;
+
+      //이용 통계
+      $uses = AppsStat::where('app_id','=',$data['appData']->app_id)->first(['total_c','today_c','yesterday_c','max_c','reg_date','launch_date']);
+      $uses->toArray();
+
+      $uses['time'] = $now->diffInDays(Carbon::createFromFormat('Y-m-d H:i:s',$uses['reg_date']));
+      $uses['average'] = round($uses['total_c']/$uses['time']);
+
+      $data['useData'] = $uses;
+
+      //매출 통계
+      $sales = AppsSaleStat::where('app_id','=',$data['appData']->app_id)->first(['total_c','today_c','yesterday_c','max_c','total_m','today_m','yesterday_m','max_m','max_c_date','reg_date','launch_date']);
+      if($sales == null) $sales = [];
+      else {
+          $sales->toArray();
+
+          $sales['time'] = $now->diffInDays(Carbon::createFromFormat('Y-m-d H:i:s',$sales['reg_date']));
+          $sales['average_c'] = round($sales['total_c']/$uses['time']);
+          $sales['average_m'] = round($sales['total_m']/$uses['time']);
+      }
+
+      $data['saleData'] = $sales;
 
       return view('appsdetail')->with($data);
     }

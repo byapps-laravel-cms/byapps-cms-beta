@@ -162,5 +162,6 @@ Route::group(['middleware' => ['auth']], function() {
   Route::post('/commentSend','Comment@send')->name('comment.send');
 
   //관리자 관리
-  Route::post('/adminedit/{idx}','Admin@update')->name('adminupdate');
+  Route::get('/admindetail/{idx}','Admin@detail')->name('admindetail');
+  Route::post('/admindetail/{idx}','Admin@update')->name('adminupdate');
 });

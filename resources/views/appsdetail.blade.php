@@ -203,12 +203,12 @@
                             <label class="col-md-2 col-form-label">앱이용통계</label>
                             <div class="col-md-8 col-xs-9">
                                 <p class="form-control-static mt-1 mb-1">
-                                    전체: {{ $downData['total_c'] }} /
-                                    오늘: {{ $downData['today_c'] }} /
-                                    어제: {{ $downData['yesterday_c'] }} /
-                                    평균: {{ $downData['average'] }} /
-                                    최고: {{ $downData['max_c'] }} /
-                                    기간: {{ $downData['time'] }} ({{ $downData['launch_date'] }}~{{ date('Y/m/d') }})
+                                    전체: {{ number_format($useData['total_c']) }} /
+                                    오늘: {{ number_format($useData['today_c']) }} /
+                                    어제: {{ number_format($useData['yesterday_c']) }} /
+                                    평균: {{ number_format($useData['average']) }} /
+                                    최고: {{ number_format($useData['max_c']) }} /
+                                    기간: {{ number_format($useData['time']) }} ({{ $useData['launch_date'] }}~{{ date('Y/m/d') }})
                                     <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button">주간통계재발송</button>
                                 </p>
                             </div>
@@ -218,12 +218,18 @@
                             <label class="col-md-2 col-form-label">앱매출통계</label>
                             <div class="col-md-8 col-xs-9">
                                 <p class="form-control-static mt-1 mb-1">
-                                    전체: 0(0) /
-                                    오늘: 0(0) /
-                                    어제: 0(0) /
-                                    평균: 0(0) /
-                                    최고: 0(0) /
-                                    기간: 192 (2019-05-14~2019/11/22)
+                                    전체: {{ number_format($saleData['total_m'])?:0 }}
+                                          ({{ number_format($saleData['total_c'])?:0 }}) /
+                                    오늘: {{ number_format($saleData['today_m'])?:0 }}
+                                          ({{ number_format($saleData['today_c'])?:0 }}) /
+                                    어제: {{ number_format($saleData['yesterday_m'])?:0 }}
+                                          ({{ number_format($saleData['yesterday_c'])?:0 }}) /
+                                    평균: {{ number_format($saleData['average_m'])?:0 }}
+                                          ({{ number_format($saleData['average_c'])?:0 }}) /
+                                    최고: {{ number_format($saleData['max_m'])?:0 }}
+                                          ({{ number_format($saleData['max_c'])?:0 }}) /
+                                    기간: {{ number_format($saleData['time'])?:0 }}
+                                          ({{ $saleData['launch_date']?:0 }}~{{ date('Y/m/d') }})
                                 </p>
                             </div>
                         </div>
