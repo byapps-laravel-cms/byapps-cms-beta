@@ -20,7 +20,16 @@ class Admin extends Controller
         Data::where('idx','=',$idx)->update(['adminNMNew' => $permission]);
         return request()->ajax() ? response()->json(['success' => true], 200) : '';
     }
+    public function list(){
+        if(!request()->ajax()) return view();
+        
+    }
     public function detail($idx){
+        try {
+            $data['per'] = Data::find($idx,'adminNMNew')->adminNMNew;
+        } catch (\Exception $e) {
+            abort(404);
+        }
         $type1 = [
             'list' => '목록',
             'detail' => '상세',

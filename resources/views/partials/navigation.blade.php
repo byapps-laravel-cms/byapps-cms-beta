@@ -217,12 +217,13 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                <li><a href="#">앱 템플릿</a></li>
-                                <li><a href="#">앱 카테고리</a></li>
-                                <li><a href="#">공지사항</a></li>
-                                <li><a href="#">팝업 관리</a></li>
-                                <li><a href="#">SMS 관리</a></li>
-                                <li><a href="#">CMS 관리</a></li>
+                                    <li><a href="#">앱 템플릿</a></li>
+                                    <li><a href="#">앱 카테고리</a></li>
+                                    <li><a href="#">공지사항</a></li>
+                                    <li><a href="#">팝업 관리</a></li>
+                                    <li><a href="#">SMS 관리</a></li>
+                                    <li><a href="#">CMS 관리</a></li>
+                                    <li><a href="{{ route('adminlist') }}">관리자 관리</a></li>
                                 </ul>
                             </li>
                         </ul>

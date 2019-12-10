@@ -9,10 +9,10 @@
             <select name="{{ $name }}">
                 <option value="nothing">없음</option>
               @foreach($data['permission'] as $key => $val)
-               @if(request()->user()->adminNMNew == 'all')
+               @if($per == 'all')
                 <option value="{{ $key }}" selected>{{ $val }}</option>
                @else
-                <option value="{{ $key }}"{{ strpos(request()->user()->adminNMNew,$name.$key) ? ' selected' : '' }}>{{ $val }}</option>
+                <option value="{{ $key }}"{{ strpos($per,$name.$key) ? ' selected' : '' }}>{{ $val }}</option>
                @endif
               @endforeach
             </select>
