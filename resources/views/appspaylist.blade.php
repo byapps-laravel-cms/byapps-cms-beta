@@ -97,7 +97,7 @@ $(function() {
                 case '기타':
                 $('td:eq(2)', row).html("<btn btn-pink btn-rounded btn-xs'>기타</button>");
                 break;
-            case '신규': 
+            case '신규':
                 $('td:eq(2)', row).html("<button class='btn btn-success btn-rounded btn-xs'>신규</button>");
                 break;
             case '연장':
