@@ -80,34 +80,38 @@ class QnaMemberController extends Controller
     $dom = new \DomDocument();
     $dom->loadHtml($request->add_answer, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
     $images = $dom->getElementsByTagName('img');
+	
+	if($images->length > 0) {
+		foreach($images as $img){
 
-     foreach($images as $img){
+			 $src = $img->getAttribute('src');
+			 // if the img source is 'data-url'
+				 if(preg_match('/data:image/', $src)){
 
-         $src = $img->getAttribute('src');
-         // if the img source is 'data-url'
-             if(preg_match('/data:image/', $src)){
+					 // get the mimetype
+					 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+					 $mimetype = $groups['mime'];
+					 // Generating a random filename
+					 $filename = uniqid();
+					 $filepath = "/storage/qnamember/$filename.$mimetype";
+					 $answer = preg_replace('/data:image.*\"/',$filepath.'"',$request->add_answer);
+					 // @see http://image.intervention.io/api/
+					 $image = Image::make($src)
+					   // resize if required
+					   /* ->resize(300, 200) */
+					   ->encode($mimetype, 100)  // encode file to the specified mimetype
+					   ->save(public_path($filepath));
 
-                 // get the mimetype
-                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
-                 $mimetype = $groups['mime'];
-                 // Generating a random filename
-                 $filename = uniqid();
-                 $filepath = "/storage/qnamember/$filename.$mimetype";
-                 $answer = preg_replace('/data:image.*\"/',$filepath.'"',$request->add_answer);
-                 // @see http://image.intervention.io/api/
-                 $image = Image::make($src)
-                   // resize if required
-                   /* ->resize(300, 200) */
-                   ->encode($mimetype, 100)  // encode file to the specified mimetype
-                   ->save(public_path($filepath));
+					  info($image);
 
-                  info($image);
-
-                 $new_src = asset($filepath);
-                 $img->removeAttribute('src');
-                 $img->setAttribute('src', $new_src);
-             } // <!--endif
-     }
+					 $new_src = asset($filepath);
+					 $img->removeAttribute('src');
+					 $img->setAttribute('src', $new_src);
+				 } // <!--endif
+		 }
+	} else {
+		$answer = $request->add_answer;
+	}
      $detail = $dom->saveHTML();
 
      $qnaMemberData = QnaMember::where('idx', $idx)->first();

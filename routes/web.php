@@ -142,12 +142,10 @@ Route::group(['middleware' => ['auth']], function() {
   //  회원 정보
   Route::view('/userinfolist', 'userinfolist')->name('userinfolist.view');
   Route::get('/userinfolist/data', 'UserInfoController@getUserInfoListData')->name('userinfolist');
-<<<<<<< HEAD
+
   Route::get('/userinfodetail/{idx}', 'UserInfoController@getSingleData')->name('userinfodetail');
   Route::post('/userinfoupdate/{idx}', 'UserInfoController@update')->name('userinfoupdate');
-=======
-  Route::get('/userinfodetail/{idx?}', 'UserInfoController@getSingleData')->name('userinfodetail');
->>>>>>> 8ff7f0237410182b648879fa84f9c3625f5fe2fe
+  //Route::get('/userinfodetail/{idx?}', 'UserInfoController@getSingleData')->name('userinfodetail');
 
   //  회원 문의
   Route::view('/qnamemberlist', 'qnamemberlist')->name('qnamemberlist.view');
@@ -171,15 +169,14 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('/resellerpaymentdetail/{idx}', 'ResellerPaymentController@getSingleData')->name('resellerpaymentdetail');
 
   //댓글
-<<<<<<< HEAD
   Route::post('/comment','CommentController')->name('comment');
   Route::post('/commentSend','CommentController@send')->name('comment.send');
-=======
+  /*
   Route::post('/comment','Comment')->name('comment');
   Route::post('/commentSend','Comment@send')->name('comment.send');
 
   //관리자 관리
   Route::get('/admindetail/{idx}','Admin@detail')->name('admindetail');
   Route::post('/admindetail/{idx}','Admin@update')->name('adminupdate');
->>>>>>> 8ff7f0237410182b648879fa84f9c3625f5fe2fe
+*/
 });
