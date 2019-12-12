@@ -8,6 +8,10 @@ use App\QnaMember;
 use Yajra\Datatables\Datatables;
 use Image;
 
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+
+
 class QnaMemberController extends Controller
 {
   public function getIndex()
@@ -130,7 +134,9 @@ class QnaMemberController extends Controller
     $fileName = "fileName".time().'.'.request()->fileToUpload->getClientOriginalExtension();
 
     $request->fileToUpload->storeAs('public/qnafiles', $fileName);
+    //Storage::put('qnafiles', new File('public/qnafiles'), $fileName);
 
     return $fileName;
   }
+
 }
