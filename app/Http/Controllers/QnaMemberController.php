@@ -62,33 +62,38 @@ class QnaMemberController extends Controller
     $images = $dom->getElementsByTagName('img');
     $answer = '';
 
-     foreach($images as $img){
+    if ($images->length > 0) {
+      foreach($images as $img){
 
-         $src = $img->getAttribute('src');
-         // if the img source is 'data-url'
-             if(preg_match('/data:image/', $src)){
+          $src = $img->getAttribute('src');
+          // if the img source is 'data-url'
+              if(preg_match('/data:image/', $src)){
 
-                 // get the mimetype
-                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
-                 $mimetype = $groups['mime'];
-                 // Generating a random filename
-                 $filename = uniqid();
-                 $filepath = "/storage/qnamember/$filename.$mimetype";
-                 $answer = preg_replace('/data:image.*\"/',$filepath.'"', $request->add_answer);
-                 // @see http://image.intervention.io/api/
-                 $image = Image::make($src)
-                   // resize if required
-                   /* ->resize(300, 200) */
-                   ->encode($mimetype, 100)  // encode file to the specified mimetype
-                   ->save(public_path($filepath));
+                  // get the mimetype
+                  preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                  $mimetype = $groups['mime'];
+                  // Generating a random filename
+                  $filename = uniqid();
+                  $filepath = "/storage/qnamember/$filename.$mimetype";
+                  $answer = preg_replace('/data:image.*\"/',$filepath.'"', $request->add_answer);
+                  // @see http://image.intervention.io/api/
+                  $image = Image::make($src)
+                    // resize if required
+                    /* ->resize(300, 200) */
+                    ->encode($mimetype, 100)  // encode file to the specified mimetype
+                    ->save(public_path($filepath));
 
-                  info($image);
+                   info($image);
 
-                 $new_src = asset($filepath);
-                 $img->removeAttribute('src');
-                 $img->setAttribute('src', $new_src);
-             } // <!--endif
-     }
+                  $new_src = asset($filepath);
+                  $img->removeAttribute('src');
+                  $img->setAttribute('src', $new_src);
+              }
+      }
+    } else {
+      $answer = $request->add_answer;
+    }
+
      $detail = $dom->saveHTML();
 
      $qnaMemberData = QnaMember::where('idx', $idx)->first();
@@ -100,7 +105,7 @@ class QnaMemberController extends Controller
      $answerData->subject = "RE: ".$request->subject;
      $answerData->attach_file = $attachFile;
      //$answerData->content = $request->add_answer;
-     $answerData->content = $detail;
+     $answerData->content = $answer;
      $answerData->reg_time = Carbon::now()->timestamp;
      $qnaMemberData->process = 3;
 
@@ -114,15 +119,17 @@ class QnaMemberController extends Controller
 
   public function uploadFilePost(Request $request)
   {
+    // 파일 있는지 확인하고 없으면 null 반환
     if(!$request->hasFile('fileToUpload')) return null;
 
+    // max:8MB
     $request->validate([
-        'fileToUpload' => 'required|file|max:1024',
+        'fileToUpload' => 'required|file|max:8192',
     ]);
 
     $fileName = "fileName".time().'.'.request()->fileToUpload->getClientOriginalExtension();
 
-    $request->fileToUpload->storeAs('qnafiles', $fileName);
+    $request->fileToUpload->storeAs('public/qnafiles', $fileName);
 
     return $fileName;
   }

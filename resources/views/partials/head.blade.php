@@ -52,6 +52,6 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
     <!-- include summernote-ko-KR -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/lang/summernote-ko-KR.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/lang/summernote-ko-KR.js"></script>
 
 </head>
