@@ -21,8 +21,8 @@ class Admin extends Controller
         return request()->ajax() ? response()->json(['success' => true], 200) : '';
     }
     public function list(){
-        if(!request()->ajax()) return view();
-        
+        if(!request()->ajax()) return view('adminlist');
+
     }
     public function detail($idx){
         try {
