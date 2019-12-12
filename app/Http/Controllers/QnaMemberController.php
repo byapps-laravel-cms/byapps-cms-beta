@@ -114,15 +114,17 @@ class QnaMemberController extends Controller
 
   public function uploadFilePost(Request $request)
   {
+    // 파일 있는지 확인하고 없으면 null 반환
     if(!$request->hasFile('fileToUpload')) return null;
 
+    // max:8MB
     $request->validate([
-        'fileToUpload' => 'required|file|max:1024',
+        'fileToUpload' => 'required|file|max:8192',
     ]);
 
     $fileName = "fileName".time().'.'.request()->fileToUpload->getClientOriginalExtension();
 
-    $request->fileToUpload->storeAs('qnafiles', $fileName);
+    $request->fileToUpload->storeAs('public/qnafiles', $fileName);
 
     return $fileName;
   }
