@@ -30,7 +30,7 @@ function getMemData(memId){
 
             $('body').append(
                 `<div id="shadow" onclick="closeMemData(this)" style="position:fixed;width:100%;height:100%;z-index:9990;background:#fff;opacity:.3;top:0"></div>
-                <div id="mem-data" class="ui-widget-content" style="position:fixed;width:1000px;height:300px;z-index:9991;border-radius:15px;opacity:1;box-shadow: 5px 5px 15px #000;">
+                <div id="mem-data" class="ui-widget-content" style="position:fixed;width:1000px;height:300px;z-index:9991;border-radius:15px;opacity:1;box-shadow: 5px 5px 15px #000;" >
                     <div class="popHeader" style="height:50px;line-height: 50px; font-size: 18px;font-weight: bold; border-bottom: 1px solid #ccc;">
                         <span>회원정보</span>
                         <span style="float:right;padding-right:1rem;" onclick="closeMemData()">X</span>
@@ -76,8 +76,12 @@ function getMemData(memId){
                 "top": (($(window).height()-$("#mem-data").outerHeight())/2+$(window).scrollTop())/2+"px",
                 "left": (($(window).width()-$("#mem-data").outerWidth())/2+$(window).scrollLeft())+"px"
             });
-            //드래그
-            $("#mem-data").draggable();
+            //draggable
+            $('#mem-data').draggable({
+                 containment: $('#shadow'),
+                 'cancel':'.popSection'
+            });
+            //resize
             $( "#mem-data" ).resizable();
         }
     });

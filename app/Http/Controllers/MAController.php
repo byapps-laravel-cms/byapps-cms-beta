@@ -103,6 +103,8 @@ class MAController extends Controller
     return view('madetail')->with($data);
   }
   public function update($idx){
+    $maData = MAData::find($idx);
+    if(!$maData) abort(404);
     if(request()->has('mode') && request()->input('mode') == 'get_info'){
         $appId = MAData::find($idx,'ma_id')->ma_id;
         $data = AppsData::where('app_id','=',$appId)->first(['app_android_url','app_ios_url','surl']);
@@ -124,7 +126,7 @@ class MAController extends Controller
     if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['start_time']) && $data['start_time'] != '')return validateExit(['col'=>'start_time','message'=>'서비스 시작일이 날짜형식이 아님']);
     if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['end_time']) && $data['end_time'] != '')return validateExit(['col'=>'end_time','message'=>'서비스 시작일이 날짜형식이 아님']);
 
-    MAData::find($idx)->update($data);
+    $maData->update($data);
 
     return request()->ajax() ? response()->json(['success' => 'true',], 200) : $this->getSingleData($idx);
   }

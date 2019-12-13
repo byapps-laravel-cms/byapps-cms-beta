@@ -205,3 +205,14 @@ Breadcrumbs::for('resellerpaymentlist', function ($trail) {
   $trail->parent('resellerlist');
   $trail->push('리셀러 정산', route('resellerpaymentlist.view'));
 });
+
+//관리자
+Breadcrumbs::for('admin', function ($trail) {
+  $trail->push('관리자', route('adminlist'));
+});
+
+//관리자 관리
+Breadcrumbs::for('adminlist', function ($trail) {
+  $trail->parent('admin');
+  $trail->push('관리자 관리', route('adminlist'));
+});
