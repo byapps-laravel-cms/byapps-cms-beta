@@ -8,6 +8,10 @@ use App\QnaMember;
 use Yajra\Datatables\Datatables;
 use Image;
 
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+
+
 class QnaMemberController extends Controller
 {
   public function getIndex()
@@ -55,6 +59,7 @@ class QnaMemberController extends Controller
 
   public function create(Request $request, $idx)
   {
+
      $qnaMemberData = QnaMember::where('idx', $idx)->first();
      $answerData = new QnaMember;
 
@@ -63,15 +68,36 @@ class QnaMemberController extends Controller
      $answerData->mem_name = $request->user()->mem_name;
      $answerData->subject = "RE: ".$request->subject;
      $answerData->content = dataToImage($request->add_answer,'QnaMember');
+     $answerData->attach_file = $attachFile;
+     //$answerData->content = $request->add_answer;
+     $answerData->content = $answer;
      $answerData->reg_time = Carbon::now()->timestamp;
      $qnaMemberData->process = 3;
 
-    //dd($answerData);
-    $answerData->save();
     $qnaMemberData->save();
+    $answerData->save();
 
     toastr()->success('답변 등록완료', '', ['timeOut' => 1000, 'positionClass' => 'toast-center-center']);
 
     return redirect()->back();
   }
+
+  public function uploadFilePost(Request $request)
+  {
+    // 파일 있는지 확인하고 없으면 null 반환
+    if(!$request->hasFile('fileToUpload')) return null;
+
+    // max:8MB
+    $request->validate([
+        'fileToUpload' => 'required|file|max:8192',
+    ]);
+
+    $fileName = "fileName".time().'.'.request()->fileToUpload->getClientOriginalExtension();
+
+    $request->fileToUpload->storeAs('public/qnafiles', $fileName);
+    //Storage::put('qnafiles', new File('public/qnafiles'), $fileName);
+
+    return $fileName;
+  }
+
 }
