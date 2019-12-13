@@ -61,8 +61,7 @@ class UserInfoController extends Controller
   {
     if(request()->ajax()){
         if(!request()->has('mem_id')) abort(400);
-        //['mem_name','phoneno','mem_email','ip']
-        $data = UserInfo::where('mem_id','=',request()->input('mem_id'))->first();
+        $data = UserInfo::where('mem_id','=',request()->input('mem_id'))->first(['mem_job','mem_name','phoneno','mem_email','ip']);
         return $data;
     }
     $userInfoData = UserInfo::find($idx);

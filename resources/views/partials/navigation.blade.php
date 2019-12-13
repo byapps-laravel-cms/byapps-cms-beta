@@ -223,6 +223,7 @@
                                 <li><a href="#">팝업 관리</a></li>
                                 <li><a href="#">SMS 관리</a></li>
                                 <li><a href="#">CMS 관리</a></li>
+                                <li><a href="{{ route('adminlist') }}">관리자 관리</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -236,10 +237,8 @@
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
-                                  @if(config('app.now_page.url') != Cookie::get('refer'))
-                                    <li><a href="{!! config('app.now_page.url') !!}">{{ config('app.now_page.title') }}</a></li>
-                                  @endif
                                   @foreach(array_reverse((array)json_decode(Cookie::get('link_history'))) as $key => $history)
+                                    @continue($history->url == url()->current())
                                     <li><a href="{!! $history->url !!}">{{ $history->title }}</a></li>
                                   @endforeach
                                 </ul>

@@ -1,7 +1,5 @@
 <?php
-
 namespace DaveJamesMiller\Breadcrumbs;
-
 use DaveJamesMiller\Breadcrumbs\Exceptions\DuplicateBreadcrumbException;
 use DaveJamesMiller\Breadcrumbs\Exceptions\InvalidBreadcrumbException;
 use DaveJamesMiller\Breadcrumbs\Exceptions\UnnamedRouteException;
@@ -11,56 +9,46 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Traits\Macroable;
-
 /**
  * The main Breadcrumbs singleton class, responsible for registering, generating and rendering breadcrumbs.
  */
 class BreadcrumbsManager
 {
     use Macroable;
-
     /**
      * @var BreadcrumbsGenerator
      */
     protected $generator;
-
     /**
      * @var Router
      */
     protected $router;
-
     /**
      * @var ViewFactory
      */
     protected $viewFactory;
-
     /**
      * @var array The registered breadcrumb-generating callbacks.
      */
     protected $callbacks = [];
-
     /**
      * @var array Closures to call before generating breadcrumbs for the current page.
      */
     protected $before = [];
-
     /**
      * @var array Closures to call after generating breadcrumbs for the current page.
      */
     protected $after = [];
-
     /**
      * @var array|null The current route name and parameters.
      */
     protected $route;
-
     public function __construct(BreadcrumbsGenerator $generator, Router $router, ViewFactory $viewFactory)
     {
         $this->generator = $generator;
         $this->router = $router;
         $this->viewFactory = $viewFactory;
     }
-
     /**
      * Register a breadcrumb-generating callback for a page.
      *
@@ -76,10 +64,8 @@ class BreadcrumbsManager
         if (isset($this->callbacks[$name])) {
             throw new DuplicateBreadcrumbException($name);
         }
-
         $this->callbacks[$name] = $callback;
     }
-
     /**
      * Register a breadcrumb-generating callback for a page.
      *
@@ -97,7 +83,6 @@ class BreadcrumbsManager
     {
         $this->for($name, $callback);
     }
-
     /**
      * Register a closure to call before generating breadcrumbs for the current page.
      *
@@ -110,7 +95,6 @@ class BreadcrumbsManager
     {
         $this->before[] = $callback;
     }
-
     /**
      * Register a closure to call after generating breadcrumbs for the current page.
      *
@@ -123,7 +107,6 @@ class BreadcrumbsManager
     {
         $this->after[] = $callback;
     }
-
     /**
      * Check if a breadcrumb with the given name exists.
      *
@@ -141,10 +124,8 @@ class BreadcrumbsManager
                 return false;
             }
         }
-
         return isset($this->callbacks[$name]);
     }
-
     /**
      * Generate a set of breadcrumbs for a page.
      *
@@ -159,7 +140,6 @@ class BreadcrumbsManager
     public function generate(string $name = null, ...$params): Collection
     {
         $origName = $name;
-
         // Route-bound breadcrumbs
         if ($name === null) {
             try {
@@ -168,11 +148,9 @@ class BreadcrumbsManager
                 if (config('breadcrumbs.unnamed-route-exception')) {
                     throw $e;
                 }
-
                 return new Collection;
             }
         }
-
         // Generate breadcrumbs
         try {
             return $this->generator->generate($this->callbacks, $this->before, $this->after, $name, $params);
@@ -181,15 +159,12 @@ class BreadcrumbsManager
                 $e->setIsRouteBound();
                 throw $e;
             }
-
             if ($origName !== null && config('breadcrumbs.invalid-named-breadcrumb-exception')) {
                 throw $e;
             }
-
             return new Collection;
         }
     }
-
     /**
      * Render breadcrumbs for a page with the specified view.
      *
@@ -204,14 +179,11 @@ class BreadcrumbsManager
     public function view(string $view, string $name = null, ...$params): HtmlString
     {
         $breadcrumbs = $this->generate($name, ...$params);
-
         $title = $this->generator->getTitle();
-        
-        $html = $this->viewFactory->make($view, compact('breadcrumbs','title'))->render();
 
+        $html = $this->viewFactory->make($view, compact('breadcrumbs','title'))->render();
         return new HtmlString($html);
     }
-
     /**
      * Render breadcrumbs for a page with the default view.
      *
@@ -225,14 +197,11 @@ class BreadcrumbsManager
     public function render(string $name = null, ...$params): HtmlString
     {
         $view = config('breadcrumbs.view');
-
         if (!$view) {
             throw new ViewNotSetException('Breadcrumbs view not specified (check config/breadcrumbs.php)');
         }
-
         return $this->view($view, $name, ...$params);
     }
-
     /**
      * Get the last breadcrumb for the current page.
      *
@@ -246,7 +215,6 @@ class BreadcrumbsManager
     {
         return $this->generate()->where('current', '!==', false)->last();
     }
-
     /**
      * Get the current route name and parameters.
      *
@@ -267,28 +235,21 @@ class BreadcrumbsManager
         if ($this->route) {
             return $this->route;
         }
-
         // Determine the current route
         $route = $this->router->current();
-
         // No current route - must be the 404 page
         if ($route === null) {
             return ['errors.404', []];
         }
-
         // Convert route to name
         $name = $route->getName();
-
         if ($name === null) {
             throw new UnnamedRouteException($route);
         }
-
         // Get the current route parameters
         $params = array_values($route->parameters());
-
         return [$name, $params];
     }
-
     /**
      * Set the current route name and parameters to use when calling render() or generate() with no parameters.
      *
@@ -300,7 +261,6 @@ class BreadcrumbsManager
     {
         $this->route = [$name, $params];
     }
-
     /**
      * Clear the previously set route name and parameters to use when calling render() or generate() with no parameters.
      *

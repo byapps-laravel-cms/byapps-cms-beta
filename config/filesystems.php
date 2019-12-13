@@ -43,9 +43,9 @@ return [
 
     'disks' => [
 
-        'local' => [
+        'QnaMember' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => '/home/stu_pji/data/QnaMember',
         ],
 
         'public' => [
