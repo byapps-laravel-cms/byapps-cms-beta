@@ -10,7 +10,7 @@ function dataToImage($input,$disk){
         $src = $img->getAttribute('src');
         if(preg_match('/data:image/',$src)){
             $ext = explode('.',$img->getAttribute('data-filename'));
-            $filename = 'test'.'.'.end($ext);
+            $filename = time().'_'.mt_rand(1000,9999).'.'.end($ext);
             $result = str_replace($src,"/data?path=" . $filename . "&disk=".$disk,$result);
             $src = preg_replace('/^data:image\/[a-z]{3,4};base64,/', '', $src);
             $src = str_replace(' ', '+', $src);
