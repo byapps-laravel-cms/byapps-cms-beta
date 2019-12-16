@@ -1,10 +1,7 @@
 <?php
-
 namespace DaveJamesMiller\Breadcrumbs;
-
 use DaveJamesMiller\Breadcrumbs\Exceptions\InvalidBreadcrumbException;
 use Illuminate\Support\Collection;
-
 /**
  * Generate a set of breadcrumbs for a page.
  *
@@ -18,12 +15,10 @@ class BreadcrumbsGenerator
      * @var Collection Breadcrumbs currently being generated.
      */
     protected $breadcrumbs;
-
     /**
      * @var array The registered breadcrumb-generating callbacks.
      */
     protected $callbacks = [];
-
     /**
      * Generate breadcrumbs.
      *
@@ -37,22 +32,17 @@ class BreadcrumbsGenerator
      */
     public function generate(array $callbacks, array $before, array $after, string $name, array $params): Collection
     {
-
         $this->breadcrumbs = new Collection;
         $this->callbacks   = $callbacks;
-
         foreach ($before as $callback) {
             $callback($this);
         }
-
         $this->call($name, $params);
-
         foreach ($after as $callback) {
             $callback($this);
         }
         return $this->breadcrumbs;
     }
-
     /**
      * Call the closure to generate breadcrumbs for a page.
      *
@@ -65,10 +55,8 @@ class BreadcrumbsGenerator
         if (! isset($this->callbacks[ $name ])) {
             throw new InvalidBreadcrumbException($name);
         }
-
         $this->callbacks[$name]($this, ...$params);
     }
-
     /**
      * Add breadcrumbs for a parent page.
      *
@@ -82,7 +70,6 @@ class BreadcrumbsGenerator
     {
         $this->call($name, $params);
     }
-
     /**
      * Add a breadcrumb.
      *
@@ -96,7 +83,6 @@ class BreadcrumbsGenerator
      {
          $this->breadcrumbs->push((object) array_merge($data, compact('title', 'url')));
      }
-
      public function title(string $model,string $col): void
      {
          $this->titleQuery = '$temp = '.$model."::find(request()->route()->parameter('idx'),'" . $col . "')->" . $col;

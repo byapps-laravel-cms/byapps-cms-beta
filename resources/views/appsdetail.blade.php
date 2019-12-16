@@ -60,7 +60,7 @@
                             <label class="col-md-2 col-form-label">회원 ID</label>
                             <div class="col-md-10 col-xs-9">
                                 <span class="form-control-static mt-1 mb-1 d-p-inline"> <i class="fa fa-user"></i>&nbsp;&nbsp; {{ $appData->mem_id }} </span>
-                                <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" >회원정보</button>
+                                <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button" onclick="getMemData('{!! $appData->mem_id !!})'">회원정보</button>
                                 <button class="btn btn-info waves-effect btn-xs mr-1" type="button" >Transfer</button>
                             </div>
                         </div>
@@ -111,14 +111,14 @@
                             <div class="col-md-10 col-xs-9 form-inline mt-2">
                                 <div class="checkbox checkbox-success mr-2">
                                     <label>
-                                        <input type="checkbox" value="android"{!! $appData->app_os_type == 'android' || $appData->app_os_type == 'both' ? ' checked' : '' !!}>
+                                        <input type="checkbox" name="app_os_type[]" value="android"{!! $appData->app_os_type == 'android' || $appData->app_os_type == 'both' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                         &nbsp;안드로이드
                                     </label>
                                 </div>
                                 <div class="checkbox checkbox-info mr-2">
                                     <label>
-                                        <input type="checkbox" value="ios"{!! $appData->app_os_type == 'ios' || $appData->app_os_type == 'both' ? ' checked' : '' !!}>
+                                        <input type="checkbox" name="app_os_type[]" value="ios"{!! $appData->app_os_type == 'ios' || $appData->app_os_type == 'both' ? ' checked' : '' !!}>
                                         <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                         &nbsp;아이폰
                                     </label>
@@ -129,14 +129,14 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Byapps ver</label>
                             <div class="col-md-1 col-xs-9">
-                                <input type="text" class="form-control input-sm" value="{!! $appData->byapps_ver !!}" >
+                                <input type="text" name="byapps_ver" class="form-control input-sm" value="{!! $appData->byapps_ver !!}" >
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">업체명</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1"> {{ $appData->member->mem_name }} </p>
+                            <p class="form-control-static mt-1 mb-1"> {{ $appData->member->mem_nick }} </p>
                             </div>
                         </div>
 
@@ -145,11 +145,11 @@
                             <div class="col-md-6 col-xs-9 form-inline">
                                 ver -
                                 <div class="col-md-2 col-xs-9">
-                                    <input type="text" class="form-control input-sm" value="{!! $appData->app_ver !!}" >
+                                    <input type="text" name="app_ver" class="form-control input-sm" value="{!! $appData->app_ver !!}" >
                                 </div>
                                 build -
                                 <div class="col-md-2 col-xs-9">
-                                    <input type="text" class="form-control input-sm" value="{!! $appData->app_build !!}" >
+                                    <input type="text" name="app_build" class="form-control input-sm" value="{!! $appData->app_build !!}" >
                                 </div>
                             </div>
                         </div>
@@ -159,11 +159,11 @@
                             <div class="col-md-6 col-xs-9 form-inline">
                                 ver -
                                 <div class="col-md-2 col-xs-9">
-                                    <input type="text" class="form-control input-sm" value="{!! $appData->app_ver_ios !!}" >
+                                    <input type="text" name="app_ver_ios" class="form-control input-sm" value="{!! $appData->app_ver_ios !!}" >
                                 </div>
                                 build -
                                 <div class="col-md-2 col-xs-9">
-                                    <input type="text" class="form-control input-sm" value="{!! $appData->app_build_ios !!}" >
+                                    <input type="text" name="app_build_ios" class="form-control input-sm" value="{!! $appData->app_build_ios !!}" >
                                 </div>
                             </div>
                         </div>
@@ -203,12 +203,12 @@
                             <label class="col-md-2 col-form-label">앱이용통계</label>
                             <div class="col-md-8 col-xs-9">
                                 <p class="form-control-static mt-1 mb-1">
-                                    전체: {{ $downData['total_c'] }} /
-                                    오늘: {{ $downData['today_c'] }} /
-                                    어제: {{ $downData['yesterday_c'] }} /
-                                    평균: {{ $downData['average'] }} /
-                                    최고: {{ $downData['max_c'] }} /
-                                    기간: {{ $downData['time'] }} ({{ $downData['launch_date'] }}~{{ date('Y/m/d') }})
+                                    전체: {{ number_format($useData['total_c']) }} /
+                                    오늘: {{ number_format($useData['today_c']) }} /
+                                    어제: {{ number_format($useData['yesterday_c']) }} /
+                                    평균: {{ number_format($useData['average']) }} /
+                                    최고: {{ number_format($useData['max_c']) }} /
+                                    기간: {{ number_format($useData['time']) }} ({{ $useData['launch_date'] }}~{{ date('Y/m/d') }})
                                     <button class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" type="button">주간통계재발송</button>
                                 </p>
                             </div>
@@ -218,12 +218,18 @@
                             <label class="col-md-2 col-form-label">앱매출통계</label>
                             <div class="col-md-8 col-xs-9">
                                 <p class="form-control-static mt-1 mb-1">
-                                    전체: 0(0) /
-                                    오늘: 0(0) /
-                                    어제: 0(0) /
-                                    평균: 0(0) /
-                                    최고: 0(0) /
-                                    기간: 192 (2019-05-14~2019/11/22)
+                                    전체: {{ number_format($saleData['total_m'])?:0 }}
+                                          ({{ number_format($saleData['total_c'])?:0 }}) /
+                                    오늘: {{ number_format($saleData['today_m'])?:0 }}
+                                          ({{ number_format($saleData['today_c'])?:0 }}) /
+                                    어제: {{ number_format($saleData['yesterday_m'])?:0 }}
+                                          ({{ number_format($saleData['yesterday_c'])?:0 }}) /
+                                    평균: {{ number_format($saleData['average_m'])?:0 }}
+                                          ({{ number_format($saleData['average_c'])?:0 }}) /
+                                    최고: {{ number_format($saleData['max_m'])?:0 }}
+                                          ({{ number_format($saleData['max_c'])?:0 }}) /
+                                    기간: {{ number_format($saleData['time'])?:0 }}
+                                          ({{ $saleData['launch_date']?:0 }}~{{ date('Y/m/d') }})
                                 </p>
                             </div>
                         </div>
@@ -410,7 +416,7 @@
                                     <span class="input-group-append">
                                         <button type="button" class="btn btn-sm waves-effect waves-light btn-success"><i class="fa fa-android"></i> </button>
                                     </span>
-                                    <input type="text" name="androi_pk" class="form-control input-sm" value="{!! substr($appData->app_android_url,45) !!}">
+                                    <input type="text" name="androi_pk" class="form-control input-sm" value="{!! $appData->packagename !!}">
                                 </div>
                                 <div class="input-group col-md-5 col-xs-9 px-0">
                                     <span class="input-group-append">
@@ -420,7 +426,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Android-Vender</label>
@@ -461,7 +466,7 @@
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Charset</label>
-                            <div class="col-md-10 col-xs-9 form-inline mt-2">
+                            <div class="col-md-10 col-xs-9 form-inline mt-2 no-drag">
                                 <div class="radio radio-success mr-2">
                                     <label>
                                         <input type="radio" name="txtencode" value="utf-8"{!! $appData->txtencode == 'utf-8' ? ' checked' : '' !!}>
@@ -481,7 +486,7 @@
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Hosting Com.</label>
-                            <div class="col-md-10 col-xs-9 form-inline mt-2">
+                            <div class="col-md-10 col-xs-9 form-inline mt-2 no-drag">
                                 <div class="radio radio-primary mr-2">
                                     <label>
                                         <input type="radio" name="host_name" value="cafe24"{!! $appData->host_name == 'cafe24' ? ' checked' : '' !!}>
@@ -520,10 +525,9 @@
                             </div>
                         </div>
 
-
                         <div class="form-group row">
-                            <label class="col-md-2 col-form-label">App OS</label>
-                            <div class="col-md-10 col-xs-9 form-inline mt-2">
+                            <label class="col-md-2 col-form-label">Lang</label>
+                            <div class="col-md-10 col-xs-9 form-inline mt-2 no-drag">
                                 <div class="checkbox checkbox-inverse mr-2">
                                     <label>
                                         <input type="checkbox" name="app_lang[]" value="ko" {!! in_array('ko',$appLang) ? ' checked' : '' !!}>
@@ -571,7 +575,7 @@
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">자동로그인</label>
-                            <div class="col-md-10 col-xs-9 form-inline mt-2">
+                            <div class="col-md-10 col-xs-9 form-inline mt-2 no-drag">
                                 <div class="checkbox checkbox-inverse mr-2">
                                     <label>
                                         <input type="checkbox" value="Y" name="auto_login"{!! $appData->auto_login == 'Y' ? ' checked' : '' !!}>
@@ -584,7 +588,7 @@
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">포인트</label>
-                            <div class="col-md-10 col-xs-9 form-inline mt-2">
+                            <div class="col-md-10 col-xs-9 form-inline mt-2 no-drag">
                                 <div class="checkbox checkbox-inverse mr-2">
                                     <label>
                                         <input type="checkbox" value="Y" name="login_point" {!! $appData->login_point == 'Y' ? ' checked' : '' !!}>
@@ -681,13 +685,11 @@
             height: 300,                 // set editor height
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor
-            focus: true                  // set focus to editable area after initializing summernote
         });
     });
 </script>
 @endsection
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+@section('script')
 <script>
     function modify(obj){
         var request = new FormData(obj);
@@ -699,6 +701,7 @@
             contentType: false,
             processData: false,
             error : function(jqXHR, textStatus, error) {
+                $(`[name=${jqXHR.responseJSON.col}]`).focus();
                 alert(jqXHR.responseJSON.message)
             },
             success : function(data, jqXHR, textStatus) {
@@ -714,3 +717,9 @@
         window.open(url, "_blank");
     }
 </script>
+@endsection
+@section('style')
+    <style>
+        .no-drag {-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;}
+    </style>
+@endsection

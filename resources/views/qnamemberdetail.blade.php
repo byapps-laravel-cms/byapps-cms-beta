@@ -46,6 +46,12 @@
                                 </p>
                               </div>
 
+                              <label class="col-md-2 col-form-label ">문의일시</label>
+                              <div class="col-md-10 col-xs-9">
+                                <p class="form-control-static mt-1 mb-1">{{ date("Y-m-d h:i:s", $qnaMemberData->reg_time) }}
+                                </p>
+                              </div>
+
                               <label class="col-md-2 col-form-label ">이메일</label>
                               <div class="col-md-10 col-xs-9">
                                 <p class="form-control-static mt-1 mb-1">{{ $qnaMemberData->email }}</p>
@@ -73,7 +79,7 @@
                                   <div class="card card-border">
                                       <div class="card-header border-primary pb-1">
                                           <h4 class="card-title text-primary mb-1">{{ $qnaMemberData->subject }}</h4>
-                                          <h4 class="card-title text-primary mb-1 float-right">{{ date("Y-m-d h:i:s", $qnaMemberData->reg_time) }}</h4>
+                                          <!-- <h4 class="card-title text-primary mb-1 float-right">{{ date("Y-m-d h:i:s", $qnaMemberData->reg_time) }}</h4> -->
                                       </div>
                                       <div class="card-body">
                                           <p class="mb-0">{!! $qnaMemberData->content !!}</p>
@@ -108,7 +114,7 @@
 
                             <p class="form-control-static mt-1 mb-1">
                               @if ($reply->attach_file)
-                                <a href="" target="_blank">{{ $reply->attach_file }}</a>
+                                <a href="{{ Storage::url('qnafiles/'.$reply->attach_file) }}" download>{{ $reply->attach_file }}</a>
                               @else
                               <p>없음</p>
                               @endif
@@ -177,18 +183,31 @@ function answer() {
   var div = document.createElement('div');
 
   div.className = 'row';
-  div.innerHTML = '<!-- form start -->\
-                {!! Form::open([ 'route' => ['qnamembercreate', $qnaMemberData->idx] ])!!}\
+  div.innerHTML = '<!-- file form start -->\
+                <!-- file form end -->\
+                <!-- text form start -->\
+                {!! Form::open([ 'route' => ['qnamembercreate', $qnaMemberData->idx], 'method' => 'post', 'files' => true, 'accept-charset' => 'utf-8' ])!!}\
                 <div class="col-md-12 col-xs-12">\
                       <div class="card-body">\
                           <input type="hidden" name="subject" value="{{ $qnaMemberData->subject }}">\
                           <textarea id="answer_content" class="mb-0" rows="20" style="width:100%;" name="add_answer"></textarea>\
-                            <button type="button" class="btn btn-danger btn-sm float-right ml-1 mt-1" onclick="history.back()">취소</button>\
-                          <button type="submit" class="btn btn-success btn-sm float-right mt-1" >등록</button>\
+                          <div class="form-group">\
+                            <input name="fileToUpload" type="file" class="filestyle" data-input="false" id="filestyle-1" tabindex="-1" style="display: none;">\
+                            <div class="bootstrap-filestyle input-group">\
+                              <div style="position: absolute; width: 100%; height: 35.375px; z-index: -1;"></div>\
+                              <span class="group-span-filestyle " tabindex="0">\
+                                <label for="filestyle-1" style="margin-bottom: 0;" class="btn btn-secondary btn-sm fload-right">\
+                                  <span class="buttonText">첨부파일</span>\
+                                </label>\
+                              </span>\
+                            </div>\
+                          </div>\
+                          <button type="button" class="btn btn-danger btn-sm float-right ml-1 mt-1" onclick="history.back()">취소</button>\
+                          <button type="submit" class="btn btn-success btn-sm float-right mt-1">등록</button>\
                       </div>\
                   </div>\
                   {!! Form::close() !!}\
-                  <!-- form end -->';
+                  <!-- text form end -->';
 
   document.getElementById('replyData').appendChild(div);
   document.getElementById('answer').remove();
@@ -197,6 +216,9 @@ function answer() {
       // placeholder: {!! json_encode($qnaMemberData->content) !!},
       tabsize: 2,
       height: 200,
+      lang: 'ko-KR',
+      fontNames: ['Gulim',  'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
+      fontNamesIgnoreCheck: ['Gulim'],
   });
 }
 </script>

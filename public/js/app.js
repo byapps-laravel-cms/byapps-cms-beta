@@ -2416,10 +2416,10 @@ function showSalesChart(data) {
       columns: data.bar,
       type: "bar",
       colors: {
-        "전체": "#97215c",
-        "신규": "#fca1b0",
-        "연장": "#f9637c",
-        "기타": "#d7215c"
+        "전체": "#f5707a",
+        "신규": "#188ae2",
+        "연장": "#4bd396",
+        "기타": "#f9c851"
       },
       labels: {
         centered: true,
@@ -2450,10 +2450,10 @@ function showSalesLineChart(data) {
       x: "x",
       columns: data.line,
       colors: {
-        "전체": "#97215c",
-        "신규": "#fca1b0",
-        "연장": "#f9637c",
-        "기타": "#d7215c"
+        "전체": "#f5707a",
+        "신규": "#188ae2",
+        "연장": "#4bd396",
+        "기타": "#f9c851"
       },
       labels: {
         centered: true,

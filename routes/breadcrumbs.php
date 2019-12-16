@@ -118,6 +118,13 @@ Breadcrumbs::for('malist', function ($trail) {
   $trail->push('MA 이용 업체', route('malist.view'));
 });
 
+// MA 상세
+Breadcrumbs::for('madetail', function ($trail) {
+  $trail->parent('malist');
+  $trail->title('\App\MaData','app_name');
+  $trail->push('MA 상세','');
+});
+
 // 통계
 Breadcrumbs::for('statlist', function ($trail) {
   $trail->push('통계', route('appsdownstatlist.view'));
@@ -197,4 +204,15 @@ Breadcrumbs::for('resellerinfolist', function ($trail) {
 Breadcrumbs::for('resellerpaymentlist', function ($trail) {
   $trail->parent('resellerlist');
   $trail->push('리셀러 정산', route('resellerpaymentlist.view'));
+});
+
+//관리자
+Breadcrumbs::for('admin', function ($trail) {
+  $trail->push('관리자', route('adminlist'));
+});
+
+//관리자 관리
+Breadcrumbs::for('adminlist', function ($trail) {
+  $trail->parent('admin');
+  $trail->push('관리자 관리', route('adminlist'));
 });

@@ -45,7 +45,7 @@
                     $(this).find('input[name=message]').val('')
                     $.ajax({
                         async: false,
-                        url: '{{ Route("comment.send") }}',
+                        url: '{{ Route("commentsend") }}',
                         type: 'POST',
                         data: {
                             pidx: {{ request()->route()->parameter('idx') }},
