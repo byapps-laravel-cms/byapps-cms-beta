@@ -189,6 +189,12 @@ Breadcrumbs::for('qnanonmemberlist', function ($trail) {
   $trail->push('비고객 문의', route('qnanonmemberlist.view'));
 });
 
+// 비고객 문의 상세
+Breadcrumbs::for('qnanonmemberdetail', function ($trail) {
+  $trail->parent('qnanonmemberlist');
+  $trail->push('비고객 문의 상세', route('userinfolist'));
+});
+
 // 리셀러 관리
 Breadcrumbs::for('resellerlist', function ($trail) {
   $trail->push('리셀러 관리', route('resellerinfolist.view'));
