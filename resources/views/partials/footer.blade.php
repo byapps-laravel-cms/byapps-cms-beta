@@ -221,6 +221,10 @@ $(document).ready(function() {
 <script src="{{ asset('assets/codefox/plugins/waypoints/jquery.waypoints.min.js') }}"></script>
 <script src="{{ asset('assets/codefox/plugins/counterup/jquery.counterup.min.js') }}"></script>
 
+<!-- color picker js  -->
+<script src="{{ asset('assets/codefox/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+<script src="{{ asset('assets/codefox/plugins/clockpicker/js/bootstrap-clockpicker.min.js') }}"></script>
+
 <!-- Dashboard init -->
 <script src="{{ asset('assets/codefox/js/jquery.dashboard.js') }}"></script>
 
@@ -263,5 +267,7 @@ $(document).ready(function() {
 <script src="{{ asset('assets/javascript/datatables/dataTables.fixedHeader.min.js') }}"></script>
 <script src="{{ asset('assets/javascript/datatables/dataTables.responsive.min.js') }}"></script>
 <!-- For Datatable 끝 -->
+
+
 
 @stack('scripts')
