@@ -46,7 +46,14 @@ return [
         'QnaMember' => [
             'driver' => 'local',
             'root' => '/home/stu_pji/data/QnaMember',
+            'url' => env('APP_URL').'/storage',
         ],
+
+        // 'local' => [
+        //     'driver' => 'local',
+        //     'url' => env('APP_URL').'/storage',
+        //     'root' => '/home/stu_pji/data/QnaMember',
+        // ],
 
         'public' => [
             'driver' => 'local',
