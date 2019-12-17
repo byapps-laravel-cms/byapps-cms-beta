@@ -37,3 +37,9 @@ function get_string_between($string, $start, $end){
     $len = strpos($string, $end, $ini) - $ini;
     return substr($string, $ini, $len);
 }
+function getUserData($memId){
+    return App\UserInfo::where('mem_id','=',$memId)->first();
+}
+function getResellerInfo($memId){
+    return App\ResellerInfo::where('mem_id','=',$memId)->first();
+}
