@@ -7,6 +7,7 @@ Route::get('/test/{idx?}',function($idx = 19){
    \Illuminate\Support\Facades\Auth::guard('web')->loginUsingId($idx);
    return '<script>location=`/`</script>';
 });
+
 // 세션정보 확인용
 Route::get('/session',function(){
     dd(session()->all());
@@ -17,6 +18,7 @@ Route::get('/layout', 'HomeController@onLayoutChange');
 Route::any('/search', 'HomeController@search')->name('search');
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
+
 // 차트 데이터
 Route::post('/chart', 'ChartController@index');
 Route::post('/chart/entire_chart', 'ChartController@onGetEntireChartData');
@@ -24,14 +26,17 @@ Route::post('/chart/app_term', 'ChartController@onGetAppTermChartData');
 Route::get('/chart/app_total', 'ChartController@onGetAppChartData');
 Route::post('/chart/ma_term', 'ChartController@onGetMaTermChartData');
 Route::get('/chart/ma_total', 'ChartController@onGetMaChartData');
+
 // 매출 차트 데이터
 Route::post('/saleschart', 'SalesChartController@index');
 //Route::post('/saleschart/entire_chart', 'SalesChartController@onGetEntireSalesChartData');
 Route::post('/saleschart/sales_term', 'SalesChartController@onGetSalesTermChartData');
 Route::post('/saleschart/sales_total', 'SalesChartController@onGetSalesChartData');
+
 // 매출 통계표
 Route::post('/sales', 'SalesController@getPlatformData');
 Route::get('/data','File@view');
+
 Route::group(['middleware' => ['auth']], function() {
   // 결제관리
   Route::view('/appspaylist', 'appspaylist')->name('appspaylist.view');
@@ -125,6 +130,8 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/qnanonmemberlist', 'qnanonmemberlist')->name('qnanonmemberlist.view');
   Route::get('/qnanonmemberlist/data', 'QnaNonmemberController@getQnaNonmemberListData')->name('qnanonmemberlist');
   Route::get('/qnanonmemberdetail/{idx}', 'QnaNonmemberController@getSingleData')->name('qnanonmemberdetail');
+  Route::post('/qnanonmemberupdate/{idx}', 'QnaNonmemberController@update')->name('qnanonmemberupdate');
+
   //  리셀러 정보
   Route::view('/resellerinfolist', 'resellerinfolist')->name('resellerinfolist.view');
   Route::get('/resellerinfolist/data', 'ResellerInfoController@getResellerInfoListData')->name('resellerinfolist');

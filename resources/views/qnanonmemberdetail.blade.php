@@ -35,8 +35,11 @@
                     </div>
                     @endif
 
-                    <div class="row" id="qnaMemberData">
+                    <div class="row" id="qnaNonmemberData">
                       <div class="col-md-12 col-xs-12 px-4">
+
+                        <!-- form start -->
+                        {!! Form::open([ 'route' => ['qnanonmemberupdate', $qnaNonmemberData->idx] ]) !!}
 
                           <div class="form-group row">
                               <label class="col-md-2 col-form-label ">접수자</label>
@@ -84,37 +87,47 @@
                               <label class="col-md-2 col-form-label ">문의내용</label>
                               <div class="col-md-10 col-xs-9">
                                   <div class="card card-border">
-                                      <div class="card-header border-primary pb-1">
-
-                                      <div class="card-body">
-                                          <p class="mb-0">{!! $qnaNonmemberData->comment !!}</p>
-                                      </div>
+                                      <!-- <div class="card-header border-primary pb-1"> -->
+                                        <div class="card-body">
+                                            <p class="mb-0">{!! $qnaNonmemberData->comment !!}</p>
+                                        </div>
+                                      <!-- </div> -->
                                   </div>
                               </div>
-                          </div>
 
-                      </div>
+                            </div>
 
-                    </div><!--row end-->
+                            @if ($qnaNonmemberData->process != 2)
+                            <div class="form-group row" id="answer">
+                                <div class="col-md-10 col-xs-9 offset-md-2">
+                                    <button type="submit" class="btn btn-info btn-sm float-right">상담완료</button>
+                                </div>
+                            </div>
+                            @endif
 
+                          {!! Form::close() !!}
+                          <!-- form end -->
 
-            </div>
-                <!-- row end -->
-        </div>
-        <!-- cardbody end -->
-    </div>
-    <!-- card end -->
+                          </div><!-- col12 end-->
+                      </div><!--row end-->
+
+            </div><!--col-sm-12 end-->
+          </div><!-- row end -->
+
+        </div><!-- cardbody end -->
+
+      </div>
+      <!-- card end -->
     </div>
     <!-- col-12 end -->
-</div>
-<!-- row end -->
+  </div>
+  <!-- row end -->
 </div>
 <!-- container-fluid end -->
 
 @toastr_css
 @toastr_js
 @toastr_render
-
 
 <script>
 

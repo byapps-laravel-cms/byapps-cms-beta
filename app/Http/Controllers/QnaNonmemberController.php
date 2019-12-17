@@ -43,4 +43,16 @@ class QnaNonmemberController extends Controller
 
     return view('qnanonmemberdetail')->with('qnaNonmemberData', $qnaNonmemberData);
   }
+
+  public function update($idx)
+  {
+    $qnaNonmemberData = QnaNonmember::where('idx', $idx)->first();
+
+    $qnaNonmemberData->process = '2';
+    $qnaNonmemberData->save();
+
+    toastr()->success('상담완료 처리', '', ['timeOut' => 1000, 'positionClass' => 'toast-center-center']);
+
+    return redirect()->back();
+  }
 }
