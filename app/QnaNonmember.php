@@ -8,6 +8,8 @@ class QnaNonmember extends Model
 {
   protected $connection = 'byapps';
   protected $table = 'BYAPPS_cs_qna';
+  protected $primaryKey = 'idx';
+  public $timestamps = false;
 
   public static function getQnaNonmemberData()
   {
