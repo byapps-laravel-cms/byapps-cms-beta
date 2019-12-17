@@ -64,7 +64,7 @@ class UserInfoController extends Controller
 
     $recom_id = UserInfo::where('idx', $idx)->select('recom_id')->get();
     $recom_id = $recom_id[0]['recom_id'];
-    $resellerData = ResellerInfo::where('mem_id', $recom_id)->first();
+    $resellerData = ResellerInfo::where('mem_id','=', $recom_id)->first();
 
     return view('userinfodetail')->with('userInfoData', $userInfoData)
                                  ->with('resellerData', $resellerData);

@@ -84,7 +84,7 @@ class AppsListController extends Controller
       }
 
       $data['saleData'] = $sales;
-
+      $data['mem_id'] = $data['appData']->mem_id;
       return view('appsdetail')->with($data);
     }
 

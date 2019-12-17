@@ -23,7 +23,7 @@
 
       </div>
 
-      @unless (Route::getCurrentRoute()->uri() == '/')
+      @unless (Request::route()->getName() == 'home')
       <div id="sidebar-toggle">
         <span><i class="mdi mdi-comment-processing-outline"></i></span>
           <p>OPEN</p>

@@ -239,7 +239,7 @@ $(document).ready(function() {
 <script src="{{ asset('assets/javascript/temp.js?v1') }}"></script>
 
 
-@if (Route::getCurrentRoute()->uri() == '/')
+@if (Request::route()->getName() == 'home')
 <!-- <script src="{{ asset('assets/javascript/chart.js') }}"></script> -->
 <script src="{{ asset('assets/javascript/drag.js') }}"></script>
 @else
