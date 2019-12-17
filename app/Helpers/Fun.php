@@ -37,3 +37,7 @@ function get_string_between($string, $start, $end){
     $len = strpos($string, $end, $ini) - $ini;
     return substr($string, $ini, $len);
 }
+function getUserData($memId){
+    $data = UserInfo::where('mem_id','=',$memId)->first(['mem_job','mem_name','phoneno','mem_email','ip']);
+    return $data;
+}

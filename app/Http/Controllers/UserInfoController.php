@@ -57,13 +57,8 @@ class UserInfoController extends Controller
             ->make(true);
   }
 
-  public function getSingleData($idx = -1)
+  public function getSingleData($idx)
   {
-    if(request()->ajax()){
-        if(!request()->has('mem_id')) abort(400);
-        $data = UserInfo::where('mem_id','=',request()->input('mem_id'))->first(['mem_job','mem_name','phoneno','mem_email','ip']);
-        return $data;
-    }
     $userInfoData = UserInfo::find($idx);
     if($userInfoData == null)abort(404);
 

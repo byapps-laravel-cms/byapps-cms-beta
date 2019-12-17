@@ -218,18 +218,20 @@
                             <label class="col-md-2 col-form-label">앱매출통계</label>
                             <div class="col-md-8 col-xs-9">
                                 <p class="form-control-static mt-1 mb-1">
-                                    전체: {{ $saleData != null ? number_format($saleData['total_m']):0 }}
-                                          ({{ $saleData != null ? number_format($saleData['total_c']):0 }}) /
-                                    오늘: {{ $saleData != null ? number_format($saleData['today_m']):0 }}
-                                          ({{ $saleData != null ? number_format($saleData['today_c']):0 }}) /
-                                    어제: {{ $saleData != null ? number_format($saleData['yesterday_m']):0 }}
-                                          ({{ $saleData != null ? number_format($saleData['yesterday_c']):0 }}) /
-                                    평균: {{ $saleData != null ? number_format($saleData['average_m']):0 }}
-                                          ({{ $saleData != null ? number_format($saleData['average_c']):0 }}) /
-                                    최고: {{ $saleData != null ? number_format($saleData['max_m']):0 }}
-                                          ({{ $saleData != null ? number_format($saleData['max_c']):0 }}) /
-                                    기간: {{ $saleData != null ? number_format($saleData['time']):0 }}
-                                          ({{ $saleData != null ? $saleData['launch_date']:0 }}~{{ date('Y/m/d') }})
+                                  @if($saleData != null)
+                                    전체: {{ number_format($saleData['total_m']) }}
+                                          ({{ number_format($saleData['total_c']) }}) /
+                                    오늘: {{ number_format($saleData['today_m']) }}
+                                          ({{ number_format($saleData['today_c']) }}) /
+                                    어제: {{ number_format($saleData['yesterday_m']) }}
+                                          ({{ number_format($saleData['yesterday_c']) }}) /
+                                    평균: {{ number_format($saleData['average_m']) }}
+                                          ({{ number_format($saleData['average_c']) }}) /
+                                    최고: {{ number_format($saleData['max_m']) }}
+                                         ({{ number_format($saleData['max_c']) }}) /
+                                    기간: {{ number_format($saleData['time']) }}
+                                            ({{ $saleData['launch_date'] }}~{{ date('Y/m/d') }})
+                                  @endif
                                 </p>
                             </div>
                         </div>
