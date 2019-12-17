@@ -114,7 +114,7 @@
 
                             <p class="form-control-static mt-1 mb-1">
                               @if ($reply->attach_file)
-                                <a href="{{ Storage::disk('QnaMember')->url('qnafiles/'.$reply->attach_file) }}" download>{{ $reply->attach_file }}</a>
+                                <a href="/data?path={{ $reply->attach_file }}&disk=QnaMember" download="{{ $reply->attach_file }}">{{ $reply->attach_file }}</a>
                               @else
                               <p>없음</p>
                               @endif
