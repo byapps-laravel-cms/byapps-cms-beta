@@ -60,7 +60,7 @@ class QnaMemberController extends Controller
   public function create(Request $request, $idx)
   {
 
-     $qnaMemberData = QnaMember::where('idx', $idx)->first();
+     $qnaMemberData = QnaMember::find($idx)->first();
      $answerData = new QnaMember;
 
      $answerData->pid = $idx;
@@ -68,9 +68,9 @@ class QnaMemberController extends Controller
      $answerData->mem_name = $request->user()->mem_name;
      $answerData->subject = "RE: ".$request->subject;
      $answerData->content = dataToImage($request->add_answer,'QnaMember');
-     $answerData->attach_file = $attachFile;
+     $answerData->attach_file = $this->uploadFilePost();
      //$answerData->content = $request->add_answer;
-     $answerData->content = $answer;
+     // $answerData->content = $answer;
      $answerData->reg_time = Carbon::now()->timestamp;
      $qnaMemberData->process = 3;
 
@@ -82,8 +82,9 @@ class QnaMemberController extends Controller
     return redirect()->back();
   }
 
-  public function uploadFilePost(Request $request)
+  public function uploadFilePost()
   {
+    $request = request();
     // 파일 있는지 확인하고 없으면 null 반환
     if(!$request->hasFile('fileToUpload')) return null;
 
@@ -94,8 +95,8 @@ class QnaMemberController extends Controller
 
     $fileName = "fileName".time().'.'.request()->fileToUpload->getClientOriginalExtension();
 
-    $request->fileToUpload->storeAs('public/qnafiles', $fileName);
-    //Storage::put('qnafiles', new File('public/qnafiles'), $fileName);
+    // $request->fileToUpload->storeAs('public/qnafiles', $fileName);
+    Storage::disk('QnaMember')->put($fileName,file_get_contents($request->file('fileToUpload')));
 
     return $fileName;
   }

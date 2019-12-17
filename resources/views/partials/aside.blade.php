@@ -80,6 +80,7 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-comment-tab" data-toggle="tab" href="#nav-comment" role="tab" aria-controls="nav-comment" aria-selected="true">댓글</a>
                             <?= $tablist ?>
+                            <a class="nav-item nav-link" id="nav-cc-tab" data-toggle="tab" href="#nav-cc" role="tab" aria-controls="nav-comment" aria-selected="true">cc</a>
                         </div>
                     </nav>
                     <div class="tab-content">
@@ -290,6 +291,9 @@
                                             </div>
 
                                     </div><!-- //card body -->
+                            </div>
+                            <div class="tab-pane px-3 active" id="nav-cc" role="tabpanel" aria-labelledby="nav-cc-tab">
+
                             </div>
                     </div>
 

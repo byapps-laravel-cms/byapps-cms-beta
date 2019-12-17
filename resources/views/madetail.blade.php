@@ -137,7 +137,7 @@
                                 <label class="col-md-2 col-form-label">홈페이지 URL</label>
                                 <div class="col-md-8 col-xs-9">
                                     <div class="input-group">
-                                        <input type="text" name="app_android_url" class="form-control input-sm" value="{!! $maData->home_url !!}">
+                                        <input type="text" name="home_url" class="form-control input-sm" value="{!! $maData->home_url !!}">
                                         <span class="input-group-append">
                                             <button type="button" class="btn btn-sm waves-effect waves-light btn-inverse" onclick="goLink(this)">홈페이지 이동</button>
                                         </span>
@@ -417,7 +417,7 @@ barsQ('appi','${$('[name=pn]').val()}|${$('[name=aid]').val()}|${$('[name=schm]'
     }
     function getInfo(memId){
         var request = {
-            mode : memId
+            mode : 'get_info'
         }
         $.ajax({
             url : location.href,

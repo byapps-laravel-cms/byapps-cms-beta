@@ -113,7 +113,7 @@ class MAController extends Controller
         if($data->app_ios_url)
             $result['aid'] = get_string_between($data->app_ios_url,'/id','?');
         if($data->surl)
-            $result['surl'] = $data->surl;
+            $result['home_url'] = $data->surl;
         return $result;
     }
     $data = request()->only(['app_process','ma_ver','auto_push','service_ma','service_type','start_time','end_time','start_time','pn','aid','schm','push_center','txtencode','host_name','app_lang','opt_sst','vip_check','info']);
