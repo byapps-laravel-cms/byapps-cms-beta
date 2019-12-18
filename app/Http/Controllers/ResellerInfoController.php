@@ -26,10 +26,16 @@ class ResellerInfoController extends Controller
                                               'reg_date'
                                               );
 
+    $reseller_memlv = array("미승인", "승인");
+
     return Datatables::of($resellerInfoListData)
             ->setRowId(function($resellerInfoListData) {
                 return $resellerInfoListData->idx;
             })
+            ->editColumn('mem_lv', function($eloquent) use ($reseller_memlv) {
+                return $reseller_memlv[$eloquent->mem_lv];
+            })
+            ->editColumn('reg_date', '{{ date("Y-m-d", strtotime($reg_date)) }}')
             ->orderColumn('reg_date', 'reg_date $1')
             ->make(true);
     }
