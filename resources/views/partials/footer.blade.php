@@ -181,9 +181,7 @@ function stat_tableDateTerm(term) {
 <script>
 $(document).ready(function() {
   var $sidebar = $("#sidebar");
-  readCookie('sidebar') == 'open' ? sidebarOpen() : $sidebar.hide();
-
-  console.log(readCookie('sidebar') );
+  // readCookie('sidebar') == 'open' ? sidebarOpen() : $sidebar.hide();
 
   function readCookie(name) {
       var nameEQ = name + "=";
