@@ -136,6 +136,8 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/resellerinfolist', 'resellerinfolist')->name('resellerinfolist.view');
   Route::get('/resellerinfolist/data', 'ResellerInfoController@getResellerInfoListData')->name('resellerinfolist');
   Route::get('/resellerinfodetail/{idx}', 'ResellerInfoController@getSingleData')->name('resellerinfodetail');
+  Route::post('/resellerinfoupdate/{idx}', 'ResellerInfoController@update')->name('resellerinfoupdate');
+
   //  리셀러 정산
   Route::view('/resellerpaymentlist', 'resellerpaymentlist')->name('resellerpaymentlist.view');
   Route::get('/resellerpaymentlist/data', 'ResellerPaymentController@getResellerPaymentListData')->name('resellerpaymentlist');

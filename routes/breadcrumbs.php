@@ -206,6 +206,12 @@ Breadcrumbs::for('resellerinfolist', function ($trail) {
   $trail->push('리셀러 정보', route('resellerinfolist.view'));
 });
 
+// 리셀러 정보 상세
+Breadcrumbs::for('resellerinfodetail', function ($trail) {
+  $trail->parent('resellerinfolist');
+  $trail->push('리셀러 상세', route('resellerinfolist'));
+});
+
 // 리셀러 정산
 Breadcrumbs::for('resellerpaymentlist', function ($trail) {
   $trail->parent('resellerlist');
