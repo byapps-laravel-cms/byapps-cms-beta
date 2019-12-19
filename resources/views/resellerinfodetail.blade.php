@@ -105,7 +105,7 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="email" class="form-control" id="cellno" name="cellno" value="{{ $resellerInfoData->mem_email }}">
+                                      <input type="email" class="form-control" id="mem_email" name="mem_email" value="{{ $resellerInfoData->mem_email }}">
                                     </div>
                                 </div>
                             </div>
@@ -116,9 +116,11 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="text" class="form-control" id="phoneno" name="phoneno" value="{{ $resellerInfoData->phoneno }}">
-                                      <input type="text" class="form-control" id="cellno" name="cellno" value="{{ $resellerInfoData->cellno }}">
+                                    <p class="form-control-static mt-1 mb-1">
+                                      전화 <input type="text" class="form-control" id="phoneno" name="phoneno" value="{{ $resellerInfoData->phoneno }}">
+                                      휴대폰 <input type="text" class="form-control" id="cellno" name="cellno" value="{{ $resellerInfoData->cellno }}">
                                       <input class="btn btn-info waves-effect btn-xs ml-1" type="button" value="SMS 보내기">
+                                     <p>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +154,9 @@
                                 <div class="form-inline">
                                     <p class="input-group">
                                         <p class="form-control-static mt-1 mb-1">
-                                            은행<input type="text" class="form-control" id="address" name="address" value="{{ explode('|', $resellerInfoData->company_bank)[0] }}">
+                                            은행 <input type="text" class="form-control" id="company_bank0" name="company_bank0" value="{{ explode('|', $resellerInfoData->company_bank)[0] }}">
+                                            계좌번호 <input type="text" class="form-control" id="company_bank1" name="company_bank1" value="{{ explode('|', $resellerInfoData->company_bank)[1] }}">
+                                            예금주 <input type="text" class="form-control" id="company_bank2" name="company_bank2" value="{{ explode('|', $resellerInfoData->company_bank)[2] }}">
                                         </p>
                                     <p>
                                 </div>
@@ -164,7 +168,12 @@
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
                                   <div class="input-group">
-                                      <input type="text" class="form-control" id="returns_percent" name="returns_percent" value="{{ $resellerInfoData->returns_percent }}">%
+                                      <p class="form-control-static mt-1 mb-1">
+                                        <input type="text" class="form-control" id="returns_percent" name="returns_percent" value="{{ $resellerInfoData->returns_percent }}">%
+                                        @if ($resellerInfoData->mem_lv != 1)
+                                          <input class="btn btn-info waves-effect btn-xs ml-1" type="button" value="승인처리">
+                                        @endif
+                                      </p>
                                     </div>
                                 </div>
                             </div>
