@@ -171,7 +171,7 @@
                                       <p class="form-control-static mt-1 mb-1">
                                         <input type="text" class="form-control" id="returns_percent" name="returns_percent" value="{{ $resellerInfoData->returns_percent }}">%
                                         @if ($resellerInfoData->mem_lv != 1)
-                                          <input class="btn btn-info waves-effect btn-xs ml-1" type="button" value="승인처리">
+                                          <input class="btn btn-info waves-effect btn-xs ml-1" type="button" value="승인처리" onclick="updateMemlv()">
                                         @endif
                                       </p>
                                     </div>
@@ -219,6 +219,7 @@
 @toastr_js
 @toastr_render
 
+@push('scripts')
 <script>
 $(document).ready(function() {
 
@@ -244,6 +245,25 @@ function checkRadiobutton() {
 }
 
 });
+
+function updateMemlv(idx) {
+  var idx = {!! json_encode($resellerInfoData->idx) !!};
+
+  $.ajax({
+    async: false,
+    url: '{{ Route("updatememlv") }}',
+    type: 'POST',
+    data: {
+      idx: idx,
+      _token: "{{ csrf_token() }}"
+    },
+    success: function(response) {
+      //console.log(response);
+    },
+  });
+}
+
 </script>
+@endpush
 
 @endsection

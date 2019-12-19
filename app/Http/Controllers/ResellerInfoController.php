@@ -69,4 +69,17 @@ class ResellerInfoController extends Controller
 
     return redirect()->back();
   }
+
+  public function updateMemlv()
+  {
+    $idx = $_POST['idx'];
+    $resellerInfoData = ResellerInfo::where('idx', $idx)->first();
+
+    $resellerInfoData->mem_lv = '1';
+    $resellerInfoData->save();
+
+    toastr()->success('승인처리 되었습니다', '', ['timeOut' => 1000, 'positionClass' => 'toast-center-center']);
+
+    return redirect()->back();
+  }
 }
