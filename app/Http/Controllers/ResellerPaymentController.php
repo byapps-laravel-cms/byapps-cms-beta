@@ -21,6 +21,7 @@ class ResellerPaymentController extends Controller
                                                     'recom_id',
                                                     'app_name',
                                                     'process',
+                                                    'pay_type',
                                                     'term',
                                                     'start_time',
                                                     'amount'
@@ -37,6 +38,13 @@ class ResellerPaymentController extends Controller
             ->editColumn('recom_id', function($eloquent) {
               if ($eloquent->recom_id != 'byapps' && $eloquent->recom_id != '' && $eloquent->recom_id != null)
                 return $eloquent->recom_id;
+            })
+            ->editColumn('pay_type', function($eloquent) {
+              if ($eloquent->pay_type == 1) {
+                return "연장";
+              } else {
+                return "신규";
+              }
             })
             ->editColumn('amount', '{{ number_format($amount)." 원" }}')
             ->editColumn('term', function($eloquent) {
