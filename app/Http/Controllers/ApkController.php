@@ -47,7 +47,7 @@ class ApkController extends Controller
   {
     $apkData = ApkData::where('idx', $idx)->first();
 
-    return view('apkdetail')->with('apkData', $apkData);
+    return view('apkdetail')->with('apkdata', $apkData);
   }
 
 }
