@@ -171,24 +171,28 @@
                             </div> <!-- //#nav-company-info -->
 
                             <div class="tab-pane fade px-3 text-black" id="nav-manager-info" role="tabpanel" aria-labelledby="nav-manager-tab">
-                                <ul id="permission">
-                                @foreach($pageList as $name => $data)
-                                    <li>
-                                        <span>{{ $data['name'] }}</span>
-                                        <select name="{{ $name }}">
-                                            <option value="nothing">없음</option>
-                                        @foreach($data['permission'] as $key => $val)
-                                        @if($per == 'all')
-                                            <option value="{{ $key }}" selected>{{ $val }}</option>
-                                        @else
-                                            <option value="{{ $key }}"{{ strpos($per,$name.$key) ? ' selected' : '' }}>{{ $val }}</option>
-                                        @endif
+                                <div class="row">
+                                    <div class="col-md-12 pl-5">
+                                        <ul id="permission">
+                                        @foreach($pageList as $name => $data)
+                                            <li>
+                                                <span>{{ $data['name'] }}</span>
+                                                <select name="{{ $name }}">
+                                                    <option value="nothing">없음</option>
+                                                @foreach($data['permission'] as $key => $val)
+                                                @if($per == 'all')
+                                                    <option value="{{ $key }}" selected>{{ $val }}</option>
+                                                @else
+                                                    <option value="{{ $key }}"{{ strpos($per,$name.$key) ? ' selected' : '' }}>{{ $val }}</option>
+                                                @endif
+                                                @endforeach
+                                                </select>
+                                            </li>
                                         @endforeach
-                                        </select>
-                                    </li>
-                                @endforeach
-                                </ul>
-                                <input type="button" onclick="send()" value="저장"> 
+                                        </ul>
+                                        <input type="button" onclick="send()" value="저장"> 
+                                    </div>
+                                </div>
                             </div>
 
                         </div><!-- //tab content-->
