@@ -221,6 +221,10 @@ $(document).ready(function() {
 <script src="{{ asset('assets/codefox/plugins/waypoints/jquery.waypoints.min.js') }}"></script>
 <script src="{{ asset('assets/codefox/plugins/counterup/jquery.counterup.min.js') }}"></script>
 
+<!-- file -->
+<script src="{{ asset('assets/codefox/plugins/bootstrap-fileupload/bootstrap-fileupload.js') }}"></script>
+<script src="{{ asset('assets/codefox/plugins/bootstrap-filestyle/js/bootstrap-filestyle.js') }}"></script>
+
 <!-- color picker js  -->
 <script src="{{ asset('assets/codefox/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
 <script src="{{ asset('assets/codefox/plugins/clockpicker/js/bootstrap-clockpicker.min.js') }}"></script>
