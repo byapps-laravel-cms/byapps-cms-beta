@@ -62,8 +62,8 @@ class ResellerPaymentController extends Controller
 
   public function getSingleData($idx)
   {
-    $resellerPaymentData = AppsPaymentData::has('payments')->where('idx', $idx)->first();
+    $resellerPaymentData = AppsPaymentData::has('resellerinfo')->where('idx', $idx)->first();
 
-    return view('resellerpaymentdetail')->with('resellerPaymentData', $resellerPaymentData);
+    return view('resellerpaydetail')->with('resellerPaymentData', $resellerPaymentData);
   }
 }

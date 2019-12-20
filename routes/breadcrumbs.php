@@ -209,13 +209,19 @@ Breadcrumbs::for('resellerinfolist', function ($trail) {
 // 리셀러 정보 상세
 Breadcrumbs::for('resellerinfodetail', function ($trail) {
   $trail->parent('resellerinfolist');
-  $trail->push('리셀러 상세', route('resellerinfolist'));
+  $trail->push('리셀러 정보 상세', route('resellerinfolist'));
 });
 
 // 리셀러 정산
 Breadcrumbs::for('resellerpaymentlist', function ($trail) {
   $trail->parent('resellerlist');
   $trail->push('리셀러 정산', route('resellerpaymentlist.view'));
+});
+
+// 리셀러 정산 상세
+Breadcrumbs::for('resellerpaydetail', function ($trail) {
+  $trail->parent('resellerpaymentlist');
+  $trail->push('리셀러 정산 상세', route('resellerinfolist'));
 });
 
 //관리자
