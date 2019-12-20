@@ -42,7 +42,7 @@ $(function() {
             { data: 'reg_time', name: 'reg_time' },
             { data: 'recom_id', name: 'recom_id' },
             { data: 'app_name', name: 'app_name' },
-            { data: 'process', name: 'process' },
+            { data: 'pay_type', name: 'pay_type' },
             { data: 'term', name: 'term' },
             { data: 'amount', name: 'amount' },
         ],

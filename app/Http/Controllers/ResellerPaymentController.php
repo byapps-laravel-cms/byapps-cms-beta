@@ -21,6 +21,7 @@ class ResellerPaymentController extends Controller
                                                     'recom_id',
                                                     'app_name',
                                                     'process',
+                                                    'pay_type',
                                                     'term',
                                                     'start_time',
                                                     'amount'
@@ -38,6 +39,13 @@ class ResellerPaymentController extends Controller
               if ($eloquent->recom_id != 'byapps' && $eloquent->recom_id != '' && $eloquent->recom_id != null)
                 return $eloquent->recom_id;
             })
+            ->editColumn('pay_type', function($eloquent) {
+              if ($eloquent->pay_type == 1) {
+                return "연장";
+              } else {
+                return "신규";
+              }
+            })
             ->editColumn('amount', '{{ number_format($amount)." 원" }}')
             ->editColumn('term', function($eloquent) {
                if (empty($eloquent->start_time)) {
@@ -54,8 +62,8 @@ class ResellerPaymentController extends Controller
 
   public function getSingleData($idx)
   {
-    $resellerPaymentData = AppsPaymentData::has('payments')->where('idx', $idx)->first();
+    $resellerPaymentData = AppsPaymentData::has('resellerinfo')->where('idx', $idx)->first();
 
-    return view('resellerpaymentdetail')->with('resellerPaymentData', $resellerPaymentData);
+    return view('resellerpaydetail')->with('resellerPaymentData', $resellerPaymentData);
   }
 }

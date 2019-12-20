@@ -31,7 +31,7 @@ class AppsPaymentData extends Model implements Searchable
   {
       parent::__construct(['app_name']);
   }
-  
+
   public function getSearchResult(): SearchResult
   {
     $url = route('appspaydetail', $this->idx);
@@ -44,5 +44,10 @@ class AppsPaymentData extends Model implements Searchable
   public function userinfo()
   {
     return $this->belongsTo('App\UserInfo', 'mem_id');
+  }
+
+  public function resellerinfo()
+  {
+    return $this->belongsTo('App\ResellerInfo', 'recom_id', 'mem_id');
   }
 }

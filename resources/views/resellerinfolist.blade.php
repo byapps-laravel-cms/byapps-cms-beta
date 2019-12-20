@@ -77,6 +77,15 @@ $(function() {
               table = $('#resellerinfolistTable').dataTable();
               window.location.href = "/resellerinfodetail/" + this.id;
             });
+         },
+
+         "rowCallback": function(row, data, index) {
+           var cellValue = data['mem_lv'];
+
+           $('td:eq(2)', row).addClass('align-middle text-center');
+           if (cellValue == "미승인") {
+             $('td:eq(2)', row).html("<button class='btn btn-info btn-rounded btn-xs'>미승인</button>");
+           }
          }
     });
 });
