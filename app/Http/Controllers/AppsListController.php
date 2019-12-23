@@ -131,7 +131,7 @@ class AppsListController extends Controller
            'android_hash' => '',
            'host_id' => '',
            'txtencode' => ['required',Rule::in(['utf-8','euc-kr'])],
-           'host_name' => '',
+           'host_name' => ['required',Rule::in(['cafe24','makeshop','etc','godo','wisa'])],
            'app_lang' => ['required','array'],
            'cscall' => ['required','regex:/^\d{2,3}-\d{3,4}-\d{4}$/'],
            'receipt' => '',
@@ -150,6 +150,7 @@ class AppsListController extends Controller
 
     public function update($idx)
     {
+        if(AppsData::where('idx','=',$idx)->count() == 0) abort(404);
         $data = request()->only(['app_process','service_type','app_os_type','byapps_ver','app_ver','app_build','app_ver_ios','app_build_ios','app_cate','noti_gcm','noti_gcm_num','noti_fcm_num','noti_ios_cerp','ios_cer_exp','ios_dev_exp','push_server','token','start_time','end_time','app_android_url','app_ios_url','surl','vender','hashkey','ioshack','host_id','txtencode','host_name','app_lang','auto_login','login_point','push_point','install_point','point_transfer_btn','cscall','app_intro','developer_info','start_date','end_time']);
         $data['developer_info'] = XSS($data['developer_info']);
 

@@ -711,12 +711,13 @@
                 var errors = jqXHR.responseJSON.errors;
                 var firstError = true;
                 for(key in errors){
+                    var input = $(`[name^=${key}]`);
                     var value = errors[key];
                     if(firstError){
-                        $(`[name=${key}]`).focus();
+                        input.focus();
                         firstError = false;
                     }
-                    $(`[name=${key}]`).addClass('is-invalid');
+                    input.addClass('is-invalid');
                     for(var i = 0 ; i < value.length ; i++){
                         var message = '';
                         var error = value[i];
@@ -728,15 +729,13 @@
                                 message = '시작시간 이후여햐 합니다.';
                                 break;
                             case 'validation.regex':
-                                message = '형식에 맞지 않습니다.';
-                                break;
                             case 'validation.date_format':
                                 message = '형식에 맞지 않습니다.';
                                 break;
                             default:
                                 message = error;
                         }
-                        $(`[name=${key}]`).parent().append(`
+                        input.parent().append(`
                             <span class="invalid-feedback error" role="alert">
                                 <strong>${message}</strong>
                             </span>

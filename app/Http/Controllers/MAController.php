@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+
+use Yajra\Datatables\Datatables;
+
 use App\MAData;
 use App\AppsData;
-use Yajra\Datatables\Datatables;
 
 class MAController extends Controller
 {
@@ -94,40 +98,64 @@ class MAController extends Controller
             ->make(true);
   }
 
-  public function getSingleData($idx)
-  {
-    $data['maData'] = MAData::find($idx);
-    if(!$data['maData']) abort(400);
-    $data['maData']->toArray();
-    $data['appLang'] = explode('|',$data['maData']->app_lang);
-    return view('madetail')->with($data);
-  }
-  public function update($idx){
-    $maData = MAData::find($idx);
-    if(!$maData) abort(404);
-    if(request()->has('mode') && request()->input('mode') == 'get_info'){
-        $appId = MAData::find($idx,'ma_id')->ma_id;
-        $data = AppsData::where('app_id','=',$appId)->first(['app_android_url','app_ios_url','surl']);
-        $result['pn'] = substr($data['app_android_url'],45);
-        $result['schm'] = $appId;
-        if($data->app_ios_url)
-            $result['aid'] = get_string_between($data->app_ios_url,'/id','?');
-        if($data->surl)
-            $result['home_url'] = $data->surl;
-        return $result;
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'app_process' => ['required','integer',Rule::in(1,2,3,4,5,6)],
+            'ma_ver'=> ['required'],
+            'auto_push'=> ['required',Rule::in('Y','N')],
+            // 'service_ma'=> ['required',Rule::in('Y','N')],
+            'service_type'=> ['required',Rule::in('both','tararget','ma')],
+            'start_time' => ['required','date_format:Y-m-d'],
+            'end_time' => ['required','date_format:Y-m-d','after:start_time'],
+            'pn'=> ['required'],
+            'aid'=> '',
+            'schm'=> ['required'],
+            'push_center'=> '',
+            'txtencode'=> ['required',Rule::in(['utf-8','euc-kr'])],
+            'host_name'=> ['required',Rule::in(['cafe24','makeshop','etc','godo'])],
+            'app_lang'=> ['required','array'],
+            'opt_sst'=> ['required',Rule::in('Y','N')],
+            'vip_check'=> '',
+            'info' => ''
+        ]);
     }
-    $data = request()->only(['app_process','ma_ver','auto_push','service_ma','service_type','start_time','end_time','start_time','pn','aid','schm','push_center','txtencode','host_name','app_lang','opt_sst','vip_check','info']);
+    public function getSingleData($idx)
+    {
+        $data['maData'] = MAData::find($idx);
+        if($data['maData'] == null) abort(400);
+        $data['maData']->toArray();
+        $data['appLang'] = explode('|',$data['maData']->app_lang);
+        return view('madetail')->with($data);
+    }
+    public function update($idx){
+        //앱설치 정보
+        if(request()->has('mode') && request()->input('mode') == 'get_info'){
+            $appId = MAData::find($idx,'ma_id')->ma_id;
+            $data = AppsData::where('app_id','=',$appId)->first(['app_android_url','app_ios_url','surl']);
+            $result['pn'] = substr($data['app_android_url'],45);
+            $result['schm'] = $appId;
+            if($data->app_ios_url)
+                $result['aid'] = get_string_between($data->app_ios_url,'/id','?');
+            if($data->surl)
+                $result['home_url'] = $data->surl;
+            return $result;
+        }
+        $maData = MAData::find($idx);
+        if($maData == null) abort(404);
+        $data = request()->only(['app_process','ma_ver','auto_push','service_ma','service_type','start_time','end_time','pn','aid','schm','push_center','txtencode','host_name','app_lang','opt_sst','vip_check','info']);
 
-    $data['app_lang'] = join($data['app_lang'],'|');
-    if($data['app_process'] > 10 || $data['app_process'] < 0)return validateExit(['col'=>'app_process','message'=>'process 입력이 잘못됨']);
-    //app_os 둘다 체크시 both 로 변경
-    if(!isset($data['service_type']) || count($data['service_type']) == 0)return validateExit(['col'=>'service_type','message'=>'OS를 하나이상 선택 하세요.']);
-    $data['service_type'] = count($data['service_type']) > 1 ? 'both' : $data['service_type'][0];
-    if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['start_time']) && $data['start_time'] != '')return validateExit(['col'=>'start_time','message'=>'서비스 시작일이 날짜형식이 아님']);
-    if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['end_time']) && $data['end_time'] != '')return validateExit(['col'=>'end_time','message'=>'서비스 시작일이 날짜형식이 아님']);
+        if(!isset($data['auto_push']))$data['auto_push'] = 'N';
+        // if(!isset($data['service_ma']))$data['service_ma'] = 'N';
 
-    $maData->update($data);
+        $data['service_type'] = count($data['service_type']) > 1 ? 'both' : $data['service_type'][0];
 
-    return request()->ajax() ? response()->json(['success' => 'true',], 200) : $this->getSingleData($idx);
-  }
+        $this->validator($data)->validate();
+
+        $data['app_lang'] = join($data['app_lang'],'|');
+
+        $maData->update($data);
+
+        return request()->ajax() ? response()->json(['success' => 'true',], 200) : back();
+    }
 }
