@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //route param pattern
+        $_COOKIE['sidebar'] = isset($_COOKIE['sidebar']) ? $_COOKIE['sidebar'] : 'close';
         \Illuminate\Support\Facades\Route::pattern('idx','^[0-9]*$');
 
         Schema::defaultStringLength(191);

@@ -1,12 +1,10 @@
-if(Util.getCookie('aside') == 'on' && $('#sidebar').length != 0) {
-  $("body").toggleClass("open");
-}
+// if(Util.getCookie('aside') == 'on' && $('#sidebar').length != 0) {
+//   $("body").toggleClass("open");
+// }
 // $('.top_btn').click( function () {
 //   $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
 //   return false;
 // });
-
-
 
 $("#sidebar-close,#sidebar-toggle").click(function (e) {
   $("body").toggleClass("open");

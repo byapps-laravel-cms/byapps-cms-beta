@@ -80,8 +80,8 @@
             contentType: false,
             processData: false,
             error : function(jqXHR, textStatus, error) {
+                alert(jqXHR.responseJSON.message)
                 if(jqXHR.status == 419){
-                    alert(jqXHR.responseJSON.message)
                     location += '';
                 }
             },
