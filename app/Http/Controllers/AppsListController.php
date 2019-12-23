@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 
@@ -88,34 +91,83 @@ class AppsListController extends Controller
       return view('appsdetail')->with($data);
     }
 
+    protected function validator(array $data)
+    {
+       return Validator::make($data, [
+           'app_process' => ['required', 'integer',Rule::in([1,2,3,4,5,6,7,8,10])],
+           'service_type' => ['required','string',Rule::in(['biz','lite','tester'])],
+           'app_os_type' => ['required','array'],
+           'byapps_ver' => ['required'],
+           'app_ver' => '',
+           'app_build' => '',
+           'app_ver_ios' => '',
+           'app_build_ios' => '',
+           'app_cate' => ['required',Rule::in(['01','02','03','04','05','06','07'])],
+           'noti_gcm' => '',
+           'noti_gcm_num' => '',
+           'noti_fcm_num' => '',
+           'noti_ios_cerp' => '',
+           'ios_cer_exp' => ['date_format:Y-m-d'],
+           'ios_dev_exp' => ['date_format:Y-m-d'],
+           'push_server' => ['required',Rule::in([
+                   'default',
+                   'http://byappspush4.cafe24app.com/',
+                   'http://byappspush3.cafe24app.com/',
+                   'http://byapps.cafe24app.com/',
+                   'http://byappspush2.cafe24app.com/',
+                   'http://push1.cafe24app.com/',
+               ])
+           ],
+           'token' => '',
+           'start_time' => ['required','date_format:Y-m-d'],
+           'end_time' => ['required','date_format:Y-m-d','after:start_time'],
+           'app_android_url' => '',
+           'app_ios_url' => '',
+           'surl' => '',
+           'androi_pk' => '',
+           'bundleid' => '',
+           'vender' => '',
+           'hashkey' => '',
+           'android_hash' => '',
+           'host_id' => '',
+           'txtencode' => ['required',Rule::in(['utf-8','euc-kr'])],
+           'host_name' => '',
+           'app_lang' => ['required','array'],
+           'cscall' => ['required','regex:/^\d{2,3}-\d{3,4}-\d{4}$/'],
+           'receipt' => '',
+           'app_intro' => '',
+           'developer_info' => '',
+           'auto_login' => ['required',Rule::in('Y','N')],
+           'login_point' => ['required',Rule::in('Y','N')],
+           'push_point' => ['required',Rule::in('Y','N')],
+           'install_point' => ['required',Rule::in('Y','N')],
+           'point_transfer_btn' => ['required',Rule::in('Y','N')],
+
+       ],[
+
+       ]);
+    }
+
     public function update($idx)
     {
         $data = request()->only(['app_process','service_type','app_os_type','byapps_ver','app_ver','app_build','app_ver_ios','app_build_ios','app_cate','noti_gcm','noti_gcm_num','noti_fcm_num','noti_ios_cerp','ios_cer_exp','ios_dev_exp','push_server','token','start_time','end_time','app_android_url','app_ios_url','surl','vender','hashkey','ioshack','host_id','txtencode','host_name','app_lang','auto_login','login_point','push_point','install_point','point_transfer_btn','cscall','app_intro','developer_info','start_date','end_time']);
         $data['developer_info'] = XSS($data['developer_info']);
-        $data['app_lang'] = join($data['app_lang'],'|');
-        //카테고리 01~07사이
-        if(!preg_match('/^0[1-7]$/',$data['app_cate']))return validateExit(['col'=>'app_cate','message'=>'카테고리 입력이 잘못됨']);
-        if($data['app_process'] > 10 || $data['app_process'] < 0)return validateExit(['col'=>'app_process','message'=>'process 입력이 잘못됨']);
-        //날짜 형식
-        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['ios_cer_exp']) && $data['ios_cer_exp'] != '')return validateExit(['col'=>'ios_cer_exp','message'=>'인증서 만료일이 날짜형식이 아님']);
-        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['ios_dev_exp']) && $data['ios_dev_exp'] != '')return validateExit(['col'=>'ios_dev_exp','message'=>'개발자 만료일이 날짜형식이 아님']);
-        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['start_time']))return validateExit(['col'=>'start_time','message'=>'플랫폼 시작일이 날짜형식이 아님']);
-        if(!preg_match('/^20\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/',$data['end_time']))return validateExit(['col'=>'end_time','message'=>'플랫폼 종료일이 날짜형식이 아님']);
-        //Y or N
-        if(!isset($data['auto_login']))$data['auto_login'] = 'N';
-        elseif($data['auto_login'] != 'Y')return validateExit(['col'=>'auto_login','message'=>'자동로그인 입력이 잘못됨']);
-        if(!isset($data['login_point']))$data['login_point'] = 'N';
-        elseif($data['login_point'] != 'Y')return validateExit(['col'=>'login_point','message'=>'출석체크 포인트 입력이 잘못됨']);
-        if(!isset($data['push_point']))$data['push_point'] = 'N';
-        elseif($data['push_point'] != 'Y')return validateExit(['col'=>'push_point','message'=>'푸쉬체크 포인트 입력이 잘못됨']);
-        if(!isset($data['install_point']))$data['install_point'] = 'N';
-        elseif($data['install_point'] != 'Y')return validateExit(['col'=>'install_point','message'=>'앱설치 포인트 입력이 잘못됨']);
-        if(!isset($data['point_transfer_btn']))$data['point_transfer_btn'] = 'N';
-        elseif($data['point_transfer_btn'] != 'Y')return validateExit(['col'=>'point_transfer_btn','message'=>'앱 포인트,수동전환 입력이 잘못됨']);
-        //app_os 둘다 체크시 both 로 변경
-        if(!isset($data['app_os_type']) || count($data['app_os_type']) == 0)return validateExit(['col'=>'app_os_type','message'=>'OS를 하나이상 선택 하세요.']);
-        $data['app_os_type'] = count($data['app_os_type']) > 1 ? 'both' : $data['app_os_type'][0];
 
+        if(!isset($data['auto_login']))$data['auto_login'] = 'N';
+        if(!isset($data['login_point']))$data['login_point'] = 'N';
+        if(!isset($data['push_point']))$data['push_point'] = 'N';
+        if(!isset($data['install_point']))$data['install_point'] = 'N';
+        if(!isset($data['point_transfer_btn']))$data['point_transfer_btn'] = 'N';
+
+        if($data['ios_cer_exp'] == null) unset($data['ios_cer_exp']);
+        if($data['ios_dev_exp'] == null) unset($data['ios_dev_exp']);
+
+        $this->validator($data)->validate();
+
+        $data['app_lang'] = join($data['app_lang'],'|');
+
+        //app_os 둘다 체크시 both 로 변경
+        $data['app_os_type'] = count($data['app_os_type']) > 1 ? 'both' : $data['app_os_type'][0];
         $data['modify_time'] = time();
 
         AppsData::find($idx)->update($data);
