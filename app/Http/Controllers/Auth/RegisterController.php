@@ -52,11 +52,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $model = new User();
         return Validator::make($data, [
-            'mem_id' => ['required', 'string', 'max:255', 'unique:users'],
-            'mem_name' => ['required', 'string', 'max:255'],
+            'mem_id' => ['required', 'string', 'max:255', 'unique:'.$model->getConnectionName().'.'.$model->getTable()],
+            'name' => ['required', 'string', 'max:255'],
             //'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'passwd' => ['required', 'string', 'min:4', 'confirmed'],
+            'password' => ['required', 'string', 'min:4','confirmed'],
+        ],[
+            'mem_id.unique' => '중복된 아이디가 존재합니다.',
+            'password.confirmed' => '동일하지 않는 비밀번호 입니다.',
         ]);
     }
 
@@ -68,11 +72,12 @@ class RegisterController extends Controller
      */
     protected function register()
     {
-        $data = request()->all();
+        $data = request()->only('mem_id','name','password','password_confirmation');
+        $this->validator($data)->validate();
 
         Auth::guard('web')->loginUsingId(
           User::insertGetId([
-            'mem_id' => $data['user_id'],
+            'mem_id' => $data['mem_id'],
             'mem_name' => $data['name'],
             //'email' => $data['email'],
             //'password' => Hash::make($data['password']),

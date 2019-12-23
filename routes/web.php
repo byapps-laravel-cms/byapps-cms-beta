@@ -1,4 +1,7 @@
 <?php
+Route::get('/info',function(){
+    phpinfo();
+});
 Route::get('/test',function(){
   dd(config('filesystems'));
   Storage::get('5de8bd2a668e6.jpeg');
