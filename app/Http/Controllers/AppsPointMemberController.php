@@ -45,22 +45,38 @@ class AppsPointMemberController extends Controller
 		'app_name' => $appsPointMemberData->app_name,
 		'app_id' => $appsPointMemberData->app_id,
 		'mem_id' => $appsPointMemberData->mem_id,
-		'app_lang' => $appsPushData->app_lang,
-		'app_os' => $appsPushData->app_os,
-		'app_ver' => $appsPushData->app_ver,
-		'app_udid' => $appsPushData->app_udid,
-		'device_name' => $appsPushData->device_name,
-		'device_ver' => $appsPushData->device_ver,
-		'push_agree' => $appsPushData->push_agree,
-		'reg_time' => date("Y/m/d [H:i:s]", $appsPushData->reg_time),
-		'visit_cnt' => number_format($appsPushData->visit_cnt),
-		'last_time' => $appsPushData->last_time ? date("Y/m/d [H:i:s]", $appsPushData->last_time) : date("Y/m/d [H:i:s]", $appsPushData->reg_time),
-		'order_cnt' => number_format($appsPushData->order_cnt),
-		'order_amount' => number_format($appsPushData->order_amount),
-		'last_purchase_time' => $appsPushData->last_purchase_time ? date("Y/m/d [H:i:s]", $appsPushData->last_purchase_time) : 'N',
-		'total_point' => number_format($appsPointMemberData->total_point),
-		'total_payback_point' => number_format($appsPointMemberData->total_payback_point),
+		'app_lang' => "",
+		'app_os' => "",
+		'app_ver' => "",
+		'app_udid' => "",
+		'device_name' => "",
+		'device_ver' => "",
+		'push_agree' => "",
+		'reg_time' => "",
+		'visit_cnt' => "",
+		'last_time' => "",
+		'order_cnt' => "",
+		'order_amount' => "",
+		'last_purchase_time' => "N",
+		'total_point' => "0",
+		'total_payback_point' => "0",
 	];
+	
+	if($appsPushData != "") {
+		$valu['app_lang'] = $appsPushData->app_lang;
+		$valu['app_os'] = $appsPushData->app_os;
+		$valu['app_ver'] = $appsPushData->app_ver;
+		$valu['app_udid'] = $appsPushData->app_udid;
+		$valu['device_name'] = $appsPushData->device_name;
+		$valu['device_ver'] = $appsPushData->device_ver;
+		$valu['push_agree'] = $appsPushData->push_agree;
+		$valu['reg_time'] = date("Y/m/d [H:i:s]", $appsPushData->reg_time);
+		$valu['visit_cnt'] = number_format($appsPushData->visit_cnt);
+		$valu['last_time'] = $appsPushData->last_time ? date("Y/m/d [H:i:s]", $appsPushData->last_time) : date("Y/m/d [H:i:s]", $appsPushData->reg_time);
+		$valu['order_cnt'] = number_format($appsPushData->order_cnt);
+		$valu['order_amount'] = number_format($appsPushData->order_amount);
+		$valu['last_purchase_time'] = $appsPushData->last_purchase_time ? date("Y/m/d [H:i:s]", $appsPushData->last_purchase_time) : 'N';
+	}
 
     return view('appspointmemberdetail')->with('valu', $valu);
   }

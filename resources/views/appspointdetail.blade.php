@@ -41,7 +41,7 @@
 						<input type="hidden" name="app_token" value="{{ $valu['app_udid'] }}">
 						<input type="hidden" name="app_name" value="{{ $valu['app_name'] }}">
 						<input type="hidden" name="app_os" value="{{ $valu['app_os'] }}">
-						<input type="hidden" name="app_ver" value="{{ [$valu['app_ver'] }}">	
+						<input type="hidden" name="app_ver" value="{{ $valu['app_ver'] }}">	
                           <div class="form-group row">
                               <label class="col-md-2 col-form-label ">앱 아이디</label>
                               <div class="col-md-10 col-xs-9">
