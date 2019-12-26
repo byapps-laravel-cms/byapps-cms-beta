@@ -98,6 +98,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/appendixorderlist', 'appendixorderlist')->name('appendixorderlist.view');
   Route::get('/appendixorderlist/data', 'AppendixOrderController@getAppendixOrderListData')->name('appendixorderlist');
   Route::get('/appendixorderdetail/{idx}', 'AppendixOrderController@getSingleData')->name('appendixorderdetail');
+  Route::post('/appendixorderdetail/{idx}', 'AppendixOrderController@update')->name('appendixorderupdate');
   //  MA 이용 업체
   Route::view('/malist', 'malist')->name('malist.view');
   Route::get('/malist/data', 'MAController@getMAListData')->name('malist');

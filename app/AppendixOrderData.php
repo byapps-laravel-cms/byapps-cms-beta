@@ -8,6 +8,9 @@ class AppendixOrderData extends Model
 {
   protected $connection = 'byapps';
   protected $table = 'BYAPPS_appendix_order_data';
+  protected $primaryKey = 'idx';
+  public $timestamps = false;
+  protected $fillable = ['receipt'];
 
   public static function getAppendixOrderData()
   {
