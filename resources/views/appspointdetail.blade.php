@@ -23,7 +23,7 @@
                 <div class="col-sm-12">
 
                     @if ($valu)
-                    <h4 class="header-title">{{$valu['app_name']}}</h2>
+                    <h4 class="header-title">{{ $valu['app_name'] }}</h2>
                     @else
                     <h4 class="header-title">Something went wrong.</h4>
                     @endif
@@ -35,45 +35,45 @@
 						<!-- form start -->
 						{!! Form::open([ 'route' => ['appspointtransfter', $valu['idx']] ]) !!}
 						<input type="hidden" name="op" value="point_transfer">
-	  					<input type="hidden" name="idx" value="{{$valu['idx']}}">
-						<input type="hidden" name="app_id" value="{{$valu['app_id']}}">
-						<input type="hidden" name="app_mid" value="{{$valu['mem_id']}}">
-						<input type="hidden" name="app_token" value="{{$valu['app_udid']}}">
-						<input type="hidden" name="app_name" value="{{$valu['app_name']}}">
-						<input type="hidden" name="app_os" value="{{$valu['app_os']}}">
-						<input type="hidden" name="app_ver" value="{[$valu['app_ver']}}">	
+	  					<input type="hidden" name="idx" value="{{ $valu['idx'] }}">
+						<input type="hidden" name="app_id" value="{{ $valu['app_id'] }}">
+						<input type="hidden" name="app_mid" value="{{ $valu['mem_id'] }}">
+						<input type="hidden" name="app_token" value="{{ $valu['app_udid'] }}">
+						<input type="hidden" name="app_name" value="{{ $valu['app_name'] }}">
+						<input type="hidden" name="app_os" value="{{ $valu['app_os'] }}">
+						<input type="hidden" name="app_ver" value="{{ [$valu['app_ver'] }}">	
                           <div class="form-group row">
                               <label class="col-md-2 col-form-label ">앱 아이디</label>
                               <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{$valu['app_id']}}
+                                <p class="form-control-static mt-1 mb-1">{{ $valu['app_id'] }}
                                 </p>
                               </div>
 								
 							  <label class="col-md-2 col-form-label ">앱 버전</label>
 							  <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{$valu['app_ver']}}
+                                <p class="form-control-static mt-1 mb-1">{{ $valu['app_ver'] }}
                                 </p>
                               </div>
 
                               <label class="col-md-2 col-form-label ">회원정보</label>
                               <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{$valu['mem_id']}} / {{$valu['app_os']}} / {{$valu['app_lang']}} / {{$valu['app_udid']}}</p>
+                                <p class="form-control-static mt-1 mb-1">{{ $valu['mem_id'] }} / {{ $valu['app_os'] }} / {{ $valu['app_lang'] }} / {{ $valu['app_udid'] }}</p>
                               </div>
 
 							  <label class="col-md-2 col-form-label ">적립내역</label>
                               <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{$valu['point_title']}}({{$valu['point_id']}}) / {{$valu['point']}} / {{$valu['reg_time']}} => {{$valu['msg']}} 
+                                <p class="form-control-static mt-1 mb-1">{{ $valu['point_title'] }}({{ $valu['point_id'] }}) / {{ $valu['point'] }} / {{ $valu['reg_time'] }} => {{ $valu['msg'] }} 
 								<input type="button" class="btn btn-primary waves-effect wave-light btn-xs ml-1 mr-1" value="전환" onclick="if(confirm('정말로 전환하시겠습니까?')){this.form.op.value='point_back';this.form.submit()}" class="nbutton3"></p>
                               </div>
 
                               <label class="col-md-2 col-form-label ">포인트</label>
                               <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{$valu['total_point']}}({{$valu['chk']}}) / {{$valu['total_payback_point']}}</p>
+                                <p class="form-control-static mt-1 mb-1">{{ $valu['total_point'] }}({{ $valu['chk'] }}) / {{ $valu['total_payback_point'] }}</p>
                               </div>
 
                               <label class="col-md-2 col-form-label ">비고</label>
                               <div class="col-md-10 col-xs-9 text-danger" style="font-weight: bold">
-                                <p class="form-control-static mt-1 mb-1">{{$valu['err']}}</p>
+                                <p class="form-control-static mt-1 mb-1">{{ $valu['err'] }}</p>
                               </div>
 
                               <div class="col-md-10 col-xs-9">

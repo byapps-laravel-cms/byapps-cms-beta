@@ -23,7 +23,7 @@
                 <div class="col-sm-12">
 
                     @if ($valu)
-                    <h4 class="header-title">{{$valu['app_name']}}</h2>
+                    <h4 class="header-title">{{ $valu['app_name'] }}</h2>
                     @else
                     <h4 class="header-title">Something went wrong.</h4>
                     @endif
@@ -35,33 +35,33 @@
                           <div class="form-group row">
                               <label class="col-md-2 col-form-label ">회원 ID</label>
                               <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{$valu['mem_id']}} ({{$valu['app_lang']}} / {{$valu['app_os']}} / ver {{$valu['app_ver']}} / {{$valu['app_udid']}})
+                                <p class="form-control-static mt-1 mb-1">{{ $valu['mem_id'] }} ({{ $valu['app_lang'] }} / {{ $valu['app_os'] }} / ver {{ $valu['app_ver'] }} / {{ $valu['app_udid'] }})
                                 </p>
                               </div>
 
                               <label class="col-md-2 col-form-label ">Device Info.</label>
                               <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{$valu['device_name']}} ({{$valu['device_ver']}} / {{$valu['push_agree']}})</p>
+                                <p class="form-control-static mt-1 mb-1">{{ $valu['device_name'] }} ({{ $valu['device_ver'] }} / {{ $valu['push_agree'] }})</p>
                               </div>
 
                               <label class="col-md-2 col-form-label ">설치날짜</label>
                               <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{$valu['reg_time']}}</p>
+                                <p class="form-control-static mt-1 mb-1">{{ $valu['reg_time'] }}</p>
                               </div>
 
                               <label class="col-md-2 col-form-label ">방문통계</label>
                               <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{$valu['visit_cnt']}} 회, {{$valu['last_time']}}</p>
+                                <p class="form-control-static mt-1 mb-1">{{ $valu['visit_cnt'] }} 회, {{ $valu['last_time'] }}</p>
                               </div>
 
                               <label class="col-md-2 col-form-label ">구매통계</label>
                               <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{$valu['order_cnt']}} 회, 총 {{$valu['order_amount']}}원, {{$valu['last_purchase_time']}}</p>
+                                <p class="form-control-static mt-1 mb-1">{{ $valu['order_cnt'] }} 회, 총 {{ $valu['order_amount'] }}원, {{ $valu['last_purchase_time'] }}</p>
                               </div>
 
                               <label class="col-md-2 col-form-label ">앱포인트</label>
                               <div class="col-md-10 col-xs-9">
-                                <p class="form-control-static mt-1 mb-1">{{$valu['total_point']}} ({{$valu['total_payback_point']}})</p>
+                                <p class="form-control-static mt-1 mb-1">{{ $valu['total_point'] }} ({{ $valu['total_payback_point'] }})</p>
                               </div>
                             </div>
 
