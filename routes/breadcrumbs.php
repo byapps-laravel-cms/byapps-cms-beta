@@ -89,10 +89,24 @@ Breadcrumbs::for('appspointmemberlist', function ($trail) {
   $trail->push('인증회원 관리', route('appspointmemberlist.view'));
 });
 
+// 인증회원 상세
+Breadcrumbs::for('appspointmemberdetail', function ($trail) {
+  $trail->parent('appspointmemberlist');
+  $trail->title('\App\AppsPointMemberData','app_name');
+  $trail->push('인증회원 상세', '');
+});
+
 // 앱포인트 관리
 Breadcrumbs::for('appspointlist', function ($trail) {
   $trail->parent('appslist');
   $trail->push('앱포인트 관리', route('appspointlist.view'));
+});
+
+// 앱포인트 상세
+Breadcrumbs::for('appspointdetail', function ($trail) {
+  $trail->parent('appspointlist');
+  $trail->title('\App\AppsPointData','app_name');
+  $trail->push('앱포인트 상세', '');
 });
 
 // 테스터 관리

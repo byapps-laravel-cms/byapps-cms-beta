@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/appspointlist', 'appspointlist')->name('appspointlist.view');
   Route::get('/appspointlist/data', 'AppsPointController@getAppsPointListData')->name('appspointlist');
   Route::get('/appspointdetail/{idx}', 'AppsPointController@getSingleData')->name('appspointdetail');
+  Route::post('/appspointdetail/{idx}', 'AppsPointController@pointTransfer')->name('appspointtransfter');
   //  테스터 관리
   Route::view('/pushtesterlist', 'pushtesterlist')->name('pushtesterlist.view');
   Route::get('/pushtesterlist/data', 'PushTesterController@getPushTesterListData')->name('pushtesterlist');
