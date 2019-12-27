@@ -15,20 +15,37 @@ class AppsOrderController extends Controller
       return view('appsorderlist');
   }
 
-  public function getAppsOrderData()
+  public function getAppsOrderData(Request $request)
   {
-    $appsOrderData = AppsOrderData::select('idx',
-                                         'app_process',
-                                         'app_name',
-                                         'app_company',
-                                         'order_name',
-                                         'cellno',
-                                         'apps_type',
-                                         'pay_way',
-                                         'receipt',
-                                         'reg_time');
-
     $app_process = array("주문취소","접수","주문확인","개발진행","앱등록","서비스중지","서비스해지","","취소요청","접수대기");
+
+    if ($request->app_process) {
+
+      //dd($request->app_process);
+
+      $appsOrderData = AppsOrderData::select('idx',
+                                           'app_process',
+                                           'app_name',
+                                           'app_company',
+                                           'order_name',
+                                           'cellno',
+                                           'apps_type',
+                                           'pay_way',
+                                           'receipt',
+                                           'reg_time')
+                                        ->where('app_process' , $request->app_process);
+    } else {
+      $appsOrderData = AppsOrderData::select('idx',
+                                           'app_process',
+                                           'app_name',
+                                           'app_company',
+                                           'order_name',
+                                           'cellno',
+                                           'apps_type',
+                                           'pay_way',
+                                           'receipt',
+                                           'reg_time');
+    }
 
     return Datatables::of($appsOrderData)
             ->setRowId(function($appsOrderData) {
