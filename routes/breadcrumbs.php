@@ -96,10 +96,24 @@ Breadcrumbs::for('appspointmemberlist', function ($trail) {
   $trail->push('인증회원 관리', route('appspointmemberlist.view'));
 });
 
+// 인증회원 상세
+Breadcrumbs::for('appspointmemberdetail', function ($trail) {
+  $trail->parent('appspointmemberlist');
+  $trail->title('\App\AppsPointMemberData','app_name');
+  $trail->push('인증회원 상세', '');
+});
+
 // 앱포인트 관리
 Breadcrumbs::for('appspointlist', function ($trail) {
   $trail->parent('appslist');
   $trail->push('앱포인트 관리', route('appspointlist.view'));
+});
+
+// 앱포인트 상세
+Breadcrumbs::for('appspointdetail', function ($trail) {
+  $trail->parent('appspointlist');
+  $trail->title('\App\AppsPointData','app_name');
+  $trail->push('앱포인트 상세', '');
 });
 
 // 테스터 관리
@@ -117,6 +131,13 @@ Breadcrumbs::for('appendixlist', function ($trail) {
 Breadcrumbs::for('appendixorderlist', function ($trail) {
   $trail->parent('appendixlist');
   $trail->push('부가서비스 접수', route('appendixorderlist.view'));
+});
+
+// 부가서비스 접수 상세
+Breadcrumbs::for('appendixorderdetail', function ($trail) {
+  $trail->parent('appendixorderlist');
+  $trail->title('\App\AppendixOrderData','app_company');
+  $trail->push('부가서비스 접수 상세', '');
 });
 
 // MA 이용 업체

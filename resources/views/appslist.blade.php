@@ -60,7 +60,7 @@ $(function() {
         select: {
            'style': 'multi'
         },
-        order: [[ 5, 'desc']],
+        order: [[ 0, 'desc']],
         "paging": true,
         "pageLength": 50,
         "fixedHeader": false,

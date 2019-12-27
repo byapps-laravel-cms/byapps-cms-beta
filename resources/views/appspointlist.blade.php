@@ -71,7 +71,7 @@ $(function() {
         "fnDrawCallback": function () {
             $("#appspointlistTable tbody tr").click(function () {
               table = $('#appspointlistTable').dataTable();
-              window.location.href = "/appsDetail/" + this.id;
+              window.location.href = "/appspointdetail/" + this.id;
             });
          }
     });

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use App\Http\Controllers\Controller;
 use App\Admin as User;
 use DB;
 
@@ -45,9 +46,21 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'user_id' => ['required','string','max:255'],
+            'password' => ['required','string','max:255'],
+        ]);
+    }
     public function login()
 	{
+        $validate = $this->validator(request()->all());
+        if($validate->fails()){
+            $message = $validate->messages()->toArray();
+            $message['success'] = false;
+            return response()->json($message,200);
+        }
         $user = User::where('mem_id','=',request()->input('user_id'));
         try {
             $data = $user->first(['idx','err']);
