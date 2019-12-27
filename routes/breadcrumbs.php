@@ -65,6 +65,13 @@ Breadcrumbs::for('apklist', function ($trail) {
   $trail->push('APK 관리', route('apklist.view'));
 });
 
+// 앱 접수 상세
+Breadcrumbs::for('apkdetail', function ($trail) {
+  $trail->parent('apklist');
+  $trail->title('\App\ApkData','app_name');
+  $trail->push('APK 상세','');
+});
+
 // CAFE24 앱 설치
 Breadcrumbs::for('cafe24tokenlist', function ($trail) {
   $trail->parent('appslist');

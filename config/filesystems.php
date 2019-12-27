@@ -49,6 +49,12 @@ return [
             'url' => env('APP_URL').'/storage',
         ],
 
+        'Apkfiles' => [
+            'driver' => 'local',
+            'root' => '/home/ljw/data/Apkfiles',
+            'url' => env('APP_URL').'/storage',
+        ],
+
         // 'local' => [
         //     'driver' => 'local',
         //     'url' => env('APP_URL').'/storage',
