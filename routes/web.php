@@ -1,7 +1,4 @@
 <?php
-Route::get('/info',function(){
-    phpinfo();
-});
 Route::get('/test',function(){
   dd(config('filesystems'));
   Storage::get('5de8bd2a668e6.jpeg');
@@ -19,6 +16,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/load-more-data', 'ExpiredController@more_data');
 Route::get('/layout', 'HomeController@onLayoutChange');
 Route::any('/search', 'HomeController@search')->name('search');
+
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 
@@ -91,7 +89,6 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/appspointlist', 'appspointlist')->name('appspointlist.view');
   Route::get('/appspointlist/data', 'AppsPointController@getAppsPointListData')->name('appspointlist');
   Route::get('/appspointdetail/{idx}', 'AppsPointController@getSingleData')->name('appspointdetail');
-  Route::post('/appspointdetail/{idx}', 'AppsPointController@pointTransfer')->name('appspointtransfter');
   //  테스터 관리
   Route::view('/pushtesterlist', 'pushtesterlist')->name('pushtesterlist.view');
   Route::get('/pushtesterlist/data', 'PushTesterController@getPushTesterListData')->name('pushtesterlist');
@@ -100,7 +97,6 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/appendixorderlist', 'appendixorderlist')->name('appendixorderlist.view');
   Route::get('/appendixorderlist/data', 'AppendixOrderController@getAppendixOrderListData')->name('appendixorderlist');
   Route::get('/appendixorderdetail/{idx}', 'AppendixOrderController@getSingleData')->name('appendixorderdetail');
-  Route::post('/appendixorderdetail/{idx}', 'AppendixOrderController@update')->name('appendixorderupdate');
   //  MA 이용 업체
   Route::view('/malist', 'malist')->name('malist.view');
   Route::get('/malist/data', 'MAController@getMAListData')->name('malist');
