@@ -21,8 +21,6 @@ class AppsOrderController extends Controller
 
     if ($request->app_process) {
 
-      //dd($request->app_process);
-
       $appsOrderData = AppsOrderData::select('idx',
                                            'app_process',
                                            'app_name',

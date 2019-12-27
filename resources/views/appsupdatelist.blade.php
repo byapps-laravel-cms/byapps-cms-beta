@@ -14,7 +14,18 @@
              <tr>
                  <th>idx</th>
                  <th>신청일</th>
-                 <th>진행상태</th>
+                 <!-- <th>진행상태</th> -->
+                 <th>
+                   <select name="app_process_filter" id="app_process_filter" class="form-control">
+                     <option value="">진행상태</option>
+                     @php
+                      $app_process = array("취소","접수","신청확인","진행중","심사중","","","","","완료");
+                     @endphp
+                     @foreach($app_process as $key => $val)
+                        <option value="{{ $key }}">{{ $val }}</option>
+                     @endforeach
+                   </select>
+                 </th>
                  <th>앱아이디</th>
                  <th>앱명</th>
                  <th>앱OS</th>
@@ -31,13 +42,20 @@
 
 @push('scripts')
 <script type="text/javascript">
-$(function() {
+$(document).ready(function() {
+
+  fetch_data();
+
+function fetch_data(app_process = '') {
     $('#appsupdatelistTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
           url: "{{ route('appsupdatelist') }}",
-          crossDomain: true
+          crossDomain: true,
+          data: {
+            app_process: app_process
+          }
         },
         columns: [
             { data: 'idx', name: 'idx' },
@@ -58,6 +76,11 @@ $(function() {
               'checkboxes': {
                  'selectRow': true
               },
+           },
+           {
+              'targets': 2,
+              'searchable': false,
+              'orderable': false,
            },
         ],
         select: {
@@ -86,7 +109,7 @@ $(function() {
             case '취소':
                 $('td:eq(2)', row).html("<button class='btn btn-light btn-rounded btn-xs'>취소</button>");
                 break;
-            case '접수': 
+            case '접수':
                 $('td:eq(2)', row).html("<button class='btn btn-primary btn-rounded btn-xs'>접수</button>");
                 break;
             case '신청확인':
@@ -102,6 +125,15 @@ $(function() {
             }
          },
     });
+  }
+
+  $('#app_process_filter').change(function() {
+    var app_process = $('#app_process_filter').val();
+
+    $('#appsupdatelistTable').DataTable().destroy();
+
+    fetch_data(app_process);
+  });
 });
 </script>
 @endpush
