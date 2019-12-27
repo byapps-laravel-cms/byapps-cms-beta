@@ -39,7 +39,7 @@
                     <div class="col-md-12 col-xs-12 px-4">
 
                       <!-- form start -->
-                      {!! Form::open([ 'route' => ['userinfoupdate', $apkdata->idx] ]) !!}
+                      {!! Form::open([ 'route' => ['apkupdate', $apkdata->idx] ]) !!}
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">App.ID</label>
@@ -72,13 +72,13 @@
                                       <div class="form-group">
                                         <!-- <input name="fileToUpload" type="file" class="filestyle" data-input="false" id="filestyle-8" tabindex="-1" style="display: none;"> -->
 
-                                        <input name="fileToUpload" type="file" class="filestyle" data-placeholder="No file" id="filestyle-0" tabindex="-1" style="display: none;">
+                                        <input name="fileToUpload" type="file" class="filestyle" id="filestyle-8" tabindex="-1" style="display: none;">
 
                                         <div class="bootstrap-filestyle input-group">
                                           <div name="filedrag" style="position: absolute; width: 100%; height: 35.8906px; z-index: -1;"></div>
                                           <input type="text" class="form-control " placeholder="{{ $apkdata->apk_file }}" disabled="" style="border-top-left-radius: 0.25rem; border-bottom-left-radius: 0.25rem;">
                                             <span class="group-span-filestyle input-group-btn" tabindex="0">
-                                              <label for="filestyle-0" style="margin-bottom: 0;" class="btn btn-secondary ">
+                                              <label for="filestyle-8" style="margin-bottom: 0;" class="btn btn-secondary ">
                                                 <span class="buttonText">첨부파일</span>
                                               </label>
                                             </span>

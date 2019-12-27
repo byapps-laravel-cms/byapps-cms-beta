@@ -66,6 +66,8 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/apklist', 'apklist')->name('apklist.view');
   Route::get('/apklist/data', 'ApkController@getApkData')->name('apklist');
   Route::get('/apkdetail/{idx}', 'ApkController@getSingleData')->name('apkdetail');
+  Route::post('/apkupdate/{idx}', 'ApkController@update')->name('apkupdate');
+
   // Cafe24 앱 설치
   Route::view('/cafe24tokenlist', 'cafe24tokenlist')->name('cafe24tokenlist.view');
   Route::get('/cafe24tokenlist/data', 'Cafe24ApiTokenController@getCafe24ApiTokenData')->name('cafe24tokenlist');
