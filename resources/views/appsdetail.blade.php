@@ -711,7 +711,7 @@
                 var errors = jqXHR.responseJSON.errors;
                 var firstError = true;
                 for(key in errors){
-                    var input = $(`[name^=${key}]`);
+                    var input = $(`[name=${key}]`).length == 0 ? $(`[name='${key}[]']`).eq(0).closest('div') : $(`[name=${key}]`);
                     var value = errors[key];
                     if(firstError){
                         input.focus();
@@ -736,7 +736,7 @@
                                 message = error;
                         }
                         input.parent().append(`
-                            <span class="invalid-feedback error" role="alert">
+                            <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;" role="alert">
                                 <strong>${message}</strong>
                             </span>
                         `);
@@ -746,6 +746,7 @@
             },
             success : function(data, jqXHR, textStatus) {
                 alert('처리되었습니다');
+                refreshComment();
                 sys = true;
             }
         });

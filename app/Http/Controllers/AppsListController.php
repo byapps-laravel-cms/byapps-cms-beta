@@ -9,12 +9,34 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 
+use App\Comment;
 use App\AppsData;
 use App\AppsStat;
 use App\AppsSaleStat;
 
 class AppsListController extends Controller
 {
+    protected $columns;
+    public function __construct(){
+        $this->columns = [
+            'app_process' => 'Process',
+            'end_time' => '플랫폼 종료 시간',
+            'retarget_end' => '리타겟팅 종료 시간',
+            'service_type' => 'service type',
+            'login_point' => '출석체크 서비스',
+            'auto_login' => '자동로그인 설정',
+            'push_point' => '푸쉬체크 서비스',
+            'install_point' => '앱설치포인트 서비스',
+            'lock_screen' => '잠금화면 서비스',
+            'app_cart' => '장바구니 리마인드 서비스',
+            'app_retarget' => '장바구니 리마인드 서비스',
+            'app_ma' => '마케팅오토메이션 서비스',
+            'app_members' => '앱사용자 관리',
+            'reward_opt' => '리워드 서비스',
+            'push_server' => '푸쉬서버',
+        ];
+    }
+
     public function getIndex()
     {
         return view('appslist');
@@ -88,6 +110,7 @@ class AppsListController extends Controller
 
       $data['saleData'] = $sales;
       $data['mem_id'] = $data['appData']->mem_id;
+
       return view('appsdetail')->with($data);
     }
 
@@ -151,7 +174,8 @@ class AppsListController extends Controller
     public function update($idx)
     {
         if(AppsData::where('idx','=',$idx)->count() == 0) abort(404);
-        $data = request()->only(['app_process','service_type','app_os_type','byapps_ver','app_ver','app_build','app_ver_ios','app_build_ios','app_cate','noti_gcm','noti_gcm_num','noti_fcm_num','noti_ios_cerp','ios_cer_exp','ios_dev_exp','push_server','token','start_time','end_time','app_android_url','app_ios_url','surl','vender','hashkey','ioshack','host_id','txtencode','host_name','app_lang','auto_login','login_point','push_point','install_point','point_transfer_btn','cscall','app_intro','developer_info','start_date','end_time']);
+        $model = AppsData::find($idx);
+        $data = request()->only(['app_process','service_type','app_os_type','byapps_ver','app_ver','app_build','app_ver_ios','app_build_ios','app_cate','noti_gcm','noti_gcm_num','noti_fcm_num','noti_ios_cerp','ios_cer_exp','ios_dev_exp','push_server','token','end_time','app_android_url','app_ios_url','surl','vender','hashkey','ioshack','host_id','txtencode','host_name','app_lang','auto_login','login_point','push_point','install_point','point_transfer_btn','cscall','app_intro','developer_info','end_time','start_time']);
         $data['developer_info'] = XSS($data['developer_info']);
 
         if(!isset($data['auto_login']))$data['auto_login'] = 'N';
@@ -169,10 +193,75 @@ class AppsListController extends Controller
 
         //app_os 둘다 체크시 both 로 변경
         $data['app_os_type'] = count($data['app_os_type']) > 1 ? 'both' : $data['app_os_type'][0];
+
+        $model->fill($data);
+
+        $this->logging($model);
+
+        //수정시간 변경
         $data['modify_time'] = time();
 
-        AppsData::find($idx)->update($data);
+        $model->save();
 
         return request()->ajax() ? response()->json(['success' => 'true',], 200) : $this->getSingleData($idx);
+    }
+    public function logging($model){
+        $data = [
+            'mmid' => 'apps',
+            'pidx' => request()->route()->parameter('idx'),
+            'pmid' => $model->mem_id,
+            'mem_id' => request()->user()->mem_id,
+            'reg_time' => time(),
+            'mem_name' => request()->user()->mem_name
+        ];
+        $app_process = array("","개발준비중","개발진행중","심사중","등록거부","재심사중","등록대기","등록완료","서비스중지","기간만료","서비스유효");
+        $comment = new Comment();
+        foreach($model->getAttributes() as $col => $new){
+            $old = $model->getOriginal($col);
+            $temp[$old] = $new;
+            if($old != $new){
+                $data['comment'] = $this->columns[$col] . ' ';
+                switch ($col) {
+                    case 'app_process':
+                        $data['comment'].= $app_process[$old]." → ".$app_process[$new];
+                        if($new == '8') {
+
+                        }
+                        break;
+                    case 'end_time':
+                    case 'retarget_end':
+                        $data['comment'].= ($old ? date("Y-m-d",$old) : "미정")." → ".date("Y-m-d",$new);
+                        break;
+                    case 'service_type':
+                        $temp = [
+                            'lite' => '라이트',
+                            'tester' => '테스터',
+                            'biz' => '일반'
+                        ];
+                        $data['comment'].= $temp[$old] . ' → ' . $temp[$new];
+                        break;
+                    case 'login_point':
+                    case 'auto_login':
+                    case 'push_point':
+                    case 'install_point':
+                    case 'lock_screen':
+                    case 'app_cart':
+                    case 'app_retarget':
+                    case 'app_ma':
+                    case 'app_members':
+                    case 'reward_opt':
+                        $data['comment'].= ($old = 'Y' ? '허용' : '미허용'). ' → ' . ($new = 'Y' ? '허용' : '미허용');
+                        break;
+                    case 'push_server':
+                        $data['comment'].= $old." → ".$new;
+                        break;
+                    default:
+                       // code...
+                        break;
+               }
+               $data['comment'].= ' 변경';
+               $comment->insert($data);
+            }
+        }
     }
 }

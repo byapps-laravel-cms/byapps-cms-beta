@@ -24,7 +24,7 @@ class AppsData extends Model implements Searchable
   }
   public function fromDateTime($value){
       if(gettype($value) == 'integer') return $value;
-      $result = \Carbon\Carbon::createFromFormat('Y-m-d', $value);
+      $result = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $value.' 00:00:00');
       return $result->timestamp;
   }
 
