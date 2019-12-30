@@ -5,9 +5,25 @@
        ?>
     }
     var mode = 'all';
+    function refreshComment(){
+        $('.comments').html('');
+        $.ajax({
+            url: '{{ Route("comment") }}',
+            type: 'POST',
+            data: {
+                idx: {{ request()->route()->parameter('idx') }},
+                mmid: mode,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                response.forEach( data =>
+                    $('.comments').append(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}<span style="float:right;margin-right:5px;">${data.mmid}</span></li>`)
+                );
+            }
+        })
+    }
     $(document).ready(function(){
         $.ajax({
-            async: false,
             url: '{{ Route("comment") }}',
             type: 'POST',
             data: {

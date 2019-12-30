@@ -56,11 +56,7 @@ class LoginController extends Controller
     public function login()
 	{
         $validate = $this->validator(request()->all());
-        if($validate->fails()){
-            $message = $validate->messages()->toArray();
-            $message['success'] = false;
-            return response()->json($message,200);
-        }
+        $validate->validate();
         $user = User::where('mem_id','=',request()->input('user_id'));
         try {
             $data = $user->first(['idx','err']);

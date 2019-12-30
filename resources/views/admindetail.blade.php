@@ -10,12 +10,6 @@
         <!-- cardbody start -->
         <div class="card-body">
             <div class="row">
-                {{-- <div class="col-sm-12">
-                    <h4>
-                        <strong>{{ $appData->app_name }}</strong>
-                    </h4>
-                    <hr/>
-                </div> --}}
                 <div id="app_noti" class="row" >
 
                     <div class="col-12" style="overflow:auto;" >
@@ -35,11 +29,11 @@
                                     <div class="col-md-12 pl-5">
                                         <div class="form-group row">
                                             <label class="col-md-6 col-xs-12 control-label">ID</label>
-                                            <strong class="form-control-static">sm7104</strong>
+                                            <strong class="form-control-static">{{ $admin->mem_id }}</strong>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-6 col-xs-12 control-label">관리자명</label>
-                                            <strong class="form-control-static">임성미</strong>
+                                            <strong class="form-control-static">{{ $admin->mem_name }}</strong>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-6 col-xs-12 control-label">연락처</label>
@@ -60,10 +54,6 @@
                                         <div class="form-group row">
                                             <label class="col-md-6 col-xs-12 control-label">비밀번호 확인</label>
                                             <input type="password" name="pw" class="col-4" value="">
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-6 col-xs-12 control-label">비밀번호 확인</label>
-                                            <input type="password" name="check_pw" class="col-4" value="">
                                         </div>
 
                                         <button type="button" class="btn btn-sm btn-inverse waves-effect w-md waves-light text-center"> <i class="mdi mdi-account"></i> <span>회원정보 수정</span> </button>
@@ -190,13 +180,13 @@
                                             </li>
                                         @endforeach
                                         </ul>
-                                        <input type="button" onclick="send()" value="저장"> 
+                                        <input type="button" onclick="send()" value="저장">
                                     </div>
                                 </div>
                             </div>
 
                         </div><!-- //tab content-->
-                    </div> 
+                    </div>
             </div>
             <!--// row -->
         </div>
@@ -205,8 +195,8 @@
     <!--//card-->
     </div>
     <!--//col-dm-12-->
-</div>   
-<!--// row-->         
+</div>
+<!--// row-->
 @endsection
 @push('scripts')
 <script>

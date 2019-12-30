@@ -31,11 +31,9 @@ class Admin extends Controller
             ->make(true);
     }
     public function detail($idx){
-        try {
-            $data['per'] = Data::find($idx,'adminNMNew')->adminNMNew;
-        } catch (\Exception $e) {
-            abort(404);
-        }
+        $data['admin'] = Data::find($idx);
+        if($data == null) abort(400);
+        $data['per'] = $data['admin']->adminNMNew;
         $type1 = [
             'list' => '목록',
             'detail' => '상세',

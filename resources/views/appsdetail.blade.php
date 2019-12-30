@@ -25,9 +25,9 @@
                     <form method="POST" onsubmit="return modify(this)">
                         @csrf
                         <div class="form-group row">
-                            <label class="col-md-2 col-form-label ">Process</label>
+                            <label class="col-md-2 col-form-label">Process</label>
                             <div class="col-md-6 col-xs-9">
-                                <select name="app_process" id="" class="form-control input-sm">
+                                <select name="app_process" class="form-control input-sm">
                                     <option value="" >선택해 주세요</option>
                                     <option value="1"{!! $appData->app_process == 1 ? 'selected' : '' !!}> 개발준비중</option>
                                     <option value="2"{!! $appData->app_process == 2 ? 'selected' : '' !!}> 개발진행중</option>
@@ -693,8 +693,13 @@
 @endsection
 @section('script')
 <script>
+    var sys = true;
     function modify(obj){
         var request = new FormData(obj);
+        $('.error').remove();
+        $('.is-invalid').removeClass('is-invalid');
+        if(!sys) return sys;
+        sys = false;
         $.ajax({
             url : location.href,
             type : 'POST',
@@ -703,11 +708,46 @@
             contentType: false,
             processData: false,
             error : function(jqXHR, textStatus, error) {
-                $(`[name=${jqXHR.responseJSON.col}]`).focus();
-                alert(jqXHR.responseJSON.message)
+                var errors = jqXHR.responseJSON.errors;
+                var firstError = true;
+                for(key in errors){
+                    var input = $(`[name=${key}]`).length == 0 ? $(`[name='${key}[]']`).eq(0).closest('div') : $(`[name=${key}]`);
+                    var value = errors[key];
+                    if(firstError){
+                        input.focus();
+                        firstError = false;
+                    }
+                    input.addClass('is-invalid');
+                    for(var i = 0 ; i < value.length ; i++){
+                        var message = '';
+                        var error = value[i];
+                        switch (error) {
+                            case 'validation.required':
+                                message = '입력해 주세요.';
+                                break;
+                            case 'validation.after':
+                                message = '시작시간 이후여햐 합니다.';
+                                break;
+                            case 'validation.regex':
+                            case 'validation.date_format':
+                                message = '형식에 맞지 않습니다.';
+                                break;
+                            default:
+                                message = error;
+                        }
+                        input.parent().append(`
+                            <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;" role="alert">
+                                <strong>${message}</strong>
+                            </span>
+                        `);
+                    }
+                }
+                sys = true;
             },
             success : function(data, jqXHR, textStatus) {
                 alert('처리되었습니다');
+                refreshComment();
+                sys = true;
             }
         });
         return false;
