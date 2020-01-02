@@ -91,3 +91,7 @@ class Util{
 //     $("#shadow").remove();
 //     $('#mem-data').remove()
 // }
+function memberInfo(){
+    $('#nav-cc-tab').click();
+    sidebarOpen();
+}
