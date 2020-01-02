@@ -16,8 +16,10 @@ Route::get('/session',function(){
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/load-more-data', 'ExpiredController@more_data');
 Route::get('/layout', 'HomeController@onLayoutChange');
-Route::any('/search', 'HomeController@search')->name('search');
+//Route::any('/search', 'HomeController@search')->name('search');
 //Route::any('/search-more', 'Search@load_more')->name('search-more');
+Route::any('/search', 'SearchContorller@search')->name('search');
+Route::any('/search-more', 'SearchContorller@loadMore')->name('search-more');
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
