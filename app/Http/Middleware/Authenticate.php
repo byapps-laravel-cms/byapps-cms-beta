@@ -9,6 +9,10 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         $pageName = str_replace('.view','',\Request::route()->getName());
+        $white = ['admin','comment','commentsend'];
+        if(in_array($pageName,$white)){
+            return $next($request);
+        }
         try {
             $per = request()->user()->adminNMNew;
         } catch (\Exception $e) {

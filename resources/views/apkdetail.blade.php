@@ -72,7 +72,7 @@
                                       <div class="form-group">
                                         <!-- <input name="fileToUpload" type="file" class="filestyle" data-input="false" id="filestyle-8" tabindex="-1" style="display: none;"> -->
 
-                                        <input type="file" name="apk" class="filestyle" data-placeholder="{{ $apkdata->apk_file }}" data-buttontext="첨부파일" data-buttonname="btn-secondary"> 
+                                        <input type="file" name="apk" class="filestyle" data-placeholder="{{ $apkdata->apk_file }}" data-buttontext="첨부파일" data-buttonname="btn-secondary">
 
                                       </div>
                                     </div>

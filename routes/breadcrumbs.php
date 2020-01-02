@@ -254,11 +254,11 @@ Breadcrumbs::for('resellerpaydetail', function ($trail) {
 
 //관리자
 Breadcrumbs::for('admin', function ($trail) {
-  $trail->push('관리자', route('adminlist'));
+  $trail->push('관리자', route('admin'));
 });
 
 //관리자 관리
 Breadcrumbs::for('adminlist', function ($trail) {
   $trail->parent('admin');
-  $trail->push('관리자 관리', route('adminlist'));
+  $trail->push('관리자 관리', route('admin'));
 });

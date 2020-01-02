@@ -10,30 +10,14 @@ use App\Admin as Data;
 
 class Admin extends Controller
 {
-    public function update($idx){
-        $data = Data::find($idx);
-        if(!$data) abort(404);
-        if(!request()->has('permission')) abort(400);
-        $permission = request()->input('permission');
-        if($permission != 'all'){
-            if(is_array($permission)) $permission = join('|',$permission);
-            $permission = '|'.$permission.'|';
+    public function __invoke(){
+        if(request()->ajax()){
+            return Datatables::of(Data::select(['mem_name','idx','reg_date']))
+                ->setRowId(function($data) {
+                    return $data->idx;
+                })
+                ->make(true);
         }
-        Data::where('idx','=',$idx)->update(['adminNMNew' => $permission]);
-        return request()->ajax() ? response()->json(['success' => true], 200) : '';
-    }
-    public function list(){
-        if(!request()->ajax()) return view('adminlist');
-        return Datatables::of(Data::select(['mem_name','idx','reg_date']))
-            ->setRowId(function($data) {
-                return $data->idx;
-            })
-            ->make(true);
-    }
-    public function detail($idx){
-        $data['admin'] = Data::find($idx);
-        if($data == null) abort(400);
-        $data['per'] = $data['admin']->adminNMNew;
         $type1 = [
             'list' => '목록',
             'detail' => '상세',
@@ -116,11 +100,29 @@ class Admin extends Controller
                 'permission' => $type1],
             'comment' => [
                 'name' => '댓글',
-                'permission' => $type3],
+                'permission' => $type2],
             'admin' => [
                 'name' => '관리자 관리',
-                'permission' => $type1],
-        ];
+                'permission' => [
+                        'update' => '권한 수정'
+                    ]
+                ],
+            ];
         return view('admindetail')->with($data);
+    }
+    public function update(){
+        $data = Data::find(request()->input('user_id'),'adminNMNew');
+        if($data == null) response()->json(['message' => 'user not found'], 200);
+        if(!request()->has('permission')) return $data;
+        $permission = request()->input('permission');
+        if($permission == 'all'){}
+        elseif($permission == 'nothing'){
+            $permission = null;
+        }else{
+            if(is_array($permission)) $permission = join('|',$permission);
+            $permission = '|'.$permission.'|';
+        }
+        Data::where('idx','=',request()->input('user_id'))->update(['adminNMNew' => $permission]);
+        return request()->ajax() ? response()->json(['success' => true], 200) : '';
     }
 }

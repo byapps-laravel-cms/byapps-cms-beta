@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 
+use App\PushSchedule;
 use App\Comment;
 use App\AppsData;
 use App\AppsStat;
@@ -73,7 +74,6 @@ class AppsListController extends Controller
 
     public function getSingleData($idx)
     {
-      $this->colums[] = 'app_id';
       $data['appData'] = AppsData::find($idx);
       if($data['appData'] == null) abort(404);
 
@@ -225,7 +225,12 @@ class AppsListController extends Controller
                     case 'app_process':
                         $data['comment'].= $app_process[$old]." → ".$app_process[$new];
                         if($new == '8') {
-
+                            $pushSc = PushSchedule::where('app_id','=',$model->getOriginal('app_id'));
+                            if($pushSc->value('idx')){
+                                $pushSc->delete();
+                                $comment->insert($data);
+                                $data['comment'] = '서비스중지로 푸쉬스케쥴링 삭제처리됨';
+                            }
                         }
                         break;
                     case 'end_time':
@@ -250,7 +255,7 @@ class AppsListController extends Controller
                     case 'app_ma':
                     case 'app_members':
                     case 'reward_opt':
-                        $data['comment'].= ($old = 'Y' ? '허용' : '미허용'). ' → ' . ($new = 'Y' ? '허용' : '미허용');
+                        $data['comment'].= ($old == 'Y' ? '허용' : '미허용'). ' → ' . ($new == 'Y' ? '허용' : '미허용');
                         break;
                     case 'push_server':
                         $data['comment'].= $old." → ".$new;
