@@ -98,10 +98,13 @@ class Admin extends Controller
             'resellerpayment' => [
                 'name' => '리셀러 정산',
                 'permission' => $type1],
+            'comment' => [
+                'name' => '댓글',
+                'permission' => $type2],
             'admin' => [
                 'name' => '관리자 관리',
                 'permission' => [
-                        'adminupdate' => '관리자 권한 수정'
+                        'adminupdate' => '권한 수정'
                     ]
                 ],
             ];

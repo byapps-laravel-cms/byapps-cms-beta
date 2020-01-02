@@ -195,46 +195,49 @@
 @if(request()->user()->adminNMNew == 'all' || strpos(request()->user()->adminNMNew,'|adminupdate|') > -1)
     <div id="shadow" style="display:none"></div>
     <div class="col-md-12 pl-5" id="permission" style="display:none">
-        <h1></h1>
-      @foreach($pageList as $name => $data)
-        <div class="form-group row" style="margin-bottom: 0;">
-            <label for="user_id" class="col-md-6 col-form-label text-md-right" style="padding-bottom:0">{{ $data['name'] }}</label>
-            <div class="col-md-6 col-form-label" style="padding-bottom:0">
-                <select name="{{ $name }}">
-                    <option value="nothing">없음</option>
-                  @foreach($data['permission'] as $key => $val)
-                    <option value="{{ $name.$key }}">{{ $val }}</option>
-                  @endforeach
-                </select>
+        <form action="javascript:void(0)">
+            <h1></h1>
+          @foreach($pageList as $name => $data)
+            <div class="form-group row" style="margin-bottom: 0;">
+                <label for="user_id" class="col-md-4 col-form-label text-md-right" style="padding-bottom:0">{{ $data['name'] }}</label>
+                <div class="col-md-8 col-form-label" style="padding-bottom:0">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="{{ $name }}" id="{{ $name.'nothing' }}" value="nothing" checked>
+                        <label class="form-check-label" for="{{ $name.'nothing' }}">없음</label>
+                    </div>
+                    <?$temp = '';?>
+                    @foreach($data['permission'] as $key => $val)
+                        <?$temp.= $name.$key ?>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="{{ $name }}" id="{{ $name.$key }}" value="{{ $temp }}">
+                            <label class="form-check-label" for="{{ $name.$key }}">{{ $val }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+          @endforeach
+            <div class="col-md-8 offset-md-4">
+                <button class="btn btn-primary" onclick="send()">저장</button>
+                <button class="btn btn-danger" onclick="$('#shadow').click();">취소</button>
             </div>
         </div>
-      @endforeach
-        <div class="col-md-8 offset-md-4">
-            <button type="submit" class="btn btn-primary" onclick="send()">저장</button>
-            <button type="submit" class="btn btn-danger" onclick="$('#shadow').click();">취소</button>
-        </div>
-    </div>
+    </form>
 @endif
 @push('scripts')
 <script>
   @if(request()->user()->adminNMNew == 'all' || strpos(request()->user()->adminNMNew,'|adminupdate|') > -1)
     function send(){
         var permission = [];
-        for(var temp of $('#permission select')){
-            var item = $(temp)
-            if(item.val() == 'nothing') continue;
-            for(var temp1 of item.find('option')){
-                var option = $(temp1);
-                if(option.val() == 'nothing') continue;
-                permission.push(`${item.attr('name')}${option.val()}`);
-                if(option.val() == item.val()) break;
+        new FormData($('#permission>form')[0]).forEach(function(value, key){
+            if(value != 'nothing'){
+               permission.push(value);
             }
-        }
-        if(permission.length == 0) permission = 'nothing'
+        })
+        if(permission.length == 0) permission == 'nothing'
         $.ajax({
             url : '{{ route('adminupdate') }}',
             type : 'POST',
-            data : {user_id:user_id,'permission':permission},
+            data : {user_id:user_id,permission:permission},
             error : function(jqXHR, textStatus, error) {
 
             },
@@ -293,16 +296,17 @@
                         },
                         success : function(data, jqXHR, textStatus) {
                             var per = data.adminNMNew;
+                            $('#permission [value=nothing]').attr("checked",true)
                             if(per == 'all'){
-                                for(var i = 0 ; i < $('#permission select>option').length ; i++){
-                                    $('#permission select>option').eq(i).prop('selected',true)
+                                for(var i = 0 ; i < $('#permission input[type=radio]').length ; i++){
+                                    $('#permission input[type=radio]').eq(i).attr('checked',true)
                                 }
                             }else if(per == null){
                             }else{
                                 per = per.substring(1,per.length-1);
                                 per = per.split('|');
                                 for(var i = 0 ; i < per.length ; i++){
-                                    $(`#permission select>option[value=${per[i]}]`).prop('selected',true)
+                                    $(`#permission input[type=radio][value=${per[i]}]`).attr('checked',true)
                                 }
                             }
                             perPopup.fadeIn();
