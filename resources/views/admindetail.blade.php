@@ -207,9 +207,9 @@
                     </div>
                     <?$temp = '';?>
                     @foreach($data['permission'] as $key => $val)
-                        <?$temp.= $name.$key ?>
+                        <?$temp.= $name.$key.'|';?>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="{{ $name }}" id="{{ $name.$key }}" value="{{ $temp }}">
+                            <input class="form-check-input" type="radio" name="{{ $name }}" id="{{ $name.$key }}" value="{{ substr($temp,0,-1) }}">
                             <label class="form-check-label" for="{{ $name.$key }}">{{ $val }}</label>
                         </div>
                     @endforeach
@@ -306,7 +306,7 @@
                                 per = per.substring(1,per.length-1);
                                 per = per.split('|');
                                 for(var i = 0 ; i < per.length ; i++){
-                                    $(`#permission input[type=radio][value=${per[i]}]`).attr('checked',true)
+                                    $(`#${per[i]}`).attr('checked',true)
                                 }
                             }
                             perPopup.fadeIn();
@@ -336,7 +336,7 @@
         left:0;
         right:0;
     }
-    #permission>h1{
+    #permission>form>h1{
         text-align: center;
     }
     #shadow{

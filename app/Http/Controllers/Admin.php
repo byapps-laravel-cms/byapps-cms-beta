@@ -104,7 +104,7 @@ class Admin extends Controller
             'admin' => [
                 'name' => '관리자 관리',
                 'permission' => [
-                        'adminupdate' => '권한 수정'
+                        'update' => '권한 수정'
                     ]
                 ],
             ];
