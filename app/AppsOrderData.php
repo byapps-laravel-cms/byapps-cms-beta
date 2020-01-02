@@ -27,7 +27,7 @@ class AppsOrderData extends Model implements Searchable
   {
     $url = route('appsorderdetail', $this->idx);
 
-    return new SearchResult($this, $this->app_company, $url);
+    return new SearchResult($this, $this->app_company, $url, $this->reg_time);
   }
 
   public function userinfo()

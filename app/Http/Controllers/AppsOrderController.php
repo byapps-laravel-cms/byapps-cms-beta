@@ -31,7 +31,7 @@ class AppsOrderController extends Controller
                                            'pay_way',
                                            'receipt',
                                            'reg_time')
-                                        ->where('app_process' , $request->app_process);
+                                        ->where('app_process', $request->app_process);
     } else {
       $appsOrderData = AppsOrderData::select('idx',
                                            'app_process',

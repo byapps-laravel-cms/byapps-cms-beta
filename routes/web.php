@@ -1,4 +1,5 @@
 <?php
+
 Route::get('/test',function(){
   dd(config('filesystems'));
   Storage::get('5de8bd2a668e6.jpeg');
@@ -16,6 +17,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/load-more-data', 'ExpiredController@more_data');
 Route::get('/layout', 'HomeController@onLayoutChange');
 Route::any('/search', 'HomeController@search')->name('search');
+//Route::any('/search-more', 'Search@load_more')->name('search-more');
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');

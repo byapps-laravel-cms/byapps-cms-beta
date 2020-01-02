@@ -30,7 +30,7 @@ class UserInfo extends Model implements Searchable
   {
     $url = route('userinfodetail', $this->idx);
 
-    return new SearchResult($this, $this->mem_name, $url);
+    return new SearchResult($this, $this->mem_name, $url, $this->reg_date);
   }
 
   public function order()

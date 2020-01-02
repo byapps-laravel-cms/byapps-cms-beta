@@ -130,11 +130,10 @@ class HomeController extends Controller
     public function search(Request $request)
     {
       $searchResults = (new Search())
-                        ->registerModel(AppsPaymentData::class, 'app_name')
-                        ->registerModel(PromotionData::class, 'mem_name')
-                        ->registerModel(AppsOrderData::class, 'app_company')
-                        ->registerModel(UserInfo::class, 'mem_name')
-                        // ->perform($request->input('query'));
+                       ->registerModel(AppsPaymentData::class, 'app_name')
+                       ->registerModel(PromotionData::class, 'mem_name')
+                       ->registerModel(AppsOrderData::class, 'app_company')
+                       ->registerModel(UserInfo::class, 'mem_name')
                         ->search($request->input('query'));
 
       $typesArray = [ 'BYAPPS_apps_payment_data' => '결제 관리',
