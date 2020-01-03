@@ -87,7 +87,8 @@ $(function() {
         "fnDrawCallback": function () {
             $("#pushtesterlistTable tbody tr").click(function () {
               table = $('#pushtesterlistTable').dataTable();
-              window.location.href = "/pushtesterdetail/" + this.id;
+			  sidebarOpen();
+              //window.location.href = "/pushtesterdetail/" + this.id;
             });
          },
          "rowCallback": function(row, data, index) {

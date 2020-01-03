@@ -5,17 +5,13 @@
 <div class="row">
     <!-- col-sm-12 start -->
     <div class="col-sm-12">
+
+  {{ Breadcrumbs::render('adminlist') }}
     <!-- card -->
     <div class="card">
         <!-- cardbody start -->
         <div class="card-body">
             <div class="row">
-                {{-- <div class="col-sm-12">
-                    <h4>
-                        <strong>{{ $appData->app_name }}</strong>
-                    </h4>
-                    <hr/>
-                </div> --}}
                 <div id="app_noti" class="row" >
 
                     <div class="col-12" style="overflow:auto;" >
@@ -23,7 +19,9 @@
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-myinfo-tab" data-toggle="tab" href="#nav-myinfo" role="tab" aria-controls="nav-myinfo" aria-selected="true">개인정보 변경</a>
                                 <a class="nav-item nav-link" id="nav-app-company-tab" data-toggle="tab" href="#nav-app-company" role="tab" aria-controls="nav-app-company" aria-selected="false">지정업체 수정</a>
+                              @if(request()->user()->adminNMNew == 'all' || strpos(request()->user()->adminNMNew,'|adminupdate|') > -1)
                                 <a class="nav-item nav-link" id="nav-manager-tab" data-toggle="tab" href="#nav-manager-info" role="tab" aria-controls="nav-manager-info" aria-selected="false">관리자 권한 수정</a>
+                              @endif
                             </div>
                         </nav>
 
@@ -35,11 +33,11 @@
                                     <div class="col-md-12 pl-5">
                                         <div class="form-group row">
                                             <label class="col-md-6 col-xs-12 control-label">ID</label>
-                                            <strong class="form-control-static">sm7104</strong>
+                                            <strong class="form-control-static">{{ request()->user()->mem_id }}</strong>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-6 col-xs-12 control-label">관리자명</label>
-                                            <strong class="form-control-static">임성미</strong>
+                                            <strong class="form-control-static">{{ request()->user()->mem_name }}</strong>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-6 col-xs-12 control-label">연락처</label>
@@ -60,10 +58,6 @@
                                         <div class="form-group row">
                                             <label class="col-md-6 col-xs-12 control-label">비밀번호 확인</label>
                                             <input type="password" name="pw" class="col-4" value="">
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-6 col-xs-12 control-label">비밀번호 확인</label>
-                                            <input type="password" name="check_pw" class="col-4" value="">
                                         </div>
 
                                         <button type="button" class="btn btn-sm btn-inverse waves-effect w-md waves-light text-center"> <i class="mdi mdi-account"></i> <span>회원정보 수정</span> </button>
@@ -170,33 +164,23 @@
                                 </div>
                             </div> <!-- //#nav-company-info -->
 
+                          @if(request()->user()->adminNMNew == 'all' || strpos(request()->user()->adminNMNew,'|adminupdate|') > -1)
                             <div class="tab-pane fade px-3 text-black" id="nav-manager-info" role="tabpanel" aria-labelledby="nav-manager-tab">
                                 <div class="row">
-                                    <div class="col-md-12 pl-5">
-                                        <ul id="permission">
-                                        @foreach($pageList as $name => $data)
-                                            <li>
-                                                <span>{{ $data['name'] }}</span>
-                                                <select name="{{ $name }}">
-                                                    <option value="nothing">없음</option>
-                                                @foreach($data['permission'] as $key => $val)
-                                                @if($per == 'all')
-                                                    <option value="{{ $key }}" selected>{{ $val }}</option>
-                                                @else
-                                                    <option value="{{ $key }}"{{ strpos($per,$name.$key) ? ' selected' : '' }}>{{ $val }}</option>
-                                                @endif
-                                                @endforeach
-                                                </select>
-                                            </li>
-                                        @endforeach
-                                        </ul>
-                                        <input type="button" onclick="send()" value="저장"> 
-                                    </div>
+                                    <table id="adminTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>IDX</th>
+                                                <th>이름</th>
+                                                <th>가입일자</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
                                 </div>
                             </div>
-
+                          @endif
                         </div><!-- //tab content-->
-                    </div> 
+                    </div>
             </div>
             <!--// row -->
         </div>
@@ -205,35 +189,162 @@
     <!--//card-->
     </div>
     <!--//col-dm-12-->
-</div>   
-<!--// row-->         
+</div>
+<!--// row-->
 @endsection
+@if(request()->user()->adminNMNew == 'all' || strpos(request()->user()->adminNMNew,'|adminupdate|') > -1)
+    <div id="shadow" style="display:none"></div>
+    <div class="col-md-12 pl-5" id="permission" style="display:none">
+        <form action="javascript:void(0)">
+            <h1></h1>
+          @foreach($pageList as $name => $data)
+            <div class="form-group row" style="margin-bottom: 0;">
+                <label for="user_id" class="col-md-4 col-form-label text-md-right" style="padding-bottom:0">{{ $data['name'] }}</label>
+                <div class="col-md-8 col-form-label" style="padding-bottom:0">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="{{ $name }}" id="{{ $name.'nothing' }}" value="nothing" checked>
+                        <label class="form-check-label" for="{{ $name.'nothing' }}">없음</label>
+                    </div>
+                    <?$temp = '';?>
+                    @foreach($data['permission'] as $key => $val)
+                        <?$temp.= $name.$key.'|';?>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="{{ $name }}" id="{{ $name.$key }}" value="{{ substr($temp,0,-1) }}">
+                            <label class="form-check-label" for="{{ $name.$key }}">{{ $val }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+          @endforeach
+            <div class="col-md-8 offset-md-4">
+                <button class="btn btn-primary" onclick="send()">저장</button>
+                <button class="btn btn-danger" onclick="$('#shadow').click();">취소</button>
+            </div>
+        </div>
+    </form>
+@endif
 @push('scripts')
 <script>
+  @if(request()->user()->adminNMNew == 'all' || strpos(request()->user()->adminNMNew,'|adminupdate|') > -1)
     function send(){
         var permission = [];
-        for(var temp of $('#permission select')){
-            var item = $(temp)
-            if(item.val() == 'nothing') continue;
-            for(var temp1 of item.find('option')){
-                var option = $(temp1);
-                if(option.val() == 'nothing') continue;
-                permission.push(`${item.attr('name')}${option.val()}`);
-                if(option.val() == item.val()) break;
+        new FormData($('#permission>form')[0]).forEach(function(value, key){
+            if(value != 'nothing'){
+               permission.push(value);
             }
-        }
+        })
+        if(permission.length == 0) permission == 'nothing'
         $.ajax({
-            url : location.href,
+            url : '{{ route('adminupdate') }}',
             type : 'POST',
-            data : {'permission':permission},
+            data : {user_id:user_id,permission:permission},
             error : function(jqXHR, textStatus, error) {
 
             },
             success : function(data, jqXHR, textStatus) {
-
+                if(data.success){
+                    alert('저장되었습니다');
+                    $('#shadow').click();
+                }
             }
         });
         return false;
     }
+    var user_id = 0;
+    var AdminListFirst = true;
+    var perPopup = $.merge($('#shadow'),$('#permission'))
+    $('[href="#nav-manager-info"]').click(function(){
+        if(!AdminListFirst) return;
+        AdminListFirst = false;
+        $('#adminTable').DataTable({
+            processing: true,
+            serverSide: true,
+            url: location.href,
+            columns: [
+                { data: 'idx', name: 'idx' },
+                { data: 'mem_name', name: 'mem_name' },
+                { data: 'reg_date', name: 'reg_date' },
+            ],
+            columnDefs: [
+               {
+                  'targets': 0,
+                  'className': 'select-checkbox',
+                  'searchable': false,
+                  'orderable': false,
+                  'checkboxes': {
+                     'selectRow': true
+                  },
+               },
+            ],
+            order: [[ 2, 'asc']],
+            paging: true,
+            pageLength: 50,
+            fixedHeader: false,
+            responsive: true,
+            orderClasses: false,
+            stateSave: false,
+            "fnDrawCallback": function () {
+                $("#adminTable tbody tr").click(function () {
+                    user_id = $(this).attr('id')
+                    $('#permission h1').html($(this).find('td').eq(1).text());
+                    $.ajax({
+                        url : '{{ route('adminupdate') }}',
+                        type : 'POST',
+                        data : {user_id:user_id},
+                        error : function(jqXHR, textStatus, error) {
+
+                        },
+                        success : function(data, jqXHR, textStatus) {
+                            var per = data.adminNMNew;
+                            $('#permission [value=nothing]').attr("checked",true)
+                            if(per == 'all'){
+                                for(var i = 0 ; i < $('#permission input[type=radio]').length ; i++){
+                                    $('#permission input[type=radio]').eq(i).attr('checked',true)
+                                }
+                            }else if(per == null){
+                            }else{
+                                per = per.substring(1,per.length-1);
+                                per = per.split('|');
+                                for(var i = 0 ; i < per.length ; i++){
+                                    $(`#${per[i]}`).attr('checked',true)
+                                }
+                            }
+                            perPopup.fadeIn();
+                        }
+                    });
+                });
+                $('#shadow').click(function(){
+                    perPopup.fadeOut();
+                })
+             },
+        });
+    })
+  @endif
 </script>
 @endpush
+<style>
+    #permission{
+        height:fit-content;
+        background: #fff;
+        position: fixed;
+        margin: auto;
+        width: 50%;
+        z-index: 4000;
+        border-radius: 10px;
+        top:0;
+        bottom: 0;
+        left:0;
+        right:0;
+    }
+    #permission>form>h1{
+        text-align: center;
+    }
+    #shadow{
+        position: fixed;
+        z-index: 3999;
+        height: 100%;
+        width: 100%;
+        background: #000;
+        opacity: .4;
+    }
+</style>

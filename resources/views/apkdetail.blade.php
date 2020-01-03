@@ -63,7 +63,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+						<div class="form-group row">
                             <label class="col-md-2 col-form-label">APK 파일</label>
                             <div class="col-md-10 col-xs-9">
                               <div class="form-inline">
@@ -72,17 +72,7 @@
                                       <div class="form-group">
                                         <!-- <input name="fileToUpload" type="file" class="filestyle" data-input="false" id="filestyle-8" tabindex="-1" style="display: none;"> -->
 
-                                        <input name="fileToUpload" type="file" class="filestyle" id="filestyle-8" tabindex="-1" style="display: none;">
-
-                                        <div class="bootstrap-filestyle input-group">
-                                          <div name="filedrag" style="position: absolute; width: 100%; height: 35.8906px; z-index: -1;"></div>
-                                          <input type="text" class="form-control " placeholder="{{ $apkdata->apk_file }}" disabled="" style="border-top-left-radius: 0.25rem; border-bottom-left-radius: 0.25rem;">
-                                            <span class="group-span-filestyle input-group-btn" tabindex="0">
-                                              <label for="filestyle-8" style="margin-bottom: 0;" class="btn btn-secondary ">
-                                                <span class="buttonText">첨부파일</span>
-                                              </label>
-                                            </span>
-                                          </div>
+                                        <input type="file" name="apk" class="filestyle" data-placeholder="{{ $apkdata->apk_file }}" data-buttontext="첨부파일" data-buttonname="btn-secondary">
 
                                       </div>
                                     </div>

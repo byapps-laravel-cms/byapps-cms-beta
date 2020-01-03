@@ -359,6 +359,7 @@
 @endsection
 @section('script')
 <script>
+    var sys = true;
     function goLink(obj){
         obj = $(obj)
         var url = obj.parent().parent().find('input[type=text]').val()
@@ -367,6 +368,10 @@
     }
     function modify(obj){
         var request = new FormData(obj);
+        $('.error').remove();
+        $('.is-invalid').removeClass('is-invalid');
+        if(!sys) return sys;
+        sys = false;
         $.ajax({
             url : location.href,
             type : 'POST',
@@ -375,11 +380,45 @@
             contentType: false,
             processData: false,
             error : function(jqXHR, textStatus, error) {
-                $(`[name=${jqXHR.responseJSON.col}]`).focus();
-                alert(jqXHR.responseJSON.message)
+                var errors = jqXHR.responseJSON.errors;
+                var firstError = true;
+                for(key in errors){
+                    var input = $(`[name=${key}]`).length == 0 ? $(`[name='${key}[]']`).eq(0).closest('div') : $(`[name=${key}]`);
+                    var value = errors[key];
+                    if(firstError){
+                        input.focus();
+                        firstError = false;
+                    }
+                    input.addClass('is-invalid');
+                    for(var i = 0 ; i < value.length ; i++){
+                        var message = '';
+                        var error = value[i];
+                        switch (error) {
+                            case 'validation.required':
+                                message = '입력해 주세요.';
+                                break;
+                            case 'validation.after':
+                                message = '시작시간 이후여햐 합니다.';
+                                break;
+                            case 'validation.regex':
+                            case 'validation.date_format':
+                                message = '형식에 맞지 않습니다.';
+                                break;
+                            default:
+                                message = error;
+                        }
+                        input.parent().append(`
+                            <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;" role="alert">
+                                <strong>${message}</strong>
+                            </span>
+                        `);
+                    }
+                }
+                sys = true;
             },
             success : function(data, jqXHR, textStatus) {
                 alert('처리되었습니다');
+                sys = true;
             }
         });
         return false;
@@ -399,9 +438,9 @@
 b[s]=b[s]||function(c,d){b[s][c]=d};
 var aa=a.createElement(r);aa.type='text/javascript';aa.async=true;aa.defer=true;aa.charset='utf-8';aa.src='//s3.ap-northeast-2.amazonaws.com/byapps-api/v4.5/2/byapps_MA_sdk.min.js';
 var bb=a.getElementsByTagName(r)[0];bb.parentNode.insertBefore(aa,bb);})(window,document,'script','barsQ');
-barsQ('caid','room301');
+barsQ('caid','{{ $maData->ma_id }}');
 barsQ('cdid','mobile');
-barsQ('host','cafe24');
+barsQ('host','${$('[name=host_name]').val()}');
 barsQ('appi','${$('[name=pn]').val()}|${$('[name=aid]').val()}|${$('[name=schm]').val()}');
 </script\>
 <!-- //Byapps MA script end -->`

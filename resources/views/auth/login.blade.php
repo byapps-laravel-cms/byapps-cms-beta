@@ -16,7 +16,7 @@
 
                             <div class="col-md-6">
                                 <input id="user_id" type="text" class="form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ Cookie::get('login_remember') ?: '' }}" required autocomplete="user_id" autofocus>
-
+                                
                                 <span class="invalid-feedback" id="userIdError" role="alert">
                                     <strong>asdf</strong>
                                 </span>

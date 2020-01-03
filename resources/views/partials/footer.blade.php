@@ -221,7 +221,7 @@ $(document).ready(function() {
 
 <!-- file -->
 <script src="{{ asset('assets/codefox/plugins/bootstrap-fileupload/bootstrap-fileupload.js') }}"></script>
-<!-- <script src="{{ asset('assets/codefox/plugins/bootstrap-filestyle/js/bootstrap-filestyle.js') }}"></script> -->
+<script src="{{ asset('assets/codefox/plugins/bootstrap-filestyle/js/bootstrap-filestyle.js') }}"></script>
 
 <!-- color picker js  -->
 <script src="{{ asset('assets/codefox/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>

@@ -154,7 +154,6 @@ Route::group(['middleware' => ['auth']], function() {
   Route::post('/comment','CommentController')->name('comment');
   Route::post('/commentSend','CommentController@send')->name('commentsend');
   //관리자 관리
-  Route::get('/adminlist','Admin@list')->name('adminlist');
-  Route::get('/admindetail/{idx}','Admin@detail')->name('admindetail');
-  Route::post('/admindetail/{idx}','Admin@update')->name('adminupdate');
+  Route::get('/admin','Admin')->name('admin');
+  Route::post('/adminupdate','Admin@update')->name('adminupdate');
 });
