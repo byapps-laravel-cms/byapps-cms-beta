@@ -90,6 +90,13 @@ Breadcrumbs::for('pushnewslist', function ($trail) {
   $trail->push('소식 관리', route('pushnewslist.view'));
 });
 
+// 소식 상세
+Breadcrumbs::for('pushnewsdetail', function ($trail) {
+  $trail->parent('pushnewslist');
+  $trail->title('\App\PushNewsData','app_name');
+  $trail->push('소식 상세','');
+});
+
 // 인증회원 관리
 Breadcrumbs::for('appspointmemberlist', function ($trail) {
   $trail->parent('appslist');
