@@ -65,18 +65,68 @@ class SalesController extends Controller
 
         $lastPaid = $lastTotal - $lastFree;
 
-        return array(
-              array(
+        return [
+			'Pf' => [
+                [
                   'thisTotal' => $thisTotal,
                   'thisPaid' => $thisPaid,
                   'thisFree' => $thisFree
-                ),
-                array(
+                ],
+                [
                   'lastTotal' => $lastTotal,
                   'lastPaid' => $lastPaid,
                   'lastFree' => $lastFree
-                ),
-              );
+                ],
+             ],
+			'Pa' => [
+                [
+                  'thisTotal' => 0,
+                  'thisPaid' => 0,
+                  'thisFree' => 0
+                ],
+                [
+                  'lastTotal' => 0,
+                  'lastPaid' => 0,
+                  'lastFree' => 0
+                ],
+             ],
+			'Mi' => [
+                [
+                  'thisTotal' => 0,
+                  'thisPaid' => 0,
+                  'thisFree' => 0
+                ],
+                [
+                  'lastTotal' => 0,
+                  'lastPaid' => 0,
+                  'lastFree' => 0
+                ],
+             ],
+			'Rt' => [
+                [
+                  'thisTotal' => 0,
+                  'thisPaid' => 0,
+                  'thisFree' => 0
+                ],
+                [
+                  'lastTotal' => 0,
+                  'lastPaid' => 0,
+                  'lastFree' => 0
+                ],
+             ],
+			'Ma' => [
+                [
+                  'thisTotal' => 0,
+                  'thisPaid' => 0,
+                  'thisFree' => 0
+                ],
+                [
+                  'lastTotal' => 0,
+                  'lastPaid' => 0,
+                  'lastFree' => 0
+                ],
+             ]
+		];
     }
 
     // MA

@@ -72,35 +72,35 @@
             <th>전체</th> <th>유료</th> <th>무료</th>
         </tr>
         <tr>
-            <th rowspan="3">이용수</th>
+            <th rowspan="5" style="vertical-align: middle">이용수</th>
             <th>플랫폼</th>
-            <td id="thisWeekTotal"></td> <td id="thisWeekPaid"></td> <td id="thisWeekFree"></td>
-            <td id="lastWeekTotal"></td> <td id="lastWeekPaid"></td> <td id="lastWeekFree"></td>
-            <td id="variTotal"></td>     <td id="variPaid"></td>     <td id="variFree"></td>
+            <td id="thisWeekTotalPf"></td> <td id="thisWeekPaidPf"></td> <td id="thisWeekFreePf"></td>
+            <td id="lastWeekTotalPf"></td> <td id="lastWeekPaidPf"></td> <td id="lastWeekFreePf"></td>
+            <td id="variTotalPf"></td>     <td id="variPaidPf"></td>     <td id="variFreePf"></td>
         </tr>
         <tr>
-            <th>MA (기존)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <th>푸쉬자동화</th>
+            <td id="thisWeekTotalPa"></td> <td id="thisWeekPaidPa"></td> <td id="thisWeekFreePa"></td>
+            <td id="lastWeekTotalPa"></td> <td id="lastWeekPaidPa"></td> <td id="lastWeekFreePa"></td>
+            <td id="variTotalPa"></td>     <td id="variPaidPa"></td>     <td id="variFreePa"></td>
         </tr>
         <tr>
-            <th>MA 통합</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <th>MA통합</th>
+            <td id="thisWeekTotalMi"></td> <td id="thisWeekPaidMi"></td> <td id="thisWeekFreeMi"></td>
+            <td id="lastWeekTotalMi"></td> <td id="lastWeekPaidMi"></td> <td id="lastWeekFreeMi"></td>
+            <td id="variTotalMi"></td>     <td id="variPaidMi"></td>     <td id="variFreeMi"></td>
+        </tr>
+		<tr>
+            <th>리타겟팅</th>
+            <td id="thisWeekTotalRt"></td> <td id="thisWeekPaidRt"></td> <td id="thisWeekFreeRt"></td>
+            <td id="lastWeekTotalRt"></td> <td id="lastWeekPaidRt"></td> <td id="lastWeekFreeRt"></td>
+            <td id="variTotalRt"></td>     <td id="variPaidRt"></td>     <td id="variFreeRt"></td>
+        </tr>
+		<tr>
+            <th>마케팅오토메이션</th>
+            <td id="thisWeekTotalMa"></td> <td id="thisWeekPaidMa"></td> <td id="thisWeekFreeMa"></td>
+            <td id="lastWeekTotalMa"></td> <td id="lastWeekPaidMa"></td> <td id="lastWeekFreeMa"></td>
+            <td id="variTotalMa"></td>     <td id="variPaidMa"></td>     <td id="variFreeMa"></td>
         </tr>
       </thead>
       <tbody>
@@ -186,31 +186,33 @@ function platformData() {
         end: enddate
       },
       success: function(data) {
-        console.log(data);
-        thisWeekTotal = data[0]['thisTotal'];
-        thisWeekPaid = data[0]['thisPaid'];
-        thisWeekFree = data[0]['thisFree'];
+		arr = ['Pf', 'Pa', 'Mi', 'Rt', 'Ma'];
+		console.log(data);
+        $.each(arr, function(index, item) {
+			thisWeekTotal = data[item][0]['thisTotal'];
+			thisWeekPaid = data[item][0]['thisPaid'];
+			thisWeekFree = data[item][0]['thisFree'];
 
-        lastWeekTotal = data[1]['lastTotal'];
-        lastWeekPaid = data[1]['lastPaid'];
-        lastWeekFree = data[1]['lastFree'];
+			lastWeekTotal = data[item][1]['lastTotal'];
+			lastWeekPaid = data[item][1]['lastPaid'];
+			lastWeekFree = data[item][1]['lastFree'];
 
-        variTotal = variation(thisWeekTotal, lastWeekTotal);
-        variPaid = variation(thisWeekPaid, lastWeekPaid);
-        variFree = variation(thisWeekFree, lastWeekFree);
+			variTotal = variation(thisWeekTotal, lastWeekTotal);
+			variPaid = variation(thisWeekPaid, lastWeekPaid);
+			variFree = variation(thisWeekFree, lastWeekFree);
 
-        $('#thisWeekTotal').html(thisWeekTotal);
-        $('#thisWeekPaid').html(thisWeekPaid);
-        $('#thisWeekFree').html(thisWeekFree);
+			$('#thisWeekTotal'+item).html(thisWeekTotal);
+			$('#thisWeekPaid'+item).html(thisWeekPaid);
+			$('#thisWeekFree'+item).html(thisWeekFree);
 
-        $('#lastWeekTotal').html(lastWeekTotal);
-        $('#lastWeekPaid').html(lastWeekPaid);
-        $('#lastWeekFree').html(lastWeekFree);
+			$('#lastWeekTotal'+item).html(lastWeekTotal);
+			$('#lastWeekPaid'+item).html(lastWeekPaid);
+			$('#lastWeekFree'+item).html(lastWeekFree);
 
-        $('#variTotal').html(variTotal);
-        $('#variPaid').html(variPaid);
-        $('#variFree').html(variFree);
-
+			$('#variTotal'+item).html(variTotal);
+			$('#variPaid'+item).html(variPaid);
+			$('#variFree'+item).html(variFree);
+		});
       },
       error: function(err) {
         console.log(err);
