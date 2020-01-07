@@ -16,9 +16,16 @@ class AppsUpdateController extends Controller
 
   public function getAppsUpdateData(Request $request)
   {
-    $app_process = array("취소","접수","신청확인","진행중","심사중","","","","","완료");
+    $app_process = [
+						'0' => "취소",
+						'1' => "접수",
+						'2' => "신청확인",
+						'3' => "진행중",
+						'4' => "심사중",
+						'9' => "완료"
+					];
 
-    if ($request->app_process) {
+    if (isset($request->app_process) && $request->app_process >= 0) {
       $appsupdateData = AppsUpdateData::select('idx',
                                       'reg_time',
                                       'update_process',
