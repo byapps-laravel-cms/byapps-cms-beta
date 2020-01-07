@@ -19,7 +19,14 @@
                    <select name="app_process_filter" id="app_process_filter" class="form-control">
                      <option value="">진행상태</option>
                      @php
-                      $app_process = array("취소","접수","신청확인","진행중","심사중","","","","","완료");
+                      $app_process = [
+						'0' => "취소",
+						'1' => "접수",
+						'2' => "신청확인",
+						'3' => "진행중",
+						'4' => "심사중",
+						'9' => "완료"
+					  ];
                      @endphp
                      @foreach($app_process as $key => $val)
                         <option value="{{ $key }}">{{ $val }}</option>

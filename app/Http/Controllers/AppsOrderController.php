@@ -18,9 +18,19 @@ class AppsOrderController extends Controller
   public function getAppsOrderData(Request $request)
   {
     $app_process = array("주문취소","접수","주문확인","개발진행","앱등록","서비스중지","서비스해지","","취소요청","접수대기");
+	$app_process = [
+						'0' => "주문취소",
+						'1' => "접수",
+						'2' => "주문확인",
+						'3' => "개발진행",
+						'4' => "앱등록",
+						'5' => "서비스중지",
+						'6' => "서비스해지",
+						'8' => "취소요청",
+						'9' => "완료"
+					];
 
-    if ($request->app_process) {
-
+    if (isset($request->app_process) && $request->app_process >= 0) {
       $appsOrderData = AppsOrderData::select('idx',
                                            'app_process',
                                            'app_name',
