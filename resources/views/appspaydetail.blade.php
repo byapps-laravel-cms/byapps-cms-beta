@@ -47,14 +47,14 @@
                         <div class="form-group row" id="paymentData">
                             <label class="col-md-2 col-form-label ">주문번호</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1">  {{ $appsPaymentData->order_id }} </p>
+                            <p class="form-control-static mt-1 mb-1">{{ $appsPaymentData->order_id }}</p>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">결제날짜</label>
                             <div class="col-md-10 col-xs-9">
-                            <p class="form-control-static mt-1 mb-1">  {{ $appsPaymentData->reg_time }} </p>
+                            <p class="form-control-static mt-1 mb-1">{{ date("Y-m-d h:i:s", $appsPaymentData->reg_time) }}</p>
                             </div>
                         </div>
 

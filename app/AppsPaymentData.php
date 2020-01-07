@@ -35,10 +35,11 @@ class AppsPaymentData extends Model implements Searchable
   public function getSearchResult(): SearchResult
   {
     $url = route('appspaydetail', $this->idx);
-    $url = '/';
+    //$sortBy = 'reg_time desc';
 
-    dd(new SearchResult($this, $this->app_name, $url));
-    return new SearchResult($this, $this->app_name, $url);
+    $data = new SearchResult($this, $this->app_name, $url, $this->reg_time);
+
+    return $data;
   }
 
   public function userinfo()

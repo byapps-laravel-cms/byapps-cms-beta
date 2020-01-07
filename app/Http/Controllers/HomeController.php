@@ -40,7 +40,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         // 홈 레이아웃
-        $userId = $request->user()->id;
+        $userId = $request->user()->idx;
         $layout = HomeLayout::where('user_cd','=', $userId)
                               ->select('layout_name')
                               ->orderBy('sequence')
@@ -69,7 +69,7 @@ class HomeController extends Controller
         // 만료예정 데이터
         $preData = new ExpiredController;
         $expiredIos = $preData->getExpiredIos();
-		$expiredIosTotCnt = $preData->getExpiredIosTotCnt();
+		    $expiredIosTotCnt = $preData->getExpiredIosTotCnt();
         $willBeExpiredIos = $preData->getWillBeExpiredIos();
         $expiredPush = $preData->getExpiredPush();
         $willBeExpiredPush = $preData->getWillBeExpiredPush();
@@ -91,7 +91,7 @@ class HomeController extends Controller
                                         'appendixOrderCount' => $appendixOrderCount,
                                         'updateCount' => $updateCount,
                                         'expiredIos' => $expiredIos,
-										'expiredIosTotCnt' => $expiredIosTotCnt,
+										                    'expiredIosTotCnt' => $expiredIosTotCnt,
                                         'willBeExpiredIos' => $willBeExpiredIos,
                                         'expiredPush' => $expiredPush,
                                         'willBeExpiredPush' => $willBeExpiredPush,
@@ -107,9 +107,9 @@ class HomeController extends Controller
 
     public function onLayoutChange(Request $request)
     {
-        $userId = $request->user()->id;
+        $userId = $request->user()->idx;
         $params = $request->all();
-        $temp = HomeLayout::where('user_cd','=',$userId)
+        $temp = HomeLayout::where('user_cd','=', $userId)
                             ->count();
 
         foreach($params as $key => $value){
@@ -130,11 +130,10 @@ class HomeController extends Controller
     public function search(Request $request)
     {
       $searchResults = (new Search())
-                        ->registerModel(AppsPaymentData::class, 'app_name')
-                        ->registerModel(PromotionData::class, 'mem_name')
-                        ->registerModel(AppsOrderData::class, 'app_company')
-                        ->registerModel(UserInfo::class, 'mem_name')
-                        // ->perform($request->input('query'));
+                       ->registerModel(AppsPaymentData::class, 'app_name')
+                       ->registerModel(PromotionData::class, 'mem_name')
+                       ->registerModel(AppsOrderData::class, 'app_company')
+                       ->registerModel(UserInfo::class, 'mem_name')
                         ->search($request->input('query'));
 
       $typesArray = [ 'BYAPPS_apps_payment_data' => '결제 관리',
@@ -142,8 +141,6 @@ class HomeController extends Controller
                       'BYAPPS_apps_order_data' => '앱 접수',
                       'BYAPPS_user_info' => '고객 정보',
                     ];
-
-      dd($searchResults);
 
       return view('search', compact('searchResults', 'typesArray'));
     }

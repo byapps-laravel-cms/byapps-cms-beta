@@ -26,6 +26,6 @@ class PromotionData extends Model implements Searchable
   {
     $url = route('promodetail', $this->idx);
 
-    return new SearchResult($this, $this->mem_name, $url);
+    return new SearchResult($this, $this->mem_name, $url, $this->reg_time);
   }
 }

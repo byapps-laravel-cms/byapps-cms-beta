@@ -13,7 +13,8 @@ class AppsData extends Model implements Searchable
   protected $table = 'BYAPPS_apps_data';
   protected $primaryKey = 'idx';
   public $timestamps = false;
-  protected $dates = ['reg_time','start_time','end_time'];
+
+  //protected $dates = ['reg_time','start_time','end_time'];
   protected $dateFormat = 'Y-m-d [h:i:s]';
   protected $fillable = ['app_process','service_type','app_os_type','byapps_ver','app_ver','app_build','app_ver_ios','app_build_ios','app_cate','noti_gcm','noti_gcm_num','noti_fcm_num','noti_ios_cerp','ios_cer_exp','ios_dev_exp','push_server','token','start_time','end_time','app_android_url','app_ios_url','surl','vender','hashkey','ioshack','host_id','txtencode','host_name','app_lang','auto_login','login_point','push_point','install_point','point_transfer_btn','cscall','app_intro','developer_info','modify_time'];
 

@@ -65,12 +65,6 @@ $(function() {
              'targets': 2,
              'className': 'dt-body-center',
            }
-           // {
-           //   'targets': 1,
-           //   'render': function ( data, type, full, meta ) {
-           //      return '<a href="/appspaydetail/'+full.idx+'">'+data+'</a>';
-           //   }
-           // },
         ],
         select: {
            'style': 'multi'
@@ -78,15 +72,16 @@ $(function() {
         order: [[ 5, 'desc']],
         "paging": true,
         "pageLength": 50,
-        "fixedHeader": false,
+        fixedHeader: true,
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#appspaymentTable tbody tr").click(function () {
-              table = $('#appspaymentTable').dataTable();
-              window.location.href = "/appspaydetail/" + this.id;
+            $("#appspaymentTable tbody tr td:not(.test)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              //table = $('#appspaymentTable').dataTable();
+              //console.log(nRow.target.parentElement.id);
+              window.location.href = "/appspaydetail/" + nRow.target.parentElement.id;
             });
          },
          "rowCallback": function(row, data, index) {
