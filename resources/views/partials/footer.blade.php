@@ -110,16 +110,8 @@ $(function (id) {
 $(document).ready(function(){
    $('.datepicker').datepicker({
       format: "yyyy-mm-dd",
-      language: "kr",
+      language: "ko",
   });
-
-  $.fn.datepicker.dates['kr'] = {
-    days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
-    daysShort: ["일", "월", "화", "수", "목", "금", "토", "일"],
-    daysMin: ["일", "월", "화", "수", "목", "금", "토", "일"],
-    months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-    monthsShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
-  };
 });
 
 
@@ -168,12 +160,16 @@ function stat_salesDateTerm(term) {
 function stat_tableDateTerm(term) {
   if (term == 7) {
     $('#start_date_table').datepicker('setDate', '-7D');
+	$('#end_date_table').datepicker('setDate', new Date());
   } else if (term == 30) {
      $('#start_date_table').datepicker('setDate', '-1M');
+	 $('#end_date_table').datepicker('setDate', new Date());
   } else if (term == 90) {
      $('#start_date_table').datepicker('setDate', '-3M');
+	 $('#end_date_table').datepicker('setDate', new Date());
   } else if (term == 180) {
     $('#start_date_table').datepicker('setDate', '-6M');
+	$('#end_date_table').datepicker('setDate', new Date());
   }
 }
 </script>
@@ -253,6 +249,7 @@ $(document).ready(function() {
 @endif
 
 <script src="{{ asset('assets/codefox/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('assets/codefox/plugins/bootstrap-datepicker/js/bootstrap-datepicker.ko.js') }}"></script>
 
 <!-- For Datatable -->
 <script src="{{ asset('assets/javascript/datatables/jquery.dataTables.min.js') }}"></script>

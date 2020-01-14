@@ -25,19 +25,32 @@
                         </h4>
                         @endif
                         <hr />
+
+						@if ($message = Session::get('success'))
+						<div class="row justify-content-end">
+							<div class="col-3 col-align-self-end alert alert-success alert-block">
+								<button type="button" class="close" data-dismiss="alert">×</button>
+								<strong>
+								toastr.success("{{ $message }}");
+								</strong>
+							</div>
+						</div>
+						@endif
                     </div>
 
                     
 
                     <div class="col-md-12 col-xs-12 px-4">
-                        <form method="POST" action="">
+                        {!! Form::open([ 'route' => ['pushnewsupdate', $pushNewsData->idx] ]) !!}
                         <input type="hidden" name="idx" value=""/>
+						<input type="hidden" name="content_type" value="{{$pushNewsData->content_type}}"/>
+						<input type="hidden" name="content_type" value="{{$pushNewsData->app_id}}"/>
 
 						<div class="form-group row">
                             <label class="col-md-2 col-form-label">옵션</label>
                             <div class="col-md-10 col-xs-9">
                                 <label for="" class="radio-inline">
-                                <input type="radio" name="pm_used" value="0">수정하기
+                                <input type="radio" name="pm_used" value="0" checked>수정하기
                                 </label>
                                 <label for="" class="radio-inline">
                                 <input type="radio" name="pm_used" value="1">삭제하기
@@ -86,13 +99,15 @@
                                 </div>
                             </div>
                         </div>
+						
+						<div class="form-group col-md-12 col-sm-12 row">
+                            <div class="text-center" style="width:100%">
+								<button type="submit" class="btn btn-info mx-auto">등록하기</button>
+                            </div>
+                        </div>
 
 						</div>
-
-                        <div class="col-md-12 col-sm-12 text-center">
-							<button type="submit" class="btn btn-info mx-auto">등록하기</button>
-						</div>
-                    </form>
+                    {!! Form::close() !!}
                 </div>
             </div><!--row end-->
         </div>
@@ -107,7 +122,7 @@
 <!-- row end -->
 </div>
 <!-- container-fluid end -->
-
+z
     
 
 @endsection

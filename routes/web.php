@@ -85,6 +85,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/pushnewslist', 'pushnewslist')->name('pushnewslist.view');
   Route::get('/pushnewslist/data', 'PushNewsController@getPushNewsListData')->name('pushnewslist');
   Route::get('/pushnewsdetail/{idx}', 'PushNewsController@getSingleData')->name('pushnewsdetail');
+  Route::post('/pushnewsupdate/{idx}', 'PushNewsController@update')->name('pushnewsupdate');
   // 인증회원 관리
   Route::view('/appspointmemberlist', 'appspointmemberlist')->name('appspointmemberlist.view');
   Route::get('/appspointmemberlist/data', 'AppsPointMemberController@getAppsPointMemberListData')->name('appspointmemberlist');

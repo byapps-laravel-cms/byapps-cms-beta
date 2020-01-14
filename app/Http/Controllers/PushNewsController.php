@@ -30,7 +30,7 @@ class PushNewsController extends Controller
             })
             ->editColumn('content', function($eloquent) {
               if($eloquent->content_type != "img") return '<div style="width: 55rem; overflow:hidden; text-overflow: ellipsis; white-space: nowrap;">'.$eloquent->content.'</div>';
-			  else return '<div class="img-centercrop" style="width:15rem"><img src="/member/apps/news/'.$eloquent->app_id.'/'.$eloquent->content.'"></div>';
+			  else return '<div class="img-centercrop" style="width:15rem"><img src="/storage/member/apps/news/'.$eloquent->app_id.'/'.$eloquent->content.'"></div>';
             })
             ->editColumn('reg_time', '{{ date("Y-m-d", $reg_time) }}')
 			->rawColumns(['content'])
@@ -44,4 +44,31 @@ class PushNewsController extends Controller
 
     return view('pushnewsdetail')->with('pushNewsData', $pushNewsData);
   }
+
+  public function update($idx)
+  {
+	if(PushNewsData::where('idx','=',$idx)->count() == 0) abort(404);
+	$data = request()->only(['app_id','pm_used','content','content_type']);
+	
+	dd($data);
+	exit;
+
+	$model = PushNewsData::find($idx);
+	if($data['pm_used']) {
+		$_f = [
+			'content' => $data['content'],
+			'content_type' => $data['content_type'],
+		];
+		if($data['content_type'] == 'text' && $data['attach)
+		$model->update($_f);
+	} else {
+		$model->delete();
+		if( $data['content_type']=="img" ){
+			if(file_exists("../../../storage/member/news/".$data['app_id']."/".$data['content']) ) unlink("../../../storage/member/news/".$data['app_id']."/".$data['content']);
+		}
+	}
+
+	return request()->ajax() ? response()->json(['success' => 'true',], 200) : $this->getSingleData($idx);
+  }
+
 }
