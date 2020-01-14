@@ -49,26 +49,25 @@ class PushNewsController extends Controller
   {
 	if(PushNewsData::where('idx','=',$idx)->count() == 0) abort(404);
 	$data = request()->only(['app_id','pm_used','content','content_type']);
-	
-	dd($data);
-	exit;
 
 	$model = PushNewsData::find($idx);
+	
 	if($data['pm_used']) {
-		$_f = [
-			'content' => $data['content'],
-			'content_type' => $data['content_type'],
-		];
-		if($data['content_type'] == 'text' && $data['attach)
-		$model->update($_f);
-	} else {
 		$model->delete();
 		if( $data['content_type']=="img" ){
 			if(file_exists("../../../storage/member/news/".$data['app_id']."/".$data['content']) ) unlink("../../../storage/member/news/".$data['app_id']."/".$data['content']);
 		}
+	} else {
+		$_f = [
+			'content' => $data['content'],
+			'content_type' => $data['content_type'],
+		];
+
+		$model->update($_f);
 	}
+	
+	toastr()->success('업데이트 성공', '', ['timeOut' => 1000, 'positionClass' => 'toast-center-center']);
 
-	return request()->ajax() ? response()->json(['success' => 'true',], 200) : $this->getSingleData($idx);
+	return $data['pm_used'] ? redirect()->route('pushnewslist.view'): redirect()->back();
   }
-
 }
