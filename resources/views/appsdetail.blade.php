@@ -658,7 +658,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2 col-form-label">앱소개</label>
+                            <label class="col-md-2 col-form-label">앱정보</label>
                             <div class="col-md-10 col-xs-9">
                                 <textarea id="developer_info" name="developer_info" class="form-control" rows="5">{!! $appData->developer_info !!}</textarea>
                             </div>

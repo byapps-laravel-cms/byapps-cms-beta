@@ -4,77 +4,64 @@
         $tablist = '<a class="nav-item nav-link" id="nav-search-info-tab" data-toggle="tab" href="#nav-search-info" role="tab" aria-controls="nav-search-info" aria-selected="false">검색업체 정보</a>';
        ?>
     }
-    var mode = 'all';
-    function refreshComment(){
-        $('.comments').html('');
-        $.ajax({
-            url: '{{ Route("comment") }}',
-            type: 'POST',
-            data: {
-                idx: {{ request()->route()->parameter('idx') }},
-                mmid: mode,
-                _token: "{{ csrf_token() }}"
-            },
-            success: function(response) {
-                response.forEach( data =>
-                    $('.comments').append(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}<span style="float:right;margin-right:5px;">${data.mmid}</span></li>`)
-                );
-            }
-        })
+    var commentMode = 'all';
+    var commentSendMode = {!! !isset($sendMode) ? 'null' : "'".$sendMode."'" !!};
+    var refreshComment;
+    var appidx = {!! request()->route()->parameter('idx') == null ? null : "'".request()->route()->parameter('idx')."'" !!};
+    var commentFillter = {
+        idx: appidx,
+        mmid: commentMode,
+        commentSendMode:commentSendMode,
+        comment:null,
+        _token: "{{ csrf_token() }}"
     }
     $(document).ready(function(){
-        $.ajax({
-            url: '{{ Route("comment") }}',
-            type: 'POST',
-            data: {
-                idx: {{ request()->route()->parameter('idx') }},
-                mmid: mode,
-                _token: "{{ csrf_token() }}"
-            },
-            success: function(response) {
-                response.forEach( data =>
-                    $('.comments').append(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}<span style="float:right;margin-right:5px;">${data.mmid}</span></li>`)
-                );
-                $('#nav-comment .custom-select').change(function(){
-                    mode = $(this).val();
-                    $.ajax({
-                        async: false,
-                        url: '{{ Route("comment") }}',
-                        type: 'POST',
-                        data: {
-                            idx: {{ request()->route()->parameter('idx') }},
-                            mmid: mode,
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function(response) {
-                            $('.comments').html('');
-                            response.forEach( data =>
-                                $('.comments').append(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}<span style="float:right;margin-right:5px;">${data.mmid}</span></li>`)
-                            );
-                        }
-                    });
-                })
-                $('#sendComment').submit(function( event ) {
-                    event.preventDefault();
-                    var msg = $(this).find('input[name=message]').val();
-                    if(!msg)return;
-                    $(this).find('input[name=message]').val('')
-                    $.ajax({
-                        async: false,
-                        url: '{{ Route("commentsend") }}',
-                        type: 'POST',
-                        data: {
-                            pidx: {{ request()->route()->parameter('idx') }},
-                            mmid: mode,
-                            comment: msg,
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function(data) {
-                            $('.comments').html(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}<span style="float:right;margin-right:5px;">${data.mmid}</span></li>`+$('.comments').html())
-                        },
-                    });
-                });
-            },
+        $('#search').submit(function(){
+            $.ajax({
+                url: '{{ Route("search") }}',
+                type: 'POST',
+                data: {query:$(this).find('[name=search]').val()},
+                success: function(response) {
+                    console.log(response);
+                }
+            })
+        });
+        if(!appidx) return;
+        refreshComment = function(){
+            $('.comments').html('');
+            $.ajax({
+                url: '{{ Route("comment") }}',
+                type: 'POST',
+                data: commentFillter,
+                success: function(response) {
+                    response.forEach( data =>
+                        $('.comments').append(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}<span style="float:right;margin-right:5px;">${data.mmid}</span></li>`)
+                    );
+                }
+            })
+        }
+        refreshComment()
+        $('#nav-comment .custom-select').change(function(){
+            mode = $(this).val();
+            commentFillter.mmid = mode;
+            refreshComment();
+        })
+        if(!commentSendMode)return;
+        $('#sendComment').submit(function( event ) {
+            event.preventDefault();
+            var msg = $(this).find('input[name=message]').val();
+            if(!msg)return;
+            $(this).find('input[name=message]').val('')
+            commentFillter.comment = msg;
+            $.ajax({
+                async: false,
+                url: '{{ Route("commentsend") }}',
+                type: 'POST',
+                data: commentFillter,
+                success: function(data) {
+                    $('.comments').html(`<li style="font-size:.8rem;border-bottom: 1px dotted #ccc;padding-bottom:12px;margin-bottom:8px">${data.comment}<br>-${data.mem_name}, ${data.reg_time}<span style="float:right;margin-right:5px;">${data.mmid}</span></li>`+$('.comments').html())
+                },
+            });
         });
     })
 
@@ -82,7 +69,7 @@
 
 <div id="sidebar-close" class="my-2"><i class="mdi mdi-close"></i></div>
 
-        <form id="search" class="navbar-nav flex-row ml-md-auto d-none d-md-flex form-inline">
+        <form id="search" class="navbar-nav flex-row ml-md-auto d-none d-md-flex form-inline" action="javascript:void(0)">
             <div class="form-group">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
@@ -125,7 +112,7 @@
                                 </div>
                                 <!-- 코멘트 푸터 고정-->
                                 <div class="box-footer">
-                                    <form id="sendComment" method="post">
+                                    <form id="sendComment" method="post" action="javascript:void(0)">
                                     <div class="input-group">
                                     <div class="checkbox checkbox-danger my-2">
                                             <label>

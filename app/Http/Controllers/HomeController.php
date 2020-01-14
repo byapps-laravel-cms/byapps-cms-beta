@@ -129,6 +129,12 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
+      if(!$request->has('query')) abort(400);
+
+      if($request->ajax()) return (new Search())
+                        ->registerModel(AppsData::class, 'app_name')
+                        ->search($request->input('query'));
+
       $searchResults = (new Search())
                         ->registerModel(AppsPaymentData::class, 'app_name')
                         ->registerModel(PromotionData::class, 'mem_name')
