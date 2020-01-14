@@ -35,6 +35,9 @@ class AppsListController extends Controller
             'app_members' => '앱사용자 관리',
             'reward_opt' => '리워드 서비스',
             'push_server' => '푸쉬서버',
+            'developer_info' => '앱정보',
+            'app_intro' => '앱소개',
+            'start_time' => '시작시간',
         ];
     }
 
@@ -76,6 +79,8 @@ class AppsListController extends Controller
     {
       $data['appData'] = AppsData::find($idx);
       if($data['appData'] == null) abort(404);
+
+      $data['sendMode'] = 'apps';
 
       $data['appLang'] = explode('|',$data['appData']->app_lang);
 
@@ -234,6 +239,7 @@ class AppsListController extends Controller
                         }
                         break;
                     case 'end_time':
+                    case 'start_time':
                     case 'retarget_end':
                         $data['comment'].= ($old ? date("Y-m-d",$old) : "미정")." → ".date("Y-m-d",$new);
                         break;
