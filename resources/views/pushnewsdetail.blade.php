@@ -25,7 +25,6 @@
                         </h4>
                         @endif
                         <hr />
-
 						@if ($message = Session::get('success'))
 						<div class="row justify-content-end">
 							<div class="col-3 col-align-self-end alert alert-success alert-block">
@@ -122,7 +121,9 @@
 <!-- row end -->
 </div>
 <!-- container-fluid end -->
-z
+@toastr_css
+@toastr_js
+@toastr_render
     
 
 @endsection

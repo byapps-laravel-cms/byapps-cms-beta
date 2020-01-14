@@ -33,7 +33,7 @@
                     <div class="row" id="appsPointData">
                       <div class="col-md-12 col-xs-12 px-4">
 						<!-- form start -->
-						{!! Form::open([ 'route' => ['appspointtransfter', $valu['idx']] ]) !!}
+						{!! Form::open([ 'route' => ['appspointdetail', $valu['idx']] ]) !!}
 						<input type="hidden" name="op" value="point_transfer">
 	  					<input type="hidden" name="idx" value="{{ $valu['idx'] }}">
 						<input type="hidden" name="app_id" value="{{ $valu['app_id'] }}">

@@ -11,7 +11,9 @@ class PushNewsData extends Model
   protected $primaryKey = 'idx';
   public $timestamps = false;
 
-  protected $fillable = [];
+  protected $fillable = [
+	'content', 'content_type'	  
+  ];
 
   public static function getPushNewsData()
   {
