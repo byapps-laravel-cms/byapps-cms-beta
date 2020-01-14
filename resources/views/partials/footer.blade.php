@@ -136,24 +136,32 @@ $(function() {
 function stat_chartDateTerm(term) {
   if (term == 7) {
     $('#start_date_chart').datepicker('setDate', '-7D');
+	$('#end_date_chart').datepicker('setDate', new Date());
   } else if (term == 30) {
      $('#start_date_chart').datepicker('setDate', '-1M');
+	 $('#end_date_chart').datepicker('setDate', new Date());
   } else if (term == 90) {
      $('#start_date_chart').datepicker('setDate', '-3M');
+	 $('#end_date_chart').datepicker('setDate', new Date());
   } else if (term == 180) {
     $('#start_date_chart').datepicker('setDate', '-6M');
+	$('#end_date_chart').datepicker('setDate', new Date());
   }
 }
 
 function stat_salesDateTerm(term) {
   if (term == 7) {
     $('#start_date_sales').datepicker('setDate', '-7D');
+	$('#end_date_sales').datepicker('setDate', new Date());
   } else if (term == 30) {
      $('#start_date_sales').datepicker('setDate', '-1M');
+	 $('#end_date_sales').datepicker('setDate', new Date());
   } else if (term == 90) {
      $('#start_date_sales').datepicker('setDate', '-3M');
+	 $('#end_date_sales').datepicker('setDate', new Date());
   } else if (term == 180) {
     $('#start_date_sales').datepicker('setDate', '-6M');
+	$('#end_date_sales').datepicker('setDate', new Date());
   }
 }
 
