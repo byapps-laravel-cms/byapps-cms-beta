@@ -48,7 +48,17 @@ class ChartController extends Controller
       // 관리
       // original query: 없음
       // 관리업체에 체크(is_cherrypicker = Y), 서비스유효
-      $appsCheck = 100;
+      $appsCheck = DB::table('marutm1.BYAPPS_apps_data as A')
+                  ->leftJoin('marutm1.BYAPPS_apps_payment_data as B', 'A.order_id', '=', 'B.order_id')
+                  ->where('A.app_process', '=', '7')
+                  ->where('A.is_cherrypicker', '=', 'Y')
+                  // ->where(function($query){
+                  //   $query->where('A.service_type', '=', 'lite')->orWhere('A.end_time', '>', time());
+                  // })
+                  // ->where('B.process', '=', '1')
+                  // ->where('B.amount', '>', '0')
+                  ->distinct()
+                  ->count('A.order_id');
 
       $result = array(
           'circle1' => array(
@@ -98,7 +108,18 @@ class ChartController extends Controller
 
       // 관리
       // 관리업체에 체크(is_cherrypicker = Y), 서비스유효
-      $appsCheck = 100;
+      $appsCheck = DB::table('marutm1.BYAPPS_apps_data as A')
+                  ->leftJoin('marutm1.BYAPPS_apps_payment_data as B', 'A.order_id', '=', 'B.order_id')
+                  ->where('A.app_process', '=', '7')
+                  ->where('A.is_cherrypicker', '=', 'Y')
+                  // ->where(function($query) use ($target_date1, $target_date2) {
+                  //   $query->where('A.service_type', '=', 'lite')->orWhere('A.end_time', '>', $target_date2);
+                  // })
+                  ->whereBetween('A.reg_time', [ $target_date1, $target_date2 ])
+                  // ->where('B.process', '=', '1')
+                  // ->where('B.amount', '>', '0')
+                  ->distinct()
+                  ->count('A.order_id');
 
       $result = array(
           'circle1' => array(
