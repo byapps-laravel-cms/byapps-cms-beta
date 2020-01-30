@@ -69,9 +69,10 @@ $(function() {
         stateSave: false,
 
         "fnDrawCallback": function () {
-            $("#appslistTable tbody tr").click(function () {
-              table = $('#appslistTable').dataTable();
-              window.location.href = "{{ route('appsdetail','') }}/" + this.id;
+            $("#appslistTable tbody tr td:not(.select-checkbox)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              // table = $('#appslistTable').dataTable();
+              // window.location.href = "{{ route('appsdetail','') }}/" + this.id;
+              window.location.href = "{{ route('appsdetail','') }}/" + nRow.target.parentElement.id;
             });
         },
     });

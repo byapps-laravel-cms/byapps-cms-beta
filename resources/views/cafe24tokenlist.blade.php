@@ -73,9 +73,10 @@ $(function() {
         stateSave: false,
 
         "fnDrawCallback": function () {
-            $("#cafe24tokenlistTable tbody tr").click(function () {
-              table = $('#cafe24tokenlistTable').dataTable();
-              window.location.href = "/cafe24tokendetail/" + this.id;
+            $("#cafe24tokenlistTable tbody tr td:not(.select-checkbox)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              // table = $('#cafe24tokenlistTable').dataTable();
+              // window.location.href = "/cafe24tokendetail/" + this.id;
+              window.location.href = "/cafe24tokendetail/" + nRow.target.parentElement.id;
             });
          }
     });

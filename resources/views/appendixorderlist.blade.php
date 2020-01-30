@@ -73,9 +73,10 @@ $(function() {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#appendixorderlistTable tbody tr").click(function () {
-              table = $('#appendixorderlistTable').dataTable();
-              window.location.href = "/appendixorderdetail/" + this.id;
+            $("#appendixorderlistTable tbody tr td:not(.select-checkbox)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              // table = $('#appendixorderlistTable').dataTable();
+              // window.location.href = "/appendixorderdetail/" + this.id;
+              window.location.href = "/appendixorderdetail/" + nRow.target.parentElement.id;
             });
          }
     });

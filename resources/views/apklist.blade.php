@@ -67,9 +67,10 @@ $(function() {
         stateSave: false,
 
         "fnDrawCallback": function () {
-            $("#apklistTable tbody tr").click(function () {
-              table = $('#apklistTable').dataTable();
-              window.location.href = "/apkdetail/" + this.id;
+            $("#apklistTable tbody tr td:not(.select-checkbox)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              // table = $('#apklistTable').dataTable();
+              // window.location.href = "/apkdetail/" + this.id;
+              window.location.href = "/apkdetail/" + nRow.target.parentElement.id;
             });
          },
 

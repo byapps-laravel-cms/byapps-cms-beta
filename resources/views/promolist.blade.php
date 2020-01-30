@@ -71,9 +71,9 @@ $(function() {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#promotionTable tbody tr").click(function () {
-              table = $('#promotionTable').dataTable();
-              window.location.href = "/promodetail/" + this.id;
+            $("#promotionTable tbody tr td:not(.select-checkbox)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              //table = $('#promotionTable').dataTable();
+              window.location.href = "/promodetail/" + nRow.target.parentElement.id;
             });
          }
     });

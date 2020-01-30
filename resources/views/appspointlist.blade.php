@@ -69,9 +69,10 @@ $(function() {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#appspointlistTable tbody tr").click(function () {
-              table = $('#appspointlistTable').dataTable();
-              window.location.href = "/appspointdetail/" + this.id;
+            $("#appspointlistTable tbody tr td:not(.select-checkbox)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              // table = $('#appspointlistTable').dataTable();
+              // window.location.href = "/appspointdetail/" + this.id;
+              window.location.href = "/appspointdetail/" + nRow.target.parentElement.id;
             });
          }
     });

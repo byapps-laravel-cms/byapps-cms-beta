@@ -69,9 +69,10 @@ $(function() {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#pushnewslistTable tbody tr").click(function () {
-              table = $('#pushnewslistTable').dataTable();
-              window.location.href = "/pushnewsdetail/" + this.id;
+            $("#pushnewslistTable tbody tr td:not(.select-checkbox)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              // table = $('#pushnewslistTable').dataTable();
+              // window.location.href = "/pushnewsdetail/" + this.id;
+              window.location.href = "/pushnewsdetail/" + nRow.target.parentElement.id;
             });
          }
     });

@@ -73,9 +73,10 @@ $(function() {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#resellerinfolistTable tbody tr").click(function () {
-              table = $('#resellerinfolistTable').dataTable();
-              window.location.href = "/resellerinfodetail/" + this.id;
+            $("#resellerinfolistTable tbody tr td:not(.select-checkbox)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              // table = $('#resellerinfolistTable').dataTable();
+              // window.location.href = "/resellerinfodetail/" + this.id;
+              window.location.href = "/resellerinfodetail/" + nRow.target.parentElement.id;
             });
          },
 

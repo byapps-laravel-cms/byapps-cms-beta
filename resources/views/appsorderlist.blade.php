@@ -108,9 +108,10 @@ $(document).ready(function() {
           stateSave: false,
 
           "fnDrawCallback": function () {
-              $("#appsorderlistTable tbody tr").click(function () {
-                table = $('#appsorderlistTable').dataTable();
-                window.location.href = "/appsorderdetail/" + this.id;
+              $("#appsorderlistTable tbody tr td:not(.select-checkbox)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                // table = $('#appsorderlistTable').dataTable();
+                // window.location.href = "/appsorderdetail/" + this.id;
+                window.location.href = "/appsorderdetail/" + nRow.target.parentElement.id;
               });
            },
            "rowCallback": function(row, data, index) {
