@@ -78,6 +78,13 @@ Breadcrumbs::for('cafe24tokenlist', function ($trail) {
   $trail->push('CAFE24 앱 설치', route('cafe24tokenlist.view'));
 });
 
+// CAFE24 앱 상세
+Breadcrumbs::for('cafe24tokendetail', function ($trail) {
+  $trail->parent('cafe24tokenlist');
+  $trail->title('\App\Cafe24ApiToken','mall_id');
+  $trail->push('CAFE24 앱 상세', '');
+});
+
 // Push 현황
 Breadcrumbs::for('pushlist', function ($trail) {
   $trail->parent('appslist');
