@@ -10,6 +10,9 @@
       {{ Breadcrumbs::render('appsorderlist') }}
 
      <table id="appsorderlistTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
+
+       <input id="btnGet" type="button" value="Get Selected" onclick="getSelect()">
+
          <thead>
              <tr>
                  <th>idx</th>
@@ -20,16 +23,16 @@
                      <option value="">진행상태</option>
                      @php
                       $app_process = [
-						'0' => "주문취소",
-						'1' => "접수",
-						'2' => "주문확인",
-						'3' => "개발진행",
-						'4' => "앱등록",
-						'5' => "서비스중지",
-						'6' => "서비스해지",
-						'8' => "취소요청",
-						'9' => "완료"
-					  ];
+                          						'0' => "주문취소",
+                          						'1' => "접수",
+                          						'2' => "주문확인",
+                          						'3' => "개발진행",
+                          						'4' => "앱등록",
+                          						'5' => "서비스중지",
+                          						'6' => "서비스해지",
+                          						'8' => "취소요청",
+                          						'9' => "완료"
+                          					  ];
                      @endphp
                      @foreach($app_process as $key => $val)
                         <option value="{{ $key }}">{{ $val }}</option>
@@ -151,6 +154,12 @@ $(document).ready(function() {
 
     fetch_data(app_process);
   });
+
+  function getSelect() {
+    var selectedRows = $('#appsorderlistTable').DataTable().rows({ selected:true }).data.toArray();
+    console.log("Here", selectedRows);
+  }
+
 })
 
 </script>
