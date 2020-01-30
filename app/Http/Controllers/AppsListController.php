@@ -48,7 +48,15 @@ class AppsListController extends Controller
 
     public function getAppsListData()
     {
-    $appslistData = AppsData::select('idx', 'app_id', 'app_ver', 'byapps_ver', 'app_process', 'app_name', 'server_group', 'apps_type', 'script_popup');
+    $appslistData = AppsData::select('idx',
+                                     'app_id',
+                                     'app_name',
+                                     'app_ver',
+                                     'byapps_ver',
+                                     'app_process',
+                                     'server_group',
+                                     'apps_type',
+                                     'script_popup');
 
     return Datatables::of($appslistData)
             ->setRowId(function($appslistData) {
@@ -57,7 +65,7 @@ class AppsListController extends Controller
             ->editColumn('app_process', function($eloquent) {
                 switch($eloquent->app_process){
                     case 1: return "개발준비중";
-                    case 2: return "개발진행중";
+                    case 2: return "개발준비중";
                     case 3: return "심사중";
                     case 4: return "등록거부";
                     case 5: return "재심사중";
