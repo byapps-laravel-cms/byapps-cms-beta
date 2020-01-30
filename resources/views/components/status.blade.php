@@ -67,7 +67,7 @@
             <p class="m-0 text-white text-uppercase font-600 font-secondary text-overflow" title="New Downloads">
               MA 통합
             </p>
-            <h2 class="text-white"><span data-plugin="counterup">854</span> <small><i class="mdi mdi-arrow-up text-white"></i></small></h2>
+            <h2 class="text-white"><span data-plugin="counterup">{{ $maCount }}</span> <small><i class="mdi mdi-arrow-up text-white"></i></small></h2>
             <p class="text-white m-0">어제보다 <b>9.9%</b> 늘었어요</p>
         </div>
       </div>

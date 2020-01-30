@@ -71,9 +71,10 @@ $(function() {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#appspointmemberTable tbody tr").click(function () {
-              table = $('#appspointmemberTable').dataTable();
-              window.location.href = "/appspointmemberdetail/" + this.id;
+            $("#appspointmemberTable tbody tr td:not(.select-checkbox)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              // table = $('#appspointmemberTable').dataTable();
+              // window.location.href = "/appspointmemberdetail/" + this.id;
+              window.location.href = "/appspointmemberdetail/" + nRow.target.parentElement.id;
             });
          },
          "rowCallback": function(row, data, index) {
@@ -84,7 +85,7 @@ $(function() {
             case 'ios':
                 $('td:eq(5)', row).html("<button class='btn btn-info btn-rounded btn-xs'>ios</button>");
                 break;
-            case 'android': 
+            case 'android':
                 $('td:eq(5)', row).html("<button class='btn btn-success btn-rounded btn-xs'>android</button>");
                 break;
             case 'default':

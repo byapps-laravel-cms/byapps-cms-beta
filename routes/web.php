@@ -77,6 +77,8 @@ Route::group(['middleware' => ['auth']], function() {
   Route::view('/cafe24tokenlist', 'cafe24tokenlist')->name('cafe24tokenlist.view');
   Route::get('/cafe24tokenlist/data', 'Cafe24ApiTokenController@getCafe24ApiTokenData')->name('cafe24tokenlist');
   Route::get('/cafe24tokendetail/{idx}', 'Cafe24ApiTokenController@getSingleData')->name('cafe24tokendetail');
+  Route::post('/cafe24tokenupdate/{idx}', 'Cafe24ApiTokenController@update')->name('cafe24tokenupdate');
+
   // 푸쉬 현황
   Route::view('/pushlist', 'pushlist')->name('pushlist.view');
   Route::get('/pushlist/data', 'PushController@getPushListData')->name('pushlist');

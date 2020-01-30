@@ -73,9 +73,10 @@ $(function() {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#malistTable tbody tr").click(function () {
-              table = $('#malistTable').dataTable();
-              window.location.href = "/madetail/" + this.id;
+            $("#malistTable tbody tr td:not(.select-checkbox)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              // table = $('#malistTable').dataTable();
+              // window.location.href = "/madetail/" + this.id;
+              window.location.href = "/madetail/" + nRow.target.parentElement.id;
             });
          }
     });

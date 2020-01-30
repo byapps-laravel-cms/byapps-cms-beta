@@ -61,9 +61,10 @@ class HomeController extends Controller
         // 주문요청현황 데이터
         $preData = new StatusController;
         // 임시날짜로 테스트
-        $appsOrderCount = $preData->onGetAppsOrderCount('2019-03-07');
-        $appendixOrderCount = $preData->onGetAppendixOrderCount('2019-03-07');
-        $updateCount = $preData->onGetUpdateCount('2019-03-07');
+        $appsOrderCount = $preData->onGetAppsOrderCount('2020-01-01');
+        $appendixOrderCount = $preData->onGetAppendixOrderCount('2020-01-01');
+        $updateCount = $preData->onGetUpdateCount('2020-01-01');
+        $MACount = $preData->onGetMACount('2020-01-01');
 
 
         // 만료예정 데이터
@@ -90,6 +91,7 @@ class HomeController extends Controller
                                         'appsOrderCount' => $appsOrderCount,
                                         'appendixOrderCount' => $appendixOrderCount,
                                         'updateCount' => $updateCount,
+                                        'maCount' => $MACount,
                                         'expiredIos' => $expiredIos,
 										                    'expiredIosTotCnt' => $expiredIosTotCnt,
                                         'willBeExpiredIos' => $willBeExpiredIos,

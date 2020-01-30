@@ -20,13 +20,13 @@
                      <option value="">진행상태</option>
                      @php
                       $app_process = [
-						'0' => "취소",
-						'1' => "접수",
-						'2' => "신청확인",
-						'3' => "진행중",
-						'4' => "심사중",
-						'9' => "완료"
-					  ];
+                          						'0' => "취소",
+                          						'1' => "접수",
+                          						'2' => "신청확인",
+                          						'3' => "진행중",
+                          						'4' => "심사중",
+                          						'9' => "완료"
+                          					  ];
                      @endphp
                      @foreach($app_process as $key => $val)
                         <option value="{{ $key }}">{{ $val }}</option>
@@ -102,9 +102,10 @@ function fetch_data(app_process = '') {
         "stateSave": false,
 
         "fnDrawCallback": function () {
-            $("#appsupdatelistTable tbody tr").click(function () {
-              table = $('#appsupdatelistTable').dataTable();
-              window.location.href = "/appsupdatedetail/" + this.id;
+            $("#appsupdatelistTable tbody tr td:not(.select-checkbox)").click(function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+              // table = $('#appsupdatelistTable').dataTable();
+              // window.location.href = "/appsupdatedetail/" + this.id;
+              window.location.href = "/appsupdatedetail/" + nRow.target.parentElement.id;
             });
          },
 

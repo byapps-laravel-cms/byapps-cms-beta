@@ -9,17 +9,28 @@
         {{ Breadcrumbs::render('appspaylist') }}
 
        <table id="appspaymentTable" class="table table-striped mb-3 table-colored table-inverse" style="width:100%;">
-         <col width="3%">
-         <col width="33%">
-         <col width="5%">
-         <col width="20%">
-         <col width="15%">
-         <col width="15%">
          <thead>
              <tr>
                  <th>idx</th>
                  <th>앱명</th>
-                 <th>구분</th>
+                 <!-- <th>구분</th> -->
+                 <th>
+                   <select name="pay_type_filter" id="pay_type_filter" class="form-control">
+                     <option value="">구분</option>
+                     @php
+                      $pay_type = [
+                          						'0' => "신규",
+                          						'1' => "연장",
+                          						'3' => "추가",
+                          						'4' => "기타",
+                          						'5' => "충전",
+                          					  ];
+                     @endphp
+                     @foreach($pay_type as $key => $val)
+                        <option value="{{ $key }}">{{ $val }}</option>
+                     @endforeach
+                   </select>
+                 </th>
                  <th>기간</th>
                  <th>결제금액</th>
                  <th>결제일</th>
@@ -35,13 +46,20 @@
 
 @push('scripts')
 <script type="text/javascript">
-$(function() {
-    var table = $('#appspaymentTable').DataTable({
+$(document).ready(function() {
+
+  fetch_data();
+
+  function fetch_data(pay_type = '') {
+    $('#appspaymentTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
           url: "{{ route('appspaylist') }}",
-          crossDomain: true
+          crossDomain: true,
+          data: {
+            pay_type: pay_type
+          }
         },
         columns: [
             { data: 'idx', name: 'idx', className:"test" },
@@ -64,6 +82,8 @@ $(function() {
            {
              'targets': 2,
              'className': 'dt-body-center',
+             'searchable': false,
+             'orderable': false,
            }
         ],
         select: {
@@ -72,7 +92,7 @@ $(function() {
         order: [[ 5, 'desc']],
         "paging": true,
         "pageLength": 50,
-        fixedHeader: true,
+        "fixedHeader": true,
         "responsive": true,
         "orderClasses": false,
         "stateSave": false,
@@ -108,8 +128,16 @@ $(function() {
             }
          },
     });
-});
+  }
 
+  $('#pay_type_filter').change(function() {
+    var pay_type = $('#pay_type_filter').val();
+
+    $('#appspaymentTable').DataTable().destroy();
+
+    fetch_data(pay_type);
+  });
+})
 
 </script>
 @endpush

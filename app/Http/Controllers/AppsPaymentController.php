@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use App\Http\Requests;
-use DB;
+
 use App\AppsPaymentData;
 use App\AppsOrderData;
 use Yajra\Datatables\Datatables;
@@ -17,18 +16,44 @@ class AppsPaymentController extends Controller
         return view('paylist');
     }
 
-    public function getAppsPaymentData()
+    public function getAppsPaymentData(Request $request)
     {
-      $appsPaymentData = AppsPaymentData::select('idx', 'app_name', 'pay_type', 'term', 'amount', 'start_time', 'end_time', 'reg_time');
+      $pay_type = array("신규", "연장", "", "추가", "기타", "충전");
+      $pay_type = [
+        '0' => '신규',
+        '1' => '연장',
+        '3' => '추가',
+        '4' => '기타',
+        '5' => '충전'
+      ];
 
-      $pay_types = array("신규", "연장", "", "추가", "기타", "충전");
+      if (isset($request->pay_type) && $request->pay_type >= 0) {
+        $appsPaymentData = AppsPaymentData::select('idx',
+                                                   'app_name',
+                                                   'pay_type',
+                                                   'term',
+                                                   'amount',
+                                                   'start_time',
+                                                   'end_time',
+                                                   'reg_time')
+                                            ->where('pay_type', $request->pay_type);
+      } else {
+        $appsPaymentData = AppsPaymentData::select('idx',
+                                                   'app_name',
+                                                   'pay_type',
+                                                   'term',
+                                                   'amount',
+                                                   'start_time',
+                                                   'end_time',
+                                                   'reg_time');
+      }
 
       return Datatables::of($appsPaymentData)
               ->setRowId(function($appsPaymentData) {
                 return $appsPaymentData->idx;
               })
-              ->editColumn('pay_type', function($eloquent) use ($pay_types){
-                return ($eloquent->pay_type != '') ? $pay_types[$eloquent->pay_type] : '';
+              ->editColumn('pay_type', function($eloquent) use ($pay_type){
+                return $pay_type[$eloquent->pay_type];
               })
               ->editColumn('amount', '{{ number_format($amount)." 원" }}')
               ->editColumn('term', function($eloquent) {

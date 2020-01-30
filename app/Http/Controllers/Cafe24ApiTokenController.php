@@ -59,4 +59,19 @@ class Cafe24ApiTokenController extends Controller
     return view('cafe24tokendetail')->with('cafe24ApiTokenData', $cafe24ApiTokenData);
   }
 
+  public function update(Request $request, $idx)
+  {
+    $cafe24ApiTokenData = Cafe24ApiToken::where('idx', $idx)->first();
+
+    $cafe24ApiTokenData->mem_id = $request->input('mem_id');
+    $cafe24ApiTokenData->app_id = $request->input('app_id');
+    $cafe24ApiTokenData->order_no = $request->input('order_no');
+    $cafe24ApiTokenData->save();
+
+    //Session::flash('success', '업데이트 성공');
+    toastr()->success('업데이트 성공', '', ['timeOut' => 1000, 'positionClass' => 'toast-center-center']);
+
+    return redirect()->back();
+  }
+
 }

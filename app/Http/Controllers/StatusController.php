@@ -9,6 +9,7 @@ use App\AppendixOrderData;
 use App\AppsUpdateData;
 use App\QnaMember;
 use App\QnaNonmember;
+use App\MAData;
 
 class StatusController extends Controller
 {
@@ -28,7 +29,6 @@ class StatusController extends Controller
       // info($todate);
       // info($yesterday);
     }
-
   }
 
 
@@ -84,7 +84,20 @@ class StatusController extends Controller
     return $updateCount;
   }
 
-    // 회원문의
-    // $nonmemberCount = QnaNonmember::where('process', 1)->count();
-    // $memberCount = QnaMember::where('process', 1)->count();
+   /* MA 통합 접수 */
+   public function onGetMACount($date = '')
+   {
+     // 넘겨받는 날짜가 있으면 해당 날짜를 unix_timestamp로 변경. 없으면 오늘 날짜를 계산
+     if ($date == '') {
+       $todate = time();
+     } else {
+       $todate = strtotime($date);
+     }
+
+     // original query: 없음
+     $MACount = MAData::where('app_process', 3)->where('service_ma', '=', 'Y')->where('reg_time', '>=', $todate)->count();
+     // UpdateData::where('app_process', 1)->where('reg_time', '>=', time())->count();
+
+     return $MACount;
+   }
 }
